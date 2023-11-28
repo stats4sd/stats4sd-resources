@@ -19,6 +19,8 @@ class TypeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationLabel = 'Trove Types';
+
     public static function form(Form $form): Form
     {
         return $form
