@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
             $table->string('name', 400);
-            $table->string('slug', 400);
             $table->foreignId('tag_type_id')->constrained();
             $table->timestamps();
         });
