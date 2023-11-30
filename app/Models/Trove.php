@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Trove extends Model
+class Trove extends Model implements HasMedia
 {
     use HasFactory;
+    use InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -18,11 +21,10 @@ class Trove extends Model
      */
     protected $fillable = [
         'title',
-        'slug',
         'description',
         'uploader_id',
         'creation_date',
-        'type_id',
+        'trove_type_id',
         'cover_image',
         'public',
         'youtube',
@@ -39,7 +41,7 @@ class Trove extends Model
         'id' => 'integer',
         'uploader_id' => 'integer',
         'creation_date' => 'date',
-        'type_id' => 'integer',
+        'trove_type_id' => 'integer',
         'public' => 'boolean',
         'source' => 'boolean',
     ];

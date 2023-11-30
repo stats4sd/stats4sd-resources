@@ -34,7 +34,7 @@ class CollectionResource extends Resource
                 Forms\Components\Checkbox::make('public')
                                     ->label('Should this collection be shared externally?')
                                     ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Note - leaving this box unticked prevents the collection from appearing in the full collections list. It does NOT prevent the collection from being referenced in a specific page, e.g. the "CCRP Front Page" Collection'),
-                Forms\Components\FileUpload::make('cover_image'),
+                Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image')->required(),
                 Forms\Components\Hidden::make('uploader_id')
                                     ->default(Auth::user()->id),
             ])->columns(1);
@@ -53,7 +53,7 @@ class CollectionResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                                 ->wrap(),
-                Tables\Columns\ImageColumn::make('cover_image'),
+                // Tables\Columns\SpatieMediaLibraryImageColumn::make('cover_image'),
                 Tables\Columns\TextColumn::make('user.name')
                                 ->label('Uploader')
                                 ->sortable(),
