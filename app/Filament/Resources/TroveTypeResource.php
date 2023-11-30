@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\TypeResource\Pages;
-use App\Filament\Resources\TypeResource\RelationManagers;
-use App\Models\Type;
+use App\Filament\Resources\TroveTypeResource\Pages;
+use App\Filament\Resources\TroveTypeResource\RelationManagers;
+use App\Models\TroveType;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,19 +13,19 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class TypeResource extends Resource
+class TroveTypeResource extends Resource
 {
-    protected static ?string $model = Type::class;
+    protected static ?string $model = TroveType::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationLabel = 'Trove Types';
+    // protected static ?string $navigationLabel = 'Trove Types';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('label')->required(),                            
             ]);
     }
 
@@ -33,7 +33,7 @@ class TypeResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('label'),
             ])
             ->filters([
                 //
@@ -61,9 +61,9 @@ class TypeResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTypes::route('/'),
-            'create' => Pages\CreateType::route('/create'),
-            'edit' => Pages\EditType::route('/{record}/edit'),
+            'index' => Pages\ListTroveTypes::route('/'),
+            'create' => Pages\CreateTroveType::route('/create'),
+            'edit' => Pages\EditTroveType::route('/{record}/edit'),
         ];
     }    
 }

@@ -8,7 +8,7 @@ use Filament\Widgets;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use App\Filament\Resources\TagResource;
-use App\Filament\Resources\TypeResource;
+use App\Filament\Resources\TroveTypeResource;
 use Filament\Navigation\NavigationGroup;
 use App\Filament\Resources\TroveResource;
 use Filament\Http\Middleware\Authenticate;
@@ -66,7 +66,7 @@ class AdminPanelProvider extends PanelProvider
                     ->groups([
                         NavigationGroup::make('Troves and Collections')
                         ->items([
-                            ...TypeResource::getNavigationItems(),
+                            ...TroveTypeResource::getNavigationItems(),
                             ...TroveResource::getNavigationItems(),
                             ...CollectionResource::getNavigationItems(),
                         ]),

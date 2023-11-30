@@ -52,6 +52,11 @@ class TroveResource extends Resource
                                                 ->options([0 => 'Internal', 1 => 'External'])
                                                 ->required(),
 
+                            Forms\Components\Select::make('trove_type_id')
+                                                ->placeholder('Select the resource type')
+                                                ->relationship('troveType', 'label')
+                                                ->required(),
+
                             Forms\Components\DatePicker::make('creation_date')
                                                 ->label('When was the resource created?')
                                                 ->helperText('To the nearest month (approximately is fine). This is mainly to highlight to users when a resource might be a bit out of date.')
@@ -108,17 +113,7 @@ class TroveResource extends Resource
                         ->schema([
                             Placeholder::make('check_info')
                                 ->disableLabel()
-                                ->content(new HtmlString('<h2>Share and Check</h2><p>To make this trove available on the front end, you must do 2 things:<ol><li>Mark this as shareable below;</li><li>Get the trove checked by someone else.</li></ol>You may request a checking from a specific person below.</p>')),
-                            Forms\Components\Checkbox::make('public')
-                                                ->label('Share this resource externally?')
-                                                ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Please <b>do not</b> tick this box if you <b>do not</b> want this resource to be shared outside Stats4SD')
-                                                ->helperText(''),
-                            Forms\Components\Select::make('checker_id')
-                                                ->multiple()
-                                                ->options(\App\User::all()->pluck('name', 'id'))
-                                                ->searchable()
-                                                ->label('Review request')
-                                                ->helperText('Request someone to review')
+                                ->content(new HtmlString('Checking section')),
                         ]),
                 ])
                 ->skippable()
@@ -153,7 +148,9 @@ class TroveResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('source')
-                    ->options([0 => 'Internal', 1 => 'External'])
+                    ->options([0 => 'Internal', 1 => 'External']),
+                SelectFilter::make('resourceType')
+                    ->relationship('troveType', 'label')
             // ], layout: FiltersLayout::AboveContent)
             ])
             ->actions([

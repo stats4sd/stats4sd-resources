@@ -16,11 +16,10 @@ return new class extends Migration
         Schema::create('troves', function (Blueprint $table) {
             $table->id();
             $table->string('title', 400);
-            $table->string('slug', 400);
             $table->longText('description');
             $table->foreignId('uploader_id')->constrained('users');
             $table->date('creation_date');
-            $table->foreignId('type_id')->constrained();
+            $table->foreignId('trove_type_id')->constrained();
             $table->string('cover_image', 400);
             $table->boolean('public');
             $table->string('youtube', 400);

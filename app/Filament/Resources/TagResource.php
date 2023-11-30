@@ -24,9 +24,10 @@ class TagResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name'),                                
-                Forms\Components\Select::make('type')
-                                    ->relationship('tag_type', 'label'),
+                Forms\Components\TextInput::make('name')->required(),                                
+                Forms\Components\Select::make('tag_type_id')
+                                    ->relationship('tagType', 'label')
+                                    ->required(),
             ])->columns(1);
     }
 
@@ -35,16 +36,15 @@ class TagResource extends Resource
         return $table
             ->columns([                              
                 Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('type'),
+                Tables\Columns\TextColumn::make('tagType.label'),
                 Tables\Columns\TextColumn::make('troves_count')
                                 ->label('# of troves')
                                 ->counts('troves')
                                 ->sortable(),
             ])
             ->filters([
-                SelectFilter::make('tag_types')
-                    ->multiple()
-                    ->relationship('type', 'id')
+                SelectFilter::make('tagType')
+                    ->relationship('tagType', 'label')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

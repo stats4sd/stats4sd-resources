@@ -54,9 +54,9 @@ class Trove extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function type(): BelongsTo
+    public function troveType(): BelongsTo
     {
-        return $this->belongsTo(Type::class);
+        return $this->belongsTo(TroveType::class);
     }
 
     public function collections(): BelongsToMany
