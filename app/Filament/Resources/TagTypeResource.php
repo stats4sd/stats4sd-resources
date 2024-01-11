@@ -12,9 +12,12 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Resources\Concerns\Translatable;
 
 class TagTypeResource extends Resource
 {
+    use Translatable;
+    
     protected static ?string $model = TagType::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -45,10 +48,10 @@ class TagTypeResource extends Resource
                                 ->boolean()
                                 ->trueColor('success')
                                 ->falseColor('warning'),
-                Tables\Columns\TextColumn::make('tags_count')
-                                ->label('# of tags')
-                                ->counts('tags')
-                                ->sortable(),
+                // Tables\Columns\TextColumn::make('tags_count')
+                //                 ->counts('tags')
+                //                 ->label('# Tags')
+                //                 ->sortable(),
             ])
             ->filters([
                 //

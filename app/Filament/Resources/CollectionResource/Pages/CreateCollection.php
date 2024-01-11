@@ -8,8 +8,17 @@ use Filament\Resources\Pages\CreateRecord;
 
 class CreateCollection extends CreateRecord
 {
+    use CreateRecord\Concerns\Translatable;
+
     protected static string $resource = CollectionResource::class;
 
     protected static bool $canCreateAnother = false;
 
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\LocaleSwitcher::make(),
+        ];
+    }
+    
 }

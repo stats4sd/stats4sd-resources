@@ -22,7 +22,7 @@ class TagFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name,
+            'label' => $this->faker->name,
             'slug' => $this->faker->slug,
             'tag_type_id' => TagType::factory(),
         ];

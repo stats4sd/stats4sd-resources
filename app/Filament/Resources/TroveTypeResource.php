@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\TroveTypeResource\Pages;
 use App\Filament\Resources\TroveTypeResource\RelationManagers;
+use Filament\Resources\Concerns\Translatable;
 use App\Models\TroveType;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -15,6 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TroveTypeResource extends Resource
 {
+    use Translatable;
+    
     protected static ?string $model = TroveType::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -34,6 +37,10 @@ class TroveTypeResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('label'),
+                Tables\Columns\TextColumn::make('troves_count')
+                                ->counts('troves')
+                                ->label('# Troves')
+                                ->sortable(),
             ])
             ->filters([
                 //

@@ -15,7 +15,7 @@ return new class extends Migration
 
         Schema::create('trove_types', function (Blueprint $table) {
             $table->id();
-            $table->string('label', 400);
+            $table->json('label');
             $table->timestamps();
         });
 

@@ -8,12 +8,13 @@ use Filament\Widgets;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use App\Filament\Resources\TagResource;
-use App\Filament\Resources\TroveTypeResource;
 use Filament\Navigation\NavigationGroup;
 use App\Filament\Resources\TroveResource;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Navigation\NavigationBuilder;
 use App\Filament\Resources\TagTypeResource;
+use App\Filament\Resources\TroveTypeResource;
+use Filament\SpatieLaravelTranslatablePlugin;
 use App\Filament\Resources\CollectionResource;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -63,19 +64,23 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->navigation(function (NavigationBuilder $builder): NavigationBuilder {
                 return $builder
-                    ->groups([
-                        NavigationGroup::make('Troves and Collections')
+                ->items([
+
+                    ...TroveResource::getNavigationItems(),
+                    ...CollectionResource::getNavigationItems(),
+                ])
+                ->groups([
+                    NavigationGroup::make('Details')
                         ->items([
                             ...TroveTypeResource::getNavigationItems(),
-                            ...TroveResource::getNavigationItems(),
-                            ...CollectionResource::getNavigationItems(),
+                            ...TagTypeResource::getNavigationItems(),
+                            ...TagResource::getNavigationItems(),
                         ]),
-                        NavigationGroup::make('Tags')
-                            ->items([
-                                ...TagTypeResource::getNavigationItems(),
-                                ...TagResource::getNavigationItems(),
-                            ]),
-                    ]);
-            });
+                ]);
+            })
+            ->plugin(
+                SpatieLaravelTranslatablePlugin::make()
+                    ->defaultLocales(['en', 'es', 'fr'])
+                );
     }
 }

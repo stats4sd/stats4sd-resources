@@ -15,16 +15,21 @@ return new class extends Migration
 
         Schema::create('troves', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 400);
-            $table->longText('description');
-            $table->foreignId('uploader_id')->constrained('users');
-            $table->date('creation_date');
+
+            $table->json('title');
+            $table->json('description');
             $table->foreignId('trove_type_id')->constrained();
-            $table->string('cover_image', 400);
-            $table->boolean('public');
-            $table->string('youtube', 400);
             $table->boolean('source');
-            $table->integer('download_count')->default(null);
+            $table->date('creation_date');
+            $table->foreignId('uploader_id')->constrained('users');
+
+            $table->json('external_links');
+            $table->json('youtube_links');
+
+            $table->boolean('public');
+
+            $table->integer('download_count')->default(0);
+
             $table->timestamps();
         });
 

@@ -2,20 +2,24 @@
 
 namespace App\Filament\Resources;
 
+use App\Models\Tag;
 use Filament\Forms;
 use Filament\Tables;
+use App\Models\TagType;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
-use App\Models\Tag;
 use Filament\Resources\Resource;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\TagResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\TagResource\RelationManagers;
+use Filament\Resources\Concerns\Translatable;
 
 class TagResource extends Resource
 {
+    use Translatable;
+    
     protected static ?string $model = Tag::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
@@ -24,10 +28,11 @@ class TagResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')->required(),                                
-                Forms\Components\Select::make('tag_type_id')
+                Forms\Components\TextInput::make('label')->required(),                                
+                Forms\Components\Select::make('type')
                                     ->relationship('tagType', 'label')
-                                    ->required(),
+                                    ->required()
+                                    ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en')),
             ])->columns(1);
     }
 
@@ -35,7 +40,7 @@ class TagResource extends Resource
     {
         return $table
             ->columns([                              
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('label'),
                 Tables\Columns\TextColumn::make('tagType.label'),
                 Tables\Columns\TextColumn::make('troves_count')
                                 ->label('# of troves')
@@ -45,6 +50,7 @@ class TagResource extends Resource
             ->filters([
                 SelectFilter::make('tagType')
                     ->relationship('tagType', 'label')
+                    ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en'))
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

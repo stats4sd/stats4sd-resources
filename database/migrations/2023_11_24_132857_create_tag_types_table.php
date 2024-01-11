@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('tag_types', function (Blueprint $table) {
             $table->id();
-            $table->string('label', 400);
-            $table->longText('description');
+            $table->json('label');
+            $table->json('description');
             $table->boolean('freetext');
             $table->timestamps();
         });

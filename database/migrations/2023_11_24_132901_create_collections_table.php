@@ -15,10 +15,9 @@ return new class extends Migration
 
         Schema::create('collections', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 400);
-            $table->longText('description');
+            $table->json('title');
+            $table->json('description');
             $table->foreignId('uploader_id')->constrained('users');
-            $table->string('cover_image', 400);
             $table->boolean('public');
             $table->timestamps();
         });

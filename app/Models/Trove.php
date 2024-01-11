@@ -8,35 +8,29 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Tags\HasTags;
+use Spatie\Translatable\HasTranslations;
 
 class Trove extends Model implements HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
+    use HasTags;
+    use HasTranslations;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'title',
         'description',
         'uploader_id',
         'creation_date',
         'trove_type_id',
-        'cover_image',
         'public',
-        'youtube',
+        'external_links',
+        'youtube_links',
         'source',
         'download_count',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'id' => 'integer',
         'uploader_id' => 'integer',
@@ -44,11 +38,20 @@ class Trove extends Model implements HasMedia
         'trove_type_id' => 'integer',
         'public' => 'boolean',
         'source' => 'boolean',
+        'external_links' => 'array',
+        'youtube_links' => 'array'
+    ];
+
+    public $translatable = [
+        'title',
+        'description',
+        'external_links',
+        'youtube_links'
     ];
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'uploader_id');
     }
 
     public function uploader(): BelongsTo

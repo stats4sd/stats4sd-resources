@@ -2,43 +2,55 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Tags\HasTags;
+use Spatie\Tags\Tag as SpatieTag;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
-class Tag extends Model
+class Tag extends SpatieTag
 {
     use HasFactory;
+    use HasTranslations;
+    use HasTags;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'name',
+        'label',
         'slug',
-        'tag_type_id',
+        'type',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'id' => 'integer',
-        'tag_type_id' => 'integer',
+        'type' => 'integer',
     ];
+
+    public $translatable = [
+        'label',
+        'slug'
+    ];
+    
+    public static function getTagClassName(): string
+    {
+        return Tag::class;
+    }
+
+    public function tags(): MorphToMany
+    {
+        return $this
+            ->morphToMany(self::getTagClassName(), 'taggable', 'taggables', null, 'tag_id')
+            ->orderBy('order_column');
+    }
 
     public function troves(): MorphToMany
     {
-        return $this->morphedByMany(Trove::class, 'tagable');
+        return $this->morphedByMany(Trove::class, 'taggable');
     }
 
     public function tagType(): BelongsTo
     {
-        return $this->belongsTo(TagType::class);
+        return $this->belongsTo(TagType::class, 'type');
     }
 }

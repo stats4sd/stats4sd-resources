@@ -16,9 +16,12 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CollectionResource\Pages;
 use App\Filament\Resources\CollectionResource\RelationManagers;
+use Filament\Resources\Concerns\Translatable;
 
 class CollectionResource extends Resource
 {
+    use Translatable;
+    
     protected static ?string $model = Collection::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-folder';
@@ -38,13 +41,6 @@ class CollectionResource extends Resource
                 Forms\Components\Hidden::make('uploader_id')
                                     ->default(Auth::user()->id),
             ])->columns(1);
-                        // ->schema([
-                        //     Forms\Components\Select::make('troves')
-                        //     ->multiple()
-                        //     ->label('Add resource troves to this collection')
-                        //     ->placeholder('Select a resource trove')
-                        //     ->options(Trove::all()->pluck('title', 'id'))
-                        //     ->required()
     }
 
     public static function table(Table $table): Table
@@ -53,22 +49,26 @@ class CollectionResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                                 ->wrap(),
-                // Tables\Columns\SpatieMediaLibraryImageColumn::make('cover_image'),
+                Tables\Columns\SpatieMediaLibraryImageColumn::make('cover_image'),
                 Tables\Columns\TextColumn::make('user.name')
-                                ->label('Uploader')
+                                ->label('Curated By')
                                 ->sortable(),
                 Tables\Columns\IconColumn::make('public')
                                 ->boolean()
                                 ->sortable()
                                 ->trueColor('success')
                                 ->falseColor('warning'),
+                Tables\Columns\TextColumn::make('troves_count')
+                                ->counts('troves')
+                                ->label('# Troves')
+                                ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
+                // Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -22,9 +22,12 @@ use Filament\Forms\Components\Placeholder;
 use App\Filament\Resources\TroveResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\TroveResource\RelationManagers;
+use Filament\Resources\Concerns\Translatable;
 
 class TroveResource extends Resource
 {
+    use Translatable;
+    
     protected static ?string $model = Trove::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
@@ -47,14 +50,15 @@ class TroveResource extends Resource
                                                 ->required()
                                                 ->helperText('For example: What is this trove? Who is it for? Why was it or uploaded?'),
 
-                            Forms\Components\Select::make('source')
-                                                ->placeholder('Select the origin of the resource')
-                                                ->options([0 => 'Internal', 1 => 'External'])
-                                                ->required(),
-
                             Forms\Components\Select::make('trove_type_id')
                                                 ->placeholder('Select the resource type')
                                                 ->relationship('troveType', 'label')
+                                                ->required()
+                                                ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en')),
+
+                            Forms\Components\Select::make('source')
+                                                ->placeholder('Select the origin of the resource')
+                                                ->options([0 => 'Internal', 1 => 'External'])
                                                 ->required(),
 
                             Forms\Components\DatePicker::make('creation_date')
@@ -67,24 +71,24 @@ class TroveResource extends Resource
                     Wizard\Step::make('Tags')
                         ->icon('heroicon-m-tag')
                         ->schema([
-                            Forms\Components\Select::make('tags')
-                                                ->multiple()
-                                                ->options(Tag::all()->pluck('name', 'id'))
-                                                ->placeholder('Select a tag')
+                            Forms\Components\SpatieTagsInput::make('tags')
+                                                ->placeholder('Add tags')
                                                 ->label('Select tags')
                                                 ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Except where specified, you must select from existing tags. If you believe a new tag is required, please contact Emily. You can apply as many tags as you need for each category.')
                                                 ->helperText('These tags help organise and filter the resources on the front-end. ')
                                                 ->required()
                         ]),
-                    Wizard\Step::make('Attachments')
+                    Wizard\Step::make('Content')
                         ->icon('heroicon-m-link')
                         ->schema([
-                            Forms\Components\SpatieMediaLibraryFileUpload::make('elements_files')
+                            Forms\Components\SpatieMediaLibraryFileUpload::make('files')
                                                 ->label('Files')
                                                 ->hintIcon('heroicon-m-question-mark-circle', tooltip: ('A trove will often contain multiple files. These are files that work together, for example a questions and answers sheet, or a document translated into different languages.'))
                                                 ->helperText('One or more files can be uploaded into this resource trove')
-                                                ->multiple(),
-                            Forms\Components\Repeater::make('elements_urls')
+                                                ->multiple()
+                                                ->enableReordering()
+                                                ->collection('content'),
+                            Forms\Components\Repeater::make('external_links')
                                                 ->label('External links - websites, files etc., hosted by other people')
                                                 ->schema([
                                                     Forms\Components\TextInput::make('link_title'),
@@ -93,10 +97,10 @@ class TroveResource extends Resource
                                                 ])
                                                 ->columns(2)
                                                 ->addActionLabel('Add another link'),
-                            Forms\Components\Repeater::make('youtube')
+                            Forms\Components\Repeater::make('youtube_links')
                                                 ->label('YouTube Videos (if you have added a video file that already exists on YouTube)')
                                                 ->schema([
-                                                    Forms\Components\TextInput::make('elements_videos')
+                                                    Forms\Components\TextInput::make('youtube_id')
                                                                         ->label('YouTube id')
                                                                         ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'In YouTube, when you hit "share", the id is the random-like string after <strong>https://youtu.be/</strong>'),
                                                 ])
@@ -105,8 +109,9 @@ class TroveResource extends Resource
                     Wizard\Step::make('Cover Image')
                         ->icon('heroicon-m-photo')
                         ->schema([
-                            Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image_file')
-                                                ->label('Cover image'),
+                            Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image')
+                                                ->label('Cover image')
+                                                ->collection('cover_image'),
                         ]),
                     Wizard\Step::make('Check')
                         ->icon('heroicon-m-clipboard-document-check')
@@ -114,6 +119,8 @@ class TroveResource extends Resource
                             Placeholder::make('check_info')
                                 ->disableLabel()
                                 ->content(new HtmlString('Checking section')),
+                            Forms\Components\Checkbox::make('public')
+                                ->label('Is this trove resource ready to be shared externally?')
                         ]),
                 ])
                 ->skippable()
@@ -128,7 +135,11 @@ class TroveResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                                 ->wrap(),
-                Tables\Columns\SpatieMediaLibraryImageColumn::make('cover_image'),
+                Tables\Columns\SpatieMediaLibraryImageColumn::make('cover_image')
+                                ->collection('cover_image'),
+                Tables\Columns\TextColumn::make('creation_date')
+                                ->date()
+                                ->sortable(),
                 Tables\Columns\TextColumn::make('user.name')
                                 ->label('Uploader')
                                 ->sortable(),
@@ -140,18 +151,15 @@ class TroveResource extends Resource
                 Tables\Columns\TextColumn::make('download_count')
                                 ->label('# Downloads')
                                 ->sortable(),
-                Tables\Columns\TextColumn::make('creation_date')
-                                ->date()
-                                ->sortable(),
-
-                
             ])
             ->filters([
                 SelectFilter::make('source')
                     ->options([0 => 'Internal', 1 => 'External']),
                 SelectFilter::make('resourceType')
                     ->relationship('troveType', 'label')
-            // ], layout: FiltersLayout::AboveContent)
+                    ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en')),
+                SelectFilter::make('uploader')
+                    ->relationship('user', 'name')
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -159,7 +167,7 @@ class TroveResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                Tables\Actions\DeleteBulkAction::make(),
+                // Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
