@@ -36,95 +36,110 @@ class TroveResource extends Resource
     {
         return $form
             ->schema([
-                Wizard::make([
-                    Wizard\Step::make('Details')
-                        ->icon('heroicon-m-information-circle')
-                        ->columns(1)
-                        ->schema([
-                            Forms\Components\TextInput::make('title')
-                                                ->required()
-                                                ->label('Title')
-                                                ->helperText('Add a useful title for the resource, this could be the title of the document, or the name of the software, etc.'),
 
-                            Forms\Components\MarkdownEditor::make('description')
-                                                ->required()
-                                                ->helperText('For example: What is this trove? Who is it for? Why was it or uploaded?'),
-
-                            Forms\Components\Select::make('trove_type_id')
-                                                ->placeholder('Select the resource type')
-                                                ->relationship('troveType', 'label')
-                                                ->required()
-                                                ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en')),
-
-                            Forms\Components\Select::make('source')
-                                                ->placeholder('Select the origin of the resource')
-                                                ->options([0 => 'Internal', 1 => 'External'])
-                                                ->required(),
-
-                            Forms\Components\DatePicker::make('creation_date')
-                                                ->label('When was the resource created?')
-                                                ->helperText('To the nearest month (approximately is fine). This is mainly to highlight to users when a resource might be a bit out of date.')
-                                                ->required(),
-
-                            Forms\Components\Hidden::make('uploader_id')->default(Auth::user()->id),
-                        ]),
-                    Wizard\Step::make('Tags')
-                        ->icon('heroicon-m-tag')
-                        ->schema([
-                            Forms\Components\SpatieTagsInput::make('tags')
-                                                ->placeholder('Add tags')
-                                                ->label('Select tags')
-                                                ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Except where specified, you must select from existing tags. If you believe a new tag is required, please contact Emily. You can apply as many tags as you need for each category.')
-                                                ->helperText('These tags help organise and filter the resources on the front-end. ')
-                                                ->required()
-                        ]),
-                    Wizard\Step::make('Content')
-                        ->icon('heroicon-m-link')
-                        ->schema([
-                            Forms\Components\SpatieMediaLibraryFileUpload::make('files')
-                                                ->label('Files')
-                                                ->hintIcon('heroicon-m-question-mark-circle', tooltip: ('A trove will often contain multiple files. These are files that work together, for example a questions and answers sheet, or a document translated into different languages.'))
-                                                ->helperText('One or more files can be uploaded into this resource trove')
-                                                ->multiple()
-                                                ->enableReordering()
-                                                ->collection('content'),
-                            Forms\Components\Repeater::make('external_links')
-                                                ->label('External links - websites, files etc., hosted by other people')
-                                                ->schema([
-                                                    Forms\Components\TextInput::make('link_title'),
-                                                    Forms\Components\TextInput::make('link_url')
-                                                                        ->label('Link URL')
-                                                ])
-                                                ->columns(2)
-                                                ->addActionLabel('Add another link'),
-                            Forms\Components\Repeater::make('youtube_links')
-                                                ->label('YouTube Videos (if you have added a video file that already exists on YouTube)')
-                                                ->schema([
-                                                    Forms\Components\TextInput::make('youtube_id')
-                                                                        ->label('YouTube id')
-                                                                        ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'In YouTube, when you hit "share", the id is the random-like string after <strong>https://youtu.be/</strong>'),
-                                                ])
-                                                ->addActionLabel('Add another YouTube video'),
-                        ]),
-                    Wizard\Step::make('Cover Image')
-                        ->icon('heroicon-m-photo')
-                        ->schema([
-                            Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image')
-                                                ->label('Cover image')
-                                                ->collection('cover_image'),
-                        ]),
-                    Wizard\Step::make('Check')
-                        ->icon('heroicon-m-clipboard-document-check')
-                        ->schema([
-                            Placeholder::make('check_info')
-                                ->disableLabel()
-                                ->content(new HtmlString('Checking section')),
-                            Forms\Components\Checkbox::make('public')
-                                ->label('Is this trove resource ready to be shared externally?')
-                        ]),
+                Forms\Components\Section::make([
+                    Forms\Components\Select::make('label_language')
+                                        ->label('Language')
+                                        ->options(['en' =>'English', 'es' => 'Spanish', 'fr' => 'French'])
+                                        ->required(fn(string $operation) => $operation == 'create')
+                                        ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Select the language you are using to create this trove. After the trove has been created, translations for the other languages can be added at any time while in \'Edit Trove\' mode.'),
                 ])
-                ->skippable()
-                // ->submitAction(new HtmlString('<button type="submit">Submit</button>'))
+                ->hiddenOn('edit')
+                ->columns(2)
+                ->aside(),
+
+                Forms\Components\Section::make([
+                        Wizard::make([
+                            Wizard\Step::make('Details')
+                                ->icon('heroicon-m-information-circle')
+                                ->columns(1)
+                                ->schema([
+                                    Forms\Components\TextInput::make('title')
+                                                        ->required()
+                                                        ->label('Title')
+                                                        ->helperText('Add a useful title for the resource, this could be the title of the document, or the name of the software, etc.'),
+
+                                    Forms\Components\MarkdownEditor::make('description')
+                                                        ->required()
+                                                        ->helperText('For example: What is this trove? Who is it for? Why was it or uploaded?'),
+
+                                    Forms\Components\Select::make('trove_type_id')
+                                                        ->placeholder('Select the resource type')
+                                                        ->relationship('troveType', 'label')
+                                                        ->required()
+                                                        ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en')),
+
+                                    Forms\Components\Select::make('source')
+                                                        ->placeholder('Select the origin of the resource')
+                                                        ->options([0 => 'Internal', 1 => 'External'])
+                                                        ->required(),
+
+                                    Forms\Components\DatePicker::make('creation_date')
+                                                        ->label('When was the resource created?')
+                                                        ->helperText('To the nearest month (approximately is fine). This is mainly to highlight to users when a resource might be a bit out of date.')
+                                                        ->required(),
+
+                                    Forms\Components\Hidden::make('uploader_id')->default(Auth::user()->id),
+                                ]),
+                            Wizard\Step::make('Tags')
+                                ->icon('heroicon-m-tag')
+                                ->schema([
+                                    Forms\Components\SpatieTagsInput::make('tags')
+                                                        ->placeholder('Add tags')
+                                                        ->label('Select tags')
+                                                        ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Except where specified, you must select from existing tags. If you believe a new tag is required, please contact Emily. You can apply as many tags as you need for each category.')
+                                                        ->helperText('These tags help organise and filter the resources on the front-end. ')
+                                                        ->required()
+                                ]),
+                            Wizard\Step::make('Content')
+                                ->icon('heroicon-m-link')
+                                ->schema([
+                                    Forms\Components\SpatieMediaLibraryFileUpload::make('files')
+                                                        ->label('Files')
+                                                        ->hintIcon('heroicon-m-question-mark-circle', tooltip: ('A trove will often contain multiple files. These are files that work together, for example a questions and answers sheet, or a document translated into different languages.'))
+                                                        ->helperText('One or more files can be uploaded into this resource trove')
+                                                        ->multiple()
+                                                        ->enableReordering()
+                                                        ->collection('content'),
+                                    Forms\Components\Repeater::make('external_links')
+                                                        ->label('External links - websites, files etc., hosted by other people')
+                                                        ->schema([
+                                                            Forms\Components\TextInput::make('link_title'),
+                                                            Forms\Components\TextInput::make('link_url')
+                                                                                ->label('Link URL')
+                                                        ])
+                                                        ->columns(2)
+                                                        ->addActionLabel('Add another link'),
+                                    Forms\Components\Repeater::make('youtube_links')
+                                                        ->label('YouTube Videos (if you have added a video file that already exists on YouTube)')
+                                                        ->schema([
+                                                            Forms\Components\TextInput::make('youtube_id')
+                                                                                ->label('YouTube id')
+                                                                                ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'In YouTube, when you hit "share", the id is the random-like string after <strong>https://youtu.be/</strong>'),
+                                                        ])
+                                                        ->addActionLabel('Add another YouTube video'),
+                                ]),
+                            Wizard\Step::make('Cover Image')
+                                ->icon('heroicon-m-photo')
+                                ->schema([
+                                    Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image')
+                                                        ->label('Cover image')
+                                                        ->collection('cover_image'),
+                                ]),
+                            Wizard\Step::make('Check')
+                                ->icon('heroicon-m-clipboard-document-check')
+                                ->schema([
+                                    Placeholder::make('check_info')
+                                        ->disableLabel()
+                                        ->content(new HtmlString('Checking section')),
+                                    Forms\Components\Checkbox::make('public')
+                                        ->label('Is this trove resource ready to be shared externally?')
+                                ]),
+                        ])
+                        ->skippable()
+                        // ->submitAction(new HtmlString('<button type="submit">Submit</button>'))
+                ])->grow(false),   
+
             ])
             ->columns(1);
     }
