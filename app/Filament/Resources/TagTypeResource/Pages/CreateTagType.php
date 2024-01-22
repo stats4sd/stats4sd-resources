@@ -14,15 +14,20 @@ class CreateTagType extends CreateRecord
 
     protected static bool $canCreateAnother = false;
 
-    protected function getHeaderActions(): array
+    protected function afterCreate(): void
     {
-        return [
-            Actions\LocaleSwitcher::make(),
-        ];
-    }
-    
-    protected function getRedirectUrl(): string 
-    {
-        return $this->getResource()::getUrl('index');
+        $language = $this->data['label_language'];
+
+        if($language!=='en'){
+
+            $this->record->setTranslations('label', [$language => $this->record->label]);
+            $this->record->forgetTranslation('label', 'en');
+
+            $this->record->setTranslations('description', [$language => $this->record->description]);
+            $this->record->forgetTranslation('description', 'en');
+        
+        }
+
+        $this->record->save();
     }
 }

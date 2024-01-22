@@ -28,8 +28,21 @@ class TroveTypeResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('label')->required(),                            
-            ]);
+                Forms\Components\Split::make([
+                    Forms\Components\Section::make([
+                        Forms\Components\TextInput::make('label')->required(),
+                    ]),
+                    Forms\Components\Section::make([
+                        Forms\Components\Select::make('label_language')
+                                            ->label('Language')
+                                            ->options(['en' =>'English', 'es' => 'Spanish', 'fr' => 'French'])
+                                            ->required(fn(string $operation) => $operation == 'create')
+                                            ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Select the language you are using to create this trove type. After the trove type has been created, translations for the other languages can be added at any time while in \'Edit Trove Type\' mode.'),
+                    ])
+                    ->aside()
+                    ->hiddenOn('edit'),
+                ])->from('md')
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table

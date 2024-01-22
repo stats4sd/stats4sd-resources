@@ -14,11 +14,21 @@ class CreateCollection extends CreateRecord
 
     protected static bool $canCreateAnother = false;
 
-    protected function getHeaderActions(): array
+    protected function afterCreate(): void
     {
-        return [
-            Actions\LocaleSwitcher::make(),
-        ];
+        $language = $this->data['label_language'];
+
+        if($language!=='en'){
+
+            $this->record->setTranslations('title', [$language => $this->record->title]);
+            $this->record->forgetTranslation('title', 'en');
+
+            $this->record->setTranslations('description', [$language => $this->record->description]);
+            $this->record->forgetTranslation('description', 'en');
+        
+        }
+
+        $this->record->save();
     }
-    
+
 }

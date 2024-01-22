@@ -13,16 +13,5 @@ class CreateTrove extends CreateRecord
     protected static string $resource = TroveResource::class;
 
     protected static bool $canCreateAnother = false;
-
-    protected function getHeaderActions(): array
-    {
-        return [
-            Actions\LocaleSwitcher::make(),
-        ];
-    }
     
-    protected function getRedirectUrl(): string 
-    {
-        return $this->getResource()::getUrl('index');
-    }
 }
