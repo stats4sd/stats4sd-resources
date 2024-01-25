@@ -24,36 +24,75 @@ class CollectionResource extends Resource
     
     protected static ?string $model = Collection::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-folder';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-group';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Split::make([
-                    Forms\Components\Section::make([
-                        Forms\Components\TextInput::make('title')
-                                            ->required(),
-                        Forms\Components\TextArea::make('description')
-                                            ->rows(3)
-                                            ->required(),
-                        Forms\Components\Checkbox::make('public')
-                                            ->label('Should this collection be shared externally?')
-                                            ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Note - leaving this box unticked prevents the collection from appearing in the full collections list. It does NOT prevent the collection from being referenced in a specific page, e.g. the "CRFS Front Page" Collection'),
-                        Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image')->required(),
-                        Forms\Components\Hidden::make('uploader_id')
+                Forms\Components\Section::make('Title')
+                                ->description('Add a useful title for the collection.')
+                                ->columns(3)
+                                ->schema([
+                                    Forms\Components\TextInput::make('title')->hiddenOn(['edit', 'create']),
+                                    Forms\Components\TextInput::make('title_en')
+                                                    ->label('English')
+                                                    ->requiredWithoutAll('title_es, title_fr')
+                                                    ->validationMessages(['required_without_all' => 'Enter the title in at least one language']),
+                                    Forms\Components\TextInput::make('title_es')
+                                                    ->label('Spanish')
+                                                    ->requiredWithoutAll('title_en, title_fr')
+                                                    ->validationMessages(['required_without_all' => 'Enter the title in at least one language']),
+                                    Forms\Components\TextInput::make('title_fr')
+                                                    ->label('French')
+                                                    ->requiredWithoutAll('title_es, title_en')
+                                                    ->validationMessages(['required_without_all' => 'Enter the title in at least one language']),
+                                ]),
+                
+                Forms\Components\Section::make('Description')
+                                ->description('For example: What is this collection? Who is it for? Why was it curated?')
+                                ->columns(3)
+                                ->schema([
+                                    Forms\Components\TextInput::make('description')->hiddenOn(['edit', 'create']),
+                                    Forms\Components\TextArea::make('description_en')
+                                                    ->label('English')
+                                                    ->requiredWithoutAll('description_es, description_fr')
+                                                    ->validationMessages(['required_without_all' => 'Enter the description in at least one language']),
+                                    Forms\Components\TextArea::make('description_es')
+                                                    ->label('Spanish')
+                                                    ->requiredWithoutAll('description_en, description_fr')
+                                                    ->validationMessages(['required_without_all' => 'Enter the description in at least one language']),
+                                    Forms\Components\TextArea::make('description_fr')
+                                                    ->label('French')
+                                                    ->requiredWithoutAll('description_es, description_en')
+                                                    ->validationMessages(['required_without_all' => 'Enter the description in at least one language']),
+                                ]),
+
+
+                Forms\Components\Checkbox::make('public')
+                                ->label('Should this collection be shared externally?')
+                                ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Note - leaving this box unticked prevents the collection from appearing in the full collections list. It does NOT prevent the collection from being referenced in a specific page, e.g. the "CRFS Front Page" Collection'),
+                
+                Forms\Components\Fieldset::make('cover_image')
+                                ->label('Cover Image')
+                                ->columns(3)
+                                ->schema([
+                                    Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image_en')
+                                                        ->label('English')
+                                                        ->collection('collection_cover_en'),
+                                    Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image_es')
+                                                        ->label('Spanish')
+                                                        ->collection('collection_cover_es'),
+                                    Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image_fr')
+                                                        ->label('French')
+                                                        ->collection('collection_cover_fr'),
+                                ]),
+                
+                Forms\Components\Hidden::make('uploader_id')
                                             ->default(Auth::user()->id),
-                    ]),
-                    Forms\Components\Section::make([
-                        Forms\Components\Select::make('label_language')
-                                            ->label('Language')
-                                            ->options(['en' =>'English', 'es' => 'Spanish', 'fr' => 'French'])
-                                            ->required(fn(string $operation) => $operation == 'create')
-                                            ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Select the language you are using to create this collection. After the collection has been created, translations for the other languages can be added at any time while in \'Edit Collection\' mode.'),
-                    ])
-                    ->aside()
-                    ->hiddenOn('edit'),
-                ])->from('md')
+
+
+
             ])->columns(1);
     }
  

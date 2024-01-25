@@ -14,18 +14,40 @@ class CreateCollection extends CreateRecord
 
     protected static bool $canCreateAnother = false;
 
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['title'] = 'titles added after creation';
+        $data['description'] = 'descriptions added after creation';
+        return $data;
+    }
+
     protected function afterCreate(): void
     {
-        $language = $this->data['label_language'];
+        $this->record->title = '';
+        $this->record->description = '';
 
-        if($language!=='en'){
+        if(!is_null($this->data['title_en'])){
+            $this->record->setTranslation('title', 'en', $this->data['title_en']);
+        }
 
-            $this->record->setTranslations('title', [$language => $this->record->title]);
-            $this->record->forgetTranslation('title', 'en');
+        if(!is_null($this->data['title_es'])){
+            $this->record->setTranslation('title', 'es', $this->data['title_es']);
+        }
 
-            $this->record->setTranslations('description', [$language => $this->record->description]);
-            $this->record->forgetTranslation('description', 'en');
-        
+        if(!is_null($this->data['title_fr'])){
+            $this->record->setTranslation('title', 'fr', $this->data['title_fr']);
+        }
+
+        if(!is_null($this->data['description_en'])){
+            $this->record->setTranslation('description', 'en', $this->data['description_en']);
+        }
+
+        if(!is_null($this->data['description_es'])){
+            $this->record->setTranslation('description', 'es', $this->data['description_es']);
+        }
+
+        if(!is_null($this->data['description_fr'])){
+            $this->record->setTranslation('description', 'fr', $this->data['description_fr']);
         }
 
         $this->record->save();

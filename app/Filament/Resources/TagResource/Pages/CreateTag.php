@@ -14,15 +14,34 @@ class CreateTag extends CreateRecord
 
     protected static bool $canCreateAnother = false;
 
-    protected function getHeaderActions(): array
+    protected function mutateFormDataBeforeCreate(array $data): array
     {
-        return [
-            Actions\LocaleSwitcher::make(),
-        ];
+        $data['name'] = 'names added after creation';
+        return $data;
     }
-    
+
+    protected function afterCreate(): void
+    {
+        $this->record->name = '';
+
+        if(!is_null($this->data['name_en'])){
+            $this->record->setTranslation('name', 'en', $this->data['name_en']);
+        }
+
+        if(!is_null($this->data['name_es'])){
+            $this->record->setTranslation('name', 'es', $this->data['name_es']);
+        }
+
+        if(!is_null($this->data['name_fr'])){
+            $this->record->setTranslation('name', 'fr', $this->data['name_fr']);
+        }
+
+        $this->record->save();
+    }
+
     protected function getRedirectUrl(): string 
     {
         return $this->getResource()::getUrl('index');
     }
+
 }

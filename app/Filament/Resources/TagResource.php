@@ -27,20 +27,38 @@ class TagResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\TextInput::make('label')->required(),                                
-                Forms\Components\Select::make('type')
-                                    ->relationship('tagType', 'label')
-                                    ->required()
-                                    ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en')),
-            ])->columns(1);
-    }
+        ->schema([
+            Forms\Components\Fieldset::make('name_field')
+                                ->label('Name')
+                                ->columns(3)
+                                ->schema([
+                                    Forms\Components\TextInput::make('name')->hiddenOn(['edit', 'create']),
+                                    Forms\Components\TextInput::make('name_en')
+                                                    ->label('English')
+                                                    ->requiredWithoutAll('name_es, name_fr')
+                                                    ->validationMessages(['required_without_all' => 'Enter the name in at least one language']),
+                                    Forms\Components\TextInput::make('name_es')
+                                                    ->label('Spanish')
+                                                    ->requiredWithoutAll('name_en, name_fr')
+                                                    ->validationMessages(['required_without_all' => 'Enter the name in at least one language']),
+                                    Forms\Components\TextInput::make('name_fr')
+                                                    ->label('French')
+                                                    ->requiredWithoutAll('name_es, name_en')
+                                                    ->validationMessages(['required_without_all' => 'Enter the name in at least one language']),
+                                ]),
+
+            Forms\Components\Select::make('type')
+                            ->relationship('tagType', 'name')
+                            ->required()
+                            ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en')),
+        ]);
+}
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([                              
-                Tables\Columns\TextColumn::make('label'),
+                Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('tagType.label'),
                 Tables\Columns\TextColumn::make('troves_count')
                                 ->label('# of troves')

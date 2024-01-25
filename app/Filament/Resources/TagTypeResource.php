@@ -27,30 +27,50 @@ class TagTypeResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Split::make([
-                    Forms\Components\Section::make([
-                        Forms\Components\TextInput::make('label')
-                                            ->required(),
-                        Forms\Components\TextInput::make('description')
-                                            ->helperText('Text that appears as a hint in the add / edit Troves form')
-                                            ->required(),
-                        Forms\Components\Checkbox::make('freetext')
-                                            ->label('Does this bucket accept new tag entries during Trove upload?')
-                                            ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Most buckets should not have this enabled, to prevent accidental duplication / mistyping during Trove upload.'),
-                    ])->grow(false),
-                    Forms\Components\Section::make([
-                        Forms\Components\Select::make('label_language')
-                                            ->label('Language')
-                                            ->options(['en' =>'English', 'es' => 'Spanish', 'fr' => 'French'])
-                                            ->required(fn(string $operation) => $operation == 'create')
-                                            ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Select the language you are using to create this tag type. After the tag type has been created, translations for the other languages can be added at any time while in \'Edit Tag Type\' mode.'),
+                Forms\Components\Fieldset::make('label_field')
+                                ->label('Label')
+                                ->columns(3)
+                                ->schema([
+                                    Forms\Components\TextInput::make('label')->hiddenOn(['edit', 'create']),
+                                    Forms\Components\TextInput::make('label_en')
+                                                    ->label('English')
+                                                    ->requiredWithoutAll('label_es, label_fr')
+                                                    ->validationMessages(['required_without_all' => 'Enter the label in at least one language']),
+                                    Forms\Components\TextInput::make('label_es')
+                                                    ->label('Spanish')
+                                                    ->requiredWithoutAll('label_en, label_fr')
+                                                    ->validationMessages(['required_without_all' => 'Enter the label in at least one language']),
+                                    Forms\Components\TextInput::make('label_fr')
+                                                    ->label('French')
+                                                    ->requiredWithoutAll('label_es, label_en')
+                                                    ->validationMessages(['required_without_all' => 'Enter the label in at least one language']),
+                                ]),
 
-                    ])
-                    ->aside()
-                    ->hiddenOn('edit')
-                ])
-                ->from('md')
-            ])->columns(1);
+                Forms\Components\Fieldset::make('description_field')
+                                ->label('Description')
+                                ->columns(3)
+                                ->schema([
+                                    Forms\Components\TextInput::make('description')->hiddenOn(['edit', 'create']),
+                                    Forms\Components\TextArea::make('description_en')
+                                                    ->label('English')
+                                                    ->requiredWithoutAll('description_es, description_fr')
+                                                    ->validationMessages(['required_without_all' => 'Enter the description in at least one language']),
+                                    Forms\Components\TextArea::make('description_es')
+                                                    ->label('Spanish')
+                                                    ->requiredWithoutAll('description_en, description_fr')
+                                                    ->validationMessages(['required_without_all' => 'Enter the description in at least one language']),
+                                    Forms\Components\TextArea::make('description_fr')
+                                                    ->label('French')
+                                                    ->requiredWithoutAll('description_es, description_en')
+                                                    ->validationMessages(['required_without_all' => 'Enter the description in at least one language']),
+                                ]),
+                
+                Forms\Components\Section::make('')
+                                ->schema([Forms\Components\Checkbox::make('freetext')
+                                                ->label('Does this bucket accept new tag entries during Trove upload?')
+                                                ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Most buckets should not have this enabled, to prevent accidental duplication / mistyping during Trove upload.'),
+                                            ])
+            ]);
     }
 
     public static function table(Table $table): Table
