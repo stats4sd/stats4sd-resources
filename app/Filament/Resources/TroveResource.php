@@ -66,16 +66,19 @@ class TroveResource extends Resource
                                     ->columns(3)
                                     ->schema([
                                         Forms\Components\TextInput::make('description')->hiddenOn(['edit', 'create']),
-                                        Forms\Components\TextArea::make('description_en')
+                                        Forms\Components\MarkdownEditor::make('description_en')
                                                         ->label('English')
+                                                        ->disableToolbarButtons(['attachFiles'])
                                                         ->requiredWithoutAll('description_es, description_fr')
                                                         ->validationMessages(['required_without_all' => 'Enter the description in at least one language']),
-                                        Forms\Components\TextArea::make('description_es')
+                                        Forms\Components\MarkdownEditor::make('description_es')
                                                         ->label('Spanish')
+                                                        ->disableToolbarButtons(['attachFiles'])
                                                         ->requiredWithoutAll('description_en, description_fr')
                                                         ->validationMessages(['required_without_all' => 'Enter the description in at least one language']),
-                                        Forms\Components\TextArea::make('description_fr')
+                                        Forms\Components\MarkdownEditor::make('description_fr')
                                                         ->label('French')
+                                                        ->disableToolbarButtons(['attachFiles'])
                                                         ->requiredWithoutAll('description_es, description_en')
                                                         ->validationMessages(['required_without_all' => 'Enter the description in at least one language']),
                                 ]),
@@ -94,6 +97,8 @@ class TroveResource extends Resource
                                 Forms\Components\DatePicker::make('creation_date')
                                                     ->label('When was the resource created?')
                                                     ->helperText('To the nearest month (approximately is fine). This is mainly to highlight to users when a resource might be a bit out of date.')
+                                                    ->minDate(now()->subYears(30))
+                                                    ->maxDate(now())
                                                     ->required(),
 
                                 Forms\Components\Hidden::make('uploader_id')->default(Auth::user()->id),
