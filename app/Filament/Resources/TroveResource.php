@@ -3,12 +3,13 @@
 namespace App\Filament\Resources;
 
 use App\User;
+use App\Models\Tag;
 use Filament\Forms;
 use Filament\Tables;
+use App\Models\Trove;
+use App\Models\TagType;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
-use App\Models\Tag;
-use App\Models\Trove;
 use Filament\Resources\Resource;
 use Illuminate\Support\HtmlString;
 use Filament\Tables\Filters\Filter;
@@ -19,10 +20,10 @@ use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\Placeholder;
+use Filament\Resources\Concerns\Translatable;
 use App\Filament\Resources\TroveResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\TroveResource\RelationManagers;
-use Filament\Resources\Concerns\Translatable;
 
 class TroveResource extends Resource
 {
@@ -107,12 +108,89 @@ class TroveResource extends Resource
                             Wizard\Step::make('Tags')
                             ->icon('heroicon-m-tag')
                             ->schema([
-                                Forms\Components\TagsInput::make('tags')
-                                                    ->placeholder('Add tags')
-                                                    ->label('Select tags')
-                                                    ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Except where specified, you must select from existing tags. If you believe a new tag is required, please contact Emily. You can apply as many tags as you need for each category.')
-                                                    ->helperText('These tags help organise and filter the resources on the front-end. ')
-                                                    // ->required()
+                                Forms\Components\Section::make('Tags')
+                                ->description('These tags help organise and filter the resources on the front-end. Except where specified, you must select from existing tags. If you believe a new tag is required, please contact Emily. You can apply as many tags as you need for each category.')
+                                ->columns(2)
+                                ->schema([
+
+                                    // TOPICS
+                                    Forms\Components\Select::make('tags_topics')
+                                                        ->relationship('tags', 'label')
+                                                        ->options(Tag::where('type_id', '1')->pluck('label', 'id'))
+                                                        ->label('TOPICS')
+                                                        ->placeholder('Select tags')
+                                                        ->multiple()
+                                                        ->preload()
+                                                        ->loadingMessage('Loading tags...')
+                                                        ->noSearchResultsMessage('No tags match your search')
+                                                        ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en'))
+                                                        ->hintIcon('heroicon-m-question-mark-circle', tooltip: fn () => TagType::where('id', '1')->first()->getTranslation('description', 'en')),
+
+                                    // KEYWORDS
+                                    Forms\Components\Select::make('tags_keywords')
+                                                        ->relationship('tags', 'label')
+                                                        ->options(Tag::where('type_id', '2')->pluck('label', 'id'))
+                                                        ->label('KEYWORDS')
+                                                        ->placeholder('Select tags')
+                                                        ->multiple()
+                                                        ->preload()
+                                                        ->loadingMessage('Loading tags...')
+                                                        ->noSearchResultsMessage('No tags match your search')
+                                                        ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en'))
+                                                        ->hintIcon('heroicon-m-question-mark-circle', tooltip: fn () => TagType::where('id', '2')->first()->getTranslation('description', 'en')),
+                                    // AUDIENCE
+                                    Forms\Components\Select::make('tags_audience')
+                                                        ->relationship('tags', 'label')
+                                                        ->options(Tag::where('type_id', '3')->pluck('label', 'id'))
+                                                        ->label('AUDIENCE')
+                                                        ->placeholder('Select tags')
+                                                        ->multiple()
+                                                        ->preload()
+                                                        ->loadingMessage('Loading tags...')
+                                                        ->noSearchResultsMessage('No tags match your search')
+                                                        ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en'))
+                                                        ->hintIcon('heroicon-m-question-mark-circle', tooltip: fn () => TagType::where('id', '3')->first()->getTranslation('description', 'en')),
+
+                                    // THEMES
+                                    Forms\Components\Select::make('tags_themes')
+                                                        ->relationship('tags', 'label')
+                                                        ->options(Tag::where('type_id', '4')->pluck('label', 'id'))
+                                                        ->label('THEMES')
+                                                        ->placeholder('Select tags')
+                                                        ->multiple()
+                                                        ->preload()
+                                                        ->loadingMessage('Loading tags...')
+                                                        ->noSearchResultsMessage('No tags match your search')
+                                                        ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en'))
+                                                        ->hintIcon('heroicon-m-question-mark-circle', tooltip: fn () => TagType::where('id', '4')->first()->getTranslation('description', 'en')),
+
+                                    // AUTHORS
+                                    Forms\Components\Select::make('tags_authors')
+                                                        ->relationship('tags', 'label')
+                                                        ->options(Tag::where('type_id', '5')->pluck('label', 'id'))
+                                                        ->label('AUTHORS')
+                                                        ->placeholder('Select tags')
+                                                        ->multiple()
+                                                        ->preload()
+                                                        ->loadingMessage('Loading tags...')
+                                                        ->noSearchResultsMessage('No tags match your search')
+                                                        ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en'))
+                                                        ->hintIcon('heroicon-m-question-mark-circle', tooltip: fn () => TagType::where('id', '5')->first()->getTranslation('description', 'en')),
+
+                                    // LOCATIONS
+                                    Forms\Components\Select::make('tags_locations')
+                                                        ->relationship('tags', 'label')
+                                                        ->options(Tag::where('type_id', '6')->pluck('label', 'id'))
+                                                        ->label('LOCATIONS')
+                                                        ->placeholder('Select tags')
+                                                        ->multiple()
+                                                        ->preload()
+                                                        ->loadingMessage('Loading tags...')
+                                                        ->noSearchResultsMessage('No tags match your search')
+                                                        ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en'))
+                                                        ->hintIcon('heroicon-m-question-mark-circle', tooltip: fn () => TagType::where('id', '6')->first()->getTranslation('description', 'en')),
+                                
+                                ])
                             ]),
 
                             Wizard\Step::make('Content')
@@ -249,6 +327,10 @@ class TroveResource extends Resource
                 Tables\Columns\TextColumn::make('creation_date')
                                 ->date()
                                 ->sortable(),
+                Tables\Columns\TextColumn::make('tags_count')
+                                ->label('# Tags')
+                                ->sortable()
+                                ->counts('tags'),
                 Tables\Columns\TextColumn::make('user.name')
                                 ->label('Uploader')
                                 ->sortable(),

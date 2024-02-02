@@ -11,10 +11,8 @@ return new class extends Migration
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
 
-            $table->json('label');
-            $table->json('slug');
-            $table->string('type')->nullable();
-            $table->integer('order_column')->nullable();
+            $table->json('name');
+            $table->foreignId('type_id');
 
             $table->timestamps();
         });

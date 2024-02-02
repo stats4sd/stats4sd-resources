@@ -2,47 +2,30 @@
 
 namespace App\Models;
 
-use Spatie\Tags\HasTags;
-use Spatie\Tags\Tag as SpatieTag;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
-class Tag extends SpatieTag
+class Tag extends Model
 {
     use HasFactory;
     use HasTranslations;
-    use HasTags;
 
     protected $fillable = [
         'label',
-        'slug',
-        'type',
+        'type_id',
     ];
 
     protected $casts = [
         'id' => 'integer',
-        'type' => 'integer',
+        'type_id' => 'integer',
     ];
 
-    public $translatable = [
+    public array $translatable = [
         'label',
-        'slug'
     ];
-    
-    public static function getTagClassName(): string
-    {
-        return Tag::class;
-    }
-
-    public function tags(): MorphToMany
-    {
-        return $this
-            ->morphToMany(self::getTagClassName(), 'taggable', 'taggables', null, 'tag_id')
-            ->orderBy('order_column');
-    }
 
     public function troves(): MorphToMany
     {
@@ -51,6 +34,6 @@ class Tag extends SpatieTag
 
     public function tagType(): BelongsTo
     {
-        return $this->belongsTo(TagType::class, 'type');
+        return $this->belongsTo(TagType::class);
     }
 }

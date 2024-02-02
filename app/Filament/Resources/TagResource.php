@@ -47,7 +47,7 @@ class TagResource extends Resource
                                                     ->validationMessages(['required_without_all' => 'Enter the name in at least one language']),
                                 ]),
 
-            Forms\Components\Select::make('type')
+            Forms\Components\Select::make('type_id')
                             ->relationship('tagType', 'name')
                             ->required()
                             ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en')),
