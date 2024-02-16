@@ -51,15 +51,15 @@ class TagTypeResource extends Resource
                                 ->columns(3)
                                 ->schema([
                                     Forms\Components\TextInput::make('description')->hiddenOn(['edit', 'create']),
-                                    Forms\Components\TextArea::make('description_en')
+                                    Forms\Components\Textarea::make('description_en')
                                                     ->label('English')
                                                     ->requiredWithoutAll('description_es, description_fr')
                                                     ->validationMessages(['required_without_all' => 'Enter the description in at least one language']),
-                                    Forms\Components\TextArea::make('description_es')
+                                    Forms\Components\Textarea::make('description_es')
                                                     ->label('Spanish')
                                                     ->requiredWithoutAll('description_en, description_fr')
                                                     ->validationMessages(['required_without_all' => 'Enter the description in at least one language']),
-                                    Forms\Components\TextArea::make('description_fr')
+                                    Forms\Components\Textarea::make('description_fr')
                                                     ->label('French')
                                                     ->requiredWithoutAll('description_es, description_en')
                                                     ->validationMessages(['required_without_all' => 'Enter the description in at least one language']),
