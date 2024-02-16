@@ -14,7 +14,7 @@ class Tag extends Model
     use HasTranslations;
 
     protected $fillable = [
-        'label',
+        'name',
         'type_id',
     ];
 
@@ -24,7 +24,7 @@ class Tag extends Model
     ];
 
     public array $translatable = [
-        'label',
+        'name',
     ];
 
     public function troves(): MorphToMany
@@ -34,6 +34,6 @@ class Tag extends Model
 
     public function tagType(): BelongsTo
     {
-        return $this->belongsTo(TagType::class);
+        return $this->belongsTo(TagType::class, 'type_id');
     }
 }

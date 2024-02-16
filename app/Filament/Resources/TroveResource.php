@@ -114,80 +114,80 @@ class TroveResource extends Resource
                                 ->schema([
 
                                     // TOPICS
-                                    Forms\Components\Select::make('tags_topics')
-                                                        ->relationship('tags', 'label')
-                                                        ->options(Tag::where('type_id', '1')->pluck('label', 'id'))
+                                    Forms\Components\Select::make('tags')
+                                                        ->relationship('tags', 'name')
+                                                        ->options(Tag::where('type_id', '1')->pluck('name', 'id'))
                                                         ->label('TOPICS')
                                                         ->placeholder('Select tags')
                                                         ->multiple()
                                                         ->preload()
                                                         ->loadingMessage('Loading tags...')
                                                         ->noSearchResultsMessage('No tags match your search')
-                                                        ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en'))
+                                                        ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('name', 'en'))
                                                         ->hintIcon('heroicon-m-question-mark-circle', tooltip: fn () => TagType::where('id', '1')->first()->getTranslation('description', 'en')),
 
                                     // KEYWORDS
                                     Forms\Components\Select::make('tags_keywords')
-                                                        ->relationship('tags', 'label')
-                                                        ->options(Tag::where('type_id', '2')->pluck('label', 'id'))
+                                                        ->relationship('tags', 'name')
+                                                        ->options(Tag::where('type_id', '2')->pluck('name', 'id'))
                                                         ->label('KEYWORDS')
                                                         ->placeholder('Select tags')
                                                         ->multiple()
                                                         ->preload()
                                                         ->loadingMessage('Loading tags...')
                                                         ->noSearchResultsMessage('No tags match your search')
-                                                        ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en'))
+                                                        ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('name', 'en'))
                                                         ->hintIcon('heroicon-m-question-mark-circle', tooltip: fn () => TagType::where('id', '2')->first()->getTranslation('description', 'en')),
                                     // AUDIENCE
                                     Forms\Components\Select::make('tags_audience')
-                                                        ->relationship('tags', 'label')
-                                                        ->options(Tag::where('type_id', '3')->pluck('label', 'id'))
+                                                        ->relationship('tags', 'name')
+                                                        ->options(Tag::where('type_id', '3')->pluck('name', 'id'))
                                                         ->label('AUDIENCE')
                                                         ->placeholder('Select tags')
                                                         ->multiple()
                                                         ->preload()
                                                         ->loadingMessage('Loading tags...')
                                                         ->noSearchResultsMessage('No tags match your search')
-                                                        ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en'))
+                                                        ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('name', 'en'))
                                                         ->hintIcon('heroicon-m-question-mark-circle', tooltip: fn () => TagType::where('id', '3')->first()->getTranslation('description', 'en')),
 
                                     // THEMES
                                     Forms\Components\Select::make('tags_themes')
-                                                        ->relationship('tags', 'label')
-                                                        ->options(Tag::where('type_id', '4')->pluck('label', 'id'))
+                                                        ->relationship('tags', 'name')
+                                                        ->options(Tag::where('type_id', '4')->pluck('name', 'id'))
                                                         ->label('THEMES')
                                                         ->placeholder('Select tags')
                                                         ->multiple()
                                                         ->preload()
                                                         ->loadingMessage('Loading tags...')
                                                         ->noSearchResultsMessage('No tags match your search')
-                                                        ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en'))
+                                                        ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('name', 'en'))
                                                         ->hintIcon('heroicon-m-question-mark-circle', tooltip: fn () => TagType::where('id', '4')->first()->getTranslation('description', 'en')),
 
                                     // AUTHORS
                                     Forms\Components\Select::make('tags_authors')
-                                                        ->relationship('tags', 'label')
-                                                        ->options(Tag::where('type_id', '5')->pluck('label', 'id'))
+                                                        ->relationship('tags', 'name')
+                                                        ->options(Tag::where('type_id', '5')->pluck('name', 'id'))
                                                         ->label('AUTHORS')
                                                         ->placeholder('Select tags')
                                                         ->multiple()
                                                         ->preload()
                                                         ->loadingMessage('Loading tags...')
                                                         ->noSearchResultsMessage('No tags match your search')
-                                                        ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en'))
+                                                        ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('name', 'en'))
                                                         ->hintIcon('heroicon-m-question-mark-circle', tooltip: fn () => TagType::where('id', '5')->first()->getTranslation('description', 'en')),
 
                                     // LOCATIONS
                                     Forms\Components\Select::make('tags_locations')
-                                                        ->relationship('tags', 'label')
-                                                        ->options(Tag::where('type_id', '6')->pluck('label', 'id'))
+                                                        ->relationship('tags', 'name')
+                                                        ->options(Tag::where('type_id', '6')->pluck('name', 'id'))
                                                         ->label('LOCATIONS')
                                                         ->placeholder('Select tags')
                                                         ->multiple()
                                                         ->preload()
                                                         ->loadingMessage('Loading tags...')
                                                         ->noSearchResultsMessage('No tags match your search')
-                                                        ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en'))
+                                                        ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('name', 'en'))
                                                         ->hintIcon('heroicon-m-question-mark-circle', tooltip: fn () => TagType::where('id', '6')->first()->getTranslation('description', 'en')),
                                 
                                 ])
