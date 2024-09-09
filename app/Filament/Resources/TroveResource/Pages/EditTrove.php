@@ -8,18 +8,10 @@ use Filament\Resources\Pages\EditRecord;
 
 class EditTrove extends EditRecord
 {
-    use EditRecord\Concerns\Translatable;
-
     protected static string $resource = TroveResource::class;
 
     protected function mutateFormDataBeforeFill(array $data): array
     {
-        $translations = $this->record->getTranslations('title');
-
-        $data['title_en'] = isset($translations['en']) ? $this->record->getTranslation('title', 'en') : null;
-        $data['title_es'] = isset($translations['es']) ? $this->record->getTranslation('title', 'es') : null;
-        $data['title_fr'] = isset($translations['fr']) ? $this->record->getTranslation('title', 'fr') : null;
-
         $translations = $this->record->getTranslations('description');
 
         $data['description_en'] = isset($translations['en']) ? $this->record->getTranslation('description', 'en') : null;
@@ -43,12 +35,8 @@ class EditTrove extends EditRecord
 
     protected function afterSave(): void
     {
-        $this->record->title = '';
-        $this->record->description = '';
 
-        if(!is_null($this->data['title_en'])) {$this->record->setTranslation('title', 'en', $this->data['title_en']);}
-        if(!is_null($this->data['title_es'])) {$this->record->setTranslation('title', 'es', $this->data['title_es']);}
-        if(!is_null($this->data['title_fr'])) {$this->record->setTranslation('title', 'fr', $this->data['title_fr']);}
+        $this->record->description = '';
 
         if(!is_null($this->data['description_en'])) {$this->record->setTranslation('description', 'en', $this->data['description_en']);}
         if(!is_null($this->data['description_es'])) {$this->record->setTranslation('description', 'es', $this->data['description_es']);}
@@ -65,11 +53,11 @@ class EditTrove extends EditRecord
         $this->record->save();
     }
 
-    protected function getRedirectUrl(): string 
+    protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');
     }
-    
+
     protected function getHeaderActions(): array
     {
         return [

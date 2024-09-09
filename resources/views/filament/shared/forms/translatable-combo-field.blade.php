@@ -1,14 +1,10 @@
-@php
-    $isAside = $isAside();
-@endphp
-
 <x-filament::section
-    :aside="$isAside"
+    :aside="false"
     :collapsed="$isCollapsed()"
-    :collapsible="$isCollapsible() && (! $isAside)"
+    :collapsible="$isCollapsible()"
     :compact="$isCompact()"
-    :content-before="$isFormBefore()"
-    :description="$getDescription()"
+    :content-before="false"
+    :description="$getHint()"
     :footer-actions="$getFooterActions()"
     :footer-actions-alignment="$getFooterActionsAlignment()"
     :header-actions="$getHeaderActions()"
@@ -27,6 +23,9 @@
     "
 >
 
+    {{ $getChildComponentContainer() }}
 
+
+    {{ json_encode($getState()) }}
 
 </x-filament::section>

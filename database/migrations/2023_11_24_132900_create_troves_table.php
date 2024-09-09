@@ -23,11 +23,10 @@ return new class extends Migration
             $table->date('creation_date');
             $table->foreignId('uploader_id')->constrained('users');
 
-            $table->json('external_links');
-            $table->json('youtube_links');
+            $table->json('external_links')->nullable();
+            $table->json('youtube_links')->nullable();
 
-            $table->boolean('public');
-
+            $table->boolean('public')->default(0);
             $table->integer('download_count')->default(0);
 
             $table->timestamps();

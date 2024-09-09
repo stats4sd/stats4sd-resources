@@ -4,24 +4,59 @@ namespace App\Filament\Shared\Form;
 
 use Closure;
 use Filament\Forms\Components\Component;
+use Filament\Forms\Components\Concerns;
+use Filament\Forms\Components\Contracts;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
+use Filament\Infolists\Components\Concerns\CanBeCollapsed;
+use Filament\Support\Concerns\HasDescription;
+use Filament\Support\Concerns\HasExtraAlpineAttributes;
+use Filament\Support\Concerns\HasHeading;
+use Filament\Support\Concerns\HasIcon;
+use Filament\Support\Concerns\HasIconColor;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Spatie\Color\Contrast;
 
 //
-class TranslatableComboField extends Section
+class TranslatableComboField extends Field implements Contracts\HasHeaderActions, Contracts\HasFooterActions
 {
+
+    use Concerns\CanBeCollapsed;
+    use Concerns\CanBeCompacted;
+    use Concerns\HasFooterActions;
+    use Concerns\HasHeaderActions;
+    use HasDescription;
+    use HasExtraAlpineAttributes;
+    use HasHeading;
+    use HasIcon;
+    use HasIconColor;
+
     // NOTES:
     // Is a wrapper around a set of fields that all populate the same value in the database, but in different languages.
 
-    // Maybe we have 2 versions - for Section and for Fieldset
 
-    public Closure|string|null $name = null;
+    protected string $view = 'filament.shared.forms.translatable-combo-field';
 
     public Closure|array|null $locales = null;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->formatStateUsing(function ($livewire, $state) {
+            $record = $livewire->getRecord();
+
+            if ($record->{$this->getName()} && method_exists($record, 'getTranslations')) {
+                return $record->getTranslations($this->getName());
+            }
+
+            return $state;
+        });
+
+    }
 
     public function locales(Closure|array|null $locales): static
     {
@@ -40,24 +75,6 @@ class TranslatableComboField extends Section
         return $this->evaluate($this->locales);
     }
 
-    public function name(Closure|string|null $name): static
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getName(): ?string
-    {
-        // default to the heading
-        if (!$this->name) {
-            return Str::lower($this->getHeading());
-        }
-
-        return $this->evaluate($this->name);
-    }
-
-
     public function fieldType(Closure|string $fieldType = null): static
     {
         // check that $fieldType is a class that extends Form Field
@@ -71,14 +88,17 @@ class TranslatableComboField extends Section
         }
 
         $localeFields = [];
+
         // create a field for each locale
         foreach ($this->getLocales() as $key => $label) {
 
-            $localeFields[] = $fieldType::make($this->getName() . '_' . $key)
+            $localeFields[] = $fieldType::make($key)
                 ->label($label);
         }
 
         $this->childComponents($localeFields);
         return $this;
     }
+
+
 }
