@@ -48,52 +48,18 @@ class TroveResource extends Resource
                         ->schema([
                             TranslatableComboField::make('title')
                                 ->columns(3)
-                                ->label(__('Title'))
+                                ->heading(__('Title'))
                                 ->hint(__('Add a useful title for the resource, this could be the title of the document, or the name of the software, etc.'))
                                 ->fieldType(
                                     TextInput::class
                                 ),
-
-//                            Forms\Components\Section::make('Title')
-//                                ->description('Add a useful title for the resource, this could be the title of the document, or the name of the software, etc.')
-//                                ->columns(3)
-//                                ->schema([
-//                                    Forms\Components\TextInput::make('title')->hiddenOn(['edit', 'create']),
-//                                    Forms\Components\TextInput::make('title_en')
-//                                        ->label('English')
-//                                        ->requiredWithoutAll('title_es, title_fr')
-//                                        ->validationMessages(['required_without_all' => 'Enter the title in at least one language']),
-//                                    Forms\Components\TextInput::make('title_es')
-//                                        ->label('Spanish')
-//                                        ->requiredWithoutAll('title_en, title_fr')
-//                                        ->validationMessages(['required_without_all' => 'Enter the title in at least one language']),
-//                                    Forms\Components\TextInput::make('title_fr')
-//                                        ->label('French')
-//                                        ->requiredWithoutAll('title_es, title_en')
-//                                        ->validationMessages(['required_without_all' => 'Enter the title in at least one language']),
-//                                ]),
-
-                            Forms\Components\Section::make('Description')
-                                ->description('For example: What is this trove? Who is it for? Why was it made or uploaded?')
-                                ->columns(3)
-                                ->schema([
-                                    Forms\Components\TextInput::make('description')->hiddenOn(['edit', 'create']),
-                                    Forms\Components\MarkdownEditor::make('description_en')
-                                        ->label('English')
-                                        ->disableToolbarButtons(['attachFiles'])
-                                        ->requiredWithoutAll('description_es, description_fr')
-                                        ->validationMessages(['required_without_all' => 'Enter the description in at least one language']),
-                                    Forms\Components\MarkdownEditor::make('description_es')
-                                        ->label('Spanish')
-                                        ->disableToolbarButtons(['attachFiles'])
-                                        ->requiredWithoutAll('description_en, description_fr')
-                                        ->validationMessages(['required_without_all' => 'Enter the description in at least one language']),
-                                    Forms\Components\MarkdownEditor::make('description_fr')
-                                        ->label('French')
-                                        ->disableToolbarButtons(['attachFiles'])
-                                        ->requiredWithoutAll('description_es, description_en')
-                                        ->validationMessages(['required_without_all' => 'Enter the description in at least one language']),
-                                ]),
+                            TranslatableComboField::make('description')
+                                ->columns(1)
+                                ->heading(__('Description'))
+                                ->hint(__('For example: What is this trove? Who is it for? Why was it made or uploaded?'))
+                                ->fieldType(
+                                    Forms\Components\MarkdownEditor::class,
+                                ),
 
                             Forms\Components\Select::make('trove_type_id')
                                 ->placeholder('Select the resource type')

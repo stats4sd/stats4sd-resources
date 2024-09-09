@@ -12,11 +12,6 @@ class EditTrove extends EditRecord
 
     protected function mutateFormDataBeforeFill(array $data): array
     {
-        $translations = $this->record->getTranslations('description');
-
-        $data['description_en'] = isset($translations['en']) ? $this->record->getTranslation('description', 'en') : null;
-        $data['description_es'] = isset($translations['es']) ? $this->record->getTranslation('description', 'es') : null;
-        $data['description_fr'] = isset($translations['fr']) ? $this->record->getTranslation('description', 'fr') : null;
 
         $translations = $this->record->getTranslations('external_links');
 
