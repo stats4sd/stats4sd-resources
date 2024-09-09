@@ -10,10 +10,13 @@ class CreateTrove extends CreateRecord
 {
     use CreateRecord\Concerns\Translatable;
 
+    // temp
+    protected static string $view = 'filament.pages.create-record';
+
     protected static string $resource = TroveResource::class;
 
     protected static bool $canCreateAnother = false;
-    
+
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $data['title'] = 'titles added after creation';
@@ -45,7 +48,7 @@ class CreateTrove extends CreateRecord
         $this->record->save();
     }
 
-    protected function getRedirectUrl(): string 
+    protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');
     }

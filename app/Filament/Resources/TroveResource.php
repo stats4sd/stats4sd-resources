@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Shared\Form\TranslatableComboField;
 use App\User;
 use App\Models\Tag;
 use Filament\Forms;
@@ -45,6 +46,14 @@ class TroveResource extends Resource
                         ->icon('heroicon-m-information-circle')
                         ->columns(1)
                         ->schema([
+                            TranslatableComboField::make('title')
+                                ->columns(3)
+                                ->heading(__('Title'))
+                                ->description(__('Add a useful title for the resource, this could be the title of the document, or the name of the software, etc.'))
+                                ->fieldType(
+                                    TextInput::class
+                                ),
+
                             Forms\Components\Section::make('Title')
                                 ->description('Add a useful title for the resource, this could be the title of the document, or the name of the software, etc.')
                                 ->columns(3)
