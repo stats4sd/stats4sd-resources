@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Database\Seeders\Prep\TagSeeder;
 use Database\Seeders\Prep\TagTypeSeeder;
+use Database\Seeders\Prep\TroveTypeSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,9 +15,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        //$this->call(RolesAndPermissionsSeeder::class);
-        $this->call(TestSeeder::class);
+        // run test seeders locally
+        if (app()->environment('local')) {
+            $this->call(TestSeeder::class);
+        }
+
+        // run prep seeders from Prep folder
         $this->call(TagTypeSeeder::class);
         $this->call(TagSeeder::class);
+        $this->call(TroveTypeSeeder::class);
+
+
+
     }
 }
