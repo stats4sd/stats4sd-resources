@@ -20,7 +20,7 @@ class TroveType extends Model
         'id' => 'integer',
     ];
 
-    public $translatable = ['label'];
+    public array $translatable = ['label'];
 
     public function troves(): HasMany
     {

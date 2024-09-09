@@ -42,7 +42,7 @@ class Trove extends Model implements HasMedia
         'youtube_links' => 'array'
     ];
 
-    public $translatable = [
+    public array $translatable = [
         'title',
         'description',
         'external_links',

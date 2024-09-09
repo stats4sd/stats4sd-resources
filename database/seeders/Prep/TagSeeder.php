@@ -448,46 +448,6 @@ class TagSeeder extends Seeder
             ]);
         }
 
-        $resourceType = $tagTypes->where('slug', 'resource-types')->first();
-
-        if ($resourceType) {
-            $resourceType->tags()->createMany([
-                ["name" => ["en" => "Video", "es" => "", "fr" => ""]],
-                ["name" => ["en" => "Organisational Diagram", "es" => "", "fr" => ""]],
-                ["name" => ["en" => "Webinar", "es" => "", "fr" => ""]],
-                ["name" => ["en" => "Meeting Recording", "es" => "", "fr" => ""]],
-                ["name" => ["en" => "Guide", "es" => "", "fr" => ""]],
-                ["name" => ["en" => "Case Study", "es" => "", "fr" => ""]],
-                ["name" => ["en" => "Journal Article", "es" => "", "fr" => ""]],
-                ["name" => ["en" => "Presentation", "es" => "", "fr" => ""]],
-                ["name" => ["en" => "Picture", "es" => "", "fr" => ""]],
-                ["name" => ["en" => "Diagram", "es" => "", "fr" => ""]],
-                ["name" => ["en" => "XLS-form", "es" => "", "fr" => ""]],
-                ["name" => ["en" => "Survey", "es" => "", "fr" => ""]],
-                ["name" => ["en" => "Checklist", "es" => "", "fr" => ""]],
-                ["name" => ["en" => "Infographic", "es" => "", "fr" => ""]],
-                ["name" => ["en" => "Curricula / Training Course", "es" => "", "fr" => ""]],
-                ["name" => ["en" => "Reference", "es" => "", "fr" => ""]],
-                ["name" => ["en" => "Textbook", "es" => "", "fr" => ""]],
-                ["name" => ["en" => "Template", "es" => "", "fr" => ""]],
-                ["name" => ["en" => "Script", "es" => "", "fr" => ""]],
-                ["name" => ["en" => "Activity", "es" => "", "fr" => ""]],
-                ["name" => ["en" => "Leaflet", "es" => "", "fr" => ""]],
-                ["name" => ["en" => "Poster", "es" => "", "fr" => ""]],
-                ["name" => ["en" => "Example"]],
-                ["name" => ["en" => "Tool"]],
-                ["name" => ["en" => "App"]],
-                ["name" => ["en" => "Questionnaire"]],
-                ["name" => ["en" => "Booklet"]],
-                ["name" => ["en" => "Report"]],
-                ["name" => ["en" => "list of Resources"]],
-                ["name" => ["en" => "Book"]],
-                ["name" => ["en" => "Manual"]],
-                ["name" => ["en" => "Website"]],
-            ]);
-        }
-
-
         $audienceType = $tagTypes->where('slug', 'audiences')->first();
 
         if ($audienceType) {

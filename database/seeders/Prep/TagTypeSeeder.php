@@ -88,17 +88,5 @@ class TagTypeSeeder extends Seeder
             'freetext' => false,
         ]);
 
-        TagType::create([
-            'slug' => 'resource-types',
-            'label' => [
-                'en' => 'Resource Types',
-                'fr' => 'Types de ressources',
-            ],
-            'description' => [
-                'en' => 'Types of resources',
-                'fr' => 'Types de ressources',
-            ],
-            'freetext' => false,
-        ]);
     }
 }
