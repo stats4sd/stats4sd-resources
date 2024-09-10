@@ -26,10 +26,6 @@ class CreateTrove extends CreateRecord
     protected function afterCreate(): void
     {
 
-        $this->record->setTranslation('external_links', 'en', $this->data['external_links_en']);
-        $this->record->setTranslation('external_links', 'es', $this->data['external_links_es']);
-        $this->record->setTranslation('external_links', 'fr', $this->data['external_links_fr']);
-
         $this->record->setTranslation('youtube_links', 'en', $this->data['youtube_links_en']);
         $this->record->setTranslation('youtube_links', 'es', $this->data['youtube_links_es']);
         $this->record->setTranslation('youtube_links', 'fr', $this->data['youtube_links_fr']);

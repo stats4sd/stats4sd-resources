@@ -13,12 +13,6 @@ class EditTrove extends EditRecord
     protected function mutateFormDataBeforeFill(array $data): array
     {
 
-        $translations = $this->record->getTranslations('external_links');
-
-        $data['external_links_en'] = isset($translations['en']) ? $this->record->getTranslation('external_links', 'en') : null;
-        $data['external_links_es'] = isset($translations['es']) ? $this->record->getTranslation('external_links', 'es') : null;
-        $data['external_links_fr'] = isset($translations['fr']) ? $this->record->getTranslation('external_links', 'fr') : null;
-
         $translations = $this->record->getTranslations('youtube_links');
 
         $data['youtube_links_en'] = isset($translations['en']) ? $this->record->getTranslation('youtube_links', 'en') : null;
@@ -31,15 +25,6 @@ class EditTrove extends EditRecord
     protected function afterSave(): void
     {
 
-        $this->record->description = '';
-
-        if(!is_null($this->data['description_en'])) {$this->record->setTranslation('description', 'en', $this->data['description_en']);}
-        if(!is_null($this->data['description_es'])) {$this->record->setTranslation('description', 'es', $this->data['description_es']);}
-        if(!is_null($this->data['description_fr'])) {$this->record->setTranslation('description', 'fr', $this->data['description_fr']);}
-
-        $this->record->setTranslation('external_links', 'en', $this->data['external_links_en']);
-        $this->record->setTranslation('external_links', 'es', $this->data['external_links_es']);
-        $this->record->setTranslation('external_links', 'fr', $this->data['external_links_fr']);
 
         $this->record->setTranslation('youtube_links', 'en', $this->data['youtube_links_en']);
         $this->record->setTranslation('youtube_links', 'es', $this->data['youtube_links_es']);

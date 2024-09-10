@@ -9,6 +9,7 @@ use Filament\Forms\Components\Contracts;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\Concerns\CanBeCollapsed;
 use Filament\Support\Concerns\HasDescription;
@@ -49,7 +50,8 @@ class TranslatableComboField extends Field implements Contracts\HasHeaderActions
         $this->formatStateUsing(function ($livewire, $state) {
             $record = $livewire->getRecord();
 
-            if ($record->{$this->getName()} && method_exists($record, 'getTranslations')) {
+            // if the record exists, and has a translation for this field, return the translations to populate the state
+            if ($record && $record->{$this->getName()} && method_exists($record, 'getTranslations')) {
                 return $record->getTranslations($this->getName());
             }
 
@@ -75,30 +77,68 @@ class TranslatableComboField extends Field implements Contracts\HasHeaderActions
         return $this->evaluate($this->locales);
     }
 
-    public function fieldType(Closure|string $fieldType = null): static
+    /*
+     * Set the child field. The given field will be duplicated for each locale.
+     * @param Closure|string|Field $childField - either the FQDN of a Field class, or a Field instance. If a field instance is given its properties will be copied for each locale (except for name, label, and statePath)
+     */
+    public function childField(Closure|string|Field $childField = null): static
     {
-        // check that $fieldType is a class that extends Form Field
-        $fieldType = $this->evaluate($fieldType);
+        // check that $childField is a class that extends Form Field
+        $childField = $this->evaluate($childField);
 
-        if (is_string($fieldType) &&
-            (!class_exists($fieldType) || !is_subclass_of($fieldType, Field::class)
+        if (is_string($childField) &&
+            (!class_exists($childField) || !is_subclass_of($childField, Field::class)
             )
         ) {
-            abort(501, 'Invalid field type: The fieldType for this TranslatableComboField must be a FQDN of a class that extends Filament\Forms\Components\Field (e.g. `TextInput::class`');
+            abort(501, 'Invalid field type: The childField for this TranslatableComboField must be a FQDN of a class that extends Filament\Forms\Components\Field (e.g. `TextInput::class`');
         }
 
         $localeFields = [];
 
         // create a field for each locale
-        foreach ($this->getLocales() as $key => $label) {
+        foreach ($this->getLocales() as $locale => $localeLabel) {
 
-            $localeFields[] = $fieldType::make($key)
-                ->label($label);
+
+            // clone the childField properties
+            if ($childField instanceof Field) {
+                $newField = clone $childField;
+                // set the name and label based on the locale.
+                $newField->label($localeLabel);
+                $newField->statePath($locale);
+            } else {
+                // create a new field instance
+                $newField = $childField::make($locale)
+                    ->label($localeLabel);
+            }
+
+            $localeFields[] = $newField;
         }
 
         $this->childComponents($localeFields);
         return $this;
     }
 
+    public
+    static function checkParent($childField, $parentClass, $newField): Field
+    {
+
+        if ($parentClass === Field::class) {
+            return $newField;
+        }
+
+        $parentClass = new $parentClass($newField->name);
+        foreach ($parentClass as $key => $value) {
+            if ($key !== 'name' && $key !== 'label' && $key !== 'statePath') {
+                $newField->{$key} = $childField->{$key};
+            }
+        }
+
+        if ($nextParentClass = get_parent_class($parentClass)) {
+            $newField = self::checkParent($parentClass, $nextParentClass, $newField);
+        }
+
+        return $newField;
+
+    }
 
 }

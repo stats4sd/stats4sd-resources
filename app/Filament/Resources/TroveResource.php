@@ -6,6 +6,7 @@ use App\Filament\Shared\Form\TranslatableComboField;
 use App\User;
 use App\Models\Tag;
 use Filament\Forms;
+use Filament\Forms\Components\Repeater;
 use Filament\Tables;
 use App\Models\Trove;
 use App\Models\TagType;
@@ -50,14 +51,15 @@ class TroveResource extends Resource
                                 ->columns(3)
                                 ->heading(__('Title'))
                                 ->hint(__('Add a useful title for the resource, this could be the title of the document, or the name of the software, etc.'))
-                                ->fieldType(
-                                    TextInput::class
+                                ->childField(
+                                    TextInput::make('title')
+                                    ->columnSpan(2),
                                 ),
                             TranslatableComboField::make('description')
                                 ->columns(1)
                                 ->heading(__('Description'))
                                 ->hint(__('For example: What is this trove? Who is it for? Why was it made or uploaded?'))
-                                ->fieldType(
+                                ->childField(
                                     Forms\Components\MarkdownEditor::class,
                                 ),
 
@@ -94,63 +96,33 @@ class TroveResource extends Resource
                     Wizard\Step::make('Content')
                         ->icon('heroicon-m-link')
                         ->schema([
-                            Forms\Components\Section::make('Files')
+                            TranslatableComboField::make('files')
+                                ->heading(__('Files'))
                                 ->description('Multiple files can be uploaded if necessary')
                                 ->columns(3)
-                                ->schema([
-                                    Forms\Components\SpatieMediaLibraryFileUpload::make('files_en')
-                                        ->label('English')
-                                        ->hintIcon('heroicon-m-question-mark-circle', tooltip: ('A trove will often contain multiple files. These are files that work together, for example a questions and answers sheet, or a document translated into different languages.'))
+                                ->hintIcon(
+                                    icon: 'heroicon-m-question-mark-circle',
+                                    tooltip: __('A trove will often contain multiple files. These are files that work together, for example a questions and answers sheet, or a document translated into different languages.'))
+                                ->childField(
+                                    Forms\Components\SpatieMediaLibraryFileUpload::make('files')
                                         ->multiple()
-                                        ->enableReordering()
-                                        ->collection('content_en'),
-                                    Forms\Components\SpatieMediaLibraryFileUpload::make('files_es')
-                                        ->label('Spanish')
-                                        ->hintIcon('heroicon-m-question-mark-circle', tooltip: ('These are files that work together, for example a questions and answers sheet, or a document translated into different languages.'))
-                                        ->multiple()
-                                        ->enableReordering()
-                                        ->collection('content_es'),
-                                    Forms\Components\SpatieMediaLibraryFileUpload::make('files_fr')
-                                        ->label('French')
-                                        ->hintIcon('heroicon-m-question-mark-circle', tooltip: ('These are files that work together, for example a questions and answers sheet, or a document translated into different languages.'))
-                                        ->multiple()
-                                        ->enableReordering()
-                                        ->collection('content_fr'),
-                                ]),
+                                        ->reorderable()
+                                ),
 
-
-                            Forms\Components\Section::make('External Links')
-                                ->description('Websites, files etc., hosted by other people')
-                                ->columns(3)
-                                ->schema([
-                                    Forms\Components\Repeater::make('external_links_en')
-                                        ->label('English')
+                            TranslatableComboField::make('external_links')
+                                ->heading(__('External Links'))
+                                ->description(__('Websites, files etc., hosted by other people'))
+                                ->childField(
+                                    Repeater::make('-')
+                                        ->label('-')
                                         ->schema([
-                                            Forms\Components\TextInput::make('link_title'),
-                                            Forms\Components\TextInput::make('link_url')
+                                            TextInput::make('link_title'),
+                                            TextInput::make('link_url')
                                                 ->label('Link URL'),
                                         ])
                                         ->columns(1)
-                                        ->addActionLabel('Add another link'),
-                                    Forms\Components\Repeater::make('external_links_es')
-                                        ->label('Spanish')
-                                        ->schema([
-                                            Forms\Components\TextInput::make('link_title'),
-                                            Forms\Components\TextInput::make('link_url')
-                                                ->label('Link URL'),
-                                        ])
-                                        ->columns(1)
-                                        ->addActionLabel('Add another link'),
-                                    Forms\Components\Repeater::make('external_links_fr')
-                                        ->label('French')
-                                        ->schema([
-                                            Forms\Components\TextInput::make('link_title'),
-                                            Forms\Components\TextInput::make('link_url')
-                                                ->label('Link URL'),
-                                        ])
-                                        ->columns(1)
-                                        ->addActionLabel('Add another link'),
-                                ]),
+                                        ->addActionLabel('Add another link')
+                                ),
 
                             Forms\Components\Section::make('Youtube Videos')
                                 ->description('Add the youtube id if you have added a video file that already exists on YouTube. On YouTube, when you hit "share", the id is the random-like string after https://youtu.be/')
