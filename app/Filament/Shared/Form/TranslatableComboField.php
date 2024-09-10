@@ -106,7 +106,7 @@ class TranslatableComboField extends Field implements Contracts\HasHeaderActions
                 $newField->label($localeLabel);
                 $newField->statePath($locale);
             } else {
-                // create a new field instance
+                // create a new field instance using the given FQDN
                 $newField = $childField::make($locale)
                     ->label($localeLabel);
             }

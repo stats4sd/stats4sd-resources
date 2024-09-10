@@ -48,14 +48,19 @@ class TroveResource extends Resource
                         ->columns(1)
                         ->schema([
                             TranslatableComboField::make('title')
+                                ->icon('heroicon-o-exclamation-circle')
+                                ->iconColor('primary')
+                                ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
                                 ->columns(3)
                                 ->heading(__('Title'))
                                 ->hint(__('Add a useful title for the resource, this could be the title of the document, or the name of the software, etc.'))
                                 ->childField(
-                                    TextInput::make('title')
-                                    ->columnSpan(2),
+                                    TextInput::class,
                                 ),
                             TranslatableComboField::make('description')
+                                ->icon('heroicon-o-document-text')
+                                ->iconColor('primary')
+                                ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
                                 ->columns(1)
                                 ->heading(__('Description'))
                                 ->hint(__('For example: What is this trove? Who is it for? Why was it made or uploaded?'))
@@ -63,31 +68,42 @@ class TroveResource extends Resource
                                     Forms\Components\MarkdownEditor::class,
                                 ),
 
-                            Forms\Components\Select::make('trove_type_id')
-                                ->placeholder('Select the resource type')
-                                ->relationship('troveType', 'label')
-                                ->required()
-                                ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en')),
+                            Forms\Components\Section::make('Metadata')
+                                ->icon('heroicon-o-document-chart-bar')
+                                ->iconColor('primary')
+                                ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
+                                ->description(__('Key metadata for filters and search'))
+                                ->schema([
 
-                            Forms\Components\Select::make('source')
-                                ->placeholder('Select the origin of the resource')
-                                ->options([0 => 'Internal', 1 => 'External'])
-                                ->required(),
+                                    Forms\Components\Select::make('trove_type_id')
+                                        ->placeholder('Select the resource type')
+                                        ->relationship('troveType', 'label')
+                                        ->required()
+                                        ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en')),
 
-                            Forms\Components\DatePicker::make('creation_date')
-                                ->label('When was the resource created?')
-                                ->helperText('To the nearest month (approximately is fine). This is mainly to highlight to users when a resource might be a bit out of date.')
-                                ->minDate(now()->subYears(30))
-                                ->maxDate(now())
-                                ->required(),
+                                    Forms\Components\Select::make('source')
+                                        ->placeholder('Select the origin of the resource')
+                                        ->options([0 => 'Internal', 1 => 'External'])
+                                        ->required(),
 
-                            Forms\Components\Hidden::make('uploader_id')->default(Auth::user()->id),
+                                    Forms\Components\DatePicker::make('creation_date')
+                                        ->label('When was the resource created?')
+                                        ->helperText('To the nearest month (approximately is fine). This is mainly to highlight to users when a resource might be a bit out of date.')
+                                        ->minDate(now()->subYears(30))
+                                        ->maxDate(now())
+                                        ->required(),
+
+                                    Forms\Components\Hidden::make('uploader_id')->default(Auth::user()->id),
+                                ]),
                         ]),
 
                     Wizard\Step::make('Tags')
                         ->icon('heroicon-m-tag')
                         ->schema([
                             Forms\Components\Section::make('Tags')
+                                ->icon('heroicon-m-tag')
+                                ->iconColor('primary')
+                                ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
                                 ->description('These tags help organise and filter the resources on the front-end. Except where specified, you must select from existing tags. If you believe a new tag is required, please contact Emily. You can apply as many tags as you need for each category.')
                                 ->columns(2)
                                 ->schema($tagFields),
@@ -97,8 +113,11 @@ class TroveResource extends Resource
                         ->icon('heroicon-m-link')
                         ->schema([
                             TranslatableComboField::make('files')
+                                ->icon('heroicon-o-document')
+                                ->iconColor('primary')
+                                ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
                                 ->heading(__('Files'))
-                                ->description('Multiple files can be uploaded if necessary')
+                                ->hint('Multiple files can be uploaded if necessary')
                                 ->columns(3)
                                 ->hintIcon(
                                     icon: 'heroicon-m-question-mark-circle',
@@ -110,8 +129,11 @@ class TroveResource extends Resource
                                 ),
 
                             TranslatableComboField::make('external_links')
+                                ->icon('heroicon-o-link')
+                                ->iconColor('primary')
+                                ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
                                 ->heading(__('External Links'))
-                                ->description(__('Websites, files etc., hosted by other people'))
+                                ->hint(__('Websites, files etc., hosted by other people'))
                                 ->childField(
                                     Repeater::make('-')
                                         ->label('-')
@@ -124,53 +146,38 @@ class TroveResource extends Resource
                                         ->addActionLabel('Add another link')
                                 ),
 
-                            Forms\Components\Section::make('Youtube Videos')
-                                ->description('Add the youtube id if you have added a video file that already exists on YouTube. On YouTube, when you hit "share", the id is the random-like string after https://youtu.be/')
+                            TranslatableComboField::make('youtube_links')
+                                ->icon('heroicon-o-video-camera')
+                                ->iconColor('primary')
+                                ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
+                                ->heading(__('YouTube Videos'))
+                                ->hint('Add the youtube id if you have added a video file that already exists on YouTube. On YouTube, when you hit "share", the id is the random-like string after https://youtu.be/')
                                 ->columns(3)
-                                ->schema([
-                                    Forms\Components\Repeater::make('youtube_links_en')
-                                        ->label('English')
+                                ->childField(
+                                    Forms\Components\Repeater::make('youtube_links')
                                         ->schema([
                                             Forms\Components\TextInput::make('youtube_id')
-                                                ->label('YouTube id'),
+                                                ->label('YouTube ID'),
                                         ])
                                         ->addActionLabel('Add another YouTube video'),
-                                    Forms\Components\Repeater::make('youtube_links_es')
-                                        ->label('Spanish')
-                                        ->schema([
-                                            Forms\Components\TextInput::make('youtube_id')
-                                                ->label('YouTube id'),
-                                        ])
-                                        ->addActionLabel('Add another YouTube video'),
-                                    Forms\Components\Repeater::make('youtube_links_fr')
-                                        ->label('French')
-                                        ->schema([
-                                            Forms\Components\TextInput::make('youtube_id')
-                                                ->label('YouTube id'),
-                                        ])
-                                        ->addActionLabel('Add another YouTube video'),
-                                ]),
+                                ),
                         ]),
 
                     Wizard\Step::make('Cover Image')
                         ->icon('heroicon-m-photo')
                         ->schema([
-                            Forms\Components\Fieldset::make('cover_image')
-                                ->label('Cover Image')
+                            TranslatableComboField::make('cover_image')
+                                ->icon('heroicon-o-photo')
+                                ->iconColor('primary')
+                                ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
+                                ->heading(__('Cover Image'))
+                                ->hint(__('Add a cover image for the resource. This will be displayed on the front-end.'))
                                 ->columns(3)
-                                ->schema([
-                                    Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image_en')
-                                        ->label('English')
-                                        ->collection('trove_cover_en'),
-                                    Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image_es')
-                                        ->label('Spanish')
-                                        ->collection('trove_cover_es'),
-                                    Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image_fr')
-                                        ->label('French')
-                                        ->collection('trove_cover_fr'),
-                                ]),
+                                ->childField(
+                                    Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image')
+                                        ->collection('trove_cover')
+                                ),
                         ]),
-
                     Wizard\Step::make('Check')
                         ->icon('heroicon-m-clipboard-document-check')
                         ->schema([
@@ -182,7 +189,6 @@ class TroveResource extends Resource
                         ]),
                 ])
                     ->skippable(),
-                // ->submitAction(new HtmlString('<button type="submit">Submit</button>'))
             ])->columns(1);
     }
 

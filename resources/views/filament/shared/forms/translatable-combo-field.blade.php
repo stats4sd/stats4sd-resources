@@ -24,8 +24,4 @@
 >
 
     {{ $getChildComponentContainer() }}
-
-
-    {{ json_encode($getState()) }}
-
 </x-filament::section>
