@@ -4,7 +4,7 @@
     :collapsible="$isCollapsible()"
     :compact="$isCompact()"
     :content-before="false"
-    :description="$getHint()"
+    :description="$getDescription()"
     :footer-actions="$getFooterActions()"
     :footer-actions-alignment="$getFooterActionsAlignment()"
     :header-actions="$getHeaderActions()"

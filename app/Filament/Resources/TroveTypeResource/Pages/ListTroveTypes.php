@@ -5,8 +5,9 @@ namespace App\Filament\Resources\TroveTypeResource\Pages;
 use App\Filament\Resources\TroveTypeResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Resources\Pages\ManageRecords;
 
-class ListTroveTypes extends ListRecords
+class ListTroveTypes extends ManageRecords
 {
     use ListRecords\Concerns\Translatable;
 
@@ -15,7 +16,8 @@ class ListTroveTypes extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->modalHeading(''),
             Actions\LocaleSwitcher::make(),
         ];
     }

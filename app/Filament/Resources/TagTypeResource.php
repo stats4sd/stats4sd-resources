@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Shared\Form\TranslatableComboField;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\TagType;
@@ -30,50 +31,31 @@ class TagTypeResource extends Resource
                 Forms\Components\TextInput::make('slug')
                     ->label(__('Enter a unique slug'))
                     ->rules('unique:tag_types,slug,required'),
-                Forms\Components\Fieldset::make('label_field')
-                    ->label('Label')
-                    ->columns(3)
-                    ->schema([
-                        Forms\Components\TextInput::make('label')->hiddenOn(['edit', 'create']),
-                        Forms\Components\TextInput::make('label_en')
-                            ->label('English')
-                            ->requiredWithoutAll('label_es, label_fr')
-                            ->validationMessages(['required_without_all' => 'Enter the label in at least one language']),
-                        Forms\Components\TextInput::make('label_es')
-                            ->label('Spanish')
-                            ->requiredWithoutAll('label_en, label_fr')
-                            ->validationMessages(['required_without_all' => 'Enter the label in at least one language']),
-                        Forms\Components\TextInput::make('label_fr')
-                            ->label('French')
-                            ->requiredWithoutAll('label_es, label_en')
-                            ->validationMessages(['required_without_all' => 'Enter the label in at least one language']),
-                    ]),
 
-                Forms\Components\Fieldset::make('description_field')
-                    ->label('Description')
+                TranslatableComboField::make('label')
+                    ->icon('heroicon-s-tag')
+                    ->iconColor('primary')
+                    ->extraAttributes(['style' => 'background-color: #e6e6e6;'])
+                    ->label('Enter the Label for the Tag Type')
                     ->columns(3)
-                    ->schema([
-                        Forms\Components\TextInput::make('description')->hiddenOn(['edit', 'create']),
-                        Forms\Components\Textarea::make('description_en')
-                            ->label('English')
-                            ->requiredWithoutAll('description_es, description_fr')
-                            ->validationMessages(['required_without_all' => 'Enter the description in at least one language']),
-                        Forms\Components\Textarea::make('description_es')
-                            ->label('Spanish')
-                            ->requiredWithoutAll('description_en, description_fr')
-                            ->validationMessages(['required_without_all' => 'Enter the description in at least one language']),
-                        Forms\Components\Textarea::make('description_fr')
-                            ->label('French')
-                            ->requiredWithoutAll('description_es, description_en')
-                            ->validationMessages(['required_without_all' => 'Enter the description in at least one language']),
-                    ]),
+                    ->childField(Forms\Components\TextInput::class),
+
+                TranslatableComboField::make('description')
+                    ->icon('heroicon-s-document-text')
+                    ->iconColor('primary')
+                    ->extraAttributes(['style' => 'background-color: #e6e6e6;'])
+                    ->label('Enter a brief description of the Tag Type')
+                    ->childField(Forms\Components\MarkdownEditor::class),
 
                 Forms\Components\Section::make('')
-                    ->schema([Forms\Components\Checkbox::make('freetext')
-                        ->label('Does this bucket accept new tag entries during Trove upload?')
-                        ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Most buckets should not have this enabled, to prevent accidental duplication / mistyping during Trove upload.'),
+                    ->schema([
+                        Forms\Components\Checkbox::make('freetext')
+                            ->label('Can the user add new tags of this type during Trove upload?')
+                            ->hintIcon(
+                                icon: 'heroicon-m-question-mark-circle',
+                                tooltip: 'Most types should not have this enabled, to prevent accidental duplication / mistyping during Trove upload. But this option is available for e.g. "Keywords" or "Authors", where new tags are likely to be needed.'),
                     ]),
-            ]);
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
@@ -115,8 +97,6 @@ class TagTypeResource extends Resource
     {
         return [
             'index' => Pages\ListTagTypes::route('/'),
-            'create' => Pages\CreateTagType::route('/create'),
-            'edit' => Pages\EditTagType::route('/{record}/edit'),
         ];
     }
 }

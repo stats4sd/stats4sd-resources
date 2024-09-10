@@ -17,6 +17,8 @@ use Filament\Support\Concerns\HasExtraAlpineAttributes;
 use Filament\Support\Concerns\HasHeading;
 use Filament\Support\Concerns\HasIcon;
 use Filament\Support\Concerns\HasIconColor;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Spatie\Color\Contrast;
@@ -47,8 +49,8 @@ class TranslatableComboField extends Field implements Contracts\HasHeaderActions
     {
         parent::setUp();
 
-        $this->formatStateUsing(function ($livewire, $state) {
-            $record = $livewire->getRecord();
+        // populate the inner fields with the translations from the record
+        $this->formatStateUsing(function (?Model $record, $state) {
 
             // if the record exists, and has a translation for this field, return the translations to populate the state
             if ($record && $record->{$this->getName()} && method_exists($record, 'getTranslations')) {
@@ -76,6 +78,19 @@ class TranslatableComboField extends Field implements Contracts\HasHeaderActions
 
         return $this->evaluate($this->locales);
     }
+
+    public function getDescription(): string|Htmlable|null
+    {
+        // if no description is set, check if there is a 'hint'
+        // Used so that this field can be a drop-in replacement for "Section" components.
+        return $this->evaluate($this->description) ?? $this->getHint();
+    }
+
+    public function getHeading(): string|Htmlable|null
+    {
+        return $this->evaluate($this->heading) ?? $this->getLabel();
+    }
+
 
     /*
      * Set the child field. The given field will be duplicated for each locale.
@@ -117,28 +132,4 @@ class TranslatableComboField extends Field implements Contracts\HasHeaderActions
         $this->childComponents($localeFields);
         return $this;
     }
-
-    public
-    static function checkParent($childField, $parentClass, $newField): Field
-    {
-
-        if ($parentClass === Field::class) {
-            return $newField;
-        }
-
-        $parentClass = new $parentClass($newField->name);
-        foreach ($parentClass as $key => $value) {
-            if ($key !== 'name' && $key !== 'label' && $key !== 'statePath') {
-                $newField->{$key} = $childField->{$key};
-            }
-        }
-
-        if ($nextParentClass = get_parent_class($parentClass)) {
-            $newField = self::checkParent($parentClass, $nextParentClass, $newField);
-        }
-
-        return $newField;
-
-    }
-
 }

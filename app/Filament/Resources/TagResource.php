@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Shared\Form\TranslatableComboField;
 use App\Models\Tag;
 use Filament\Forms;
 use Filament\Tables;
@@ -28,30 +29,22 @@ class TagResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Fieldset::make('name_field')
+                TranslatableComboField::make('name')
+                    ->icon('heroicon-s-tag')
+                    ->iconColor('primary')
+                    ->extraAttributes(['style' => 'background-color: #e6e6e6;'])
                     ->label('Name')
+                    ->description('Enter the name of the tag')
                     ->columns(3)
-                    ->schema([
-                        Forms\Components\TextInput::make('name')->hiddenOn(['edit', 'create']),
-                        Forms\Components\TextInput::make('name_en')
-                            ->label('English')
-                            ->requiredWithoutAll('name_es, name_fr')
-                            ->validationMessages(['required_without_all' => 'Enter the name in at least one language']),
-                        Forms\Components\TextInput::make('name_es')
-                            ->label('Spanish')
-                            ->requiredWithoutAll('name_en, name_fr')
-                            ->validationMessages(['required_without_all' => 'Enter the name in at least one language']),
-                        Forms\Components\TextInput::make('name_fr')
-                            ->label('French')
-                            ->requiredWithoutAll('name_es, name_en')
-                            ->validationMessages(['required_without_all' => 'Enter the name in at least one language']),
-                    ]),
+                    ->childField(Forms\Components\TextInput::class),
+
 
                 Forms\Components\Select::make('type_id')
-                    ->relationship('tagType', 'name')
-                    ->required()
-                    ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en')),
-            ]);
+                    ->relationship('tagType', 'label')
+                    ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en'))
+                    ->required(),
+            ])
+            ->columns(1);
     }
 
     public static function table(Table $table): Table
@@ -71,7 +64,8 @@ class TagResource extends Resource
                     ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en')),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                ->modalHeading(''),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -91,8 +85,6 @@ class TagResource extends Resource
     {
         return [
             'index' => Pages\ListTags::route('/'),
-            'create' => Pages\CreateTag::route('/create'),
-            'edit' => Pages\EditTag::route('/{record}/edit'),
         ];
     }
 }
