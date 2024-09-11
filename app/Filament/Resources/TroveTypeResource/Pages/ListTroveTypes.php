@@ -3,13 +3,15 @@
 namespace App\Filament\Resources\TroveTypeResource\Pages;
 
 use App\Filament\Resources\TroveTypeResource;
+use App\Filament\Translatable\TranslatableListView;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Resources\Pages\ManageRecords;
 
 class ListTroveTypes extends ManageRecords
 {
-    use ListRecords\Concerns\Translatable;
+
+    use TranslatableListView;
 
     protected static string $resource = TroveTypeResource::class;
 
@@ -21,4 +23,5 @@ class ListTroveTypes extends ManageRecords
             Actions\LocaleSwitcher::make(),
         ];
     }
+
 }

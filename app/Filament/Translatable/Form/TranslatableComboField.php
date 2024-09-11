@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Shared\Form;
+namespace App\Filament\Translatable\Form;
 
 use Closure;
 use Filament\Forms\Components\Component;

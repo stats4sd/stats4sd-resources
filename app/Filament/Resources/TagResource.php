@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Shared\Form\TranslatableComboField;
+use App\Filament\Translatable\Form\TranslatableComboField;
 use App\Models\Tag;
 use Filament\Forms;
 use Filament\Tables;

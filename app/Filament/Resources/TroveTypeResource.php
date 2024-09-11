@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\TroveTypeResource\Pages;
 use App\Filament\Resources\TroveTypeResource\RelationManagers;
-use App\Filament\Shared\Form\TranslatableComboField;
+use App\Filament\Translatable\Form\TranslatableComboField;
 use Filament\Resources\Concerns\Translatable;
 use App\Models\TroveType;
 use Filament\Forms;
