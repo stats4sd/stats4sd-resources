@@ -30,7 +30,13 @@ class TagTypeResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('slug')
                     ->label(__('Enter a unique slug'))
-                    ->rules('unique:tag_types,slug,required'),
+                    ->unique(
+                        table: 'tag_types',
+                        column: 'slug',
+                        ignoreRecord: true
+                    )
+                    ->required()
+                    ->rule('alpha_dash'),
 
                 TranslatableComboField::make('label')
                     ->icon('heroicon-s-tag')
