@@ -36,7 +36,8 @@ class TroveTypeResource extends Resource
                     ->iconColor('primary')
                     ->extraAttributes(['style' => 'background-color: #e6e6e6;'])
                     ->columns(3)
-                    ->childField(Forms\Components\TextInput::class),
+                    ->childField(Forms\Components\TextInput::class)
+                    ->required(),
             ])->columns(1);
     }
 

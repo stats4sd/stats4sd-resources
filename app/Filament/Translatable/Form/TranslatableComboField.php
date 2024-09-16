@@ -129,7 +129,48 @@ class TranslatableComboField extends Field implements Contracts\HasHeaderActions
             $localeFields[] = $newField;
         }
 
+
+        // check if the field is required - if yes, add requiredIf rules to ensure at least one locale is filled.
+        if ($this->isRequired()) {
+
+
+            $localeFields = collect($localeFields)
+                ->map(fn(Field $field) => $this->makeFieldRequiredWithoutAll($field, $localeFields))
+                ->toArray();
+        }
+
         $this->childComponents($localeFields);
         return $this;
+    }
+
+    public function required(bool|Closure $condition = true): static
+    {
+
+        // if the child components exist before required() is called, apply the required rule to each child component.
+        if ($condition && $this->getChildComponents()) {
+
+            // update child components with required rule
+            $this->childComponents(
+                collect($this->getChildComponents())
+                    ->map(fn(Field $field) => $this->makeFieldRequiredWithoutAll($field, $this->getChildComponents()))
+                    ->toArray()
+            );
+        }
+
+        return parent::required();
+    }
+
+    public function makeFieldRequiredWithoutAll(Field $field, $localeFields)
+    {
+        $otherFields = collect($localeFields)
+            ->filter(function (Field $otherField) use ($field) {
+                return $otherField !== $field;
+            })
+            ->map(function (Field $otherField) {
+                return $otherField->statePath;
+            });
+
+        return $field
+            ->requiredWithoutAll($otherFields->toArray());
     }
 }

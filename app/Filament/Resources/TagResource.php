@@ -30,6 +30,7 @@ class TagResource extends Resource
         return $form
             ->schema([
                 TranslatableComboField::make('name')
+                    ->required()
                     ->icon('heroicon-s-tag')
                     ->iconColor('primary')
                     ->extraAttributes(['style' => 'background-color: #e6e6e6;'])

@@ -56,7 +56,8 @@ class TroveResource extends Resource
                                 ->hint(__('Add a useful title for the resource, this could be the title of the document, or the name of the software, etc.'))
                                 ->childField(
                                     TextInput::class,
-                                ),
+                                )
+                                ->required(),
                             TranslatableComboField::make('description')
                                 ->icon('heroicon-o-document-text')
                                 ->iconColor('primary')
@@ -66,7 +67,8 @@ class TroveResource extends Resource
                                 ->hint(__('For example: What is this trove? Who is it for? Why was it made or uploaded?'))
                                 ->childField(
                                     Forms\Components\MarkdownEditor::class,
-                                ),
+                                )
+                                ->required(),
 
                             Forms\Components\Section::make('Metadata')
                                 ->icon('heroicon-o-document-chart-bar')

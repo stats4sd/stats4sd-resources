@@ -38,7 +38,8 @@ class CollectionResource extends Resource
                     ->label('Collection Title')
                     ->description('Add a useful title for the collection.')
                     ->columns(3)
-                    ->childField(Forms\Components\TextInput::class),
+                    ->childField(Forms\Components\TextInput::class)
+                    ->required(),
 
                 TranslatableComboField::make('description')
                     ->icon('heroicon-o-document-text')
@@ -46,7 +47,8 @@ class CollectionResource extends Resource
                     ->extraAttributes(['style' => 'background-color: #e6e6e6;'])
                     ->label('Describe the Collection')
                     ->description('For example: What is this collection? Who is it for? Why was it curated?')
-                    ->childField(Forms\Components\MarkdownEditor::class),
+                    ->childField(Forms\Components\MarkdownEditor::class)
+                    ->required(),
 
                 TranslatableComboField::make('cover_image')
                     ->icon('heroicon-o-photo')
@@ -58,7 +60,8 @@ class CollectionResource extends Resource
                     ->childField(
                         Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image')
                             ->collection('collection_cover'),
-                    ),
+                    )
+                    ->required(),
 
                 Forms\Components\Section::make('Visibility')
                     ->icon('heroicon-o-eye')

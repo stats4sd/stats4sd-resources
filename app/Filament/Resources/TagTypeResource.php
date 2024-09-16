@@ -44,14 +44,16 @@ class TagTypeResource extends Resource
                     ->extraAttributes(['style' => 'background-color: #e6e6e6;'])
                     ->label('Enter the Label for the Tag Type')
                     ->columns(3)
-                    ->childField(Forms\Components\TextInput::class),
+                    ->childField(Forms\Components\TextInput::class)
+                    ->required(),
 
                 TranslatableComboField::make('description')
                     ->icon('heroicon-s-document-text')
                     ->iconColor('primary')
                     ->extraAttributes(['style' => 'background-color: #e6e6e6;'])
                     ->label('Enter a brief description of the Tag Type')
-                    ->childField(Forms\Components\MarkdownEditor::class),
+                    ->childField(Forms\Components\MarkdownEditor::class)
+                    ->required(),
 
                 Forms\Components\Section::make('')
                     ->schema([
