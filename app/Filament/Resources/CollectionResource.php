@@ -60,8 +60,7 @@ class CollectionResource extends Resource
                     ->childField(
                         Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image')
                             ->collection('collection_cover'),
-                    )
-                    ->required(),
+                    ),
 
                 Forms\Components\Section::make('Visibility')
                     ->icon('heroicon-o-eye')
