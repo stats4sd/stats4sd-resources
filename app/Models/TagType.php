@@ -13,6 +13,7 @@ class TagType extends Model
     use HasTranslations;
 
     protected $fillable = [
+        'slug',
         'label',
         'description',
         'freetext',
