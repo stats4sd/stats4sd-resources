@@ -29,6 +29,8 @@ return new class extends Migration
             $table->boolean('public')->default(0);
             $table->integer('download_count')->default(0);
 
+            $table->drafts();
+
             $table->timestamps();
         });
 

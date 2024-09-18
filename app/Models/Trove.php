@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Tag;
+use \Oddvalue\LaravelDrafts\Concerns\HasDrafts;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
@@ -17,19 +18,7 @@ class Trove extends Model implements HasMedia
     use HasFactory;
     use InteractsWithMedia;
     use HasTranslations;
-
-    protected $fillable = [
-        'title',
-        'description',
-        'uploader_id',
-        'creation_date',
-        'trove_type_id',
-        'public',
-        'external_links',
-        'youtube_links',
-        'source',
-        'download_count',
-    ];
+    use HasDrafts;
 
     protected $casts = [
         'id' => 'integer',
@@ -47,6 +36,11 @@ class Trove extends Model implements HasMedia
         'description',
         'external_links',
         'youtube_links'
+    ];
+
+    protected array $draftableRelations = [
+        'tags',
+        'troveType',
     ];
 
     public function user(): BelongsTo

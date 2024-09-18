@@ -16,13 +16,6 @@ class Collection extends Model implements HasMedia
     use InteractsWithMedia;
     use HasTranslations;
 
-    protected $fillable = [
-        'title',
-        'description',
-        'uploader_id',
-        'public',
-    ];
-
     protected $casts = [
         'id' => 'integer',
         'uploader_id' => 'integer',

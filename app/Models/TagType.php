@@ -12,13 +12,6 @@ class TagType extends Model
     use HasFactory;
     use HasTranslations;
 
-    protected $fillable = [
-        'slug',
-        'label',
-        'description',
-        'freetext',
-    ];
-
     protected $casts = [
         'id' => 'integer',
         'freetext' => 'boolean',

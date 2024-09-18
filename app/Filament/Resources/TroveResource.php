@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Translatable\Form\TranslatableComboField;
-use App\User;
 use App\Models\Tag;
 use Filament\Forms;
 use Filament\Forms\Components\Repeater;
@@ -13,6 +12,7 @@ use App\Models\TagType;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Guava\FilamentDrafts\Admin\Resources\Concerns\Draftable;
 use Illuminate\Support\HtmlString;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Support\Facades\Auth;
@@ -25,11 +25,11 @@ use Filament\Forms\Components\Placeholder;
 use Filament\Resources\Concerns\Translatable;
 use App\Filament\Resources\TroveResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\TroveResource\RelationManagers;
 
 class TroveResource extends Resource
 {
     use Translatable;
+    use Draftable;
 
     protected static ?string $model = Trove::class;
 
@@ -81,11 +81,13 @@ class TroveResource extends Resource
                                         ->placeholder('Select the resource type')
                                         ->relationship('troveType', 'label')
                                         ->required()
+                                        ->default(1) // TODO: REMOVE THIS
                                         ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en')),
 
                                     Forms\Components\Select::make('source')
                                         ->placeholder('Select the origin of the resource')
                                         ->options([0 => 'Internal', 1 => 'External'])
+                                        ->default(0) // TODO: REMOVE THIS
                                         ->required(),
 
                                     Forms\Components\DatePicker::make('creation_date')
@@ -93,7 +95,8 @@ class TroveResource extends Resource
                                         ->helperText('To the nearest month (approximately is fine). This is mainly to highlight to users when a resource might be a bit out of date.')
                                         ->minDate(now()->subYears(30))
                                         ->maxDate(now())
-                                        ->required(),
+                                        ->required()
+                                        ->default('2020-01-01'), // TODO: REMOVE THIS
 
                                     Forms\Components\Hidden::make('uploader_id')->default(Auth::user()->id),
                                 ]),
@@ -115,6 +118,7 @@ class TroveResource extends Resource
                         ->icon('heroicon-m-link')
                         ->schema([
                             TranslatableComboField::make('files')
+                                ->dehydrated(false)
                                 ->icon('heroicon-o-document')
                                 ->iconColor('primary')
                                 ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
