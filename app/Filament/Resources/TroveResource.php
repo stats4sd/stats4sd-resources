@@ -118,7 +118,6 @@ class TroveResource extends Resource
                         ->icon('heroicon-m-link')
                         ->schema([
                             TranslatableComboField::make('files')
-                                ->dehydrated(false)
                                 ->icon('heroicon-o-document')
                                 ->iconColor('primary')
                                 ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
