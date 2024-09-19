@@ -9,7 +9,8 @@ use Guava\FilamentDrafts\Admin\Resources\Pages\Edit\Draftable;
 
 class EditTrove extends EditRecord
 {
-    use Draftable;
+    // Use custom draftable trait because of https://github.com/GuavaCZ/filament-drafts/issues/15;
+    use \App\Filament\Draftable\Pages\Edit\Draftable;
 
     protected static string $resource = TroveResource::class;
 

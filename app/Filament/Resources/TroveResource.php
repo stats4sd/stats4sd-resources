@@ -215,11 +215,11 @@ class TroveResource extends Resource
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Uploader')
                     ->sortable(),
-                Tables\Columns\IconColumn::make('public')
-                    ->boolean()
-                    ->sortable()
-                    ->trueColor('success')
-                    ->falseColor('warning'),
+                Tables\Columns\TextColumn::make('publisher.name')
+                    ->label('Publisher')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('published_at')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('download_count')
                     ->label('# Downloads')
                     ->sortable(),
