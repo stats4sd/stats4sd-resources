@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Tag;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use \Oddvalue\LaravelDrafts\Concerns\HasDrafts;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
@@ -25,10 +26,10 @@ class Trove extends Model implements HasMedia
         'uploader_id' => 'integer',
         'creation_date' => 'date',
         'trove_type_id' => 'integer',
-        'public' => 'boolean',
         'source' => 'boolean',
         'external_links' => 'array',
-        'youtube_links' => 'array'
+        'youtube_links' => 'array',
+        'check_requested' => 'boolean',
     ];
 
     public array $translatable = [
@@ -53,6 +54,11 @@ class Trove extends Model implements HasMedia
         return $this->belongsTo(User::class);
     }
 
+    public function checker(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'checker_id');
+    }
+
     public function troveType(): BelongsTo
     {
         return $this->belongsTo(TroveType::class);
@@ -66,5 +72,12 @@ class Trove extends Model implements HasMedia
     public function tags(): MorphToMany
     {
         return $this->morphToMany(Tag::class, 'taggable');
+    }
+
+    public function hasPublishedVersion(): Attribute
+    {
+        return new Attribute(
+            get: fn() => $this->revisions()->where('is_published', true)->exists()
+        );
     }
 }

@@ -26,12 +26,14 @@ return new class extends Migration
             $table->json('external_links')->nullable();
             $table->json('youtube_links')->nullable();
 
-            $table->boolean('public')->default(0);
             $table->integer('download_count')->default(0);
 
             $table->drafts();
+            $table->boolean('check_requested')->default(0);
+            $table->foreignId('checker_id')->nullable()->constrained('users')->cascadeOnUpdate()->nullOnDelete();
 
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::enableForeignKeyConstraints();

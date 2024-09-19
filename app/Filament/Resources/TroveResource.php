@@ -2,17 +2,26 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Draftable\Forms\Components\Actions\SaveDraftFormAction;
 use App\Filament\Translatable\Form\TranslatableComboField;
 use App\Models\Tag;
+use Awcodes\Shout\Components\Shout;
 use Filament\Forms;
 use Filament\Forms\Components\Repeater;
+use Filament\Notifications\Notification;
+use Filament\Resources\Pages\CreateRecord;
+use Filament\Resources\Pages\EditRecord;
+use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use App\Models\Trove;
 use App\Models\TagType;
 use Filament\Forms\Form;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Guava\FilamentDrafts\Admin\Actions\SaveDraftAction;
 use Guava\FilamentDrafts\Admin\Resources\Concerns\Draftable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\HtmlString;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Support\Facades\Auth;
@@ -34,6 +43,7 @@ class TroveResource extends Resource
     protected static ?string $model = Trove::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
+
 
     public static function form(Form $form): Form
     {
@@ -186,11 +196,99 @@ class TroveResource extends Resource
                     Wizard\Step::make('Check')
                         ->icon('heroicon-m-clipboard-document-check')
                         ->schema([
-                            Placeholder::make('check_info')
-                                ->disableLabel()
-                                ->content(new HtmlString('Checking section')),
-                            Forms\Components\Checkbox::make('public')
-                                ->label('Is this trove resource ready to be shared externally?'),
+                            Shout::make('check')
+                                ->content(new HtmlString(
+                                    '
+<h4 class="text-lg mb-2">Review and Publish</h4>
+<p>Once the trove is ready to be published, we recommend that you invite someone to check it over, to catch any issues. Please ask for a review from one of the team using the form below.</p>
+<p>If you are happy with the trove, you can publish it immediately by clicking the <b>Publish</b> button below. A notification will be sent to the resources team to let them know so it can be checked on the live site.</p>'
+                                ))
+                                ->type('info'),
+
+                            Forms\Components\Section::make('')
+                                ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
+                                ->schema([
+                                    Forms\Components\Radio::make('next_steps')
+                                        ->dehydrated(false)
+                                        ->label('What do you want to do with this trove?')
+                                        ->inlineLabel()
+                                        ->inline()
+                                        ->options([
+                                            'save' => 'Save the trove as a draft',
+                                            'review' => 'Request a Review / Check',
+                                            'publish' => 'Publish it!',
+                                        ])
+                                        ->live(),
+                                ]),
+
+                            Forms\Components\Grid::make([
+                                'default' => 3,
+                                'sm' => 1,
+                                'lg' => 3,
+                            ])
+                                ->schema([
+                                    Forms\Components\Fieldset::make('Save as Draft')
+                                        ->columns(1)
+                                        ->visible(fn(Forms\Get $get) => $get('next_steps') === 'save')
+                                        ->schema([
+                                            Shout::make('save_draft')
+                                                ->content(new HtmlString('Save the trove with the current changes, but do not publish it. You can come back to it later to finish it. Use the "Save Draft" button below')),
+                                            Forms\Components\Actions::make([SaveDraftFormAction::make()])
+                                                ->alignEnd(),
+                                        ]),
+                                    Forms\Components\Fieldset::make('Check Request')
+                                        ->columns(1)
+                                        ->visible(fn(Forms\Get $get) => $get('next_steps') === 'review')
+                                        ->schema([
+
+                                            Forms\Components\Select::make('checker_id')
+                                                ->label('Select the person to ask')
+                                                ->relationship('checker', 'name'),
+                                            Forms\Components\Actions::make([
+                                                SaveDraftFormAction::make()
+                                                    ->label('Save as Draft and Request Review'),
+                                            ])
+                                                ->alignEnd(),
+                                        ]),
+                                    Forms\Components\Fieldset::make('Publish it')
+                                        ->columns(1)
+                                        ->visible(fn(Forms\Get $get) => $get('next_steps') === 'publish')
+                                        ->schema([
+                                            Shout::make('publish_it')
+                                                ->content(new HtmlString('Publish the trove with the current changes. This will make it live on the site. A notification will be sent to the resources team to let them know so it can be checked on the live site. Use the "Saev and Publish" button below')),
+
+                                            Shout::make('are_you_sure')
+                                                ->type('warning')
+                                                ->visible(fn(?Model $record) => !$record?->check_requested)
+                                                ->content(new HtmlString('It looks like no-one has been asked to check this trove. Are you sure you want to publish it?')),
+
+                                            Forms\Components\Checkbox::make('should_publish')
+                                                ->dehydrated(false)
+                                                ->label('I am sure I want to publish this trove')
+                                                ->visible(fn(?Model $record) => !$record?->check_requested)
+                                                ->live()
+                                                ->required(),
+
+
+                                            Forms\Components\Actions::make([
+                                                Forms\Components\Actions\Action::make('Save and Publish')
+                                                    ->label(fn(?Trove $record) => $record->has_published_version ? __('Save and Publish Changes') : __('Save and Publish'))
+                                                    ->disabled(fn(?Model $record,Forms\Get $get) => !$record?->check_requested && !$get('should_publish'))
+                                                    ->action(function ($livewire) {
+                                                        $livewire->shouldSaveAsDraft = false;
+
+                                                        if ($livewire instanceof CreateRecord) {
+                                                            $livewire->create();
+                                                        }
+
+                                                        if ($livewire instanceof EditRecord) {
+                                                            $livewire->save();
+                                                        }
+                                                    }),
+                                            ])
+                                                ->alignEnd(),
+                                        ]),
+                                ]),
                         ]),
                 ])
                     ->skippable(),
