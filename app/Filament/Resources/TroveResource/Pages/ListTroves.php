@@ -39,7 +39,7 @@ class ListTroves extends ListRecords
             'review' => Tab::make()
                 ->label(__('Check Requested'))
                 ->modifyQueryUsing(fn (Builder $query) => $query->onlyDrafts()->where('is_current', true)
-                ->where('check_requested', true)),
+                ->where('checker_id', '!=', null)),
         ];
     }
 }

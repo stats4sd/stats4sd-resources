@@ -44,6 +44,19 @@ class Trove extends Model implements HasMedia
         'troveType',
     ];
 
+    // Media Library - explicitly register collections
+    public function registerMediaCollections(): void
+    {
+        foreach(config('app.locales') as $locale) {
+            $this->addMediaCollection("cover_image_{$locale}")
+                ->singleFile();
+
+            $this->addMediaCollection("content_{$locale}");
+        }
+    }
+
+
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'uploader_id');
@@ -57,6 +70,11 @@ class Trove extends Model implements HasMedia
     public function checker(): BelongsTo
     {
         return $this->belongsTo(User::class, 'checker_id');
+    }
+
+    public function requester(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'requester_id');
     }
 
     public function troveType(): BelongsTo

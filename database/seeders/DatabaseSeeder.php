@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\Prep\OldTroveSeeder;
 use Database\Seeders\Prep\TagSeeder;
 use Database\Seeders\Prep\TagTypeSeeder;
 use Database\Seeders\Prep\TroveTypeSeeder;
@@ -24,8 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TagTypeSeeder::class);
         $this->call(TagSeeder::class);
         $this->call(TroveTypeSeeder::class);
-
-
 
     }
 }

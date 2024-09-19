@@ -18,7 +18,7 @@ return new class extends Migration
 
             $table->json('title');
             $table->json('description');
-            $table->foreignId('trove_type_id')->constrained();
+            $table->foreignId('trove_type_id')->nullable()->constrained();
             $table->boolean('source');
             $table->date('creation_date');
             $table->foreignId('uploader_id')->constrained('users');
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->integer('download_count')->default(0);
 
             $table->drafts();
-            $table->boolean('check_requested')->default(0);
+            $table->foreignId('requester_id')->nullable()->constrained('users')->cascadeOnUpdate()->nullOnDelete();
             $table->foreignId('checker_id')->nullable()->constrained('users')->cascadeOnUpdate()->nullOnDelete();
 
             $table->timestamps();

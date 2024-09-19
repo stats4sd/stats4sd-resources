@@ -8,6 +8,7 @@ use App\Models\Tag;
 use Awcodes\Shout\Components\Shout;
 use Filament\Forms;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Section;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Resources\Pages\EditRecord;
@@ -127,21 +128,32 @@ class TroveResource extends Resource
                     Wizard\Step::make('Content')
                         ->icon('heroicon-m-link')
                         ->schema([
-                            TranslatableComboField::make('files')
+                            // for file uploads, have 3 separate fields to put them into different collections
+                            Section::make('files')
                                 ->icon('heroicon-o-document')
                                 ->iconColor('primary')
                                 ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
                                 ->heading(__('Files'))
-                                ->hint('Multiple files can be uploaded if necessary')
+                                ->description(__('A trove will often contain multiple files. These are files that are part of the same set, like a powerpoint presentation and the presenter\'s own notes, or question and answer sheets of a quiz'))
                                 ->columns(3)
-                                ->hintIcon(
-                                    icon: 'heroicon-m-question-mark-circle',
-                                    tooltip: __('A trove will often contain multiple files. These are files that work together, for example a questions and answers sheet, or a document translated into different languages.'))
-                                ->childField(
-                                    Forms\Components\SpatieMediaLibraryFileUpload::make('files')
+                                ->schema([
+                                    Forms\Components\SpatieMediaLibraryFileUpload::make('files_en')
+                                        ->label('English')
                                         ->multiple()
                                         ->reorderable()
-                                ),
+                                        ->collection('content_en'),
+                                    Forms\Components\SpatieMediaLibraryFileUpload::make('files_es')
+                                        ->label('Spanish')
+                                        ->multiple()
+                                        ->reorderable()
+                                        ->collection('content_es'),
+                                    Forms\Components\SpatieMediaLibraryFileUpload::make('files_fr')
+                                        ->label('French')
+                                        ->multiple()
+                                        ->reorderable()
+                                        ->collection('content_fr'),
+
+                                ]),
 
                             TranslatableComboField::make('external_links')
                                 ->icon('heroicon-o-link')
@@ -181,17 +193,24 @@ class TroveResource extends Resource
                     Wizard\Step::make('Cover Image')
                         ->icon('heroicon-m-photo')
                         ->schema([
-                            TranslatableComboField::make('cover_image')
+                            Section::make('cover_image')
                                 ->icon('heroicon-o-photo')
                                 ->iconColor('primary')
                                 ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
                                 ->heading(__('Cover Image'))
-                                ->hint(__('Add a cover image for the resource. This will be displayed on the front-end.'))
+                                ->description(__('Add a cover image for the resource. This will be displayed on the front-end.'))
                                 ->columns(3)
-                                ->childField(
-                                    Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image')
-                                        ->collection('trove_cover')
-                                ),
+                                ->schema([
+                                    Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image_en')
+                                        ->label('English')
+                                        ->collection('cover_image_en'),
+                                    Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image_es')
+                                        ->label('Spanish')
+                                        ->collection('cover_image_es'),
+                                    Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image_fr')
+                                        ->label('French')
+                                        ->collection('cover_image_fr'),
+                                ]),
                         ]),
                     Wizard\Step::make('Check')
                         ->icon('heroicon-m-clipboard-document-check')
@@ -241,9 +260,16 @@ class TroveResource extends Resource
                                         ->visible(fn(Forms\Get $get) => $get('next_steps') === 'review')
                                         ->schema([
 
+                                            // If the user requests a check, update the requester_id. Otherwise, leave as-is
+                                            Forms\Components\Hidden::make('requester_id')
+                                                ->formatStateUsing(fn(?Trove $record, Forms\Get $get) => $get('checker_id') ? auth()->id() : $record?->requester_id),
+
                                             Forms\Components\Select::make('checker_id')
                                                 ->label('Select the person to ask')
-                                                ->relationship('checker', 'name'),
+                                                ->relationship('checker', 'name')
+                                                ->live(),
+
+
                                             Forms\Components\Actions::make([
                                                 SaveDraftFormAction::make()
                                                     ->label('Save as Draft and Request Review'),
@@ -255,17 +281,22 @@ class TroveResource extends Resource
                                         ->visible(fn(Forms\Get $get) => $get('next_steps') === 'publish')
                                         ->schema([
                                             Shout::make('publish_it')
-                                                ->content(new HtmlString('Publish the trove with the current changes. This will make it live on the site. A notification will be sent to the resources team to let them know so it can be checked on the live site. Use the "Saev and Publish" button below')),
+                                                ->content(new HtmlString('Publish the trove with the current changes. This will make it live on the site. A notification will be sent to the resources team to let them know so it can be checked on the live site. Use the "Save and Publish" button below')),
 
                                             Shout::make('are_you_sure')
                                                 ->type('warning')
-                                                ->visible(fn(?Model $record) => !$record?->check_requested)
+                                                ->visible(fn(?Trove $record) => !$record?->checker_id)
                                                 ->content(new HtmlString('It looks like no-one has been asked to check this trove. Are you sure you want to publish it?')),
+
+                                            Shout::make('are_you_sure_again')
+                                                ->type('warning')
+                                                ->visible(fn(?Trove $record) => $record?->requester_id === auth()->id())
+                                                ->content(new HtmlString('It looks like you previously asked someone else to check this trove. Are you sure you want to publish it before it is checked?')),
 
                                             Forms\Components\Checkbox::make('should_publish')
                                                 ->dehydrated(false)
                                                 ->label('I am sure I want to publish this trove')
-                                                ->visible(fn(?Model $record) => !$record?->check_requested)
+                                                ->visible(fn(?Trove $record) => !$record?->checker_id || $record?->requester_id === auth()->id())
                                                 ->live()
                                                 ->required(),
 
@@ -273,7 +304,7 @@ class TroveResource extends Resource
                                             Forms\Components\Actions::make([
                                                 Forms\Components\Actions\Action::make('Save and Publish')
                                                     ->label(fn(?Trove $record) => $record->has_published_version ? __('Save and Publish Changes') : __('Save and Publish'))
-                                                    ->disabled(fn(?Model $record,Forms\Get $get) => !$record?->check_requested && !$get('should_publish'))
+                                                    ->disabled(fn(?Trove $record, Forms\Get $get) => !$record?->checker_id && !$get('should_publish'))
                                                     ->action(function ($livewire) {
                                                         $livewire->shouldSaveAsDraft = false;
 
