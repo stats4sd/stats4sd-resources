@@ -42,6 +42,7 @@ class Trove extends Model implements HasMedia
     protected array $draftableRelations = [
         'tags',
         'troveType',
+        'media',
     ];
 
     // Media Library - explicitly register collections

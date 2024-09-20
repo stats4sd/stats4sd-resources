@@ -141,17 +141,26 @@ class TroveResource extends Resource
                                         ->label('English')
                                         ->multiple()
                                         ->reorderable()
-                                        ->collection('content_en'),
+                                        ->downloadable()
+                                        ->preserveFilenames()
+                                        ->collection('content_en')
+                                        ->disk('gcs'),
                                     Forms\Components\SpatieMediaLibraryFileUpload::make('files_es')
                                         ->label('Spanish')
                                         ->multiple()
                                         ->reorderable()
-                                        ->collection('content_es'),
+                                        ->downloadable()
+                                        ->preserveFilenames()
+                                        ->collection('content_es')
+                                        ->disk('gcs'),
                                     Forms\Components\SpatieMediaLibraryFileUpload::make('files_fr')
                                         ->label('French')
                                         ->multiple()
                                         ->reorderable()
-                                        ->collection('content_fr'),
+                                        ->downloadable()
+                                        ->preserveFilenames()
+                                        ->collection('content_fr')
+                                        ->disk('gcs'),
 
                                 ]),
 
