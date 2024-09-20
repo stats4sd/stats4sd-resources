@@ -144,7 +144,7 @@ class TroveResource extends Resource
                                         ->downloadable()
                                         ->preserveFilenames()
                                         ->collection('content_en')
-                                        ->disk('gcs'),
+                                        ->disk('public'),
                                     Forms\Components\SpatieMediaLibraryFileUpload::make('files_es')
                                         ->label('Spanish')
                                         ->multiple()
@@ -152,7 +152,7 @@ class TroveResource extends Resource
                                         ->downloadable()
                                         ->preserveFilenames()
                                         ->collection('content_es')
-                                        ->disk('gcs'),
+                                        ->disk('public'),
                                     Forms\Components\SpatieMediaLibraryFileUpload::make('files_fr')
                                         ->label('French')
                                         ->multiple()
@@ -160,7 +160,8 @@ class TroveResource extends Resource
                                         ->downloadable()
                                         ->preserveFilenames()
                                         ->collection('content_fr')
-                                        ->disk('gcs'),
+                                        ->disk('public')
+                                        ->rules(['max:100000000000']),
 
                                 ]),
 
