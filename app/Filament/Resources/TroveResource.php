@@ -48,6 +48,7 @@ class TroveResource extends Resource
 
     public static function form(Form $form): Form
     {
+
         $tagFields = self::getTagFields();
 
         return $form
@@ -144,7 +145,7 @@ class TroveResource extends Resource
                                         ->downloadable()
                                         ->preserveFilenames()
                                         ->collection('content_en')
-                                        ->disk('public'),
+                                        ->disk('gcs'),
                                     Forms\Components\SpatieMediaLibraryFileUpload::make('files_es')
                                         ->label('Spanish')
                                         ->multiple()
@@ -152,7 +153,7 @@ class TroveResource extends Resource
                                         ->downloadable()
                                         ->preserveFilenames()
                                         ->collection('content_es')
-                                        ->disk('public'),
+                                        ->disk('gcs'),
                                     Forms\Components\SpatieMediaLibraryFileUpload::make('files_fr')
                                         ->label('French')
                                         ->multiple()
@@ -160,7 +161,7 @@ class TroveResource extends Resource
                                         ->downloadable()
                                         ->preserveFilenames()
                                         ->collection('content_fr')
-                                        ->disk('public')
+                                        ->disk('gcs')
                                         ->rules(['max:100000000000']),
 
                                 ]),
