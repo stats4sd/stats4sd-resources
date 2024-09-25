@@ -21,3 +21,4 @@ yarn-error.log
 /public/css
 /public/packages
 data.ms
+storage/media-library/temp
