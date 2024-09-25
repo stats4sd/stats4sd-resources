@@ -29,7 +29,7 @@ class Collection extends Model implements HasMedia
         'public' => 'boolean',
     ];
 
-    public $translatable = [
+    public array $translatable = [
         'title',
         'description'
     ];
