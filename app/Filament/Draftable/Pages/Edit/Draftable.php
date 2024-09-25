@@ -2,6 +2,7 @@
 
 namespace App\Filament\Draftable\Pages\Edit;
 
+use App\Models\Trove;
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Filament\Notifications\Notification;
@@ -30,13 +31,15 @@ trait Draftable
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
         if ($record->isPublished() && $this->shouldSaveAsDraft) {
-            $record->updateAsDraft($data);
+
+            $result = $record->updateAsDraft($data);
         } elseif ($record->isPublished() && !$this->shouldSaveAsDraft) {
+
             $record->update($data);
         } elseif (!$record->is_current && $this->shouldSaveAsDraft) {
+
             $record->updateAsDraft($data);
         } else {
-            // Unpublish all other revisions
             if (!$this->shouldSaveAsDraft) {
                 /** @var HasMany $revisions */
                 $record::withoutTimestamps(fn() => $record->revisions()

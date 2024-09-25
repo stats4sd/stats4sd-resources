@@ -1,0 +1,6 @@
+[submodule "packages/laravel-drafts"]
+	path = packages/laravel-drafts
+	url = git@github.com:dave-mills/laravel-drafts.git
+[submodule "packages/filament-drafts"]
+	path = packages/filament-drafts
+	url = git@github.com:dave-mills/filament-drafts.git

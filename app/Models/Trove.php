@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use \Oddvalue\LaravelDrafts\Concerns\HasDrafts;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\MediaCollections\MediaCollection;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Translatable\HasTranslations;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -36,26 +38,44 @@ class Trove extends Model implements HasMedia
         'title',
         'description',
         'external_links',
-        'youtube_links'
+        'youtube_links',
     ];
 
     protected array $draftableRelations = [
         'tags',
         'troveType',
-        'media',
     ];
+
+    protected static function booted()
+    {
+        // listen to custom event 'drafted'
+        static::registerModelEvent('drafted', function ($trove) {
+
+            // clone media items to the newly created draft
+            $draft = $trove->revisions()->where('is_current', true)->first();
+
+            $trove->getRegisteredMediaCollections()->each(function(MediaCollection $collection) use ($trove, $draft) {
+
+                $trove->getMedia($collection->name)->each(function (Media $media) use ($draft) {
+
+                    $media->copy($draft, $media->collection_name, $media->disk);
+                });
+            });
+
+
+        });
+    }
 
     // Media Library - explicitly register collections
     public function registerMediaCollections(): void
     {
-        foreach(config('app.locales') as $locale) {
-            $this->addMediaCollection("cover_image_{$locale}")
+        foreach (config('app.locales') as $key => $locale) {
+            $this->addMediaCollection("cover_image_{$key}")
                 ->singleFile();
 
-            $this->addMediaCollection("content_{$locale}");
+            $this->addMediaCollection("content_{$key}");
         }
     }
-
 
 
     public function user(): BelongsTo

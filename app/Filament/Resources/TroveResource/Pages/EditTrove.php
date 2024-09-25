@@ -8,6 +8,8 @@ use Filament\Resources\Pages\EditRecord;
 use Filament\Support\Enums\Alignment;
 use Guava\FilamentDrafts\Admin\Actions\SaveDraftAction;
 use Guava\FilamentDrafts\Admin\Resources\Pages\Edit\Draftable;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Contracts\View\View;
 
 class EditTrove extends EditRecord
 {
@@ -21,6 +23,12 @@ class EditTrove extends EditRecord
     {
         return $this->getResource()::getUrl('index');
     }
+
+    public function getHeading(): string|Htmlable
+    {
+        return 'Edit: ' . $this->record->name . ' (ID: ' . $this->record->id . ')';
+    }
+
 
     protected function getHeaderActions(): array
     {

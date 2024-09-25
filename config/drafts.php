@@ -1,6 +1,9 @@
 <?php
 // config for Oddvalue/LaravelDrafts
 return [
+
+    'clone_relations' => true,
+
     'revisions' => [
         'keep' => 10,
     ],

@@ -55,6 +55,13 @@ class TestSeeder extends Seeder
 
             $itemArray = [];
             foreach ($item as $key => $value) {
+
+                // preserve arrays
+                if (is_string($value) && (str_starts_with($value, '[') || str_starts_with($value, '{'))) {
+                    $itemArray[$key] = json_decode($value, true);
+                    continue;
+                }
+
                 $itemArray[$key] = $value;
             }
 
