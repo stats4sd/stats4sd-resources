@@ -149,7 +149,7 @@ class ConvertOldToNewTroves extends Command
 
                 $media->each(function (Media $media) use ($newTrove) {
                     $media->model_id = $newTrove->id;
-                    $media->collection_name = $media->collection_name === 'coverImage' ? 'cover_image_es' : 'content_es';
+                    $media->collection_name = $media->collection_name === 'cover_image_en' ? 'cover_image_es' : 'content_es';
                     $media->saveQuietly();
                 });
 
@@ -168,7 +168,7 @@ class ConvertOldToNewTroves extends Command
 
                 $media->each(function (Media $media) use ($newTrove) {
                     $media->model_id = $newTrove->id;
-                    $media->collection_name = $media->collection_name === 'coverImage' ? 'cover_image_fr' : 'content_fr';
+                    $media->collection_name = $media->collection_name === 'cover_image_en' ? 'cover_image_fr' : 'content_fr';
                     $media->saveQuietly();
                 });
 

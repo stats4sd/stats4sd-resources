@@ -70,7 +70,7 @@ class TestSeeder extends Seeder
             if ($itemArray['model_type'] === Trove::class) {
 
                 $itemArray['collection_name'] = match ($itemArray['collection_name']) {
-                    'coverImage' => 'trove_cover',
+                    'coverImage' => 'cover_image_en',
                     'troveFiles' => 'content_en',
                     default => $itemArray['collection_name'],
                 };
