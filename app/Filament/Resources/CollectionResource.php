@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CollectionResource\Pages;
 use App\Filament\Resources\CollectionResource\RelationManagers;
 use Filament\Resources\Concerns\Translatable;
+use Parallax\FilamentComments\Tables\Actions\CommentsAction;
 
 class CollectionResource extends Resource
 {
@@ -107,7 +108,7 @@ class CollectionResource extends Resource
                 //
             ])
             ->actions([
-                // Tables\Actions\ViewAction::make(),
+                CommentsAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -130,7 +131,6 @@ class CollectionResource extends Resource
             'index' => Pages\ListCollections::route('/'),
             'create' => Pages\CreateCollection::route('/create'),
             'edit' => Pages\EditCollection::route('/{record}/edit'),
-            // 'view' => Pages\ViewCollection::route('/{record}'),
         ];
     }
 }

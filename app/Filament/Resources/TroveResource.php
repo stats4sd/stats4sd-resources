@@ -35,6 +35,7 @@ use Filament\Forms\Components\Placeholder;
 use Filament\Resources\Concerns\Translatable;
 use App\Filament\Resources\TroveResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Parallax\FilamentComments\Tables\Actions\CommentsAction;
 
 class TroveResource extends Resource
 {
@@ -381,6 +382,7 @@ class TroveResource extends Resource
                     ->relationship('user', 'name'),
             ])
             ->actions([
+                CommentsAction::make(),
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
