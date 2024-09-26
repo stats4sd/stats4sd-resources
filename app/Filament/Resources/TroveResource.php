@@ -344,7 +344,14 @@ class TroveResource extends Resource
                 Tables\Columns\TextColumn::make('title')
                     ->wrap(),
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('cover_image')
-                    ->collection('cover_image'),
+                    ->collection(fn(Pages\ListTroves $livewire) => 'cover_image_' . $livewire->activeLocale)
+                ->action(
+                    Tables\Actions\Action::make('view_image')
+                        ->modalHeading(fn(Trove $record, Pages\ListTroves $livewire) => $record->title . ' - Cover Image (' . $livewire->activeLocale . ')')
+                    ->modalContent(fn(Trove $record, Pages\ListTroves $livewire) => new HtmlString('<img src="' . $record->getFirstMediaUrl('cover_image_' . $livewire->activeLocale) . '" class="w-full h-auto">'))
+                    ->modalSubmitAction(false)
+                    ->modalCancelAction(false)
+                ),
                 Tables\Columns\TextColumn::make('creation_date')
                     ->date()
                     ->sortable(),
