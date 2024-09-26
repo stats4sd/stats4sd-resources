@@ -404,10 +404,11 @@ class TroveResource extends Resource
     {
         return TagType::all()->map(function (TagType $tagType) {
 
-            // TODO: add freetext option (probably a createOptionForm)
-            return Forms\Components\Select::make("tags_{$tagType->slug}")
-                ->relationship('tags', 'name')
-                ->options($tagType->tags->pluck('name', 'id'))
+            $field = Forms\Components\Select::make("tags_{$tagType->slug}")
+                ->relationship(
+                    name: 'tags',
+                    titleAttribute: 'name',
+                    modifyQueryUsing: fn(Builder $query) => $query->where('type_id', $tagType->id))
                 ->label($tagType->label)
                 ->placeholder('Select tags')
                 ->multiple()
@@ -419,6 +420,34 @@ class TroveResource extends Resource
                     icon: 'heroicon-m-question-mark-circle',
                     tooltip: fn() => $tagType->description
                 );
+
+            if ($tagType->freetext) {
+                return $field
+                    ->createOptionForm([
+                        TranslatableComboField::make('name')
+                            ->required()
+                            ->unique('tags', 'name', ignoreRecord: true)
+                            ->icon('heroicon-s-tag')
+                            ->iconColor('primary')
+                            ->extraAttributes(['style' => 'background-color: #e6e6e6;'])
+                            ->label('Name')
+                            ->description('Enter the name of the tag')
+                            ->columns(3)
+                            ->childField(Forms\Components\TextInput::class),
+                    ])
+                    ->createOptionUsing(function (array $data) use ($tagType) {
+
+                        $tag = Tag::Create([
+                            'name' => $data['name'],
+                            'type_id' => $tagType->id,
+                        ]);
+
+                        return $tag->id;
+                    });
+            }
+
+            return $field;
+
         })
             ->toArray();
 
