@@ -16,6 +16,8 @@ class ListTroves extends ListRecords
 
     protected static string $resource = TroveResource::class;
 
+    protected ?string $maxContentWidth = 'full';
+
     protected function getHeaderActions(): array
     {
         return [
