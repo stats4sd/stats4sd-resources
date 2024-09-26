@@ -12,15 +12,11 @@ class TroveType extends Model
     use HasFactory;
     use HasTranslations;
 
-    protected $fillable = [
-        'label',
-    ];
-
     protected $casts = [
         'id' => 'integer',
     ];
 
-    public $translatable = ['label'];
+    public array $translatable = ['label'];
 
     public function troves(): HasMany
     {

@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\TroveTypeResource\Pages;
 use App\Filament\Resources\TroveTypeResource\RelationManagers;
+use App\Filament\Translatable\Form\TranslatableComboField;
 use Filament\Resources\Concerns\Translatable;
 use App\Models\TroveType;
 use Filament\Forms;
@@ -17,7 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class TroveTypeResource extends Resource
 {
     use Translatable;
-    
+
     protected static ?string $model = TroveType::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -28,31 +29,16 @@ class TroveTypeResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Fieldset::make('label_field')
-                                    ->label('Label')
-                                    ->columns(3)
-                                    ->schema([
-                                        Forms\Components\TextInput::make('label')->hiddenOn(['edit', 'create']),
-                                        Forms\Components\TextInput::make('label_en')
-                                                        ->label('English')
-                                                        ->requiredWithoutAll('label_es, label_fr')
-                                                        ->validationMessages(['required_without_all' => 'Enter the label in at least one language']),
-                                        Forms\Components\TextInput::make('label_es')
-                                                        ->label('Spanish')
-                                                        ->requiredWithoutAll('label_en, label_fr')
-                                                        ->validationMessages(['required_without_all' => 'Enter the label in at least one language']),
-                                        Forms\Components\TextInput::make('label_fr')
-                                                        ->label('French')
-                                                        ->requiredWithoutAll('label_es, label_en')
-                                                        ->validationMessages(['required_without_all' => 'Enter the label in at least one language']),
-                                    ]),
-
-                Forms\Components\Section::make('')
-                                ->schema([Forms\Components\Checkbox::make('freetext')
-                                                ->label('Does this bucket accept new tag entries during Trove upload?')
-                                                ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Most buckets should not have this enabled, to prevent accidental duplication / mistyping during Trove upload.'),
-                                            ])
-            ]);
+                TranslatableComboField::make('label')
+                    ->label(__('Trove Type'))
+                    ->description('Enter the name of the trove type. E.g. "video", "presentation", "ODK Form Template", "R Project"')
+                    ->icon('heroicon-s-tag')
+                    ->iconColor('primary')
+                    ->extraAttributes(['style' => 'background-color: #e6e6e6;'])
+                    ->columns(3)
+                    ->childField(Forms\Components\TextInput::class)
+                    ->required(),
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
@@ -61,15 +47,16 @@ class TroveTypeResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('label'),
                 Tables\Columns\TextColumn::make('troves_count')
-                                ->counts('troves')
-                                ->label('# Troves')
-                                ->sortable(),
+                    ->counts('troves')
+                    ->label('# Troves')
+                    ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->modalHeading(''),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -77,23 +64,22 @@ class TroveTypeResource extends Resource
                 ]),
             ])
             ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()
+                    ->modalHeading(''),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListTroveTypes::route('/'),
-            'create' => Pages\CreateTroveType::route('/create'),
-            'edit' => Pages\EditTroveType::route('/{record}/edit'),
         ];
-    }    
+    }
 }

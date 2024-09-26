@@ -5,75 +5,44 @@ namespace App\Filament\Resources\TroveResource\Pages;
 use App\Filament\Resources\TroveResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Support\Enums\Alignment;
+use Guava\FilamentDrafts\Admin\Actions\SaveDraftAction;
+use Guava\FilamentDrafts\Admin\Resources\Pages\Edit\Draftable;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Contracts\View\View;
 
 class EditTrove extends EditRecord
 {
-    use EditRecord\Concerns\Translatable;
+    // Use custom draftable trait because of https://github.com/GuavaCZ/filament-drafts/issues/15;
+    use \App\Filament\Draftable\Pages\Edit\Draftable;
 
     protected static string $resource = TroveResource::class;
+    public static string|Alignment $formActionsAlignment = Alignment::End;
 
-    protected function mutateFormDataBeforeFill(array $data): array
-    {
-        $translations = $this->record->getTranslations('title');
-
-        $data['title_en'] = isset($translations['en']) ? $this->record->getTranslation('title', 'en') : null;
-        $data['title_es'] = isset($translations['es']) ? $this->record->getTranslation('title', 'es') : null;
-        $data['title_fr'] = isset($translations['fr']) ? $this->record->getTranslation('title', 'fr') : null;
-
-        $translations = $this->record->getTranslations('description');
-
-        $data['description_en'] = isset($translations['en']) ? $this->record->getTranslation('description', 'en') : null;
-        $data['description_es'] = isset($translations['es']) ? $this->record->getTranslation('description', 'es') : null;
-        $data['description_fr'] = isset($translations['fr']) ? $this->record->getTranslation('description', 'fr') : null;
-
-        $translations = $this->record->getTranslations('external_links');
-
-        $data['external_links_en'] = isset($translations['en']) ? $this->record->getTranslation('external_links', 'en') : null;
-        $data['external_links_es'] = isset($translations['es']) ? $this->record->getTranslation('external_links', 'es') : null;
-        $data['external_links_fr'] = isset($translations['fr']) ? $this->record->getTranslation('external_links', 'fr') : null;
-
-        $translations = $this->record->getTranslations('youtube_links');
-
-        $data['youtube_links_en'] = isset($translations['en']) ? $this->record->getTranslation('youtube_links', 'en') : null;
-        $data['youtube_links_es'] = isset($translations['es']) ? $this->record->getTranslation('youtube_links', 'es') : null;
-        $data['youtube_links_fr'] = isset($translations['fr']) ? $this->record->getTranslation('youtube_links', 'fr') : null;
-
-        return $data;
-    }
-
-    protected function afterSave(): void
-    {
-        $this->record->title = '';
-        $this->record->description = '';
-
-        if(!is_null($this->data['title_en'])) {$this->record->setTranslation('title', 'en', $this->data['title_en']);}
-        if(!is_null($this->data['title_es'])) {$this->record->setTranslation('title', 'es', $this->data['title_es']);}
-        if(!is_null($this->data['title_fr'])) {$this->record->setTranslation('title', 'fr', $this->data['title_fr']);}
-
-        if(!is_null($this->data['description_en'])) {$this->record->setTranslation('description', 'en', $this->data['description_en']);}
-        if(!is_null($this->data['description_es'])) {$this->record->setTranslation('description', 'es', $this->data['description_es']);}
-        if(!is_null($this->data['description_fr'])) {$this->record->setTranslation('description', 'fr', $this->data['description_fr']);}
-
-        $this->record->setTranslation('external_links', 'en', $this->data['external_links_en']);
-        $this->record->setTranslation('external_links', 'es', $this->data['external_links_es']);
-        $this->record->setTranslation('external_links', 'fr', $this->data['external_links_fr']);
-
-        $this->record->setTranslation('youtube_links', 'en', $this->data['youtube_links_en']);
-        $this->record->setTranslation('youtube_links', 'es', $this->data['youtube_links_es']);
-        $this->record->setTranslation('youtube_links', 'fr', $this->data['youtube_links_fr']);
-
-        $this->record->save();
-    }
-
-    protected function getRedirectUrl(): string 
+    protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');
     }
-    
+
+    public function getHeading(): string|Htmlable
+    {
+        return 'Edit: ' . $this->record->name . ' (ID: ' . $this->record->id . ')';
+    }
+
+
     protected function getHeaderActions(): array
     {
         return [
             Actions\DeleteAction::make(),
+        ];
+    }
+
+    // override the default draftable form actions
+    protected function getFormActions(): array
+    {
+        return [
+            SaveDraftAction::make(),
+            $this->getCancelFormAction(),
         ];
     }
 }

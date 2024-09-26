@@ -18,19 +18,22 @@ return new class extends Migration
 
             $table->json('title');
             $table->json('description');
-            $table->foreignId('trove_type_id')->constrained();
+            $table->foreignId('trove_type_id')->nullable()->constrained();
             $table->boolean('source');
             $table->date('creation_date');
             $table->foreignId('uploader_id')->constrained('users');
 
-            $table->json('external_links');
-            $table->json('youtube_links');
-
-            $table->boolean('public');
+            $table->json('external_links')->nullable();
+            $table->json('youtube_links')->nullable();
 
             $table->integer('download_count')->default(0);
 
+            $table->drafts();
+            $table->foreignId('requester_id')->nullable()->constrained('users')->cascadeOnUpdate()->nullOnDelete();
+            $table->foreignId('checker_id')->nullable()->constrained('users')->cascadeOnUpdate()->nullOnDelete();
+
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::enableForeignKeyConstraints();

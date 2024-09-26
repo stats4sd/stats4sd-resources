@@ -12,24 +12,18 @@ class TagType extends Model
     use HasFactory;
     use HasTranslations;
 
-    protected $fillable = [
-        'label',
-        'description',
-        'freetext',
-    ];
-
     protected $casts = [
         'id' => 'integer',
         'freetext' => 'boolean',
     ];
 
-    public $translatable = [
+    public array $translatable = [
         'label',
         'description'
     ];
 
     public function tags(): HasMany
     {
-        return $this->hasMany(Tag::class);
+        return $this->hasMany(Tag::class, 'type_id');
     }
 }
