@@ -2,6 +2,8 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Login;
+use ChrisReedIO\Socialment\SocialmentPlugin;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
@@ -34,7 +36,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('')
-            ->login()
+            ->login(Login::class)
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -64,23 +66,25 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->navigation(function (NavigationBuilder $builder): NavigationBuilder {
                 return $builder
-                ->items([
+                    ->items([
 
-                    ...TroveResource::getNavigationItems(),
-                    ...CollectionResource::getNavigationItems(),
-                ])
-                ->groups([
-                    NavigationGroup::make('Details')
-                        ->items([
-                            ...TroveTypeResource::getNavigationItems(),
-                            ...TagTypeResource::getNavigationItems(),
-                            ...TagResource::getNavigationItems(),
-                        ]),
-                ]);
+                        ...TroveResource::getNavigationItems(),
+                        ...CollectionResource::getNavigationItems(),
+                    ])
+                    ->groups([
+                        NavigationGroup::make('Details')
+                            ->items([
+                                ...TroveTypeResource::getNavigationItems(),
+                                ...TagTypeResource::getNavigationItems(),
+                                ...TagResource::getNavigationItems(),
+                            ]),
+                    ]);
             })
-            ->plugin(
+            ->plugins([
+                SocialmentPlugin::make()
+                    ->registerProvider('azure', 'fab-microsoft', 'Stats4SD Staff (via Azure)'),
                 SpatieLaravelTranslatablePlugin::make()
-                    ->defaultLocales(['en', 'es', 'fr'])
-                );
+                    ->defaultLocales(['en', 'es', 'fr']),
+            ]);
     }
 }
