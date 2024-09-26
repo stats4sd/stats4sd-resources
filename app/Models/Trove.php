@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Tag;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use \Oddvalue\LaravelDrafts\Concerns\HasDrafts;
+use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\MediaCollections\MediaCollection;
@@ -22,6 +23,7 @@ class Trove extends Model implements HasMedia
     use InteractsWithMedia;
     use HasTranslations;
     use HasDrafts;
+    use HasFilamentComments;
 
     protected $casts = [
         'id' => 'integer',

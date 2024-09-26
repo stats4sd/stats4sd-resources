@@ -35,6 +35,7 @@ use Filament\Forms\Components\Placeholder;
 use Filament\Resources\Concerns\Translatable;
 use App\Filament\Resources\TroveResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Parallax\FilamentComments\Tables\Actions\CommentsAction;
 
 class TroveResource extends Resource
 {
@@ -345,13 +346,13 @@ class TroveResource extends Resource
                     ->wrap(),
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('cover_image')
                     ->collection(fn(Pages\ListTroves $livewire) => 'cover_image_' . $livewire->activeLocale)
-                ->action(
-                    Tables\Actions\Action::make('view_image')
-                        ->modalHeading(fn(Trove $record, Pages\ListTroves $livewire) => $record->title . ' - Cover Image (' . $livewire->activeLocale . ')')
-                    ->modalContent(fn(Trove $record, Pages\ListTroves $livewire) => new HtmlString('<img src="' . $record->getFirstMediaUrl('cover_image_' . $livewire->activeLocale) . '" class="w-full h-auto">'))
-                    ->modalSubmitAction(false)
-                    ->modalCancelAction(false)
-                ),
+                    ->action(
+                        Tables\Actions\Action::make('view_image')
+                            ->modalHeading(fn(Trove $record, Pages\ListTroves $livewire) => $record->title . ' - Cover Image (' . $livewire->activeLocale . ')')
+                            ->modalContent(fn(Trove $record, Pages\ListTroves $livewire) => new HtmlString('<img src="' . $record->getFirstMediaUrl('cover_image_' . $livewire->activeLocale) . '" class="w-full h-auto">'))
+                            ->modalSubmitAction(false)
+                            ->modalCancelAction(false)
+                    ),
                 Tables\Columns\TextColumn::make('creation_date')
                     ->date()
                     ->sortable(),
@@ -370,6 +371,10 @@ class TroveResource extends Resource
                 Tables\Columns\TextColumn::make('download_count')
                     ->label('# Downloads')
                     ->sortable(),
+                TextColumn::make('filament_comments_count')
+                    ->label('# Comments')
+                    ->counts('filamentComments')
+                    ->sortable(),
             ])
             ->filters([
                 SelectFilter::make('source')
@@ -379,8 +384,14 @@ class TroveResource extends Resource
                     ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en')),
                 SelectFilter::make('uploader')
                     ->relationship('user', 'name'),
+                Tables\Filters\TernaryFilter::make('has_comments')
+                    ->queries(
+                        true: fn(Builder $query) => $query->has('comments'),
+                        false: fn(Builder $query) => $query->doesntHave('comments'),
+                    ),
             ])
             ->actions([
+                CommentsAction::make(),
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
