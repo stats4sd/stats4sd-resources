@@ -13,4 +13,9 @@ class CreateCollection extends CreateRecord
 
     protected static bool $canCreateAnother = false;
 
+    protected function getRedirectUrl(): string
+    {
+        return CollectionResource::getUrl('view', ['record' => $this->record]);
+    }
+
 }
