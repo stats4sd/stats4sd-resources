@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Parallax\FilamentComments\Models\FilamentComment;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class TestSeeder extends Seeder
@@ -85,6 +86,20 @@ class TestSeeder extends Seeder
             $uuids[] = $itemArray['uuid'];
 
         };
+
+
+        // handle old trove comments
+        $comments = DB::connection('mysql_old_troves')
+            ->table('trove_comments')
+            ->get()
+        ->each(function($comment) {
+            FilamentComment::create([
+               'subject_type' => Trove::class,
+                'subject_id' => $comment->trove_id,
+                'user_id' => $comment->user_id,
+                'comment' => $comment->comment,
+            ]);
+        });
 
     }
 }
