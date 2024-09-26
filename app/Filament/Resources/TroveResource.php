@@ -35,6 +35,7 @@ use Filament\Forms\Components\Placeholder;
 use Filament\Resources\Concerns\Translatable;
 use App\Filament\Resources\TroveResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Kainiklas\FilamentScout\Traits\InteractsWithScout;
 use Parallax\FilamentComments\Tables\Actions\CommentsAction;
 
 class TroveResource extends Resource
@@ -341,6 +342,7 @@ class TroveResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->searchable()
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->wrap(),

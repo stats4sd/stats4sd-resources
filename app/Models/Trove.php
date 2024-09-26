@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Tag;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Laravel\Scout\Searchable;
 use \Oddvalue\LaravelDrafts\Concerns\HasDrafts;
 use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
 use Spatie\MediaLibrary\HasMedia;
@@ -24,6 +25,7 @@ class Trove extends Model implements HasMedia
     use HasTranslations;
     use HasDrafts;
     use HasFilamentComments;
+    use Searchable;
 
     protected $casts = [
         'id' => 'integer',
@@ -120,5 +122,18 @@ class Trove extends Model implements HasMedia
         return new Attribute(
             get: fn() => $this->revisions()->where('is_published', true)->exists()
         );
+    }
+
+    public function toSearchableArray(): array
+    {
+        $array = $this->toArray();
+
+        foreach(TagType::all() as $tagType) {
+            $array[$tagType->name] = $this->tags->where('type', $tagType->name)->pluck('name');
+        }
+
+        $array['trove_type'] = $this->troveType?->label ?? null;
+
+        return $array;
     }
 }
