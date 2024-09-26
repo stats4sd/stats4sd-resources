@@ -3,7 +3,10 @@
 namespace App\Console\Commands;
 
 use App\Models\OldTrove;
+use App\Models\Tag;
+use App\Models\TagType;
 use App\Models\Trove;
+use App\Models\TroveType;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -31,9 +34,11 @@ class ConvertOldToNewTroves extends Command
     {
         $oldTroves = OldTrove::all();
 
+        $missingTags = collect([]);
+
         $this->info("Found {$oldTroves->count()} old troves...");
 
-        $oldTroves->each(function (OldTrove $oldTrove) {
+        $oldTroves->each(function (OldTrove $oldTrove) use ($missingTags) {
 
             // check if this trove has translated versions
             $translatedTroveIds = $this->getTranslatedTroveIds();
@@ -43,13 +48,13 @@ class ConvertOldToNewTroves extends Command
             $translatedTroveIdsFr = array_column($translatedTroveIds, 'fr');
 
             // ignore items with a newer version
-            if($oldTrove->new_version_id) {
+            if ($oldTrove->new_version_id) {
                 $this->info("This trove {$oldTrove->id} has a newer version; skipping");
                 return;
             }
 
             // ingore es and fr versions - we will add them in when we handle the en version
-            if(in_array($oldTrove->id, $translatedTroveIdsEs) || in_array($oldTrove->id, $translatedTroveIdsFr)) {
+            if (in_array($oldTrove->id, $translatedTroveIdsEs) || in_array($oldTrove->id, $translatedTroveIdsFr)) {
                 $this->info("This trove {$oldTrove->id} is a translated version of a different trove; skipping");
                 return;
             }
@@ -57,7 +62,7 @@ class ConvertOldToNewTroves extends Command
             $spanishOldTrove = null;
             $frenchOldTrove = null;
 
-            if(in_array($oldTrove->id, $translatedTroveIdsEn)) {
+            if (in_array($oldTrove->id, $translatedTroveIdsEn)) {
                 $this->info("This trove {$oldTrove->id} has translated versions...");
 
                 $spanishOldTroveId = $translatedTroveIds['en' . $oldTrove->id]['es'];
@@ -97,8 +102,41 @@ class ConvertOldToNewTroves extends Command
             $newTrove->updated_at = $oldTrove->updated_at;
             $newTrove->deleted_at = $oldTrove->deleted_at;
 
+
+            $tags = [];
+            foreach ($oldTrove->tags as $oldTag) {
+
+                // is the tag a resourceType tag?
+                if($oldTag->type === 'ResourceType') {
+                    $newTrove->troveType()->associate(TroveType::firstWhere('label->en', $oldTag->name_en));
+                    continue;
+                }
+
+                // Yes, 'language' is lowercase, while the other types are upper-case.
+                if($oldTag->type === 'language') {
+                    continue;
+                }
+
+
+                $tag = Tag::firstWhere('name->en', $oldTag->name_en);
+
+                if (!$tag) {
+                    $tags[] = Tag::create([
+                        'type_id' => TagType::firstWhere('label->en', $oldTag->type . 's')->id,
+                        'name' => ['en' => $oldTag->name_en],
+                    ])->id;
+                } else {
+                    $tags[] = $tag->id;
+                }
+
+
+            }
+
+            $newTrove->tags()->sync($tags);
+
+
             // check for spanish and french version
-            if($spanishOldTrove) {
+            if ($spanishOldTrove) {
                 $newTrove->setTranslation('title', 'es', $spanishOldTrove->title['en']);
                 $newTrove->setTranslation('description', 'es', $spanishOldTrove->description['en']);
                 $newTrove->setTranslation('external_links', 'es', $this->getExternalLinks($spanishOldTrove));
@@ -109,15 +147,15 @@ class ConvertOldToNewTroves extends Command
 
                 $this->comment('Moving ' . $media->count() . ' media items from trove ' . $spanishOldTrove->id . ' to ' . $newTrove->id);
 
-                $media->each(function(Media $media) use ($newTrove) {
+                $media->each(function (Media $media) use ($newTrove) {
                     $media->model_id = $newTrove->id;
-                    $media->collection_name = $media->collection_name === 'coverImage' ? 'cover_image_es' : 'content_es';
+                    $media->collection_name = $media->collection_name === 'cover_image_en' ? 'cover_image_es' : 'content_es';
                     $media->saveQuietly();
                 });
 
             }
 
-            if($frenchOldTrove) {
+            if ($frenchOldTrove) {
                 $newTrove->setTranslation('title', 'fr', $frenchOldTrove->title['en']);
                 $newTrove->setTranslation('description', 'fr', $frenchOldTrove->description['en']);
                 $newTrove->setTranslation('external_links', 'fr', $this->getExternalLinks($frenchOldTrove));
@@ -128,9 +166,9 @@ class ConvertOldToNewTroves extends Command
 
                 $this->comment('Moving ' . $media->count() . ' media items from trove ' . $frenchOldTrove->id . ' to ' . $newTrove->id);
 
-                $media->each(function(Media $media) use ($newTrove) {
+                $media->each(function (Media $media) use ($newTrove) {
                     $media->model_id = $newTrove->id;
-                    $media->collection_name = $media->collection_name === 'coverImage' ? 'cover_image_fr' : 'content_fr';
+                    $media->collection_name = $media->collection_name === 'cover_image_en' ? 'cover_image_fr' : 'content_fr';
                     $media->saveQuietly();
                 });
 
@@ -138,13 +176,12 @@ class ConvertOldToNewTroves extends Command
 
             $newTrove->save();
 
-
-            // handle media relation
-
-            // handle tags relation
-
+            $missingTags = $missingTags->unique();
 
         });
+
+
+        dump($missingTags);
     }
 
 
