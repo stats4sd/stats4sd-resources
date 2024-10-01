@@ -19,7 +19,11 @@
     </div>
 
     @if($showAllTroves)
-        {{ $this->table }}
+        <livewire:all-troves-table
+            :record="$record"
+            :resource="$this->getResource()"
+            :active-locale="$activeLocale ?? null"
+        />
     @else
         <x-filament-panels::resources.relation-managers
             :active-locale="$activeLocale ?? null"

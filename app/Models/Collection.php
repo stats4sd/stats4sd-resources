@@ -49,6 +49,7 @@ class Collection extends Model implements HasMedia
 
     public function troves(): BelongsToMany
     {
-        return $this->belongsToMany(Trove::class);
+        return $this->belongsToMany(Trove::class)
+            ->withPivot('id');
     }
 }

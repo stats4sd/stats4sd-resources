@@ -110,7 +110,8 @@ class Trove extends Model implements HasMedia
 
     public function collections(): BelongsToMany
     {
-        return $this->belongsToMany(Collection::class);
+        return $this->belongsToMany(Collection::class)
+            ->withPivot('id');
     }
 
     public function tags(): MorphToMany

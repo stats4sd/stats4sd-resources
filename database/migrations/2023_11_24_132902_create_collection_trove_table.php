@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::disableForeignKeyConstraints();
 
         Schema::create('collection_trove', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('collection_id');
             $table->foreignId('trove_id');
         });

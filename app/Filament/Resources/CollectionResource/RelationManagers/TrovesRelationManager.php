@@ -14,10 +14,15 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\RelationManagers\Concerns\Translatable;
+use Livewire\Attributes\Reactive;
+use Livewire\Component;
 
 class TrovesRelationManager extends RelationManager
 {
     use Translatable;
+
+    #[Reactive]
+    public ?string $activeLocale = null;
 
     protected static string $relationship = 'troves';
 
@@ -68,8 +73,8 @@ class TrovesRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\Action::make('view_trove')
-            ->label('View Trove')
-            ->url(fn($record) => TroveResource::getUrl('view', ['record' => $record->id])),
+                    ->label('View Trove')
+                    ->url(fn($record) => TroveResource::getUrl('view', ['record' => $record->id])),
                 Tables\Actions\DetachAction::make()
                     ->label('Remove trove from collection')
                     ->modalHeading('Remove trove from collection')
@@ -80,6 +85,9 @@ class TrovesRelationManager extends RelationManager
                     // Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\DetachBulkAction::make()->label('Remove troves from collection'),
                 ]),
-            ]);
+            ])
+            ->emptyStateDescription(
+                'Use the "Show All Troves" button above to find troves to add to the collection.'
+            );
     }
 }

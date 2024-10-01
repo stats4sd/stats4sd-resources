@@ -76,6 +76,8 @@ class TestSeeder extends Seeder
                 };
             }
 
+            $itemArray['disk'] = config('media-library.disk_name');
+
             // if the uuid is identical, we can overwrite the old one
             if ($uuids->contains($itemArray['uuid'])) {
                 Media::firstWhere('uuid', $itemArray['uuid'])->updateQuietly($itemArray);
