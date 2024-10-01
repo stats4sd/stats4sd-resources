@@ -13,7 +13,7 @@ class EditCollection extends EditRecord
 
     protected function getRedirectUrl(): string
     {
-        return $this->getResource()::getUrl('index');
+        return CollectionResource::getUrl('view', ['record' => $this->record]);
     }
 
     protected function getHeaderActions(): array

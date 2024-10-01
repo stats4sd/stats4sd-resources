@@ -47,6 +47,15 @@ class TroveResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
 
+    protected static int $globalSearchResultsLimit = 100;
+
+    public static function getRecordTitleAttribute(): ?string
+    {
+        $locale = app()->getLocale();
+
+        return "title";
+    }
+
 
     public static function form(Form $form): Form
     {
@@ -417,6 +426,7 @@ class TroveResource extends Resource
             'index' => Pages\ListTroves::route('/'),
             'create' => Pages\CreateTrove::route('/create'),
             'edit' => Pages\EditTrove::route('/{record}/edit'),
+            'view' => Pages\ViewTrove::route('/{record}'),
         ];
     }
 

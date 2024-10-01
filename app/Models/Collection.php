@@ -20,15 +20,22 @@ class Collection extends Model implements HasMedia
 
 
     protected $casts = [
-        'id' => 'integer',
-        'uploader_id' => 'integer',
         'public' => 'boolean',
     ];
 
     public array $translatable = [
         'title',
-        'description'
+        'description',
     ];
+
+    public function registerMediaCollections(): void
+    {
+        foreach (config('app.locales') as $key => $locale) {
+            $this->addMediaCollection("cover_image_{$key}")
+                ->singleFile();
+        }
+
+    }
 
     public function user(): BelongsTo
     {
@@ -42,6 +49,7 @@ class Collection extends Model implements HasMedia
 
     public function troves(): BelongsToMany
     {
-        return $this->belongsToMany(Trove::class);
+        return $this->belongsToMany(Trove::class)
+            ->withPivot('id');
     }
 }
