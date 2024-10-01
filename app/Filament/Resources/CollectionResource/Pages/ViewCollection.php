@@ -6,12 +6,15 @@ use App\Filament\Resources\CollectionResource;
 use App\Models\Collection;
 use App\Models\Trove;
 use Filament\Actions;
+use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -24,13 +27,13 @@ use Illuminate\Database\Eloquent\Builder;
 class ViewCollection extends ViewRecord implements HasTable
 {
 
-     use ViewRecord\Concerns\Translatable;
-     use InteractsWithTable;
+    use ViewRecord\Concerns\Translatable;
+    use InteractsWithTable;
 
     protected static string $resource = CollectionResource::class;
     protected static string $view = 'filament.pages.view-collection';
 
-    public bool $showAllTroves = false;
+    public bool $showAllTroves = true;
 
     public function getHeading(): string|Htmlable
     {
@@ -64,26 +67,61 @@ class ViewCollection extends ViewRecord implements HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(fn (): Builder => Trove::query())
+            ->query(fn(): Builder => Trove::query())
             ->heading('All Troves')
             ->columns([
                 TextColumn::make('title')->wrap(),
                 SpatieMediaLibraryImageColumn::make('cover_image')
-                                ->collection('cover_image'),
+                    ->collection('cover_image'),
                 TextColumn::make('creation_date')
-                                ->date()
-                                ->sortable(),
+                    ->date()
+                    ->sortable(),
                 TextColumn::make('user.name')
-                                ->label('Uploader')
-                                ->sortable(),
+                    ->label('Uploader')
+                    ->sortable(),
                 IconColumn::make('public')
-                                ->boolean()
-                                ->sortable()
-                                ->trueColor('success')
-                                ->falseColor('warning'),
+                    ->boolean()
+                    ->sortable()
+                    ->trueColor('success')
+                    ->falseColor('warning'),
                 TextColumn::make('download_count')
-                                ->label('# Downloads')
-                                ->sortable(),
+                    ->label('# Downloads')
+                    ->sortable(),
+            ])
+            ->actions([
+                Action::make('attach_trove')
+                    ->label('Add Trove to Collection')
+                    ->color('success')
+                    ->icon('heroicon-o-plus')
+                    ->visible(fn(Trove $record) => !$record->collections->contains($this->getRecord()))
+                    ->deselectRecordsAfterCompletion()
+                    ->action(function (Trove $record) {
+                        $this->getRecord()->troves()->attach($record);
+                        Notification::make()
+                            ->title('Trove Added Successfully')
+                            ->success()
+                            ->send();
+                        $this->resetTable();
+                    }),
+                Action::make('detach_trove')
+                    ->icon('heroicon-o-minus')
+                    ->color('danger')
+                    ->label('Remove Trove from Collection')
+                    ->visible(fn(Trove $record) => $record->collections->contains($this->getRecord()))
+                    ->deselectRecordsAfterCompletion()
+                    ->action(function (Trove $record) {
+                        $this->getRecord()->troves()->detach($record);
+                        Notification::make()
+                            ->title('Trove Removed Successfully')
+                            ->success()
+                            ->send();
+                        $this->resetTable();
+                    }),
+            ])
+            ->bulkActions([
+                BulkAction::make('attach')
+                    ->label('Add Trove(s) to Collection')
+                    ->action(fn(\Illuminate\Database\Eloquent\Collection $records) => $this->getRecord()->troves()->attach($records)),
             ]);
     }
 
