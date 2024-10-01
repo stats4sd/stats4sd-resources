@@ -48,6 +48,7 @@ class Trove extends Model implements HasMedia
     protected array $draftableRelations = [
         'tags',
         'troveType',
+        'collections',
     ];
 
     protected static function booted()
@@ -126,7 +127,14 @@ class Trove extends Model implements HasMedia
 
     public function toSearchableArray(): array
     {
-        $array = $this->toArray();
+        // title and description
+        $array = [];
+
+        foreach(config('app.locales') as $key => $label) {
+            $array['title_' . $key] = $this->getTranslation('title', $key);
+            $array['description_' . $key] = $this->getTranslation('description', $key);
+            $array['external_links_' . $key] = collect($this->getTranslation('external_links', $key))->join('; ');
+        }
 
         foreach(TagType::all() as $tagType) {
             $array[$tagType->name] = $this->tags->where('type', $tagType->name)->pluck('name');

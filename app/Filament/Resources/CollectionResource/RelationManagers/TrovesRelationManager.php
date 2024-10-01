@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\CollectionResource\RelationManagers;
 
+use App\Filament\Resources\TroveResource;
 use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
@@ -39,47 +40,40 @@ class TrovesRelationManager extends RelationManager
     {
         return $table
             ->recordTitleAttribute('title')
+            ->heading('Troves in this Collection')
             ->columns([
                 Tables\Columns\TextColumn::make('title')->wrap(),
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('cover_image')
-                                ->collection('cover_image'),
+                    ->collection('cover_image'),
                 Tables\Columns\TextColumn::make('creation_date')
-                                ->date()
-                                ->sortable(),
+                    ->date()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('user.name')
-                                ->label('Uploader')
-                                ->sortable(),
+                    ->label('Uploader')
+                    ->sortable(),
                 Tables\Columns\IconColumn::make('public')
-                                ->boolean()
-                                ->sortable()
-                                ->trueColor('success')
-                                ->falseColor('warning'),
+                    ->boolean()
+                    ->sortable()
+                    ->trueColor('success')
+                    ->falseColor('warning'),
                 Tables\Columns\TextColumn::make('download_count')
-                                ->label('# Downloads')
-                                ->sortable(),
+                    ->label('# Downloads')
+                    ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
-                // Tables\Actions\CreateAction::make(),
                 Tables\Actions\LocaleSwitcher::make(),
-                Tables\Actions\AttachAction::make()
-                                ->label('Attach troves to collection')
-                                ->preloadRecordSelect()
-                                ->recordSelect(
-                                    fn (Select $select) => $select->placeholder('Select a trove'),
-                                )
-                                ->modalHeading('Attach trove to collection')
-                                ->successNotificationTitle('Trove attached to collection')
-])
+            ])
             ->actions([
-                // Tables\Actions\EditAction::make(),
-                // Tables\Actions\DeleteAction::make(),
+                Tables\Actions\Action::make('view_trove')
+            ->label('View Trove')
+            ->url(fn($record) => TroveResource::getUrl('view', ['record' => $record->id])),
                 Tables\Actions\DetachAction::make()
-                                ->label('Remove trove from collection')
-                                ->modalHeading('Remove trove from collection')
-                                ->successNotificationTitle('Trove removed from collection'),
+                    ->label('Remove trove from collection')
+                    ->modalHeading('Remove trove from collection')
+                    ->successNotificationTitle('Trove removed from collection'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

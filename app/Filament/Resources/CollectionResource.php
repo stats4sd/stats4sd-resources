@@ -79,11 +79,20 @@ class CollectionResource extends Resource
                             ->collection('cover_image_fr')
                             ->disk('s3'),
                     ]),
+                Forms\Components\Hidden::make('uploader_id')
+                    ->default(Auth::id()),
 
+                Section::make('Publishing')
+                    ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
+                    ->schema([
+
+                        Forms\Components\Checkbox::make('public')
+                            ->label('Should this collection be public?')
+                            ->hint('If yes, the collection will appear on the front-end. We suggest you keep the collection private until it is ready to be shared.')
+                            ->default(0),
+                    ]),
             ])->columns(1);
     }
-
-
 
     public static function table(Table $table): Table
     {
