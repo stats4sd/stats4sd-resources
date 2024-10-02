@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('troves', function (Blueprint $table) {
             $table->id();
 
+            $table->string('slug')->unique();
+
             $table->json('title');
             $table->json('description');
             $table->foreignId('trove_type_id')->nullable()->constrained();
@@ -31,6 +33,8 @@ return new class extends Migration
             $table->drafts();
             $table->foreignId('requester_id')->nullable()->constrained('users')->cascadeOnUpdate()->nullOnDelete();
             $table->foreignId('checker_id')->nullable()->constrained('users')->cascadeOnUpdate()->nullOnDelete();
+
+            $table->json('previous_slugs')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

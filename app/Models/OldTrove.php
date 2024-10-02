@@ -26,4 +26,9 @@ class OldTrove extends Model
     {
         return $this->belongsToMany(OldTag::class, 'taggables', 'taggable_id', 'tag_id');
     }
+
+    public function collections(): BelongsToMany
+    {
+        return $this->belongsToMany(OldCollection::class, '_link_collections_troves', 'trove_id', 'collection_id');
+    }
 }

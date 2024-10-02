@@ -18,7 +18,7 @@ class ConvertOldToNewTroves extends Command
      *
      * @var string
      */
-    protected $signature = 'app:convert-troves';
+    protected $signature = 'app:convert-old-to-new-troves';
 
     /**
      * The console command description.
@@ -79,6 +79,9 @@ class ConvertOldToNewTroves extends Command
             $newTrove = new Trove();
 
             $newTrove->id = $oldTrove->id; // important to maintain relationships
+
+            $newTrove->slug = $oldTrove->slug;
+
             $newTrove->setTranslation('title', 'en', $oldTrove->title['en']);
             $newTrove->setTranslation('description', 'en', $oldTrove->description['en']);
             $newTrove->source = $oldTrove->source;
@@ -153,6 +156,9 @@ class ConvertOldToNewTroves extends Command
                     $media->saveQuietly();
                 });
 
+                // add the spanish version to the list of available_slugs
+                $newTrove = $this->getPreviousSlugsAndIds($newTrove, $spanishOldTrove);
+
             }
 
             if ($frenchOldTrove) {
@@ -172,16 +178,28 @@ class ConvertOldToNewTroves extends Command
                     $media->saveQuietly();
                 });
 
+                $newTrove = $this->getPreviousSlugsAndIds($newTrove, $frenchOldTrove);
+
+            }
+
+            // check for previous versions of this trove:
+            $previousVersions = OldTrove::where('new_version_id', $oldTrove->id)->get();
+
+            if($previousVersions->count() > 0) {
+                $this->comment('Found ' . $previousVersions->count() . ' previous versions of trove ' . $oldTrove->id);
+
+                foreach($previousVersions as $previousVersion) {
+                    $newTrove = $this->getPreviousSlugsAndIds($newTrove, $previousVersion);
+
+                    // check again for previous versions of the previous version!
+                }
             }
 
             $newTrove->save();
 
-            $missingTags = $missingTags->unique();
 
         });
 
-
-        dump($missingTags);
     }
 
 
@@ -230,5 +248,22 @@ class ConvertOldToNewTroves extends Command
                 });
         }
         return $externalLinks;
+    }
+
+    /**
+     * @param Trove $newTrove
+     * @param mixed $previousVersion
+     * @return void
+     */
+    function getPreviousSlugsAndIds(Trove $newTrove, mixed $previousVersion): Trove
+    {
+        $newTrove->previous_slugs = array_merge($newTrove->previous_slugs ?? [], [$previousVersion->slug, $previousVersion->id]);
+
+        // check recursively
+        if($previousPrevious = OldTrove::where('new_version_id', $previousVersion->id)->first()) {
+            $newTrove = $this->getPreviousSlugsAndIds($newTrove, $previousPrevious);
+        }
+
+        return $newTrove;
     }
 }
