@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Tag;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 use \Oddvalue\LaravelDrafts\Concerns\HasDrafts;
 use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
@@ -36,6 +37,7 @@ class Trove extends Model implements HasMedia
         'external_links' => 'array',
         'youtube_links' => 'array',
         'check_requested' => 'boolean',
+        'previous_slugs' => 'array',
     ];
 
     public array $translatable = [
@@ -59,7 +61,7 @@ class Trove extends Model implements HasMedia
             // clone media items to the newly created draft
             $draft = $trove->revisions()->where('is_current', true)->first();
 
-            $trove->getRegisteredMediaCollections()->each(function(MediaCollection $collection) use ($trove, $draft) {
+            $trove->getRegisteredMediaCollections()->each(function (MediaCollection $collection) use ($trove, $draft) {
 
                 $trove->getMedia($collection->name)->each(function (Media $media) use ($draft) {
 
@@ -126,22 +128,52 @@ class Trove extends Model implements HasMedia
         );
     }
 
+
+    // Matching the old Algolia serachable array as much as possible
     public function toSearchableArray(): array
     {
         // title and description
-        $array = [];
+        $array = $this->toArray();
 
-        foreach(config('app.locales') as $key => $label) {
-            $array['title_' . $key] = $this->getTranslation('title', $key);
-            $array['description_' . $key] = $this->getTranslation('description', $key);
-            $array['external_links_' . $key] = collect($this->getTranslation('external_links', $key))->join('; ');
+        $languages = [];
+
+        foreach (config('app.locales') as $locale => $label) {
+            // truncate description
+            if (isset($array['description'][$locale])) {
+                $array['description'][$locale] = Str::of($array['description'][$locale])->limit(100)->stripTags();
+            }
+
+            // add language if exists
+            if (isset($array['title'][$locale])) {
+                $languages[] = $label;
+            }
         }
 
-        foreach(TagType::all() as $tagType) {
-            $array[$tagType->name] = $this->tags->where('type', $tagType->name)->pluck('name');
+        $array['languages']['name']['en'] = $languages;
+
+        foreach (TagType::all() as $tagType) {
+            $array[strtolower($tagType->label)] = $this->tags->where('type_id', $tagType->id)->map(fn($tag) => [
+                'name' => [
+                    'en' => $tag->getTranslation('name', 'en'),
+                    'es' => $tag->getTranslation('name', 'es'),
+                    'fr' => $tag->getTranslation('name', 'fr'),
+                ],
+            ])->values()->toArray();
         }
 
-        $array['trove_type'] = $this->troveType?->label ?? null;
+
+        $array['resourceTypes']['name']['en'] = $this->troveType?->label ?? '';
+        $array['collections']['id'] = $this->collections->pluck('id');
+        $array['tags'] = $this->tags->map(fn($tag) => [
+            'name' => [
+                'en' => $tag->getTranslation('name', 'en'),
+                'es' => $tag->getTranslation('name', 'es'),
+                'fr' => $tag->getTranslation('name', 'fr'),
+            ],
+        ])->values()->toArray();
+
+
+        $array['cover_image'] = $this->getFirstMediaUrl('cover_image_en');
 
         return $array;
     }

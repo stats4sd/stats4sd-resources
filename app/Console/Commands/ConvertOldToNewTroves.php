@@ -79,6 +79,9 @@ class ConvertOldToNewTroves extends Command
             $newTrove = new Trove();
 
             $newTrove->id = $oldTrove->id; // important to maintain relationships
+
+            $newTrove->slug = $oldTrove->slug;
+
             $newTrove->setTranslation('title', 'en', $oldTrove->title['en']);
             $newTrove->setTranslation('description', 'en', $oldTrove->description['en']);
             $newTrove->source = $oldTrove->source;
@@ -153,6 +156,9 @@ class ConvertOldToNewTroves extends Command
                     $media->saveQuietly();
                 });
 
+                // add the spanish version to the list of available_slugs
+                $newTrove->previous_slugs = array_merge($newTrove->previous_slugs ?? [], [$spanishOldTrove->slug, $spanishOldTrove->id]);
+
             }
 
             if ($frenchOldTrove) {
@@ -172,16 +178,29 @@ class ConvertOldToNewTroves extends Command
                     $media->saveQuietly();
                 });
 
+                $newTrove->previous_slugs = array_merge($newTrove->previous_slugs ?? [], [$frenchOldTrove->slug, $frenchOldTrove->id]);
+
             }
+
+            // check for previous versions of this trove:
+            $previousVersions = OldTrove::where('new_version_id', $oldTrove->id)->get();
+
+            if($previousVersions->count() > 0) {
+                $this->comment('Found ' . $previousVersions->count() . ' previous versions of trove ' . $oldTrove->id);
+
+                foreach($previousVersions as $previousVersion) {
+                    $newTrove->previous_slugs = array_merge($newTrove->previous_slugs ?? [], [$previousVersion->slug, $previousVersion->id]);
+                }
+            }
+
+
+
 
             $newTrove->save();
 
-            $missingTags = $missingTags->unique();
 
         });
 
-
-        dump($missingTags);
     }
 
 
