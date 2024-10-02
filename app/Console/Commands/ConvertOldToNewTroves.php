@@ -242,13 +242,16 @@ class ConvertOldToNewTroves extends Command
             $externalLinks = collect($oldTrove->elements_urls['en'])
                 ->mapWithKeys(function ($item) {
 
-                    $this->info('Processing external link: ' . $item);
+                    if($item === [] || !array_key_exists('path', $item)) {
+                        return [];
+                    }
 
                     return [
                         'link_url' => $item['path'],
                         'link_title' => $item['title'] ?? $item['path'],
                     ];
-                });
+                })
+            ->filter(fn($item) => $item !== []);
         }
         return $externalLinks;
     }
