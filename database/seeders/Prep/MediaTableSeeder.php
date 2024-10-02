@@ -44,6 +44,7 @@ class MediaTableSeeder extends Seeder
             }
 
             $itemArray['disk'] = config('media-library.disk_name');
+            $itemArray['conversions_disk'] = config('media-library.disk_name');
             $itemArray['generated_conversions'] = [];
 
             // if the uuid is identical, we can overwrite the old one
