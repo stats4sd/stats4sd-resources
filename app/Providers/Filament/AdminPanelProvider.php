@@ -86,6 +86,7 @@ class AdminPanelProvider extends PanelProvider
                     ->registerProvider('azure', 'fab-microsoft', 'Stats4SD Staff (via Azure)'),
                 SpatieLaravelTranslatablePlugin::make()
                     ->defaultLocales(['en', 'es', 'fr']),
-            ]);
+            ])
+            ->viteTheme('resources/css/filament/admin/theme.css');
     }
 }

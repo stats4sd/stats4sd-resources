@@ -41,7 +41,7 @@ class TagTypeResource extends Resource
                 TranslatableComboField::make('label')
                     ->icon('heroicon-s-tag')
                     ->iconColor('primary')
-                    ->extraAttributes(['style' => 'background-color: #e6e6e6;'])
+                    ->extraAttributes(['class' => 'grey-box'])
                     ->label('Enter the Label for the Tag Type')
                     ->columns(3)
                     ->childField(Forms\Components\TextInput::class)
@@ -50,7 +50,7 @@ class TagTypeResource extends Resource
                 TranslatableComboField::make('description')
                     ->icon('heroicon-s-document-text')
                     ->iconColor('primary')
-                    ->extraAttributes(['style' => 'background-color: #e6e6e6;'])
+                    ->extraAttributes(['class' => 'grey-box'])
                     ->label('Enter a brief description of the Tag Type')
                     ->childField(Forms\Components\MarkdownEditor::class)
                     ->required(),

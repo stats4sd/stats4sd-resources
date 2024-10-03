@@ -34,7 +34,7 @@ class TroveTypeResource extends Resource
                     ->description('Enter the name of the trove type. E.g. "video", "presentation", "ODK Form Template", "R Project"')
                     ->icon('heroicon-s-tag')
                     ->iconColor('primary')
-                    ->extraAttributes(['style' => 'background-color: #e6e6e6;'])
+                    ->extraAttributes(['class' => 'grey-box'])
                     ->columns(3)
                     ->childField(Forms\Components\TextInput::class)
                     ->required(),
