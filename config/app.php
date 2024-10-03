@@ -59,6 +59,8 @@ return [
 
     'asset_url' => env('ASSET_URL'),
 
+    'front_end_url' => env('FRONT_END_URL', 'https://stats4sd.org'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

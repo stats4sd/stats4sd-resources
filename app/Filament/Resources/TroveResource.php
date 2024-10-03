@@ -42,6 +42,7 @@ class TroveResource extends Resource
 {
     use Translatable;
     use Draftable;
+    use InteractsWithScout;
 
     protected static ?string $model = Trove::class;
 
@@ -403,7 +404,9 @@ class TroveResource extends Resource
             ])
             ->actions([
                 CommentsAction::make(),
-                Tables\Actions\ViewAction::make(),
+                Tables\Actions\Action::make('preview')
+                ->label('Preview on Front-end')
+                ->url(fn(Trove $record) => config('app.front_end_url') . '/resources/' . $record->slug),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
