@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\CollectionResource\Pages;
 
 use App\Filament\Resources\CollectionResource;
+use App\Filament\Resources\CollectionResource\RelationManagers\TrovesRelationManager;
 use App\Filament\Resources\TroveResource;
 use App\Models\Collection;
 use App\Models\Trove;
@@ -71,7 +72,8 @@ class ViewCollection extends ViewRecord
     {
         return [
             Actions\LocaleSwitcher::make(),
-            Actions\EditAction::make(),
+            Actions\EditAction::make()
+            ->label('Edit Collection Metadata'),
         ];
     }
 

@@ -10,6 +10,7 @@ class EditCollection extends EditRecord
 {
 
     protected static string $resource = CollectionResource::class;
+    protected static string $view = 'filament.pages.edit-collection';
 
     protected function getRedirectUrl(): string
     {

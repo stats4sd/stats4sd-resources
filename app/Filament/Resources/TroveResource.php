@@ -36,6 +36,7 @@ use Filament\Resources\Concerns\Translatable;
 use App\Filament\Resources\TroveResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Kainiklas\FilamentScout\Traits\InteractsWithScout;
+use Livewire\Component;
 use Parallax\FilamentComments\Tables\Actions\CommentsAction;
 
 class TroveResource extends Resource
@@ -347,60 +348,17 @@ class TroveResource extends Resource
             ])->columns(1);
     }
 
+    /**
+     * @throws \Exception
+     */
     public static function table(Table $table): Table
     {
         return $table
             ->searchable()
-            ->columns([
-                Tables\Columns\TextColumn::make('title')
-                    ->wrap()
-                    ->sortable(query: fn(Builder $query, $direction) => $query->orderBy('title->'.app()->currentLocale(), $direction)),
-                Tables\Columns\SpatieMediaLibraryImageColumn::make('cover_image')
-                    ->collection(fn(Pages\ListTroves $livewire) => 'cover_image_' . $livewire->activeLocale)
-                    ->action(
-                        Tables\Actions\Action::make('view_image')
-                            ->modalHeading(fn(Trove $record, Pages\ListTroves $livewire) => $record->title . ' - Cover Image (' . $livewire->activeLocale . ')')
-                            ->modalContent(fn(Trove $record, Pages\ListTroves $livewire) => new HtmlString('<img src="' . $record->getFirstMediaUrl('cover_image_' . $livewire->activeLocale) . '" class="w-full h-auto">'))
-                            ->modalSubmitAction(false)
-                            ->modalCancelAction(false)
-                    ),
-                Tables\Columns\TextColumn::make('creation_date')
-                    ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('tags_count')
-                    ->label('# Tags')
-                    ->sortable()
-                    ->counts('tags'),
-                Tables\Columns\TextColumn::make('user.name')
-                    ->label('Uploader')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('publisher.name')
-                    ->label('Publisher')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('published_at')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('download_count')
-                    ->label('# Downloads')
-                    ->sortable(),
-                TextColumn::make('filament_comments_count')
-                    ->label('# Comments')
-                    ->counts('filamentComments')
-                    ->sortable(),
-            ])
-            ->filters([
-                SelectFilter::make('source')
-                    ->options([0 => 'Internal', 1 => 'External']),
-                SelectFilter::make('resourceType')
-                    ->relationship('troveType', 'label')
-                    ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en')),
-                SelectFilter::make('uploader')
-                    ->relationship('user', 'name'),
-                Tables\Filters\TernaryFilter::make('has_comments')
-                    ->queries(
-                        true: fn(Builder $query) => $query->has('comments'),
-                        false: fn(Builder $query) => $query->doesntHave('comments'),
-                    ),
-            ])
+            ->columns(static::getTableColumns())
+            ->filters(static::getTableFilters())
+            ->filtersTriggerAction(fn($action) => $action->button()->label('Filters'))
+            ->filtersLayout(fn() => FiltersLayout::AboveContentCollapsible)
             ->actions([
                 CommentsAction::make(),
                 Tables\Actions\Action::make('preview')
@@ -481,7 +439,84 @@ class TroveResource extends Resource
 
         })
             ->toArray();
+    }
 
+    public static function getTableColumns(): array
+    {
+        return [
+            Tables\Columns\TextColumn::make('title')
+                ->wrap()
+                ->sortable(query: fn(Builder $query, $direction) => $query->orderBy('title->' . app()->currentLocale(), $direction)),
+            Tables\Columns\SpatieMediaLibraryImageColumn::make('cover_image')
+                ->collection(fn(Component $livewire) => 'cover_image_' . $livewire->activeLocale),
+            Tables\Columns\TextColumn::make('creation_date')
+                ->date()
+                ->sortable(),
+            Tables\Columns\TextColumn::make('user.name')
+                ->label('Uploader')
+                ->sortable(),
+            Tables\Columns\IconColumn::make('public')
+                ->boolean()
+                ->sortable()
+                ->trueColor('success')
+                ->falseColor('warning'),
+            Tables\Columns\TextColumn::make('download_count')
+                ->label('# Downloads')
+                ->sortable(),
+        ];
+    }
 
+    /**
+     * @throws \Exception
+     */
+    public static function getTableFilters(): array
+    {
+        $tagFilters = TagType::all()->map(function (TagType $tagType) {
+            return SelectFilter::make("tags_{$tagType->slug}")
+                ->label($tagType->label)
+                ->relationship('tags', 'name', function (Builder $query) use ($tagType) {
+                    $query->where('type_id', $tagType->id);
+                })
+                ->multiple()
+                ->preload();
+        })->toArray();
+
+        return [
+            SelectFilter::make('source')
+                ->options([0 => 'Internal', 1 => 'External']),
+            SelectFilter::make('resourceType')
+                ->relationship('troveType', 'label')
+                ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en')),
+            SelectFilter::make('uploader')
+                ->relationship('user', 'name'),
+            ...$tagFilters,
+        ];
+    }
+
+    public static function getTableFilterSchema(array $filters): array
+    {
+        return [
+            Section::make('Tags')
+                ->collapsed()
+                ->schema(static::getTagFilterSchema($filters))
+                ->columns([
+                    'xs' => 1,
+                    'sm' => 2,
+                    'lg' => 4,
+                    '3xl' => 6,
+                    '5xl' => 8,
+                ]),
+
+                    $filters['source'],
+                    $filters['resourceType'],
+                    $filters['uploader'],
+        ];
+    }
+
+    public static function getTagFilterSchema(array $filters): array
+    {
+        return TagType::all()->map(function (TagType $tagType) use ($filters) {
+            return $filters["tags_{$tagType->slug}"];
+        })->toArray();
     }
 }

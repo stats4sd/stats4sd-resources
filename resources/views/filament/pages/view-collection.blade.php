@@ -14,7 +14,7 @@
 
     <div class="flex justify-start">
         <x-filament::button wire:click="$toggle('showAllTroves')" class="mt-4">
-            {{ $showAllTroves ? __('Show Troves in Collection') : __('Show All Troves') }}
+            {{ $showAllTroves ? __('Show Troves in Collection') : __('Add Troves To Collection') }}
         </x-filament::button>
     </div>
 
