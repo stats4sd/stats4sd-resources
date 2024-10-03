@@ -343,8 +343,7 @@ class TroveResource extends Resource
                                         ]),
                                 ]),
                         ]),
-                ])
-                    ->skippable(),
+                ]),
             ])->columns(1);
     }
 
