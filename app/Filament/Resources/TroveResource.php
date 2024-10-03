@@ -201,7 +201,7 @@ class TroveResource extends Resource
                                                 ->label('Link URL'),
                                         ])
                                         ->columns(1)
-                                        ->addActionLabel('Add another link')
+                                        ->addActionLabel('Add a link')
                                 ),
 
                             TranslatableComboField::make('youtube_links')
@@ -217,7 +217,7 @@ class TroveResource extends Resource
                                             Forms\Components\TextInput::make('youtube_id')
                                                 ->label('YouTube ID'),
                                         ])
-                                        ->addActionLabel('Add another YouTube video'),
+                                        ->addActionLabel('Add a YouTube video'),
                                 ),
                         ]),
 
