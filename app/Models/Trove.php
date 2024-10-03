@@ -73,13 +73,13 @@ class Trove extends Model implements HasMedia
             });
         });
 
-        static::saving(function(Trove $trove){
+        static::saving(function (Trove $trove) {
 
             // set the slug to the first available title locale
             $locales = $trove->getTranslatedLocales('title');
 
             // don't generate a slug if it already exists
-            if($trove->slug)  {
+            if ($trove->slug) {
                 return;
             }
 
@@ -90,14 +90,16 @@ class Trove extends Model implements HasMedia
                 ->withDrafts()
                 ->where('slug', $trove->slug);
 
-            if($trove->id) {
+            if ($trove->id) {
                 $uniquenessQuery = $uniquenessQuery->where('id', '!=', $trove->id);
             }
 
             $count = $uniquenessQuery->count();
 
+            if ($count > 0) {
+                $trove->slug = $trove->slug . '-' . $count;
+            }
 
-            $trove->slug = $slug . '-' . $count;
 
         });
 

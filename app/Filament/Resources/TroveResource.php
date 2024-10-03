@@ -105,13 +105,11 @@ class TroveResource extends Resource
                                         ->placeholder('Select the resource type')
                                         ->relationship('troveType', 'label')
                                         ->required()
-                                        ->default(1) // TODO: REMOVE THIS
                                         ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en')),
 
                                     Forms\Components\Select::make('source')
                                         ->placeholder('Select the origin of the resource')
                                         ->options([0 => 'Internal', 1 => 'External'])
-                                        ->default(0) // TODO: REMOVE THIS
                                         ->required(),
 
                                     Forms\Components\DatePicker::make('creation_date')
@@ -119,8 +117,8 @@ class TroveResource extends Resource
                                         ->helperText('To the nearest month (approximately is fine). This is mainly to highlight to users when a resource might be a bit out of date.')
                                         ->minDate(now()->subYears(30))
                                         ->maxDate(now())
-                                        ->required()
-                                        ->default('2020-01-01'), // TODO: REMOVE THIS
+                                        ->required(),
+
 
                                     Forms\Components\Hidden::make('uploader_id')->default(Auth::user()->id),
                                 ]),
@@ -326,7 +324,7 @@ class TroveResource extends Resource
 
                                             Forms\Components\Actions::make([
                                                 Forms\Components\Actions\Action::make('Save and Publish')
-                                                    ->label(fn(?Trove $record) => $record->has_published_version ? __('Save and Publish Changes') : __('Save and Publish'))
+                                                    ->label(fn(?Trove $record) => $record?->has_published_version ? __('Save and Publish Changes') : __('Save and Publish'))
                                                     ->disabled(fn(?Trove $record, Forms\Get $get) => !$record?->checker_id && !$get('should_publish'))
                                                     ->action(function ($livewire) {
                                                         $livewire->shouldSaveAsDraft = false;
@@ -429,7 +427,6 @@ class TroveResource extends Resource
             'index' => Pages\ListTroves::route('/'),
             'create' => Pages\CreateTrove::route('/create'),
             'edit' => Pages\EditTrove::route('/{record}/edit'),
-            'view' => Pages\ViewTrove::route('/{record}'),
         ];
     }
 
