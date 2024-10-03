@@ -77,18 +77,27 @@ class Trove extends Model implements HasMedia
 
             // set the slug to the first available title locale
             $locales = $trove->getTranslatedLocales('title');
+
+            // don't generate a slug if it already exists
+            if($trove->slug)  {
+                return;
+            }
+
             $trove->slug = Str::slug($trove->getTranslation('title', $locales[0])) . '-' . Carbon::now()->format('Y-m-d');
 
             // check for uniqueness and append a number if necessary
-            $slug = $trove->slug;
-            $count = 1;
+            $uniquenessQuery = Trove::withTrashed()
+                ->withDrafts()
+                ->where('slug', $trove->slug);
 
-            while (Trove::withTrashed()->withDrafts()->where('slug', $slug)->count() > 0) {
-                $slug = $trove->slug . '-' . $count;
-                $count++;
+            if($trove->id) {
+                $uniquenessQuery = $uniquenessQuery->where('id', '!=', $trove->id);
             }
 
-            $trove->slug = $slug;
+            $count = $uniquenessQuery->count();
+
+
+            $trove->slug = $slug . '-' . $count;
 
         });
 
