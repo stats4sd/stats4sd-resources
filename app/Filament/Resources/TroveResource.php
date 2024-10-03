@@ -449,17 +449,16 @@ class TroveResource extends Resource
                 ->sortable(query: fn(Builder $query, $direction) => $query->orderBy('title->' . app()->currentLocale(), $direction)),
             Tables\Columns\SpatieMediaLibraryImageColumn::make('cover_image')
                 ->collection(fn(Component $livewire) => 'cover_image_' . $livewire->activeLocale),
+            TextColumn::make('created_at')
+            ->label('Upload date')
+            ->date()
+            ->sortable(),
             Tables\Columns\TextColumn::make('creation_date')
                 ->date()
                 ->sortable(),
             Tables\Columns\TextColumn::make('user.name')
                 ->label('Uploader')
                 ->sortable(),
-            Tables\Columns\IconColumn::make('public')
-                ->boolean()
-                ->sortable()
-                ->trueColor('success')
-                ->falseColor('warning'),
             Tables\Columns\TextColumn::make('download_count')
                 ->label('# Downloads')
                 ->sortable(),
