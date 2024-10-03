@@ -117,7 +117,8 @@ class TroveResource extends Resource
                                         ->helperText('To the nearest month (approximately is fine). This is mainly to highlight to users when a resource might be a bit out of date.')
                                         ->minDate(now()->subYears(30))
                                         ->maxDate(now())
-                                        ->required(),
+                                        ->required()
+                                        ->default(now()),
 
 
                                     Forms\Components\Hidden::make('uploader_id')->default(Auth::user()->id),
@@ -403,8 +404,8 @@ class TroveResource extends Resource
             ->actions([
                 CommentsAction::make(),
                 Tables\Actions\Action::make('preview')
-                ->label('Preview on Front-end')
-                ->url(fn(Trove $record) => config('app.front_end_url') . '/resources/' . $record->slug),
+                    ->label('Preview on Front-end')
+                    ->url(fn(Trove $record) => config('app.front_end_url') . '/resources/' . $record->slug),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
