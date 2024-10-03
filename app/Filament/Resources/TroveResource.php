@@ -92,7 +92,10 @@ class TroveResource extends Resource
                                 ->heading(__('Description'))
                                 ->hint(__('For example: What is this trove? Who is it for? Why was it made or uploaded?'))
                                 ->childField(
-                                    Forms\Components\MarkdownEditor::class,
+                                    Forms\Components\RichEditor::make('description')
+                                    ->disableToolbarButtons([
+                                        'attachFiles'
+                                    ]),
                                 )
                                 ->required(),
 
