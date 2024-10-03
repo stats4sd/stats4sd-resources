@@ -18,14 +18,16 @@ class TestSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
+        User::updateOrCreate(['email' => 'test@example.com'], [
             'name' => 'Test User',
             'email' => 'test@example.com',
+            'password' => bcrypt('password'),
         ]);
 
-        User::factory()->create([
+        User::updateOrCreate(['email' => 'test2@example.com'], [
             'name' => 'Test Two',
             'email' => 'test2@example.com',
+            'password' => bcrypt('password'),
         ]);
     }
 }

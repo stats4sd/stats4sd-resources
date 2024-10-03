@@ -69,7 +69,7 @@ class ConvertOldToNewTroves extends Command
                 $spanishOldTrove = OldTrove::find($spanishOldTroveId);
 
                 $frenchOldTroveId = $translatedTroveIds['en' . $oldTrove->id]['fr'];
-                $frenchOldTrove = OldTrkove::find($frenchOldTroveId);
+                $frenchOldTrove = OldTrove::find($frenchOldTroveId);
 
             }
 
@@ -104,39 +104,6 @@ class ConvertOldToNewTroves extends Command
             $newTrove->created_at = $oldTrove->created_at;
             $newTrove->updated_at = $oldTrove->updated_at;
             $newTrove->deleted_at = $oldTrove->deleted_at;
-
-
-            $tags = [];
-            foreach ($oldTrove->tags as $oldTag) {
-
-                // is the tag a resourceType tag?
-                if($oldTag->type === 'ResourceType') {
-                    $newTrove->troveType()->associate(TroveType::firstWhere('label->en', $oldTag->name_en));
-                    continue;
-                }
-
-                // Yes, 'language' is lowercase, while the other types are upper-case.
-                if($oldTag->type === 'language') {
-                    continue;
-                }
-
-
-                $tag = Tag::firstWhere('name->en', $oldTag->name_en);
-
-                if (!$tag) {
-                    $tags[] = Tag::create([
-                        'type_id' => TagType::firstWhere('label->en', $oldTag->type . 's')->id,
-                        'name' => ['en' => $oldTag->name_en],
-                    ])->id;
-                } else {
-                    $tags[] = $tag->id;
-                }
-
-
-            }
-
-            $newTrove->tags()->sync($tags);
-
 
             // check for spanish and french version
             if ($spanishOldTrove) {
@@ -185,10 +152,10 @@ class ConvertOldToNewTroves extends Command
             // check for previous versions of this trove:
             $previousVersions = OldTrove::where('new_version_id', $oldTrove->id)->get();
 
-            if($previousVersions->count() > 0) {
+            if ($previousVersions->count() > 0) {
                 $this->comment('Found ' . $previousVersions->count() . ' previous versions of trove ' . $oldTrove->id);
 
-                foreach($previousVersions as $previousVersion) {
+                foreach ($previousVersions as $previousVersion) {
                     $newTrove = $this->getPreviousSlugsAndIds($newTrove, $previousVersion);
 
                     // check again for previous versions of the previous version!
@@ -196,6 +163,37 @@ class ConvertOldToNewTroves extends Command
             }
 
             $newTrove->save();
+
+            $tags = [];
+            foreach ($oldTrove->tags as $oldTag) {
+
+                // is the tag a resourceType tag?
+                if ($oldTag->type === 'ResourceType') {
+                    $newTrove->troveTypes()->attach(TroveType::firstWhere('label->en', $oldTag->name_en));
+                    continue;
+                }
+
+                // Yes, 'language' is lowercase, while the other types are upper-case.
+                if ($oldTag->type === 'language') {
+                    continue;
+                }
+
+
+                $tag = Tag::firstWhere('name->en', $oldTag->name_en);
+
+                if (!$tag) {
+                    $tags[] = Tag::create([
+                        'type_id' => TagType::firstWhere('label->en', $oldTag->type . 's')->id,
+                        'name' => ['en' => $oldTag->name_en],
+                    ])->id;
+                } else {
+                    $tags[] = $tag->id;
+                }
+
+
+            }
+
+            $newTrove->tags()->sync($tags);
 
 
         });
@@ -242,7 +240,7 @@ class ConvertOldToNewTroves extends Command
             $externalLinks = collect($oldTrove->elements_urls['en'])
                 ->mapWithKeys(function ($item) {
 
-                    if($item === [] || !array_key_exists('path', $item)) {
+                    if ($item === [] || !array_key_exists('path', $item)) {
                         return [];
                     }
 
@@ -251,7 +249,7 @@ class ConvertOldToNewTroves extends Command
                         'link_title' => $item['title'] ?? $item['path'],
                     ];
                 })
-            ->filter(fn($item) => $item !== []);
+                ->filter(fn($item) => $item !== []);
         }
         return $externalLinks;
     }
@@ -266,7 +264,7 @@ class ConvertOldToNewTroves extends Command
         $newTrove->previous_slugs = array_merge($newTrove->previous_slugs ?? [], [$previousVersion->slug, $previousVersion->id]);
 
         // check recursively
-        if($previousPrevious = OldTrove::where('new_version_id', $previousVersion->id)->first()) {
+        if ($previousPrevious = OldTrove::where('new_version_id', $previousVersion->id)->first()) {
             $newTrove = $this->getPreviousSlugsAndIds($newTrove, $previousPrevious);
         }
 

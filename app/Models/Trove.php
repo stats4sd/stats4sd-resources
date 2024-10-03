@@ -75,13 +75,14 @@ class Trove extends Model implements HasMedia
 
         static::saving(function (Trove $trove) {
 
-            // set the slug to the first available title locale
-            $locales = $trove->getTranslatedLocales('title');
 
             // don't generate a slug if it already exists
             if ($trove->slug) {
                 return;
             }
+
+            // set the slug to the first available title locale
+            $locales = $trove->getTranslatedLocales('title');
 
             $trove->slug = Str::slug($trove->getTranslation('title', $locales[0])) . '-' . Carbon::now()->format('Y-m-d');
 
@@ -137,9 +138,9 @@ class Trove extends Model implements HasMedia
         return $this->belongsTo(User::class, 'requester_id');
     }
 
-    public function troveType(): BelongsTo
+    public function troveTypes(): BelongsToMany
     {
-        return $this->belongsTo(TroveType::class);
+        return $this->belongsToMany(TroveType::class);
     }
 
     public function collections(): BelongsToMany
@@ -166,6 +167,8 @@ class Trove extends Model implements HasMedia
     {
         // title and description
         $array = $this->toArray();
+
+        unset($array['media']);
 
         $languages = [];
 
@@ -194,7 +197,15 @@ class Trove extends Model implements HasMedia
         }
 
 
-        $array['resourceTypes']['name']['en'] = $this->troveType?->label ?? '';
+        $array['resourceTypes'] = $this->troveTypes
+            ->map(fn(TroveType $type) => [
+                'name' => [
+                    'en' => $type->getTranslation('label', 'en'),
+                    'es' => $type->getTranslation('label', 'es'),
+                    'fr' => $type->getTranslation('label', 'fr'),
+                ],
+            ])->values()->toArray();
+
         $array['collections']['id'] = $this->collections->pluck('id');
         $array['tags'] = $this->tags->map(fn($tag) => [
             'name' => [
