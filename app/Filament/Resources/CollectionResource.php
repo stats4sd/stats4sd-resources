@@ -109,14 +109,17 @@ class CollectionResource extends Resource
                             ->modalSubmitAction(false)
                             ->modalCancelAction(false)
                     ),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Upload Date')
+                    ->date()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Last Updated')
+                    ->date()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Curated By')
                     ->sortable(),
-                Tables\Columns\IconColumn::make('public')
-                    ->boolean()
-                    ->sortable()
-                    ->trueColor('success')
-                    ->falseColor('warning'),
                 Tables\Columns\TextColumn::make('troves_count')
                     ->counts('troves')
                     ->label('# Troves')

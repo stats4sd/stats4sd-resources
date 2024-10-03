@@ -24,6 +24,7 @@ use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\HtmlString;
 use Livewire\Attributes\Reactive;
 use Livewire\Component;
 
@@ -57,8 +58,14 @@ class AllTrovesTable extends Component implements HasTable, HasForms
     {
         return $table
             ->searchable()
+            ->headerActions([
+                Action::make('hide_all_troves')
+                    ->label('Show Troves in Collection')
+                    ->action(fn(Component $livewire) => $livewire->dispatch('hideAllTroves')),
+            ])
             ->query(fn(): Builder => Trove::query())
             ->heading('All Troves')
+            ->description('Select Troves to add to this Collection')
             ->columns(TroveResource::getTableColumns())
             ->filters(TroveResource::getTableFilters())
             ->filtersTriggerAction(fn($action) => $action->button()->label('Filters'))

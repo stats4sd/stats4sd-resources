@@ -50,6 +50,11 @@ class TrovesRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->headerActions([
+                Tables\Actions\Action::make('show_all_troves')
+                    ->label('Show All Troves')
+                    ->action(fn(Component $livewire) => $livewire->dispatch('showAllTroves')),
+            ])
             ->recordTitleAttribute('title')
             ->searchable()
             ->heading('Troves in this Collection')
@@ -57,8 +62,6 @@ class TrovesRelationManager extends RelationManager
             ->filters(TroveResource::getTableFilters())
             ->filtersTriggerAction(fn($action) => $action->button()->label('Filters'))
             ->filtersLayout(fn() => FiltersLayout::AboveContentCollapsible)
-            ->headerActions([
-            ])
             ->actions([
                 Tables\Actions\Action::make('preview_trove')
                     ->label('Preview Trove')

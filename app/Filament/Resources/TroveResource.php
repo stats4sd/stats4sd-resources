@@ -17,6 +17,7 @@ use Filament\Tables;
 use App\Models\Trove;
 use App\Models\TagType;
 use Filament\Forms\Form;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
@@ -444,22 +445,26 @@ class TroveResource extends Resource
     public static function getTableColumns(): array
     {
         return [
-            Tables\Columns\TextColumn::make('title')
+            TextColumn::make('title')
                 ->wrap()
                 ->sortable(query: fn(Builder $query, $direction) => $query->orderBy('title->' . app()->currentLocale(), $direction)),
-            Tables\Columns\SpatieMediaLibraryImageColumn::make('cover_image')
+            SpatieMediaLibraryImageColumn::make('cover_image')
                 ->collection(fn(Component $livewire) => 'cover_image_' . $livewire->activeLocale),
             TextColumn::make('created_at')
-            ->label('Upload date')
-            ->date()
-            ->sortable(),
-            Tables\Columns\TextColumn::make('creation_date')
+                ->label('Upload date')
                 ->date()
                 ->sortable(),
-            Tables\Columns\TextColumn::make('user.name')
+            TextColumn::make('updated_at')
+                ->label('Last Updated')
+                ->date()
+                ->sortable(),
+            TextColumn::make('creation_date')
+                ->date()
+                ->sortable(),
+            TextColumn::make('user.name')
                 ->label('Uploader')
                 ->sortable(),
-            Tables\Columns\TextColumn::make('download_count')
+            TextColumn::make('download_count')
                 ->label('# Downloads')
                 ->sortable(),
         ];
@@ -506,9 +511,9 @@ class TroveResource extends Resource
                     '5xl' => 8,
                 ]),
 
-                    $filters['source'],
-                    $filters['resourceType'],
-                    $filters['uploader'],
+            $filters['source'],
+            $filters['resourceType'],
+            $filters['uploader'],
         ];
     }
 

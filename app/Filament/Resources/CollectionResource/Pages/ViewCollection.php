@@ -9,12 +9,15 @@ use App\Models\Collection;
 use App\Models\Trove;
 use Filament\Actions;
 use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Infolists\Components\Grid;
 use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Columns\IconColumn;
@@ -26,6 +29,7 @@ use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
 use Kainiklas\FilamentScout\Traits\InteractsWithScout;
+use Livewire\Attributes\On;
 
 class ViewCollection extends ViewRecord
 {
@@ -35,7 +39,22 @@ class ViewCollection extends ViewRecord
     protected static string $resource = CollectionResource::class;
     protected static string $view = 'filament.pages.view-collection';
 
+    protected ?string $maxContentWidth = 'full';
+
     public bool $showAllTroves = false;
+
+    #[On('showAllTroves')]
+    public function showAllTroves(): void
+    {
+        $this->showAllTroves = true;
+    }
+
+    #[On('hideAllTroves')]
+    public function hideAllTroves(): void
+    {
+        $this->showAllTroves = false;
+    }
+
 
     public function getHeading(): string|Htmlable
     {
@@ -46,6 +65,11 @@ class ViewCollection extends ViewRecord
     public function mount(int|string $record): void
     {
         parent::mount($record);
+
+        if ($this->record->troves->count() === 0) {
+            $this->showAllTroves = true;
+        }
+
         $this->fillForm();
     }
 
@@ -53,27 +77,41 @@ class ViewCollection extends ViewRecord
     public function infolist(Infolist $infolist): Infolist
     {
         return $infolist
-            ->columns(2)
+            ->columns(1)
             ->schema([
-                SpatieMediaLibraryImageEntry::make('cover_image')
-                    ->hiddenLabel()
-                    ->collection(fn(ViewCollection $livewire) => 'cover_image_' . $this->activeLocale)
-                    ->disk('s3')
-                    ->width('500px')
-                    ->height('auto'),
-                TextEntry::make('description'),
+                Section::make('Collection Metadata')
+                    ->description('Key information about the collection')
+                    ->headerActions([
+                        \Filament\Infolists\Components\Actions\Action::make('edit')
+                            ->label('Edit Collection Metadata')
+                            ->url(CollectionResource::getUrl('edit', ['record' => $this->record])),
+                    ])
+                    ->columns(7)
+                    ->maxWidth('full')
+                    ->schema([
+                        Grid::make()
+                            ->columnStart(2)
+                            ->columnSpan(5)
+                            ->columns(2)
+                            ->maxWidth('7xl')
+                            ->schema([
+                                SpatieMediaLibraryImageEntry::make('cover_image')
+                                    ->hiddenLabel()
+                                    ->collection(fn(ViewCollection $livewire) => 'cover_image_' . $this->activeLocale)
+                                    ->disk('s3')
+                                    ->width('500px')
+                                    ->height('auto'),
+                                TextEntry::make('description'),
+                            ]),
+                    ]),
             ]);
     }
-
-
 
 
     protected function getHeaderActions(): array
     {
         return [
             Actions\LocaleSwitcher::make(),
-            Actions\EditAction::make()
-            ->label('Edit Collection Metadata'),
         ];
     }
 
