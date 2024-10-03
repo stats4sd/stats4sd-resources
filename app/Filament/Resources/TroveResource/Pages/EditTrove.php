@@ -26,7 +26,7 @@ class EditTrove extends EditRecord
 
     public function getHeading(): string|Htmlable
     {
-        return 'Edit: ' . $this->record->name . ' (ID: ' . $this->record->id . ')';
+        return 'Edit: ' . $this->record->title;
     }
 
 
