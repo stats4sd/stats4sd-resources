@@ -368,7 +368,12 @@ class TroveResource extends Resource
                 CommentsAction::make(),
                 Tables\Actions\Action::make('preview')
                     ->label('Preview on Front-end')
-                    ->url(fn(Trove $record) => config('app.front_end_url') . '/resources/' . $record->slug),
+                    ->url(function(Trove $record) {
+                        if($record->is_published) {
+                            return config('app.front_end_url') . '/resources/' . $record->slug;
+                        }
+
+                        return config('app.front_end_url') . '/resources/preview/' . $record->slug;}),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
