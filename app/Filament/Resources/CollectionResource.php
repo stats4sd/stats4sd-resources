@@ -42,7 +42,7 @@ class CollectionResource extends Resource
                 TranslatableComboField::make('title')
                     ->icon('heroicon-o-exclamation-circle')
                     ->iconColor('primary')
-                    ->extraAttributes(['style' => 'background-color: #e6e6e6;'])
+                    ->extraAttributes(['class' => 'grey-box'])
                     ->label('Collection Title')
                     ->description('Add a useful title for the collection.')
                     ->columns(3)
@@ -52,7 +52,7 @@ class CollectionResource extends Resource
                 TranslatableComboField::make('description')
                     ->icon('heroicon-o-document-text')
                     ->iconColor('primary')
-                    ->extraAttributes(['style' => 'background-color: #e6e6e6;'])
+                    ->extraAttributes(['class' => 'grey-box'])
                     ->label('Describe the Collection')
                     ->description('For example: What is this collection? Who is it for? Why was it curated?')
                     ->childField(Forms\Components\MarkdownEditor::class)
@@ -61,7 +61,7 @@ class CollectionResource extends Resource
                 Section::make('cover_image')
                     ->icon('heroicon-o-photo')
                     ->iconColor('primary')
-                    ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
+                    ->extraAttributes(['class' => 'grey-box'])
                     ->heading(__('Cover Image'))
                     ->description(__('Add a cover image for the resource. This will be displayed on the front-end.'))
                     ->columns(3)
@@ -83,7 +83,7 @@ class CollectionResource extends Resource
                     ->default(Auth::id()),
 
                 Section::make('Publishing')
-                    ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
+                    ->extraAttributes(['class' => 'grey-box'])
                     ->schema([
 
                         Forms\Components\Checkbox::make('public')
@@ -109,14 +109,17 @@ class CollectionResource extends Resource
                             ->modalSubmitAction(false)
                             ->modalCancelAction(false)
                     ),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Upload Date')
+                    ->date()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Last Updated')
+                    ->date()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Curated By')
                     ->sortable(),
-                Tables\Columns\IconColumn::make('public')
-                    ->boolean()
-                    ->sortable()
-                    ->trueColor('success')
-                    ->falseColor('warning'),
                 Tables\Columns\TextColumn::make('troves_count')
                     ->counts('troves')
                     ->label('# Troves')

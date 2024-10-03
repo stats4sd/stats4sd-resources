@@ -69,7 +69,7 @@ class ConvertOldToNewTroves extends Command
                 $spanishOldTrove = OldTrove::find($spanishOldTroveId);
 
                 $frenchOldTroveId = $translatedTroveIds['en' . $oldTrove->id]['fr'];
-                $frenchOldTrove = OldTrove::find($frenchOldTroveId);
+                $frenchOldTrove = OldTrkove::find($frenchOldTroveId);
 
             }
 

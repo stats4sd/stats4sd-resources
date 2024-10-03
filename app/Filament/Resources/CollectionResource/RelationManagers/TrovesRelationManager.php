@@ -3,9 +3,12 @@
 namespace App\Filament\Resources\CollectionResource\RelationManagers;
 
 use App\Filament\Resources\TroveResource;
+use App\Models\Trove;
+use App\Models\TroveType;
 use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Table;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Select;
@@ -41,40 +44,28 @@ class TrovesRelationManager extends RelationManager
             ]);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('title')
-            ->heading('Troves in this Collection')
-            ->columns([
-                Tables\Columns\TextColumn::make('title')->wrap(),
-                Tables\Columns\SpatieMediaLibraryImageColumn::make('cover_image')
-                    ->collection('cover_image'),
-                Tables\Columns\TextColumn::make('creation_date')
-                    ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('user.name')
-                    ->label('Uploader')
-                    ->sortable(),
-                Tables\Columns\IconColumn::make('public')
-                    ->boolean()
-                    ->sortable()
-                    ->trueColor('success')
-                    ->falseColor('warning'),
-                Tables\Columns\TextColumn::make('download_count')
-                    ->label('# Downloads')
-                    ->sortable(),
-            ])
-            ->filters([
-                //
-            ])
             ->headerActions([
-                Tables\Actions\LocaleSwitcher::make(),
+                Tables\Actions\Action::make('show_all_troves')
+                    ->label('Show All Troves')
+                    ->action(fn(Component $livewire) => $livewire->dispatch('showAllTroves')),
             ])
+            ->recordTitleAttribute('title')
+            ->searchable()
+            ->heading('Troves in this Collection')
+            ->columns(TroveResource::getTableColumns())
+            ->filters(TroveResource::getTableFilters())
+            ->filtersTriggerAction(fn($action) => $action->button()->label('Filters'))
+            ->filtersLayout(fn() => FiltersLayout::AboveContentCollapsible)
             ->actions([
-                Tables\Actions\Action::make('view_trove')
-                    ->label('View Trove')
-                    ->url(fn($record) => TroveResource::getUrl('view', ['record' => $record->id])),
+                Tables\Actions\Action::make('preview_trove')
+                    ->label('Preview Trove')
+                    ->url(fn(Trove $record) => config('app.front_end_url') . '/resources/' . $record->slug),
                 Tables\Actions\DetachAction::make()
                     ->label('Remove trove from collection')
                     ->modalHeading('Remove trove from collection')
@@ -86,6 +77,7 @@ class TrovesRelationManager extends RelationManager
                     Tables\Actions\DetachBulkAction::make()->label('Remove troves from collection'),
                 ]),
             ])
+            ->recordUrl(fn(Trove $record) => config('app.front_end_url') . '/resources/' . $record->slug)
             ->emptyStateDescription(
                 'Use the "Show All Troves" button above to find troves to add to the collection.'
             );

@@ -17,6 +17,7 @@ use Filament\Tables;
 use App\Models\Trove;
 use App\Models\TagType;
 use Filament\Forms\Form;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
@@ -36,12 +37,14 @@ use Filament\Resources\Concerns\Translatable;
 use App\Filament\Resources\TroveResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Kainiklas\FilamentScout\Traits\InteractsWithScout;
+use Livewire\Component;
 use Parallax\FilamentComments\Tables\Actions\CommentsAction;
 
 class TroveResource extends Resource
 {
     use Translatable;
     use Draftable;
+    use InteractsWithScout;
 
     protected static ?string $model = Trove::class;
 
@@ -73,7 +76,7 @@ class TroveResource extends Resource
                             TranslatableComboField::make('title')
                                 ->icon('heroicon-o-exclamation-circle')
                                 ->iconColor('primary')
-                                ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
+                                ->extraAttributes(['class' => 'grey-box'])
                                 ->columns(3)
                                 ->heading(__('Title'))
                                 ->hint(__('Add a useful title for the resource, this could be the title of the document, or the name of the software, etc.'))
@@ -84,7 +87,7 @@ class TroveResource extends Resource
                             TranslatableComboField::make('description')
                                 ->icon('heroicon-o-document-text')
                                 ->iconColor('primary')
-                                ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
+                                ->extraAttributes(['class' => 'grey-box'])
                                 ->columns(1)
                                 ->heading(__('Description'))
                                 ->hint(__('For example: What is this trove? Who is it for? Why was it made or uploaded?'))
@@ -96,7 +99,7 @@ class TroveResource extends Resource
                             Forms\Components\Section::make('Metadata')
                                 ->icon('heroicon-o-document-chart-bar')
                                 ->iconColor('primary')
-                                ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
+                                ->extraAttributes(['class' => 'grey-box'])
                                 ->description(__('Key metadata for filters and search'))
                                 ->schema([
 
@@ -104,13 +107,11 @@ class TroveResource extends Resource
                                         ->placeholder('Select the resource type')
                                         ->relationship('troveType', 'label')
                                         ->required()
-                                        ->default(1) // TODO: REMOVE THIS
                                         ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en')),
 
                                     Forms\Components\Select::make('source')
                                         ->placeholder('Select the origin of the resource')
                                         ->options([0 => 'Internal', 1 => 'External'])
-                                        ->default(0) // TODO: REMOVE THIS
                                         ->required(),
 
                                     Forms\Components\DatePicker::make('creation_date')
@@ -119,7 +120,8 @@ class TroveResource extends Resource
                                         ->minDate(now()->subYears(30))
                                         ->maxDate(now())
                                         ->required()
-                                        ->default('2020-01-01'), // TODO: REMOVE THIS
+                                        ->default(now()),
+
 
                                     Forms\Components\Hidden::make('uploader_id')->default(Auth::user()->id),
                                 ]),
@@ -131,7 +133,7 @@ class TroveResource extends Resource
                             Forms\Components\Section::make('Tags')
                                 ->icon('heroicon-m-tag')
                                 ->iconColor('primary')
-                                ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
+                                ->extraAttributes(['class' => 'grey-box'])
                                 ->description('These tags help organise and filter the resources on the front-end. Except where specified, you must select from existing tags. If you believe a new tag is required, please contact Emily. You can apply as many tags as you need for each category.')
                                 ->columns(2)
                                 ->schema($tagFields),
@@ -144,7 +146,7 @@ class TroveResource extends Resource
                             Section::make('files')
                                 ->icon('heroicon-o-document')
                                 ->iconColor('primary')
-                                ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
+                                ->extraAttributes(['class' => 'grey-box'])
                                 ->heading(__('Files'))
                                 ->description(__('A trove will often contain multiple files. These are files that are part of the same set, like a powerpoint presentation and the presenter\'s own notes, or question and answer sheets of a quiz'))
                                 ->columns(3)
@@ -180,7 +182,7 @@ class TroveResource extends Resource
                             TranslatableComboField::make('external_links')
                                 ->icon('heroicon-o-link')
                                 ->iconColor('primary')
-                                ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
+                                ->extraAttributes(['class' => 'grey-box'])
                                 ->heading(__('External Links'))
                                 ->hint(__('Websites, files etc., hosted by other people'))
                                 ->childField(
@@ -198,7 +200,7 @@ class TroveResource extends Resource
                             TranslatableComboField::make('youtube_links')
                                 ->icon('heroicon-o-video-camera')
                                 ->iconColor('primary')
-                                ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
+                                ->extraAttributes(['class' => 'grey-box'])
                                 ->heading(__('YouTube Videos'))
                                 ->hint('Add the youtube id if you have added a video file that already exists on YouTube. On YouTube, when you hit "share", the id is the random-like string after https://youtu.be/')
                                 ->columns(3)
@@ -218,7 +220,7 @@ class TroveResource extends Resource
                             Section::make('cover_image')
                                 ->icon('heroicon-o-photo')
                                 ->iconColor('primary')
-                                ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
+                                ->extraAttributes(['class' => 'grey-box'])
                                 ->heading(__('Cover Image'))
                                 ->description(__('Add a cover image for the resource. This will be displayed on the front-end.'))
                                 ->columns(3)
@@ -247,7 +249,7 @@ class TroveResource extends Resource
                                 ->type('info'),
 
                             Forms\Components\Section::make('')
-                                ->extraAttributes(['style' => 'background-color: #E6E6E6;'])
+                                ->extraAttributes(['class' => 'grey-box'])
                                 ->schema([
                                     Forms\Components\Radio::make('next_steps')
                                         ->dehydrated(false)
@@ -325,7 +327,7 @@ class TroveResource extends Resource
 
                                             Forms\Components\Actions::make([
                                                 Forms\Components\Actions\Action::make('Save and Publish')
-                                                    ->label(fn(?Trove $record) => $record->has_published_version ? __('Save and Publish Changes') : __('Save and Publish'))
+                                                    ->label(fn(?Trove $record) => $record?->has_published_version ? __('Save and Publish Changes') : __('Save and Publish'))
                                                     ->disabled(fn(?Trove $record, Forms\Get $get) => !$record?->checker_id && !$get('should_publish'))
                                                     ->action(function ($livewire) {
                                                         $livewire->shouldSaveAsDraft = false;
@@ -343,67 +345,26 @@ class TroveResource extends Resource
                                         ]),
                                 ]),
                         ]),
-                ])
-                    ->skippable(),
+                ]),
             ])->columns(1);
     }
 
+    /**
+     * @throws \Exception
+     */
     public static function table(Table $table): Table
     {
         return $table
             ->searchable()
-            ->columns([
-                Tables\Columns\TextColumn::make('title')
-                    ->wrap(),
-                Tables\Columns\SpatieMediaLibraryImageColumn::make('cover_image')
-                    ->collection(fn(Pages\ListTroves $livewire) => 'cover_image_' . $livewire->activeLocale)
-                    ->action(
-                        Tables\Actions\Action::make('view_image')
-                            ->modalHeading(fn(Trove $record, Pages\ListTroves $livewire) => $record->title . ' - Cover Image (' . $livewire->activeLocale . ')')
-                            ->modalContent(fn(Trove $record, Pages\ListTroves $livewire) => new HtmlString('<img src="' . $record->getFirstMediaUrl('cover_image_' . $livewire->activeLocale) . '" class="w-full h-auto">'))
-                            ->modalSubmitAction(false)
-                            ->modalCancelAction(false)
-                    ),
-                Tables\Columns\TextColumn::make('creation_date')
-                    ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('tags_count')
-                    ->label('# Tags')
-                    ->sortable()
-                    ->counts('tags'),
-                Tables\Columns\TextColumn::make('user.name')
-                    ->label('Uploader')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('publisher.name')
-                    ->label('Publisher')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('published_at')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('download_count')
-                    ->label('# Downloads')
-                    ->sortable(),
-                TextColumn::make('filament_comments_count')
-                    ->label('# Comments')
-                    ->counts('filamentComments')
-                    ->sortable(),
-            ])
-            ->filters([
-                SelectFilter::make('source')
-                    ->options([0 => 'Internal', 1 => 'External']),
-                SelectFilter::make('resourceType')
-                    ->relationship('troveType', 'label')
-                    ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en')),
-                SelectFilter::make('uploader')
-                    ->relationship('user', 'name'),
-                Tables\Filters\TernaryFilter::make('has_comments')
-                    ->queries(
-                        true: fn(Builder $query) => $query->has('comments'),
-                        false: fn(Builder $query) => $query->doesntHave('comments'),
-                    ),
-            ])
+            ->columns(static::getTableColumns())
+            ->filters(static::getTableFilters())
+            ->filtersTriggerAction(fn($action) => $action->button()->label('Filters'))
+            ->filtersLayout(fn() => FiltersLayout::AboveContentCollapsible)
             ->actions([
                 CommentsAction::make(),
-                Tables\Actions\ViewAction::make(),
+                Tables\Actions\Action::make('preview')
+                    ->label('Preview on Front-end')
+                    ->url(fn(Trove $record) => config('app.front_end_url') . '/resources/' . $record->slug),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -426,7 +387,6 @@ class TroveResource extends Resource
             'index' => Pages\ListTroves::route('/'),
             'create' => Pages\CreateTrove::route('/create'),
             'edit' => Pages\EditTrove::route('/{record}/edit'),
-            'view' => Pages\ViewTrove::route('/{record}'),
         ];
     }
 
@@ -459,7 +419,7 @@ class TroveResource extends Resource
                             ->unique('tags', 'name', ignoreRecord: true)
                             ->icon('heroicon-s-tag')
                             ->iconColor('primary')
-                            ->extraAttributes(['style' => 'background-color: #e6e6e6;'])
+                            ->extraAttributes(['class' => 'grey-box'])
                             ->label('Name')
                             ->description('Enter the name of the tag')
                             ->columns(3)
@@ -480,7 +440,87 @@ class TroveResource extends Resource
 
         })
             ->toArray();
+    }
 
+    public static function getTableColumns(): array
+    {
+        return [
+            TextColumn::make('title')
+                ->wrap()
+                ->sortable(query: fn(Builder $query, $direction) => $query->orderBy('title->' . app()->currentLocale(), $direction)),
+            SpatieMediaLibraryImageColumn::make('cover_image')
+                ->collection(fn(Component $livewire) => 'cover_image_' . $livewire->activeLocale),
+            TextColumn::make('created_at')
+                ->label('Upload date')
+                ->date()
+                ->sortable(),
+            TextColumn::make('updated_at')
+                ->label('Last Updated')
+                ->date()
+                ->sortable(),
+            TextColumn::make('creation_date')
+                ->date()
+                ->sortable(),
+            TextColumn::make('user.name')
+                ->label('Uploader')
+                ->sortable(),
+            TextColumn::make('download_count')
+                ->label('# Downloads')
+                ->sortable(),
+        ];
+    }
 
+    /**
+     * @throws \Exception
+     */
+    public static function getTableFilters(): array
+    {
+        $tagFilters = TagType::all()->map(function (TagType $tagType) {
+            return SelectFilter::make("tags_{$tagType->slug}")
+                ->label($tagType->label)
+                ->relationship('tags', 'name', function (Builder $query) use ($tagType) {
+                    $query->where('type_id', $tagType->id);
+                })
+                ->multiple()
+                ->preload();
+        })->toArray();
+
+        return [
+            SelectFilter::make('source')
+                ->options([0 => 'Internal', 1 => 'External']),
+            SelectFilter::make('resourceType')
+                ->relationship('troveType', 'label')
+                ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en')),
+            SelectFilter::make('uploader')
+                ->relationship('user', 'name'),
+            ...$tagFilters,
+        ];
+    }
+
+    public static function getTableFilterSchema(array $filters): array
+    {
+        return [
+            Section::make('Tags')
+                ->collapsed()
+                ->schema(static::getTagFilterSchema($filters))
+                ->columns([
+                    'xs' => 1,
+                    'sm' => 2,
+                    'lg' => 4,
+                    '3xl' => 6,
+                    '5xl' => 8,
+                ]),
+
+            $filters['source'],
+            $filters['resourceType'],
+            $filters['uploader'],
+        ];
+    }
+
+    public static function getTagFilterSchema(array $filters): array
+    {
+        return TagType::all()->map(function (TagType $tagType) use ($filters) {
+            return $filters["tags_{$tagType->slug}"];
+        })->toArray();
     }
 }

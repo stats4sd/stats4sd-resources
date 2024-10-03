@@ -33,7 +33,7 @@ class TagResource extends Resource
                     ->required()
                     ->icon('heroicon-s-tag')
                     ->iconColor('primary')
-                    ->extraAttributes(['style' => 'background-color: #e6e6e6;'])
+                    ->extraAttributes(['class' => 'grey-box'])
                     ->label('Name')
                     ->description('Enter the name of the tag')
                     ->columns(3)

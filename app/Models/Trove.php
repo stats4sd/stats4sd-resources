@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\Models\Tag;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 use \Oddvalue\LaravelDrafts\Concerns\HasDrafts;
@@ -27,6 +29,7 @@ class Trove extends Model implements HasMedia
     use HasDrafts;
     use HasFilamentComments;
     use Searchable;
+    use SoftDeletes;
 
     protected $casts = [
         'id' => 'integer',
@@ -68,9 +71,38 @@ class Trove extends Model implements HasMedia
                     $media->copy($draft, $media->collection_name, $media->disk);
                 });
             });
+        });
+
+        static::saving(function (Trove $trove) {
+
+            // set the slug to the first available title locale
+            $locales = $trove->getTranslatedLocales('title');
+
+            // don't generate a slug if it already exists
+            if ($trove->slug) {
+                return;
+            }
+
+            $trove->slug = Str::slug($trove->getTranslation('title', $locales[0])) . '-' . Carbon::now()->format('Y-m-d');
+
+            // check for uniqueness and append a number if necessary
+            $uniquenessQuery = Trove::withTrashed()
+                ->withDrafts()
+                ->where('slug', $trove->slug);
+
+            if ($trove->id) {
+                $uniquenessQuery = $uniquenessQuery->where('id', '!=', $trove->id);
+            }
+
+            $count = $uniquenessQuery->count();
+
+            if ($count > 0) {
+                $trove->slug = $trove->slug . '-' . $count;
+            }
 
 
         });
+
     }
 
     // Media Library - explicitly register collections

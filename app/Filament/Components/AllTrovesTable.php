@@ -21,8 +21,10 @@ use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\HtmlString;
 use Livewire\Attributes\Reactive;
 use Livewire\Component;
 
@@ -56,29 +58,18 @@ class AllTrovesTable extends Component implements HasTable, HasForms
     {
         return $table
             ->searchable()
+            ->headerActions([
+                Action::make('hide_all_troves')
+                    ->label('Show Troves in Collection')
+                    ->action(fn(Component $livewire) => $livewire->dispatch('hideAllTroves')),
+            ])
             ->query(fn(): Builder => Trove::query())
             ->heading('All Troves')
-            ->columns([
-                TextColumn::make('title')->wrap()
-                    ->searchable(),
-                SpatieMediaLibraryImageColumn::make('cover_image')
-                    ->collection('cover_image_' . $this->activeLocale),
-                TextColumn::make('creation_date')
-                    ->date()
-                    ->sortable(),
-                TextColumn::make('user.name')
-                    ->label('Uploader')
-                    ->sortable()
-                    ->searchable(),
-                IconColumn::make('is_published')
-                    ->boolean()
-                    ->sortable()
-                    ->trueColor('success')
-                    ->falseColor('warning'),
-                TextColumn::make('download_count')
-                    ->label('# Downloads')
-                    ->sortable(),
-            ])
+            ->description('Select Troves to add to this Collection')
+            ->columns(TroveResource::getTableColumns())
+            ->filters(TroveResource::getTableFilters())
+            ->filtersTriggerAction(fn($action) => $action->button()->label('Filters'))
+            ->filtersLayout(fn() => FiltersLayout::AboveContentCollapsible)
             ->actions([
 
                 Action::make('attach_trove')
@@ -109,11 +100,12 @@ class AllTrovesTable extends Component implements HasTable, HasForms
                             ->send();
                         $this->resetTable();
                     }),
-                Action::make('view_trove')
-                    ->label('View')
+                Action::make('preview_trove')
+                    ->label('Preview Trove')
                     ->icon('heroicon-o-eye')
-                    ->url(fn(Trove $record) => TroveResource::getUrl('view', ['record' => $record->id])),
+                    ->url(fn(Trove $record) => config('app.front_end_url') . '/resources/' . $record->slug),
             ])
+            ->recordUrl(fn(Trove $record) => config('app.front_end_url') . '/resources/' . $record->slug)
             ->bulkActions([
                 BulkAction::make('attach')
                     ->label('Add Trove(s) to Collection')
