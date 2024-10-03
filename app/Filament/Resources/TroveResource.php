@@ -353,7 +353,8 @@ class TroveResource extends Resource
             ->searchable()
             ->columns([
                 Tables\Columns\TextColumn::make('title')
-                    ->wrap(),
+                    ->wrap()
+                    ->sortable(query: fn(Builder $query, $direction) => $query->orderBy('title->'.app()->currentLocale(), $direction)),
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('cover_image')
                     ->collection(fn(Pages\ListTroves $livewire) => 'cover_image_' . $livewire->activeLocale)
                     ->action(
