@@ -16,8 +16,7 @@ return new class extends Migration
         Schema::create('troves', function (Blueprint $table) {
             $table->id();
 
-            $table->string('slug')->unique();
-
+            $table->string('slug');
             $table->json('title');
             $table->json('description');
             $table->foreignId('trove_type_id')->nullable()->constrained();
