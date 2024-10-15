@@ -12,10 +12,6 @@ class TroveType extends Model
     use HasFactory;
     use HasTranslations;
 
-    protected $fillable = [
-        'label',
-    ];
-
     protected $casts = [
         'id' => 'integer',
     ];

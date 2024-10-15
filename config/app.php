@@ -59,6 +59,8 @@ return [
 
     'asset_url' => env('ASSET_URL'),
 
+    'front_end_url' => env('FRONT_END_URL', 'https://stats4sd.org'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
@@ -175,6 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\Filament\AdminPanelProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
     ])->toArray(),
 
     /*

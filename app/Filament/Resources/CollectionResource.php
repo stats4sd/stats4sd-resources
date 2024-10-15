@@ -2,8 +2,14 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\CollectionResource\Pages\ViewCollection;
 use App\Filament\Translatable\Form\TranslatableComboField;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
+use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
@@ -18,6 +24,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CollectionResource\Pages;
 use App\Filament\Resources\CollectionResource\RelationManagers;
 use Filament\Resources\Concerns\Translatable;
+use Illuminate\Support\HtmlString;
+use Parallax\FilamentComments\Tables\Actions\CommentsAction;
 
 class CollectionResource extends Resource
 {
@@ -34,7 +42,7 @@ class CollectionResource extends Resource
                 TranslatableComboField::make('title')
                     ->icon('heroicon-o-exclamation-circle')
                     ->iconColor('primary')
-                    ->extraAttributes(['style' => 'background-color: #e6e6e6;'])
+                    ->extraAttributes(['class' => 'grey-box'])
                     ->label('Collection Title')
                     ->description('Add a useful title for the collection.')
                     ->columns(3)
@@ -44,44 +52,47 @@ class CollectionResource extends Resource
                 TranslatableComboField::make('description')
                     ->icon('heroicon-o-document-text')
                     ->iconColor('primary')
-                    ->extraAttributes(['style' => 'background-color: #e6e6e6;'])
+                    ->extraAttributes(['class' => 'grey-box'])
                     ->label('Describe the Collection')
                     ->description('For example: What is this collection? Who is it for? Why was it curated?')
                     ->childField(Forms\Components\MarkdownEditor::class)
                     ->required(),
 
-                TranslatableComboField::make('cover_image')
+                Section::make('cover_image')
                     ->icon('heroicon-o-photo')
                     ->iconColor('primary')
-                    ->extraAttributes(['style' => 'background-color: #e6e6e6;'])
-                    ->label('Cover Image')
-                    ->description('Add  a cover image, which will be displayed on the collection page.')
-                    ->columns(3)
-                    ->childField(
-                        Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image')
-                            ->collection('collection_cover'),
-                    ),
-
-                Forms\Components\Section::make('Visibility')
-                    ->icon('heroicon-o-eye')
-                    ->iconColor('primary')
-                    ->extraAttributes(['style' => 'background-color: #e6e6e6;'])
+                    ->extraAttributes(['class' => 'grey-box'])
+                    ->heading(__('Cover Image'))
+                    ->description(__('Add a cover image for the resource. This will be displayed on the front-end.'))
                     ->columns(3)
                     ->schema([
-                        Forms\Components\Checkbox::make('public')
-                            ->label('Should this collection be shared externally?')
-                            ->hintIcon(
-                                icon: 'heroicon-m-question-mark-circle',
-                                tooltip: 'Note - leaving this box unticked prevents the collection from appearing in the full collections list. It does NOT prevent the collection from being referenced in a specific page, e.g. the "CRFS Front Page" Collection'),
+                        Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image_en')
+                            ->label('English')
+                            ->collection('cover_image_en')
+                            ->disk('s3'),
+                        Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image_es')
+                            ->label('Spanish')
+                            ->collection('cover_image_es')
+                            ->disk('s3'),
+                        Forms\Components\SpatieMediaLibraryFileUpload::make('cover_image_fr')
+                            ->label('French')
+                            ->collection('cover_image_fr')
+                            ->disk('s3'),
                     ]),
-
                 Forms\Components\Hidden::make('uploader_id')
-                    ->default(Auth::user()->id),
+                    ->default(Auth::id()),
 
+                Section::make('Publishing')
+                    ->extraAttributes(['class' => 'grey-box'])
+                    ->schema([
 
+                        Forms\Components\Checkbox::make('public')
+                            ->label('Should this collection be public?')
+                            ->hint('If yes, the collection will appear on the front-end. We suggest you keep the collection private until it is ready to be shared.')
+                            ->default(0),
+                    ]),
             ])->columns(1);
     }
-
 
     public static function table(Table $table): Table
     {
@@ -89,15 +100,26 @@ class CollectionResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->wrap(),
-                Tables\Columns\SpatieMediaLibraryImageColumn::make('cover_image'),
+                Tables\Columns\SpatieMediaLibraryImageColumn::make('cover_image')
+                    ->collection(fn(Pages\ListCollections $livewire) => 'cover_image_' . $livewire->activeLocale)
+                    ->action(
+                        Tables\Actions\Action::make('view_image')
+                            ->modalHeading(fn(Collection $record, Pages\ListCollections $livewire) => $record->title . ' - Cover Image (' . $livewire->activeLocale . ')')
+                            ->modalContent(fn(Collection $record, Pages\ListCollections $livewire) => new HtmlString('<img src="' . $record->getFirstMediaUrl('cover_image_' . $livewire->activeLocale) . '" class="w-full h-auto">'))
+                            ->modalSubmitAction(false)
+                            ->modalCancelAction(false)
+                    ),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Upload Date')
+                    ->date()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Last Updated')
+                    ->date()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Curated By')
                     ->sortable(),
-                Tables\Columns\IconColumn::make('public')
-                    ->boolean()
-                    ->sortable()
-                    ->trueColor('success')
-                    ->falseColor('warning'),
                 Tables\Columns\TextColumn::make('troves_count')
                     ->counts('troves')
                     ->label('# Troves')
@@ -107,7 +129,8 @@ class CollectionResource extends Resource
                 //
             ])
             ->actions([
-                // Tables\Actions\ViewAction::make(),
+                CommentsAction::make(),
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -130,7 +153,7 @@ class CollectionResource extends Resource
             'index' => Pages\ListCollections::route('/'),
             'create' => Pages\CreateCollection::route('/create'),
             'edit' => Pages\EditCollection::route('/{record}/edit'),
-            // 'view' => Pages\ViewCollection::route('/{record}'),
+            'view' => Pages\ViewCollection::route('/{record}'),
         ];
     }
 }

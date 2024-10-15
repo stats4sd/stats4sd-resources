@@ -13,11 +13,6 @@ class Tag extends Model
     use HasFactory;
     use HasTranslations;
 
-    protected $fillable = [
-        'name',
-        'type_id',
-    ];
-
     protected $casts = [
         'id' => 'integer',
         'type_id' => 'integer',

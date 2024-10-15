@@ -59,7 +59,6 @@ class TranslatableComboField extends Field implements Contracts\HasHeaderActions
 
             return $state;
         });
-
     }
 
     public function locales(Closure|array|null $locales): static
@@ -137,6 +136,10 @@ class TranslatableComboField extends Field implements Contracts\HasHeaderActions
             $localeFields = collect($localeFields)
                 ->map(fn(Field $field) => $this->makeFieldRequiredWithoutAll($field, $localeFields))
                 ->toArray();
+        }
+
+        if($childField instanceof Field && ! $childField->isDehydrated()) {
+            $this->dehydrated(false);
         }
 
         $this->childComponents($localeFields);

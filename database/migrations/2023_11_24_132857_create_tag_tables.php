@@ -14,6 +14,8 @@ return new class extends Migration
             $table->json('name');
             $table->foreignId('type_id');
 
+            $table->integer('order_column')->nullable();
+
             $table->timestamps();
         });
 
