@@ -352,8 +352,10 @@ class TroveResource extends Resource
                                         ]),
                                 ]),
                         ]),
-                ]),
-            ])->columns(1);
+                ])
+                ->skippable(fn(Component $livewire) => $livewire instanceof EditRecord),
+            ])
+            ->columns(1);
     }
 
     /**
