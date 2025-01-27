@@ -80,74 +80,18 @@
 
     </div>
 
-    <!-- Main Content -->
+    <!-- Latest Uploads-->
     <div class="container mx-6 md:mx-auto">
         <div class="px-4">
-            <!-- Latest Uploads -->
             <div class="pt-20 pb-4 text-2xl font-bold">Latest Uploads</div>
             <div class="divider"></div>
 
             @livewire('latest-uploads')
 
-            <!-- Browse all resources -->
-            <div class="pt-20 pb-4 text-2xl font-bold">Browse All Resources</div>
-            <div class="divider"></div>
-
-            <!-- Search and Filter Section -->
-            <div class="pt-8 pb-4 pr-12">
-                <!-- Search Bar -->
-                <div class="relative flex items-center border border-gray-300 rounded-none">
-                    <input 
-                        type="text"
-                        class="flex-grow py-2 pl-12 pr-4 focus:outline-none focus:border-stats4sd-red focus:ring-1 focus:ring-stats4sd-red"
-                        placeholder="Search here"
-                    />
-                    <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
-                        <svg xmlns="http://www.w3.org/2000/svg" wire:click="searchResources" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"
-                            class="w-5 h-5 text-gray-600">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                        </svg>
-                    </div>
-                </div>
-
-                <!-- Language Selection -->
-                <div class="mt-6 flex items-center space-x-4">
-                    <label class="font-bold">Language:</label>
-                    <!-- Spanish Option -->
-                    <div class="flex items-center">
-                        <input type="checkbox" id="spanish" class="mr-2 accent-stats4sd-red" />
-                        <label for="spanish">Spanish</label>
-                    </div>
-                    <!-- English Option -->
-                    <div class="flex items-center">
-                        <input type="checkbox" id="english" class="mr-2 accent-stats4sd-red" />
-                        <label for="english">English</label>
-                    </div>
-                    <!-- French Option -->
-                    <div class="flex items-center">
-                        <input type="checkbox" id="french" class="mr-2 accent-stats4sd-red" />
-                        <label for="french">French</label>
-                    </div>
-                </div>
-
-                <!-- Filter by Section -->
-                <div class="mt-6 flex items-center space-x-4">
-                    <!-- Filter Icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-gray-600">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v2a1 1 0 0 1-.293.707l-7.414 7.414A2 2 0 0 0 12 16.828V20a1 1 0 0 1-1.447.894l-2-1A1 1 0 0 1 8 19v-2.172a2 2 0 0 0-.586-1.414L3.293 6.707A1 1 0 0 1 3 6V4z" />
-                        </svg>
-
-                    <!-- Filter Text -->
-                    <span class="font-bold">Filter by:</span>
-
-                </div>
-
-            </div>
-
-            <div class="pb-12"></div>
         </div>
     </div>
     
+    <!-- Browse Resources -->
     @livewire('resources-results')
 
 </div>
