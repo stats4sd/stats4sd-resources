@@ -2,24 +2,26 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Pages\Login;
-use ChrisReedIO\Socialment\SocialmentPlugin;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
 use Filament\PanelProvider;
+use App\Filament\Pages\Login;
 use Filament\Support\Colors\Color;
+use App\Filament\Resources\HubResource;
 use App\Filament\Resources\TagResource;
 use Filament\Navigation\NavigationGroup;
 use App\Filament\Resources\TroveResource;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Navigation\NavigationBuilder;
 use App\Filament\Resources\TagTypeResource;
+use ChrisReedIO\Socialment\SocialmentPlugin;
 use App\Filament\Resources\TroveTypeResource;
 use Filament\SpatieLaravelTranslatablePlugin;
 use App\Filament\Resources\CollectionResource;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
+use Kainiklas\FilamentScout\FilamentScoutPlugin;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
@@ -27,7 +29,6 @@ use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
-use Kainiklas\FilamentScout\FilamentScoutPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -36,6 +37,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
+            ->homeUrl('/home')
             ->path('')
             ->login(Login::class)
             ->colors([
@@ -70,6 +72,7 @@ class AdminPanelProvider extends PanelProvider
 
                         ...TroveResource::getNavigationItems(),
                         ...CollectionResource::getNavigationItems(),
+                        ...HubResource::getNavigationItems(),
                     ])
                     ->groups([
                         NavigationGroup::make('Details')
