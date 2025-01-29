@@ -72,7 +72,7 @@
     <div class="pb-12"></div>
 
     <!-- Collections -->
-    <div id="Collections" class="bg-black text-white py-4 px-8 flex flex-col sm:flex-row sm:items-center sm:justify-between">
+    <div id="Collections-section" class="bg-black text-white py-4 px-8 flex flex-col sm:flex-row sm:items-center sm:justify-between">
 
         <div class="flex items-center w-full sm:w-auto sm:mr-4">
             <!-- Result Category Name -->

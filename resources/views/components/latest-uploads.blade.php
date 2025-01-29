@@ -57,7 +57,11 @@
         </div>
         <!-- See All Resources Button -->
         <div class="mt-6 mr-6 text-center md:text-right">
-            <a href="#" class="text-stats4sd-red font-semibold hover:underline">See all</a>
+            <button
+                onclick="scrollToSection('Resources-section')"
+                class="text-stats4sd-red font-semibold hover:underline">
+                See all
+            </button>
         </div>
     </div>
 
@@ -80,7 +84,11 @@
         </div>
         <!-- See All Collections Button -->
         <div class="mt-6 text-right">
-            <a href="#" class="text-stats4sd-red font-semibold hover:underline">See all</a>
+            <button
+                onclick="scrollToSection('Collections-section')"
+                class="text-stats4sd-red font-semibold hover:underline">
+                See all
+            </button>
         </div>
     </div>
 </div>

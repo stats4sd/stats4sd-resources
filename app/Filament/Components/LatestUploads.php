@@ -8,6 +8,9 @@ use App\Models\Collection;
 
 class LatestUploads extends Component
 {
+    public $latestResources;
+    public $latestCollection;
+
     public function mount()
     {
         $this->latestResources = Trove::latest()->take(2)->get();
