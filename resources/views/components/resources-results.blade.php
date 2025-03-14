@@ -1,6 +1,6 @@
 <div>
     <!-- Search and Filters -->
-    <div class="container mx-6 md:mx-auto">
+    <div id="Search-filters-section" class="container mx-6 md:mx-auto">
         <div class="px-4">
             <!-- Heading -->
             <div class="pt-20 pb-4 text-2xl font-bold">Browse All Resources</div>
@@ -10,15 +10,13 @@
             <div class="pt-8 pb-4 pr-12">
 
                 <div class="relative flex items-center border border-gray-300 rounded-none">
-                    <input
-                        wire:model="query"
-                        wire:keydown.enter="search"
-                        type="text"
-                        class="flex-grow py-2 pl-12 pr-4 focus:outline-none focus:border-stats4sd-red focus:ring-1 focus:ring-stats4sd-red"
-                        placeholder="Search here"
-                    />
+
+                    <livewire:search-bar
+                        inputClass="flex-grow py-2 pl-12 pr-4 focus:outline-none focus:border-stats4sd-red focus:ring-1 focus:ring-stats4sd-red"
+                        :scrollOnSearch="false"/>
+                    
                     <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
-                        <svg xmlns="http://www.w3.org/2000/svg" wire:click="searchResources" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"
                             class="w-5 h-5 text-gray-600">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                         </svg>
@@ -32,6 +30,7 @@
                     </svg>
                     @endif
                 </div>
+
             </div>
 
             <!-- Language Selection -->
@@ -39,31 +38,77 @@
                 <label class="font-bold">Language:</label>
                 <!-- Spanish Option -->
                 <div class="flex items-center">
-                    <input type="checkbox" id="spanish" class="mr-2 accent-stats4sd-red" />
+                    <input type="checkbox" id="spanish" wire:model="selectedLanguages" value="es" wire:change="search" class="mr-2 accent-stats4sd-red" />
                     <label for="spanish">Spanish</label>
                 </div>
                 <!-- English Option -->
                 <div class="flex items-center">
-                    <input type="checkbox" id="english" class="mr-2 accent-stats4sd-red" />
+                    <input type="checkbox" id="english" wire:model="selectedLanguages" value="en" wire:change="search" class="mr-2 accent-stats4sd-red" />
                     <label for="english">English</label>
                 </div>
                 <!-- French Option -->
                 <div class="flex items-center">
-                    <input type="checkbox" id="french" class="mr-2 accent-stats4sd-red" />
+                    <input type="checkbox" id="french" wire:model="selectedLanguages" value="fr" wire:change="search" class="mr-2 accent-stats4sd-red" />
                     <label for="french">French</label>
                 </div>
             </div>
 
-            <!-- Filters -->
-            <div class="mt-6 flex items-center space-x-4">
-                <!-- Filter Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-gray-600">
+            <!-- Filters Section -->
+            <div class="mt-6 flex items-start space-x-4">
+                <!-- Filter Icon & "Filter by" Text -->
+                <div class="flex items-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-gray-600">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v2a1 1 0 0 1-.293.707l-7.414 7.414A2 2 0 0 0 12 16.828V20a1 1 0 0 1-1.447.894l-2-1A1 1 0 0 1 8 19v-2.172a2 2 0 0 0-.586-1.414L3.293 6.707A1 1 0 0 1 3 6V4z" />
                     </svg>
+                    <span class="text-lg font-bold">Filter by:</span>
+                </div>
 
-                <!-- Filter Text -->
-                <span class="font-bold">Filter by:</span>
+                <!-- Filter Box -->
+                <div class="border border-gray-300 rounded-lg p-4 flex-1">
+                    <!-- Filter Headings Row -->
+                    <div class="flex justify-between items-center pb-2">
+                        <div class="flex items-center space-x-6">
+                            <!-- Themes always shown -->
+                            <button wire:click="setSelectedFilterType('themes')" 
+                                class="relative pb-2 text-gray-700 font-semibold hover:text-gray-900 hover:border-b-2 hover:border-gray-400">
+                                Themes
+                                <!-- Only show red underline if more filters selected and themes is selected -->
+                                @if($filtersExpanded && $selectedFilterType === 'themes')
+                                    <span class="absolute left-0 bottom-0 w-full h-0.5 bg-red-500"></span>
+                                @endif
+                            </button>
 
+                            <!-- Show additional tag types if more filters selected -->
+                            @if($filtersExpanded)
+                                @foreach(['topics', 'keywords', 'locations'] as $filter)
+                                    <button wire:click="setSelectedFilterType('{{ $filter }}')" 
+                                        class="relative pb-2 text-gray-700 font-semibold hover:text-gray-900 hover:border-b-2 hover:border-gray-400">
+                                        {{ ucfirst($filter) }}
+                                        <span class="absolute left-0 bottom-0 w-full h-0.5 bg-red-500 {{ $selectedFilterType === $filter ? 'opacity-100' : 'opacity-0' }}"></span>
+                                    </button>
+                                @endforeach
+                            @endif
+                        </div>
+
+                        <!-- More filters button-->
+                        @if(!$filtersExpanded)
+                            <button wire:click="toggleFilters" 
+                                class="text-sm text-stats4sd-red font-semibold hover:underline cursor-pointer">
+                                More Filters +
+                            </button>
+                        @endif
+                    </div>
+
+                    <!-- Tags for selected tag type -->
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        @foreach($tags->sortBy('name') as $tag)
+                            <label class="flex items-center space-x-2 bg-gray-100 px-3 py-1 rounded-full cursor-pointer">
+                                <input type="checkbox" wire:model="selectedTags.{{ $selectedFilterType }}" value="{{ $tag->id }}" class="accent-stats4sd-red" wire:change="search"/>
+                                <span class="text-sm">{{ $tag->name }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -80,7 +125,7 @@
                 <h1 class="text-center sm:text-right text-2xl font-bold">Collections</h1>
             </div>
             <!-- Toggle Button for small screens -->
-            <button class="text-white sm:hidden -ml-2" data-target="Collections-section" onclick="toggleCollapse('Collections-section', 'Collections-toggle-content', this)">
+            <button class="text-white sm:hidden -ml-2" onclick="toggleCollapse('Collections-content', 'Collections-toggle-content', this)">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="transition-transform transform rotate-0 w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
                 </svg>
@@ -106,7 +151,7 @@
 
         <!-- Toggle Button for larger screens -->
         <div class="hidden sm:flex flex-shrink-0 justify-center sm:justify-end mt-2 sm:mt-0 w-full sm:w-auto">
-            <button class="text-white" data-target="Collections-section" onclick="toggleCollapse('Collections-section', 'Collections-toggle-content', this)">
+            <button class="text-white" onclick="toggleCollapse('Collections-content', 'Collections-toggle-content', this)">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="transition-transform transform rotate-0 w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
                 </svg>
@@ -115,7 +160,7 @@
     </div>
 
     <!-- Collections Result Card -->
-    <div id="Collections-section" class="collapse-section bg-lightgrey py-8 px-16">
+    <div id="Collections-content" class="collapse-section bg-lightgrey py-8 px-16">
         <div class="container mx-auto">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($this->collections as $index => $collection)
@@ -139,18 +184,11 @@
                 @endforeach
 
             </div>
-            @if($expandedCollectionResults && $totalCollections < $totalCollections)
-                <div class="my-4 flex content-end justify-end">
-                    <button class="bg-gray-800 hover-effect text-white text-center py-2 px-4 rounded-lg flex items-center justify-center">
-                        SEE MORE RESULTS
-                    </button>
-                </div>
-            @endif
 
         </div>
     </div>
 
-    <div id="Resources" class="bg-black text-white py-4 px-8 flex flex-col sm:flex-row sm:items-center sm:justify-between">
+    <div id="Resources-section" class="bg-black text-white py-4 px-8 flex flex-col sm:flex-row sm:items-center sm:justify-between">
 
         <div class="flex items-center w-full sm:w-auto sm:mr-4">
             <!-- Result Category Name -->
@@ -158,7 +196,7 @@
                 <h1 class="text-center sm:text-right text-2xl font-bold">Resources</h1>
             </div>
             <!-- Toggle Button for small screens -->
-            <button class="text-white sm:hidden -ml-2" data-target="Resources-section" onclick="toggleCollapse('Resources-section', 'Resources-toggle-content', this)">
+            <button class="text-white sm:hidden -ml-2" data-target="Resources-toggle" onclick="toggleCollapse('Resources-content', 'Resources-toggle-content', this)">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="transition-transform transform rotate-0 w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
                 </svg>
@@ -184,7 +222,7 @@
 
         <!-- Toggle Button for larger screens -->
         <div class="hidden sm:flex flex-shrink-0 justify-center sm:justify-end mt-2 sm:mt-0 w-full sm:w-auto">
-            <button class="text-white" data-target="Resources-section" onclick="toggleCollapse('Resources-section', 'Resources-toggle-content', this)">
+            <button class="text-white" data-target="Resources-toggle" onclick="toggleCollapse('Resources-content', 'Resources-toggle-content', this)">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="transition-transform transform rotate-0 w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
                 </svg>
@@ -192,8 +230,8 @@
         </div>
     </div>
 
-    <!-- Resources Result Card -->
-    <div id="Resources-section" class="collapse-section bg-lightgrey py-8 px-16">
+    <!-- Resources Result Cards -->
+    <div id="Resources-content" class="collapse-section bg-lightgrey py-8 px-16">
         <div class="container mx-auto">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($this->resources as $index => $resource)
@@ -209,11 +247,10 @@
 
                         <!-- Tags -->
                         <div class="flex flex-wrap mb-4 gap-2 pt-8">
-                            @php 
-                                $tags = null;
+                            @php
                                 $tags = $resource->themeAndTopicTags;
                             @endphp
-                            @foreach ($tags as $tag)
+                            @foreach ($tags->sortBy('name') as $tag)
                                 @if(!empty($tag))
                                     <div class="grey-badge">{{ $tag->name }}</div>
                                 @endif
@@ -230,13 +267,6 @@
                 @endforeach
 
             </div>
-            @if($expandedResourceResults && $totalResources < $totalResources)
-                <div class="my-4 flex content-end justify-end">
-                    <button class="bg-gray-800 hover-effect text-white text-center py-2 px-4 rounded-lg flex items-center justify-center">
-                        SEE MORE RESULTS
-                    </button>
-                </div>
-            @endif
 
         </div>
     </div>

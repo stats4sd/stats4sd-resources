@@ -17,18 +17,19 @@
             <h1 class="text-white text-base sm:text-lg md:text-xl mt-8 md:mt-10">Search the collection</h1>
 
             <div class="mt-4 flex items-center space-x-3 relative">
-                <input
-                    wire:model="query"
-                    wire:keydown.enter="searchResources"
-                    type="text"
-                    class="border-2 border-white rounded-full py-2 md:py-2 focus:outline-none transition duration-300 focus:border-stats4sd-red focus:ring-1 focus:ring-stats4sd-red"
-                >
+                
+                <livewire:search-bar
+                    inputClass="border-2 border-white rounded-full py-2 md:py-2 focus:outline-none transition duration-300 focus:border-stats4sd-red focus:ring-1 focus:ring-stats4sd-red"
+                    :scrollOnSearch="true"
+                />
 
                 <!-- Search Button -->
-                <svg xmlns="http://www.w3.org/2000/svg" wire:click="searchResources" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                    class="w-8 h-8 text-white cursor-pointer ml-4 transition-colors duration-200 hover:text-mint">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                </svg>
+                <button id="search-button" onclick="Livewire.dispatch('searchAndScroll')">
+                    <svg xmlns="http://www.w3.org/2000/svg"fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                        class="w-8 h-8 text-white cursor-pointer ml-4 transition-colors duration-200 hover:text-mint">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                    </svg>
+                </button>
             </div>
 
             <!-- Description -->
@@ -53,26 +54,26 @@
 
                 <div class="library-card bg-stats4sd-red hover-effect flex flex-col items-center">
                     <div class="flex-1 text-center">
-                        <h2 class="text-bold text-lg md:text-xl mb-4 md:mb-6">Research Methods</h2>
-                        <p class="mb-4 md:mb-6 text-white">Our extensive collection of resources on research methods, including designing studies, quantitative and qualitative methods,
-                            and statistical analysis.</p>
+                        <h2 class="text-bold text-lg md:text-xl mb-4 md:mb-6">Farmer Research Network (FRN) Research Methods Hub</h2>
+                        <p class="mb-4 md:mb-6 text-white">A dedicated page to make it easy to explore FRN-related materials - from the basic definition down
+                            to in depth seminars on aspects of conducting research within an FRN.
+                        </p>
                     </div>
                 </div>
 
                 <div class="library-card bg-stats4sd-red hover-effect flex flex-col items-center">
                     <div class="flex-1 text-center">
-                        <h2 class="text-bold text-lg md:text-xl mb-4 md:mb-6">Research Methods</h2>
-                        <p class="mb-4 md:mb-6 text-white">Our extensive collection of resources on research methods, including designing studies, quantitative and qualitative methods,
-                            and statistical analysis.</p>
+                        <h2 class="text-bold text-lg md:text-xl mb-4 md:mb-6">Agroecology</h2>
+                        <p class="mb-4 md:mb-6 text-white">Agroecological methods, agricultural techniques, agroecological transitions</p>
                     </div>
                 </div>
 
-                <div class="library-card bg-black hover-effect flex flex-col items-center">
+                <button onclick="scrollToSection('Resources-section')" class="library-card bg-black hover-effect flex flex-col items-center">
                     <div class="flex-1 text-center">
                         <h2 class="text-bold text-lg md:text-xl mb-4 md:mb-6">Browse all</h2>
                         <p class="mb-4 md:mb-6 text-white">Browse the full collection of resources on a variety of topics.</p>
                     </div>
-                </div>
+                </button>
 
             </div>
 
@@ -98,6 +99,7 @@
 @endsection
 
 <script>
+
     function toggleCollapse(sectionId, toggleContentId, button) {
         // Toggle the visibility of the section
         var section = document.getElementById(sectionId);
@@ -120,4 +122,12 @@
             target.scrollIntoView({ behavior: 'smooth' });
         }
     }
+
+    document.addEventListener('livewire:init', function () {
+        Livewire.on('homeSearchScroll', function () {
+            console.log('homeSearchScroll event received');
+            scrollToSection('Search-filters-section');
+        });
+    });
+
 </script>

@@ -138,8 +138,10 @@ return [
                  'filterableAttributes' => [
                      'source',
                      'trove_type',
-
                  ],
+                 'pagination' => [
+                    'maxTotalHits' => 1000,
+                ],
              ],
         ],
     ],

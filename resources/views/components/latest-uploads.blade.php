@@ -41,7 +41,7 @@
                     @php 
                         $tags = $latestResources->last()->themeAndTopicTags;
                     @endphp
-                    @foreach ($tags as $tag)
+                    @foreach ($tags->sortBy('name') as $tag)
                         @if(!empty($tag))
                             <div class="grey-badge">{{ $tag->name }}</div>
                         @endif
