@@ -38,7 +38,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->homeUrl('/home')
-            ->path('')
+            ->path('/admin')
             ->login(Login::class)
             ->colors([
                 'primary' => Color::Amber,
