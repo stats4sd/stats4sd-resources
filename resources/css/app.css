@@ -8,7 +8,7 @@
 
 .library-card {
     @apply text-white p-6 rounded-lg shadow-lg w-80 flex flex-col relative;
-  }
+}
 
 .hover-effect {
     transition: all 0.2s ease-in-out;
@@ -23,8 +23,8 @@
     width: 60px;
     background-color: var(--stats4sd-red);
     margin-bottom: 1.2rem;
-    position:relative;
-  }
+    position: relative;
+}
 
 .grey-badge {
     display: flex;
@@ -46,4 +46,20 @@
     height: 2px;
     background-color: gray;
     opacity: 0.5;
+}
+
+h3 {
+    @apply text-lg font-bold;
+}
+
+h2 {
+    @apply text-xl font-bold;
+}
+
+a {
+    color: var(--stats4sd-red);
+}
+
+a:hover {
+    color: var(--stats4sd-red);
 }
