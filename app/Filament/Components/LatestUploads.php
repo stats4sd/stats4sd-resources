@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 class LatestUploads extends Component
 {
     public EloquentCollection $latestResources;
-    public ?EloquentCollection $latestCollection;
+    public ?Collection $latestCollection;
 
     public function mount()
     {
