@@ -46,27 +46,6 @@ class ResourcesResults extends Component
         $this->updateTags();
     }
 
-    public function toggleTagSelection($tagId)
-    {
-        $selectedTagsArray = $this->getSelectedTagsArray();
-
-        ray('Before toggling tag', [
-            'selectedTags' => $selectedTagsArray,
-            'selectedFilterType' => $this->selectedFilterType
-        ]);
-
-        if (in_array($tagId, $selectedTagsArray)) {
-            // Remove tag if already selected
-            $selectedTagsArray = array_diff($selectedTagsArray, [$tagId]);
-        } else {
-            // Add tag to selection
-            $selectedTagsArray[] = $tagId;
-        }
-
-        // Trigger search
-        $this->search();
-    }
-
     private function getSelectedTagsArray()
     {
         switch ($this->selectedFilterType) {
