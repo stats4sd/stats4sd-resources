@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Scout\Searchable;
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\Translatable\HasTranslations;
 
 class Collection extends Model implements HasMedia
 {
@@ -17,7 +18,7 @@ class Collection extends Model implements HasMedia
     use InteractsWithMedia;
     use HasTranslations;
     use HasFilamentComments;
-
+    use Searchable;
 
     protected $casts = [
         'public' => 'boolean',
@@ -51,5 +52,13 @@ class Collection extends Model implements HasMedia
     {
         return $this->belongsToMany(Trove::class)
             ->withPivot('id');
+    }
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'title' => $this->title,
+            'description' => $this->description,
+        ];
     }
 }

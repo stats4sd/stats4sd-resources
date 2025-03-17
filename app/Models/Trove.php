@@ -219,4 +219,11 @@ class Trove extends Model implements HasMedia
 
         return $array;
     }
+
+    public function themeAndTopicTags(): MorphToMany
+    {
+        return $this->tags()->whereHas('tagType', function ($query) {
+            $query->whereIn('slug', ['themes', 'topics']);
+        });
+    }
 }
