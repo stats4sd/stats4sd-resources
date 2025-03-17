@@ -14,8 +14,8 @@ class LatestUploads extends Component
 
     public function mount()
     {
-        $this->latestResources = Trove::latest()->take(2)->get();
-        $this->latestCollection = Collection::latest()->first();
+        $this->latestResources = Trove::where('is_published', 1)->latest()->take(2)->get();
+        $this->latestCollection = Collection::where('public', 1)->latest()->first();
     }
 
     public function render()
