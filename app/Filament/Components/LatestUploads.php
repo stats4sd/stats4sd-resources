@@ -5,11 +5,12 @@ namespace App\Filament\Components;
 use App\Models\Trove;
 use Livewire\Component;
 use App\Models\Collection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class LatestUploads extends Component
 {
-    public $latestResources;
-    public $latestCollection;
+    public EloquentCollection $latestResources;
+    public ?EloquentCollection $latestCollection;
 
     public function mount()
     {

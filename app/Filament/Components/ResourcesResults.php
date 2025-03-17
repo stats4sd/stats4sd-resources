@@ -6,21 +6,22 @@ use App\Models\Tag;
 use App\Models\Trove;
 use Livewire\Component;
 use App\Models\Collection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class ResourcesResults extends Component
 {
-    public $query;
-    public $resources;
-    public $totalResources;
-    public $collections;
-    public $totalCollections;
+    public ?string $query = null;
+    public EloquentCollection $resources;
+    public int $totalResources;
+    public EloquentCollection $collections;
+    public int $totalCollections;
     public bool $expandedResourceResults = false;
     public bool $expandedCollectionResults = false;
-    public $selectedFilterType = 'themes'; // Default filter  displayed
-    public $filtersExpanded = false; // Hide extra filters at start
-    public $tags = [];
-    public $selectedLanguages = [];
-    public $selectedTags = [
+    public string $selectedFilterType = 'themes'; // Default filter  displayed
+    public bool $filtersExpanded = false; // Hide extra filters at start
+    public EloquentCollection $tags;
+    public array $selectedLanguages = [];
+    public array $selectedTags = [
         'themes' => [],
         'topics' => [],
         'keywords' => [],

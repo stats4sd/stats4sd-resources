@@ -6,11 +6,11 @@ use Livewire\Component;
 
 class SearchBar extends Component
 {
-    public $query = '';
-    public $inputClass;
+    public string $query = '';
+    public ?string $inputClass = null;
     public ?bool $scrollOnSearch = false;
     private bool $searchInProgress = false;
-    private $previousQuery = '';
+    private string $previousQuery = '';
 
     protected $listeners = [
         'clearSearchInput' => 'clearQuery', 
