@@ -208,11 +208,6 @@ class ResourcesResults extends Component
 
     public function render()
     {
-        return view('components.resources-results', [
-            'resources' => $this->resources,
-            'totalResources' => $this->totalResources,
-            'collections' => $this->collections,
-            'totalCollections' => $this->totalCollections,
-        ]);
+        return view('components.resources-results');
     }
 }

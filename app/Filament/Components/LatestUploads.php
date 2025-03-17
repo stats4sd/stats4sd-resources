@@ -19,9 +19,6 @@ class LatestUploads extends Component
 
     public function render()
     {
-        return view('components.latest-uploads', [
-            'latestResources' => $this->latestResources,
-            'latestCollection' => $this->latestCollection,
-        ]);
+        return view('components.latest-uploads');
     }
 }
