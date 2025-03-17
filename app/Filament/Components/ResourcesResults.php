@@ -47,22 +47,6 @@ class ResourcesResults extends Component
         $this->updateTags();
     }
 
-    private function getSelectedTagsArray()
-    {
-        switch ($this->selectedFilterType) {
-            case 'themes':
-                return $this->selectedThemes;
-            case 'topics':
-                return $this->selectedTopics;
-            case 'keywords':
-                return $this->selectedKeywords;
-            case 'locations':
-                return $this->selectedLocations;
-            default:
-                return [];
-        }
-    }
-
     public function updateTags()
     {
         // Get tags for the selected filter type (themes, topics, etc.)
