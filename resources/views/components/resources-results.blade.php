@@ -171,7 +171,7 @@
                         <h3 class="text-xl font-bold">{!! $collection['title'] !!}</h3>
 
                         <p class="pt-8 mb-4 flex-grow">
-                            {{ \Illuminate\Support\Str::limit(strip_tags($collection['description']), 120, '...') }}
+                            {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($collection['description']), ENT_QUOTES, 'UTF-8'), 120, '...') }}
                         </p>
 
                         <!-- View Button -->
@@ -242,7 +242,7 @@
                         <h3 class="text-xl font-bold text-stats4sd-red">{!! $resource['title'] !!}</h3>
 
                         <p class="text-gray-600 pt-8 mb-4 flex-grow">
-                            {{ \Illuminate\Support\Str::limit(strip_tags($resource['description']), 120, '...') }}
+                            {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($resource['description']), ENT_QUOTES, 'UTF-8'), 120, '...') }}
                         </p>
 
                         <!-- Tags -->

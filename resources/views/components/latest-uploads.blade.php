@@ -8,7 +8,7 @@
                 <h3 class="text-xl font-semibold mb-2">TROVE</h3>
                 <h3 class="text-xl text-bold text-stats4sd-red">{{ $latestResources->first()['title'] }}</h3>
                 <p class="text-gray-600 pt-8 mb-4 flex-grow">
-                    {{ \Illuminate\Support\Str::limit(strip_tags($latestResources->first()['description']), 120, '...') }}
+                    {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($latestResources->first()['description']), ENT_QUOTES, 'UTF-8'), 120, '...') }}
                 </p>
                 <!-- Tags -->
                 <div class="flex flex-wrap mb-4 gap-2 pt-8">
@@ -34,7 +34,7 @@
                 <h3 class="text-xl font-semibold mb-2">TROVE</h3>
                 <h3 class="text-xl text-bold text-stats4sd-red">{{ $latestResources->last()['title'] }}</h3>
                 <p class="text-gray-600 pt-8 mb-4 flex-grow">
-                    {{ \Illuminate\Support\Str::limit(strip_tags($latestResources->last()['description']), 120, '...') }}
+                    {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($latestResources->last()['description']), ENT_QUOTES, 'UTF-8'), 120, '...') }}
                 </p>
                 <!-- Tags -->
                 <div class="flex flex-wrap mb-4 gap-2 pt-8">
@@ -73,7 +73,7 @@
             <h3 class="text-xl font-semibold mb-2">COLLECTION</h3>
             <h3 class="text-xl">{{ $latestCollection['title'] }}</h3>
             <p class="pt-8 mb-4 flex-grow">
-                {{ \Illuminate\Support\Str::limit(strip_tags($latestCollection['description']), 120, '...') }}
+                {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($latestCollection['description']), ENT_QUOTES, 'UTF-8'), 120, '...') }}
             </p>
             <!-- View Button -->
             <div class="flex justify-end">
