@@ -121,13 +121,11 @@ class ResourcesResults extends Component
             foreach (['themes', 'topics', 'keywords', 'locations'] as $tagType) {
                 if (!empty($this->selectedTags[$tagType])) {
                     $hasTags = true;
-                    $query->where(function ($q) use ($tagType) {
-                        foreach ($this->selectedTags[$tagType] as $tagId) {
-                            $q->orWhereHas('tags', function ($query) use ($tagId) {
-                                $query->where('tags.id', $tagId);
-                            });
-                        }
-                    });
+                    foreach ($this->selectedTags[$tagType] as $tagId) {
+                        $query->whereHas('tags', function ($q) use ($tagId) {
+                            $q->where('tags.id', $tagId);
+                        });
+                    }
                 }
             }
         
@@ -176,15 +174,16 @@ class ResourcesResults extends Component
         
             // Step 3: Apply tag filters if selected
             if ($hasTags) {
-                $collectionsQuery->whereHas('troves', function ($query) {
+                $collectionsQuery->whereHas('troves', function ($trovesQuery) {
                     foreach (['themes', 'topics', 'keywords', 'locations'] as $tagType) {
                         if (!empty($this->selectedTags[$tagType])) {
-                            foreach ($this->selectedTags[$tagType] as $tagId) {
-                                // Check if the collection has the tag through its troves
-                                $query->whereHas('tags', function ($q) use ($tagId) {
-                                    $q->where('tags.id', $tagId);
+                            $trovesQuery->whereHas('tags', function ($tagsQuery) use ($tagType) {
+                                $tagsQuery->where(function ($orQuery) use ($tagType) {
+                                    foreach ($this->selectedTags[$tagType] as $tagId) {
+                                        $orQuery->orWhere('tags.id', $tagId);
+                                    }
                                 });
-                            }
+                            });
                         }
                     }
                 });
