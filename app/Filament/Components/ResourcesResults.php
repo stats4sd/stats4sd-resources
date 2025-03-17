@@ -19,7 +19,7 @@ class ResourcesResults extends Component
     public bool $expandedCollectionResults = false;
     public string $selectedFilterType = 'themes'; // Default filter  displayed
     public bool $filtersExpanded = false; // Hide extra filters at start
-    public EloquentCollection $tags;
+    public array $tags = [];
     public array $selectedLanguages = [];
     public array $selectedTags = [
         'themes' => [],
@@ -33,7 +33,6 @@ class ResourcesResults extends Component
     public function mount()
     {
         $this->fetchInitialData();
-        $this->updateTags();
     }
 
     public function toggleFilters()
@@ -44,25 +43,28 @@ class ResourcesResults extends Component
     public function setSelectedFilterType($filter)
     {
         $this->selectedFilterType = $filter;
-        $this->updateTags();
     }
 
-    public function updateTags()
+    public function loadTags()
     {
-        // Get tags for the selected filter type (themes, topics, etc.)
-        $this->tags = Tag::whereHas('tagType', function ($query) {
-            $query->where('slug', $this->selectedFilterType);
-        })->get();
+        $tags = Tag::with('tagType')->get();
+
+        foreach (['themes', 'topics', 'keywords', 'locations'] as $type) {
+            $this->tags[$type] = $tags->filter(function ($tag) use ($type) {
+                return $tag->tagType->slug === $type;
+            });
+        }
     }
 
     public function fetchInitialData()
     {
-        // Load all resources and collections initially
         $this->resources = Trove::where('is_published', 1)->get();
         $this->totalResources = $this->resources->count();
 
         $this->collections = Collection::where('public', 1)->get();
         $this->totalCollections = $this->collections->count();
+
+        $this->loadTags();
     }
 
     public function updateResults($query)

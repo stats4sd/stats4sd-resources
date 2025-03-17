@@ -101,7 +101,7 @@
 
                     <!-- Tags for selected tag type -->
                     <div class="flex flex-wrap gap-2 mt-4">
-                        @foreach($tags->sortBy(fn($tag) => strtolower($tag->name)) as $tag)
+                        @foreach($tags[$selectedFilterType]->sortBy(fn($tag) => strtolower($tag->name)) as $tag)
                             <label class="flex items-center space-x-2 bg-gray-100 px-3 py-1 rounded-full cursor-pointer">
                                 <input type="checkbox" wire:model="selectedTags.{{ $selectedFilterType }}" value="{{ $tag->id }}" class="accent-stats4sd-red" wire:change="search"/>
                                 <span class="text-sm">{{ $tag->name }}</span>
