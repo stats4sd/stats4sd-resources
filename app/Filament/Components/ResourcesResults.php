@@ -4,6 +4,7 @@ namespace App\Filament\Components;
 
 use App\Models\Tag;
 use App\Models\Trove;
+use App\Models\TagType;
 use Livewire\Component;
 use App\Models\Collection;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
@@ -32,12 +33,19 @@ class ResourcesResults extends Component
 
     public function mount()
     {
+        $this->locale = session('locale', app()->getLocale());
+        app()->setLocale($this->locale);
         $this->fetchInitialData();
     }
 
     public function toggleFilters()
     {
         $this->filtersExpanded = true;
+    }
+
+    public function getThemeLabelProperty()
+    {
+        return TagType::where('slug', 'themes')->first()?->label;
     }
 
     public function setSelectedFilterType($filter)
@@ -51,9 +59,14 @@ class ResourcesResults extends Component
 
         foreach (['themes', 'topics', 'keywords', 'locations'] as $type) {
             $this->tags[$type] = $tags->filter(function ($tag) use ($type) {
-                return $tag->tagType->slug === $type;
+                return strtolower($tag->tagType->getTranslation('label', app()->getLocale())) === strtolower($this->getTagTypeTranslation($type));
             });
         }
+    }
+
+    public function getTagTypeTranslation($slug)
+    {
+        return TagType::where('slug', $slug)->first()?->getTranslation('label', app()->getLocale()) ?? ucfirst($slug);
     }
 
     public function fetchInitialData()

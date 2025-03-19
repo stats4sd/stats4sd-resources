@@ -142,6 +142,7 @@ class Trove extends Model implements HasMedia
     {
         return $this->belongsToMany(TroveType::class);
     }
+    
     public function collections(): BelongsToMany
     {
         return $this->belongsToMany(Collection::class)
