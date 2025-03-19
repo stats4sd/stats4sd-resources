@@ -1,0 +1,153 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Stats4SD Resources\n"
+"Report-Msgid-Bugs-To: contact@translation.io\n"
+"Last-Translator: \n"
+"Language-Team: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-03-17T15:45:56+00:00\n"
+"PO-Revision-Date: 2025-03-17 16:45+0100\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=n!=1;\n"
+
+#: resources\views\components\home.blade.php:11
+msgid "Stats4SD Resources Collection"
+msgstr "Colección de recursos Stats4SD"
+
+#: resources\views\components\home.blade.php:16
+msgid "Search the collection"
+msgstr "Buscar en la colección"
+
+#: resources\views\components\home.blade.php:37
+msgid ""
+"The Stats4SD resources collection is a curated selection of materials that support <b>good practice, research and learning</b> in \n"
+"                            the broad range of topics relevant to our work. Search, or select a library below to get started."
+msgstr ""
+"La colección de recursos de Stats4SD es una selección de materiales que apoyan <b>las buenas prácticas, la investigación y el aprendizaje</b> en una amplia gama de temas relacionados con nuestro trabajo \n"
+"                            la amplia gama de temas relevantes para nuestro trabajo. Busque o seleccione una biblioteca para empezar."
+
+#: resources\views\components\home.blade.php:73
+msgid "Browse all"
+msgstr "Ver todos"
+
+#: resources\views\components\home.blade.php:74
+msgid "Browse the full collection of resources on a variety of topics."
+msgstr ""
+"Vea la colección completa de recursos sobre una variedad de temas.\n"
+""
+
+#: resources\views\components\home.blade.php:87
+msgid "Latest Uploads"
+msgstr "Últimas subidas"
+
+#: resources\views\components\latest-uploads.blade.php:4
+#: resources\views\components\resources-results.blade.php:207
+msgid "Resources"
+msgstr "Recursos"
+
+#: resources\views\components\latest-uploads.blade.php:8
+#: resources\views\components\latest-uploads.blade.php:36
+msgid "TROVE"
+msgstr "RECURSO"
+
+#: resources\views\components\latest-uploads.blade.php:28
+#: resources\views\components\latest-uploads.blade.php:56
+#: resources\views\components\latest-uploads.blade.php:87
+#: resources\views\components\resources-results.blade.php:190
+#: resources\views\components\resources-results.blade.php:282
+msgid "VIEW"
+msgstr "VER"
+
+#: resources\views\components\latest-uploads.blade.php:67
+#: resources\views\components\latest-uploads.blade.php:97
+msgid "See all"
+msgstr "Ver todos"
+
+#: resources\views\components\latest-uploads.blade.php:75
+#: resources\views\components\resources-results.blade.php:127
+msgid "Collections"
+msgstr "Colecciones"
+
+#: resources\views\components\latest-uploads.blade.php:78
+#: resources\views\components\resources-results.blade.php:179
+msgid "COLLECTION"
+msgstr "COLECCIÓN"
+
+#: resources\views\components\resources-results.blade.php:6
+msgid "Browse All Resources"
+msgstr ""
+"Ver todos los recursos\n"
+""
+
+#: resources\views\components\resources-results.blade.php:38
+msgid "Language:"
+msgstr "Idioma:"
+
+#: resources\views\components\resources-results.blade.php:42
+msgid "Spanish"
+msgstr "Español"
+
+#: resources\views\components\resources-results.blade.php:47
+msgid "English"
+msgstr "Inglés"
+
+#: resources\views\components\resources-results.blade.php:52
+msgid "French"
+msgstr "Francés"
+
+#: resources\views\components\resources-results.blade.php:63
+msgid "Filter by:"
+msgstr "Filtrar por:"
+
+#: resources\views\components\resources-results.blade.php:98
+msgid "More Filters +"
+msgstr "Más filtros +"
+
+#: resources\views\components\resources-results.blade.php:144
+#: resources\views\components\resources-results.blade.php:224
+msgid "Showing "
+msgstr "Mostrando "
+
+#: resources\views\components\resources-results.blade.php:144
+#: resources\views\components\resources-results.blade.php:224
+msgid " out of "
+msgstr " de "
+
+#: resources\views\components\resources-results.blade.php:144
+msgid " collections"
+msgstr " colecciones"
+
+#: resources\views\components\resources-results.blade.php:149
+#: resources\views\components\resources-results.blade.php:229
+msgid "Less"
+msgstr "Menos"
+
+#: resources\views\components\resources-results.blade.php:149
+#: resources\views\components\resources-results.blade.php:229
+msgid "More"
+msgstr "Más"
+
+#: resources\views\components\resources-results.blade.php:155
+#: resources\views\components\resources-results.blade.php:235
+msgid "See "
+msgstr "Ver "
+
+#: resources\views\components\resources-results.blade.php:224
+msgid " resources"
+msgstr " recursos"
+
+#: resources\views\components\resources-results.blade.php:259
+msgid "RESOURCE"
+msgstr "RECURSO"
+
+#: resources\views\components\search-bar.blade.php:4
+msgid "Search here"
+msgstr "Buscar aquí"
+
+#: resources\views\header.blade.php:16
+msgid "Change Language"
+msgstr ""
+"Cambiar el \n"
+"idioma"

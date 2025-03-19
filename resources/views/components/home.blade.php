@@ -9,11 +9,11 @@
             <div class="inset-0 flex flex-col items-center">
                 <!-- Heading -->
                 <div class="text-white font-bold text-4xl sm:text-5xl md:text-5xl pt-12 text-center">
-                    Stats4SD Resources Collection
+                    {{ t("Stats4SD Resources Collection") }}
                 </div>
 
                 <!-- Search -->
-                <h1 class="text-white text-base sm:text-lg md:text-xl mt-8 md:mt-10">Search the collection</h1>
+                <h1 class="text-white text-base sm:text-lg md:text-xl mt-8 md:mt-10">{{ t("Search the collection") }}</h1>
 
                 <div class="mt-4 flex items-center space-x-3 relative">
                     
@@ -34,8 +34,8 @@
                 <!-- Description -->
                 <div class="relative flex items-center max-w-3xl md:pr-16 mb-0 md:mb-2 text-center md:text-left px-4 pt-8 md:pt-10">
                     <div class="flex-grow">
-                        <h1 class="text-white mb-2 md:mb-4">The Stats4SD resources collection is a curated selection of materials that support <b>good practice, research and learning</b> in 
-                            the broad range of topics relevant to our work. Search, or select a library below to get started.
+                        <h1 class="text-white mb-2 md:mb-4">{!! t("The Stats4SD resources collection is a curated selection of materials that support <b>good practice, research and learning</b> in 
+                            the broad range of topics relevant to our work. Search, or select a library below to get started.") !!}
                         </h1>
                     </div>
                 </div>
@@ -69,8 +69,8 @@
 
                     <button onclick="scrollToSection('Resources-section')" class="library-card bg-black hover-effect flex flex-col items-center">
                         <div class="flex-1 text-center">
-                            <h2 class="text-bold text-lg md:text-xl mb-4 md:mb-6">Browse all</h2>
-                            <p class="mb-4 md:mb-6 text-white">Browse the full collection of resources on a variety of topics.</p>
+                            <h2 class="text-bold text-lg md:text-xl mb-4 md:mb-6">{{ t("Browse all") }}</h2>
+                            <p class="mb-4 md:mb-6 text-white">{{ t("Browse the full collection of resources on a variety of topics.") }}</p>
                         </div>
                     </button>
 
@@ -83,7 +83,7 @@
         <!-- Latest Uploads-->
         <div class="container mx-6 md:mx-auto">
             <div class="px-4">
-                <div class="pt-20 pb-4 text-2xl font-bold">Latest Uploads</div>
+                <div class="pt-20 pb-4 text-2xl font-bold">{{ t("Latest Uploads") }}</div>
                 <div class="divider"></div>
 
                 <livewire:latest-uploads />

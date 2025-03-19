@@ -63,3 +63,11 @@ a {
 a:hover {
     color: var(--stats4sd-red);
 }
+
+.language-dropdown-menu {
+    @apply absolute left-0 mt-2 p-0 rounded-md bg-white shadow-md flex-col text-black w-full z-50;
+}
+
+.dropdown-item {
+    @apply text-black flex items-center w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-0 pl-10 py-2.5 text-sm hover:bg-gray-50 disabled:text-gray-500;
+}

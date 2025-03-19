@@ -1,0 +1,145 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Stats4SD Resources\n"
+"Report-Msgid-Bugs-To: contact@translation.io\n"
+"Last-Translator: \n"
+"Language-Team: French\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-03-17T15:45:56+00:00\n"
+"PO-Revision-Date: 2025-03-17 16:45+0100\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
+
+#: resources\views\components\home.blade.php:11
+msgid "Stats4SD Resources Collection"
+msgstr ""
+
+#: resources\views\components\home.blade.php:16
+msgid "Search the collection"
+msgstr ""
+
+#: resources\views\components\home.blade.php:37
+msgid ""
+"The Stats4SD resources collection is a curated selection of materials that support <b>good practice, research and learning</b> in \n"
+"                            the broad range of topics relevant to our work. Search, or select a library below to get started."
+msgstr ""
+
+#: resources\views\components\home.blade.php:73
+msgid "Browse all"
+msgstr ""
+
+#: resources\views\components\home.blade.php:74
+msgid "Browse the full collection of resources on a variety of topics."
+msgstr ""
+
+#: resources\views\components\home.blade.php:87
+msgid "Latest Uploads"
+msgstr ""
+
+#: resources\views\components\latest-uploads.blade.php:4
+#: resources\views\components\resources-results.blade.php:207
+msgid "Resources"
+msgstr ""
+
+#: resources\views\components\latest-uploads.blade.php:8
+#: resources\views\components\latest-uploads.blade.php:36
+msgid "TROVE"
+msgstr ""
+
+#: resources\views\components\latest-uploads.blade.php:28
+#: resources\views\components\latest-uploads.blade.php:56
+#: resources\views\components\latest-uploads.blade.php:87
+#: resources\views\components\resources-results.blade.php:190
+#: resources\views\components\resources-results.blade.php:282
+msgid "VIEW"
+msgstr ""
+
+#: resources\views\components\latest-uploads.blade.php:67
+#: resources\views\components\latest-uploads.blade.php:97
+msgid "See all"
+msgstr ""
+
+#: resources\views\components\latest-uploads.blade.php:75
+#: resources\views\components\resources-results.blade.php:127
+msgid "Collections"
+msgstr ""
+
+#: resources\views\components\latest-uploads.blade.php:78
+#: resources\views\components\resources-results.blade.php:179
+msgid "COLLECTION"
+msgstr ""
+
+#: resources\views\components\resources-results.blade.php:6
+msgid "Browse All Resources"
+msgstr ""
+
+#: resources\views\components\resources-results.blade.php:38
+msgid "Language:"
+msgstr ""
+
+#: resources\views\components\resources-results.blade.php:42
+msgid "Spanish"
+msgstr ""
+
+#: resources\views\components\resources-results.blade.php:47
+msgid "English"
+msgstr "Anglais"
+
+#: resources\views\components\resources-results.blade.php:52
+msgid "French"
+msgstr ""
+
+#: resources\views\components\resources-results.blade.php:63
+msgid "Filter by:"
+msgstr ""
+
+#: resources\views\components\resources-results.blade.php:98
+msgid "More Filters +"
+msgstr ""
+
+#: resources\views\components\resources-results.blade.php:144
+#: resources\views\components\resources-results.blade.php:224
+msgid "Showing "
+msgstr ""
+
+#: resources\views\components\resources-results.blade.php:144
+#: resources\views\components\resources-results.blade.php:224
+msgid " out of "
+msgstr ""
+
+#: resources\views\components\resources-results.blade.php:144
+msgid " collections"
+msgstr ""
+
+#: resources\views\components\resources-results.blade.php:149
+#: resources\views\components\resources-results.blade.php:229
+msgid "Less"
+msgstr ""
+
+#: resources\views\components\resources-results.blade.php:149
+#: resources\views\components\resources-results.blade.php:229
+msgid "More"
+msgstr ""
+
+#: resources\views\components\resources-results.blade.php:155
+#: resources\views\components\resources-results.blade.php:235
+msgid "See "
+msgstr ""
+
+#: resources\views\components\resources-results.blade.php:224
+msgid " resources"
+msgstr ""
+
+#: resources\views\components\resources-results.blade.php:259
+msgid "RESOURCE"
+msgstr ""
+
+#: resources\views\components\search-bar.blade.php:4
+msgid "Search here"
+msgstr ""
+
+#: resources\views\header.blade.php:16
+msgid "Change Language"
+msgstr "Changer de langue"

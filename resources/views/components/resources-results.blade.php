@@ -3,7 +3,7 @@
     <div id="Search-filters-section" class="container mx-6 md:mx-auto">
         <div class="px-4">
             <!-- Heading -->
-            <div class="pt-20 pb-4 text-2xl font-bold">Browse All Resources</div>
+            <div class="pt-20 pb-4 text-2xl font-bold">{{ t("Browse All Resources") }}</div>
             <div class="divider"></div>
 
             <!-- Search Bar -->
@@ -35,21 +35,21 @@
 
             <!-- Language Selection -->
             <div class="mt-6 flex items-center space-x-4">
-                <label class="font-bold">Language:</label>
+                <label class="font-bold">{{ t("Language:") }}</label>
                 <!-- Spanish Option -->
                 <div class="flex items-center">
                     <input type="checkbox" id="spanish" wire:model="selectedLanguages" value="es" wire:change="search" class="mr-2 accent-stats4sd-red" />
-                    <label for="spanish">Spanish</label>
+                    <label for="spanish">{{ t("Spanish") }}</label>
                 </div>
                 <!-- English Option -->
                 <div class="flex items-center">
                     <input type="checkbox" id="english" wire:model="selectedLanguages" value="en" wire:change="search" class="mr-2 accent-stats4sd-red" />
-                    <label for="english">English</label>
+                    <label for="english">{{ t("English") }}</label>
                 </div>
                 <!-- French Option -->
                 <div class="flex items-center">
                     <input type="checkbox" id="french" wire:model="selectedLanguages" value="fr" wire:change="search" class="mr-2 accent-stats4sd-red" />
-                    <label for="french">French</label>
+                    <label for="french">{{ t("French") }}</label>
                 </div>
             </div>
 
@@ -60,7 +60,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-gray-600">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v2a1 1 0 0 1-.293.707l-7.414 7.414A2 2 0 0 0 12 16.828V20a1 1 0 0 1-1.447.894l-2-1A1 1 0 0 1 8 19v-2.172a2 2 0 0 0-.586-1.414L3.293 6.707A1 1 0 0 1 3 6V4z" />
                     </svg>
-                    <span class="text-lg font-bold">Filter by:</span>
+                    <span class="text-lg font-bold">{{ t("Filter by:") }}</span>
                 </div>
 
                 <!-- Filter Box -->
@@ -71,7 +71,7 @@
                             <!-- Themes always shown -->
                             <button wire:click="setSelectedFilterType('themes')" 
                                 class="relative pb-2 text-gray-700 font-semibold hover:text-gray-900 hover:border-b-2 hover:border-gray-400">
-                                Themes
+                                    {{ $this->themeLabel }}
                                 <!-- Only show red underline if more filters selected and themes is selected -->
                                 @if($filtersExpanded && $selectedFilterType === 'themes')
                                     <span class="absolute left-0 bottom-0 w-full h-0.5 bg-red-500"></span>
@@ -83,7 +83,7 @@
                                 @foreach(['topics', 'keywords', 'locations'] as $filter)
                                     <button wire:click="setSelectedFilterType('{{ $filter }}')" 
                                         class="relative pb-2 text-gray-700 font-semibold hover:text-gray-900 hover:border-b-2 hover:border-gray-400">
-                                        {{ ucfirst($filter) }}
+                                        {{ $this->getTagTypeTranslation($filter) }}
                                         <span class="absolute left-0 bottom-0 w-full h-0.5 bg-red-500 {{ $selectedFilterType === $filter ? 'opacity-100' : 'opacity-0' }}"></span>
                                     </button>
                                 @endforeach
@@ -94,7 +94,7 @@
                         @if(!$filtersExpanded)
                             <button wire:click="toggleFilters" 
                                 class="text-sm text-stats4sd-red font-semibold hover:underline cursor-pointer">
-                                More Filters +
+                                {{ t("More Filters +") }}
                             </button>
                         @endif
                     </div>
@@ -122,7 +122,7 @@
         <div class="flex items-center w-full sm:w-auto sm:mr-4">
             <!-- Result Category Name -->
             <div class="flex-shrink-0 w-full sm:w-1/5 mb-2 sm:mb-0 sm:text-right">
-                <h1 class="text-center sm:text-right text-2xl font-bold">Collections</h1>
+                <h1 class="text-center sm:text-right text-2xl font-bold">{{ t("Collections") }}</h1>
             </div>
             <!-- Toggle Button for small screens -->
             <button class="text-white sm:hidden -ml-2" onclick="toggleCollapse('Collections-content', 'Collections-toggle-content', this)">
@@ -135,16 +135,21 @@
         <!-- "Showing... results" & See All Button -->
         <div id="Collections-toggle-content" class="flex items-center justify-center w-full sm:w-2/5">
             <span class="text-lg text-center sm:text-left mr-2">
-                Showing {{ $expandedCollectionResults ? $totalCollections : min($collections->count(), 3) }}
-                out of {{ $totalCollections }}
-                collections
+            @php
+                $minCount = min($collections->count(), 3);
+                $totalCount = $totalCollections;
+            @endphp
+            {{ t("Showing ") . $minCount . t(" out of ") . $totalCount . t(" collections") }}
             </span>
             @if ($collections->count() > 3)
+                @php
+                    $text = $this->expandedCollectionResults ? t('Less') : t('More');
+                @endphp
                 <button
                     class="transparent-white-button hover-effect px-4 py-2 text-center ml-2"
                     wire:click="$toggle('expandedCollectionResults')"
                 >
-                    See {{ $this->expandedCollectionResults ? 'Less' : 'More' }}
+                    {{ t("See ") . $text }}
                 </button>
             @endif
         </div>
@@ -167,7 +172,7 @@
                     <div class="card relative flex flex-col justify-between bg-stats4sd-red text-white p-6 border border-gray-200 rounded-lg shadow-xl @if(!$expandedCollectionResults && $index >= 3) hidden @endif" data-category="Collections">
 
                         <!-- Category & Title -->
-                        <h3 class="text-xl font-semibold mb-4">COLLECTION</h3>
+                        <h3 class="text-xl font-semibold mb-4">{{ t("COLLECTION") }}</h3>
                         <h3 class="text-xl font-bold">{!! $collection['title'] !!}</h3>
 
                         <p class="pt-8 mb-4 flex-grow">
@@ -177,7 +182,7 @@
                         <!-- View Button -->
                         <div class="flex justify-end">
                             <a href="https://stats4sd.org/collections/{{ $collection->id }}" target="_blank" class="hover-effect bg-white text-stats4sd-red text-center py-2 px-8 rounded-lg">
-                                VIEW
+                                {{ t("VIEW") }}
                             </a>
                         </div>
                     </div>
@@ -193,7 +198,7 @@
         <div class="flex items-center w-full sm:w-auto sm:mr-4">
             <!-- Result Category Name -->
             <div class="flex-shrink-0 w-full sm:w-1/5 mb-2 sm:mb-0 sm:text-right">
-                <h1 class="text-center sm:text-right text-2xl font-bold">Resources</h1>
+                <h1 class="text-center sm:text-right text-2xl font-bold">{{ t("Resources") }}</h1>
             </div>
             <!-- Toggle Button for small screens -->
             <button class="text-white sm:hidden -ml-2" data-target="Resources-toggle" onclick="toggleCollapse('Resources-content', 'Resources-toggle-content', this)">
@@ -206,16 +211,21 @@
         <!-- "Showing... results" & See All Button -->
         <div id="Resources-toggle-content" class="flex items-center justify-center w-full sm:w-2/5">
             <span class="text-lg text-center sm:text-left mr-2">
-                Showing {{ $expandedResourceResults ? $totalResources : min($resources->count(), 3) }}
-                out of {{ $totalResources }}
-                resources
+                @php
+                    $minCount = min($resources->count(), 3);
+                    $totalCount = $totalResources;
+                @endphp
+                {{ t("Showing ") . $minCount . t(" out of ") . $totalCount . t(" resources") }}
             </span>
             @if ($resources->count() > 3)
+                @php
+                    $text = $this->expandedResourceResults ? t('Less') : t('More');
+                @endphp
                 <button
                     class="transparent-white-button hover-effect px-4 py-2 text-center ml-2"
                     wire:click="$toggle('expandedResourceResults')"
                 >
-                    See {{ $this->expandedResourceResults ? 'Less' : 'More' }}
+                    {{ t("See ") . $text }}
                 </button>
             @endif
         </div>
@@ -238,7 +248,7 @@
                     <div class="card relative flex flex-col justify-between bg-white p-6 border border-gray-200 rounded-lg shadow-xl @if(!$expandedResourceResults && $index >= 3) hidden @endif" data-category="Resources">
 
                         <!-- Category & Title -->
-                        <h3 class="text-xl font-semibold mb-4">RESOURCE</h3>
+                        <h3 class="text-xl font-semibold mb-4">{{ t("RESOURCE") }}</h3>
                         <h3 class="text-xl font-bold text-stats4sd-red">{!! $resource['title'] !!}</h3>
 
                         <p class="text-gray-600 pt-8 mb-4 flex-grow">
@@ -260,7 +270,7 @@
                         <!-- View Button -->
                         <div class="flex justify-end">
                             <a href="https://stats4sd.org/resources/{{ $resource->slug }}" target="_blank" class="hover-effect bg-black text-white text-center py-2 px-8 rounded-lg">
-                                VIEW
+                                {{ t("VIEW") }}
                             </a>
                         </div>
                     </div>
