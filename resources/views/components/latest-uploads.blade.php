@@ -5,7 +5,6 @@
         <div class="flex flex-wrap gap-4 justify-center items-center">
             <!-- Resource Card 1 -->
             <div class="card bg-white p-6 border border-gray-200 rounded-lg shadow-xl flex-1 min-w-[300px] max-w-[48%]">
-                <h3 class="text-xl font-semibold mb-2">{{ t("TROVE") }}</h3>
                 <h3 class="text-xl text-bold text-stats4sd-red">{{ $latestResources->first()['title'] }}</h3>
                 <p class="text-gray-600 pt-8 mb-4 flex-grow">
                     {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($latestResources->first()['description']), ENT_QUOTES, 'UTF-8'), 120, '...') }}
@@ -23,7 +22,7 @@
                 </div>
                 <!-- View Button -->
                 <div class="flex justify-end">
-                    <a href="https://stats4sd.org/resources/{{ $latestResources->first()->slug }}" target="_blank" class="hover-effect bg-black text-white text-center py-2 px-8 rounded-lg">
+                    <a href="/resources/{{ $latestResources->first()->slug }}" class="hover-effect bg-black text-white text-center py-2 px-8 rounded-lg">
                         {{ t("VIEW") }}
                     </a>
                 </div>
@@ -31,7 +30,6 @@
 
             <!-- Resource Card 2 -->
             <div class="card bg-white p-6 border border-gray-200 rounded-lg shadow-xl flex-1 min-w-[300px] max-w-[48%]">
-                <h3 class="text-xl font-semibold mb-2">{{ t("TROVE") }}</h3>
                 <h3 class="text-xl text-bold text-stats4sd-red">{{ $latestResources->last()['title'] }}</h3>
                 <p class="text-gray-600 pt-8 mb-4 flex-grow">
                     {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($latestResources->last()['description']), ENT_QUOTES, 'UTF-8'), 120, '...') }}
@@ -49,7 +47,7 @@
                 </div>
                 <!-- View Button -->
                 <div class="flex justify-end">
-                    <a href="https://stats4sd.org/resources/{{ $latestResources->last()->slug }}" target="_blank" class="hover-effect bg-black text-white text-center py-2 px-8 rounded-lg">
+                    <a href="/resources/{{ $latestResources->last()->slug }}" class="hover-effect bg-black text-white text-center py-2 px-8 rounded-lg">
                         {{ t("VIEW") }}
                     </a>
                 </div>
@@ -70,14 +68,13 @@
         <h2 class="text-2xl font-bold mb-4">{{ t("Collections") }}</h2>
         <!-- Collections Card -->
         <div class="card bg-stats4sd-red text-white p-6 border border-gray-200 rounded-lg shadow-xl flex-1 min-w-[300px]">
-            <h3 class="text-xl font-semibold mb-2">{{ t("COLLECTION") }}</h3>
             <h3 class="text-xl">{{ $latestCollection['title'] }}</h3>
             <p class="pt-8 mb-4 flex-grow">
                 {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($latestCollection['description']), ENT_QUOTES, 'UTF-8'), 120, '...') }}
             </p>
             <!-- View Button -->
             <div class="flex justify-end">
-                <a href="https://stats4sd.org/collections/{{ $latestCollection->id }}" target="_blank" class="hover-effect bg-white text-stats4sd-red text-center py-2 px-8 rounded-lg">
+                <a href="collections/{{ $latestCollection->id }}" class="hover-effect bg-white text-stats4sd-red text-center py-2 px-8 rounded-lg">
                     {{ t("VIEW") }}
                 </a>
             </div>

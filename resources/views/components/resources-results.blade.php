@@ -171,8 +171,7 @@
                 @foreach ($this->collections as $index => $collection)
                     <div class="card relative flex flex-col justify-between bg-stats4sd-red text-white p-6 border border-gray-200 rounded-lg shadow-xl @if(!$expandedCollectionResults && $index >= 3) hidden @endif" data-category="Collections">
 
-                        <!-- Category & Title -->
-                        <h3 class="text-xl font-semibold mb-4">{{ t("COLLECTION") }}</h3>
+                        <!-- Title -->
                         <h3 class="text-xl font-bold">{!! $collection['title'] !!}</h3>
 
                         <p class="pt-8 mb-4 flex-grow">
@@ -181,7 +180,7 @@
 
                         <!-- View Button -->
                         <div class="flex justify-end">
-                            <a href="https://stats4sd.org/collections/{{ $collection->id }}" target="_blank" class="hover-effect bg-white text-stats4sd-red text-center py-2 px-8 rounded-lg">
+                            <a href="collections/{{ $collection->id }}" class="hover-effect bg-white text-stats4sd-red text-center py-2 px-8 rounded-lg">
                                 {{ t("VIEW") }}
                             </a>
                         </div>
@@ -247,8 +246,7 @@
                 @foreach ($this->resources as $index => $resource)
                     <div class="card relative flex flex-col justify-between bg-white p-6 border border-gray-200 rounded-lg shadow-xl @if(!$expandedResourceResults && $index >= 3) hidden @endif" data-category="Resources">
 
-                        <!-- Category & Title -->
-                        <h3 class="text-xl font-semibold mb-4">{{ t("RESOURCE") }}</h3>
+                        <!-- Title -->
                         <h3 class="text-xl font-bold text-stats4sd-red">{!! $resource['title'] !!}</h3>
 
                         <p class="text-gray-600 pt-8 mb-4 flex-grow">
@@ -269,7 +267,7 @@
 
                         <!-- View Button -->
                         <div class="flex justify-end">
-                            <a href="https://stats4sd.org/resources/{{ $resource->slug }}" target="_blank" class="hover-effect bg-black text-white text-center py-2 px-8 rounded-lg">
+                            <a href="/resources/{{ $resource->slug }}" class="hover-effect bg-black text-white text-center py-2 px-8 rounded-lg">
                                 {{ t("VIEW") }}
                             </a>
                         </div>
