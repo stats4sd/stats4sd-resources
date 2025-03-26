@@ -7,10 +7,52 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-03-17T15:45:56+00:00\n"
-"PO-Revision-Date: 2025-03-17 16:45+0100\n"
+"POT-Creation-Date: 2025-03-26T17:00:09+00:00\n"
+"PO-Revision-Date: 2025-03-26 18:00+0100\n"
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=n!=1;\n"
+
+#: resources\views\collection.blade.php:13
+msgid "COLLECTION"
+msgstr "COLECCIÓN"
+
+#: resources\views\collection.blade.php:16
+msgid "Jump to resources"
+msgstr "Saltar a los recursos"
+
+#: resources\views\collection.blade.php:25
+#: resources\views\trove.blade.php:52
+msgid "Back to all resources"
+msgstr "Volver a todos los recursos"
+
+#: resources\views\collection.blade.php:30
+#: resources\views\trove.blade.php:57
+msgid "Description"
+msgstr "Descripción"
+
+#: resources\views\collection.blade.php:32
+#: resources\views\trove.blade.php:59
+msgid "Dated: "
+msgstr "Fechado: "
+
+#: resources\views\collection.blade.php:41
+msgid "Resources in this collection"
+msgstr "Recursos de esta colección"
+
+#: resources\views\components\collection-troves.blade.php:29
+#: resources\views\components\latest-uploads.blade.php:27
+#: resources\views\components\latest-uploads.blade.php:54
+#: resources\views\components\latest-uploads.blade.php:84
+#: resources\views\components\resources-results.blade.php:190
+#: resources\views\components\resources-results.blade.php:281
+#: resources\views\components\trove-collections.blade.php:19
+#: resources\views\components\trove-related-troves.blade.php:29
+msgid "VIEW"
+msgstr "VER"
+
+#: resources\views\components\collection-troves.blade.php:37
+msgid "No resources available for this collection."
+msgstr "No hay recursos disponibles para esta colección."
 
 #: resources\views\components\home.blade.php:11
 msgid "Stats4SD Resources Collection"
@@ -47,33 +89,15 @@ msgstr "Últimas subidas"
 msgid "Resources"
 msgstr "Recursos"
 
-#: resources\views\components\latest-uploads.blade.php:8
-#: resources\views\components\latest-uploads.blade.php:36
-msgid "TROVE"
-msgstr "RECURSO"
-
-#: resources\views\components\latest-uploads.blade.php:28
-#: resources\views\components\latest-uploads.blade.php:56
-#: resources\views\components\latest-uploads.blade.php:87
-#: resources\views\components\resources-results.blade.php:190
-#: resources\views\components\resources-results.blade.php:282
-msgid "VIEW"
-msgstr "VER"
-
-#: resources\views\components\latest-uploads.blade.php:67
-#: resources\views\components\latest-uploads.blade.php:97
+#: resources\views\components\latest-uploads.blade.php:65
+#: resources\views\components\latest-uploads.blade.php:94
 msgid "See all"
 msgstr "Ver todos"
 
-#: resources\views\components\latest-uploads.blade.php:75
-#: resources\views\components\resources-results.blade.php:127
+#: resources\views\components\latest-uploads.blade.php:73
+#: resources\views\components\resources-results.blade.php:128
 msgid "Collections"
 msgstr "Colecciones"
-
-#: resources\views\components\latest-uploads.blade.php:78
-#: resources\views\components\resources-results.blade.php:179
-msgid "COLLECTION"
-msgstr "COLECCIÓN"
 
 #: resources\views\components\resources-results.blade.php:6
 msgid "Browse All Resources"
@@ -101,35 +125,35 @@ msgstr "Francés"
 msgid "Filter by:"
 msgstr "Filtrar por:"
 
-#: resources\views\components\resources-results.blade.php:98
+#: resources\views\components\resources-results.blade.php:99
 msgid "More Filters +"
 msgstr "Más filtros +"
 
-#: resources\views\components\resources-results.blade.php:144
+#: resources\views\components\resources-results.blade.php:145
 #: resources\views\components\resources-results.blade.php:224
 msgid "Showing "
 msgstr "Mostrando "
 
-#: resources\views\components\resources-results.blade.php:144
+#: resources\views\components\resources-results.blade.php:145
 #: resources\views\components\resources-results.blade.php:224
 msgid " out of "
 msgstr " de "
 
-#: resources\views\components\resources-results.blade.php:144
+#: resources\views\components\resources-results.blade.php:145
 msgid " collections"
 msgstr " colecciones"
 
-#: resources\views\components\resources-results.blade.php:149
+#: resources\views\components\resources-results.blade.php:150
 #: resources\views\components\resources-results.blade.php:229
 msgid "Less"
 msgstr "Menos"
 
-#: resources\views\components\resources-results.blade.php:149
+#: resources\views\components\resources-results.blade.php:150
 #: resources\views\components\resources-results.blade.php:229
 msgid "More"
 msgstr "Más"
 
-#: resources\views\components\resources-results.blade.php:155
+#: resources\views\components\resources-results.blade.php:156
 #: resources\views\components\resources-results.blade.php:235
 msgid "See "
 msgstr "Ver "
@@ -138,16 +162,78 @@ msgstr "Ver "
 msgid " resources"
 msgstr " recursos"
 
-#: resources\views\components\resources-results.blade.php:259
-msgid "RESOURCE"
-msgstr "RECURSO"
-
 #: resources\views\components\search-bar.blade.php:4
 msgid "Search here"
 msgstr "Buscar aquí"
+
+#: resources\views\components\trove-collections.blade.php:27
+msgid "No collections available for this resource."
+msgstr "No hay colecciones disponibles para este recurso."
+
+#: resources\views\components\trove-related-troves.blade.php:38
+msgid "No related resources found."
+msgstr "No se han encontrado recursos relacionados."
 
 #: resources\views\header.blade.php:16
 msgid "Change Language"
 msgstr ""
 "Cambiar el \n"
 "idioma"
+
+#: resources\views\trove.blade.php:15
+msgid "Jump to view/download"
+msgstr "Saltar a ver/descargar"
+
+#: resources\views\trove.blade.php:34
+msgid "Available Languages:"
+msgstr "Idiomas disponibles:"
+
+#: resources\views\trove.blade.php:65
+msgid "Author:"
+msgstr "Autor:"
+
+#: resources\views\trove.blade.php:65
+msgid "Authors:"
+msgstr "Autores:"
+
+#: resources\views\trove.blade.php:81
+msgid "View/download"
+msgstr "Ver/descargar"
+
+#: resources\views\trove.blade.php:97
+msgid "This resource includes a video on our YouTube channel, embedded here."
+msgstr "Este recurso incluye un vídeo en nuestro canal de YouTube, incrustado aquí."
+
+#: resources\views\trove.blade.php:97
+msgid "This resource includes videos on our YouTube channel, embedded here."
+msgstr "Este recurso incluye vídeos en nuestro canal de YouTube, incrustados aquí."
+
+#: resources\views\trove.blade.php:124
+msgid ""
+"The individual components of the trove are listed below. Click on one to download the file or go to the \r\n"
+"                external url. You can download the full trove below as a .zip file. External urls will be included as\r\n"
+"                .url files. These files act as bookmarks and can be opened with any web browser."
+msgstr ""
+"A continuación se enumeran los distintos componentes del recurso. Haga clic en uno para descargar el archivo o vaya a la \n"
+"                url externa. Puede descargar el recurso completo en formato .zip. Las urls externas se incluirán como archivos\n"
+"                archivos .url. Estos archivos actúan como marcadores y pueden abrirse con cualquier navegador web."
+
+#: resources\views\trove.blade.php:151
+msgid "VISIT LINK"
+msgstr "VISITAR EL ENLACE"
+
+#: resources\views\trove.blade.php:178
+msgid "File"
+msgstr "Archivo"
+
+#: resources\views\trove.blade.php:188
+msgid "Download"
+msgstr "Descargar"
+
+#: resources\views\trove.blade.php:206
+msgid "Collections including this resource"
+msgstr "Colecciones que incluyen este recurso"
+
+#: resources\views\trove.blade.php:216
+msgid "Related resources"
+msgstr "Recursos relacionados"

@@ -4,6 +4,7 @@
 
 :root {
     --stats4sd-red: #D32229;
+    --stats4sd-red-transparent: rgba(211, 34, 41, 0.7);
 }
 
 .library-card {
