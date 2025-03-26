@@ -54,6 +54,17 @@ class Collection extends Model implements HasMedia
             ->withPivot('id');
     }
 
+    public function relatedCollections()
+    {    
+        return Collection::whereHas('troves', function ($query) {
+            $query->whereIn('collection_trove.trove_id', $this->troves->pluck('id'));
+        })
+        ->where('id', '!=', $this->id) // Exclude itself
+        ->distinct()
+        ->get();
+    }
+
+
     public function toSearchableArray(): array
     {
         return [

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Trove;
+use App\Models\Collection;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,5 +26,15 @@ Route::group([
     Route::get('/home', function () {
         return view('components.home');
     })->name('home');
+
+    Route::get('/resources/{slug}', function ($slug) {
+        $resource = Trove::where('slug', $slug)->where('is_published', 1)->firstOrFail();
+        return view('trove', compact('resource'));
+    });
+
+    Route::get('/collections/{id}', function ($id) {
+        $collection = Collection::where('id', $id)->where('public', 1)->firstOrFail();
+        return view('collection', compact('collection'));
+    });
     
 });

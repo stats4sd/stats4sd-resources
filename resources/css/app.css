@@ -4,6 +4,7 @@
 
 :root {
     --stats4sd-red: #D32229;
+    --stats4sd-red-transparent: rgba(211, 34, 41, 0.7);
 }
 
 .library-card {
@@ -57,10 +58,6 @@ h2 {
 }
 
 a {
-    color: var(--stats4sd-red);
-}
-
-a:hover {
     color: var(--stats4sd-red);
 }
 

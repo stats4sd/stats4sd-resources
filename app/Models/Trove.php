@@ -149,6 +149,16 @@ class Trove extends Model implements HasMedia
             ->withPivot('id');
     }
 
+    public function relatedTroves()
+    {
+        // Using the collections to get related troves
+        return Trove::whereHas('collections', function ($query) {
+            $query->whereIn('collections.id', $this->collections->pluck('id'));
+        })
+        ->where('id', '!=', $this->id)  // Exclude itself
+        ->get();
+    }
+
     public function tags(): MorphToMany
     {
         return $this->morphToMany(Tag::class, 'taggable');
