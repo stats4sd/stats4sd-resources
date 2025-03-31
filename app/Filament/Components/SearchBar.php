@@ -8,14 +8,11 @@ class SearchBar extends Component
 {
     public string $query = '';
     public ?string $inputClass = null;
-    public ?bool $scrollOnSearch = false;
-    private bool $searchInProgress = false;
     private string $previousQuery = '';
 
     protected $listeners = [
         'clearSearchInput' => 'clearQuery', 
         'queryUpdated' => 'updateQuery', 
-        'searchAndScroll' => 'search',
     ];
     
     public function search()
@@ -25,10 +22,6 @@ class SearchBar extends Component
         }
 
         $this->dispatch('queryUpdated', $this->query);
-
-        if ($this->scrollOnSearch) {
-            $this->dispatch('homeSearchScroll');
-        }
 
         $this->previousQuery = $this->query;
 

@@ -61,6 +61,10 @@ a {
     color: var(--stats4sd-red);
 }
 
+nav a {
+    color: black !important;
+}
+
 .language-dropdown-menu {
     @apply absolute left-0 mt-2 p-0 rounded-md bg-white shadow-md flex-col text-black w-full z-50;
 }

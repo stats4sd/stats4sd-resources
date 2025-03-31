@@ -31,7 +31,7 @@
     @endphp
 
     <div class="container mx-auto p-6">
-        <h3 class="text-lg font-semibold">{{ t("Available Languages:") }}</h3>
+        <p class="text-lg font-semibold">{{ t("Available Languages:") }}</p>
         <div class="flex gap-2 mt-2">
         @foreach($availableLanguages as $language)
             <a href="{{ URL::current() . '?locale=' . $language }}"

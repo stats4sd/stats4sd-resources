@@ -1,0 +1,117 @@
+<div class="pb-4 px-28">
+
+    <!-- Search bar -->
+    <div class="relative flex items-center">
+
+        <livewire:search-bar
+            inputClass="flex-grow py-2 pl-12 pr-4  border-2 border-black rounded-full focus:outline-none transition
+            duration-300 focus:border-stats4sd-red focus:ring-1 focus:ring-stats4sd-red"/>
+        
+        <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor"
+                class="w-5 h-5 text-gray-600">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            </svg>
+        </div>
+                
+        <!-- Clear Button -->
+        @if($query)
+        <svg xmlns="http://www.w3.org/2000/svg" wire:click="clearSearch" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="gray"
+            class="absolute right-12 md:right-2 top-1/2 transform -translate-y-1/2 w-5 h-5 cursor-pointer hover:stroke-gray-700 transition-colors duration-200">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+        @endif
+    </div>
+
+    <!-- Language Selection -->
+    <div class="mt-6 flex items-center space-x-4">
+        <label class="text-lg font-bold">{{ t("Language:") }}</label>
+        <!-- Spanish Option -->
+        <div class="flex items-center">
+            <input type="checkbox" id="spanish" wire:model="selectedLanguages" value="es" wire:change="search" class="mr-2 accent-stats4sd-red" />
+            <label for="spanish">{{ t("Spanish") }}</label>
+        </div>
+        <!-- English Option -->
+        <div class="flex items-center">
+            <input type="checkbox" id="english" wire:model="selectedLanguages" value="en" wire:change="search" class="mr-2 accent-stats4sd-red" />
+            <label for="english">{{ t("English") }}</label>
+        </div>
+        <!-- French Option -->
+        <div class="flex items-center">
+            <input type="checkbox" id="french" wire:model="selectedLanguages" value="fr" wire:change="search" class="mr-2 accent-stats4sd-red" />
+            <label for="french">{{ t("French") }}</label>
+        </div>
+    </div>
+
+    <!-- Research Methods Filter-->
+    <div class="pt-8">
+        <label class="text-lg font-bold">{{ t("Filter by research method:") }}</label>
+    </div>
+
+    <div class="flex flex-wrap gap-6 mt-4">
+        @foreach($this->researchMethods as $researchMethod)
+            <label class="flex items-center space-x-2 bg-gray-100 px-3 py-1 rounded-full cursor-pointer">
+                <input type="checkbox" wire:model="selectedResearchMethods" value="{{ $researchMethod->id }}" class="accent-stats4sd-red" wire:change="search"/>
+                <span class="text-sm">{{ $researchMethod->name }}</span>
+            </label>
+        @endforeach
+    </div>
+
+    @if($query || !empty($selectedLanguages) || !empty($selectedResearchMethods))
+        <!-- Display search results -->
+        <div class="pt-8">
+            {{ t("Showing ") . $totalResources . t(" resources") }}
+            <button wire:click="clearFilters" class="text-gray-500 hover:text-gray-700 underline">
+                {{ t("Clear Filters") }}
+            </button>
+        </div>
+
+        <!-- Resources Result Cards -->
+        <div id="Resources-content" class="bg-lightgrey py-8 px-16">
+            <div class="container mx-auto">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    @foreach ($this->resources as $index => $resource)
+                        <div class="card relative flex flex-col justify-between bg-white p-6 border border-gray-200 rounded-lg shadow-xl">
+
+                            <!-- Type & Title -->
+                            <p class="text-xl font-bold text-stats4sd-red">{!! $resource['title'] !!}</p>
+
+                            <p class="text-gray-600 pt-8 mb-4 flex-grow">
+                                {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($resource['description']), ENT_QUOTES, 'UTF-8'), 120, '...') }}
+                            </p>
+
+                            <!-- Tags -->
+                            <div class="flex flex-wrap mb-4 gap-2 pt-8">
+                                @php
+                                    $tags = $resource->themeAndTopicTags;
+                                @endphp
+                                @foreach ($tags->sortBy(fn($tag) => strtolower($tag->name)) as $tag)
+                                    @if(!empty($tag))
+                                        <div class="grey-badge">{{ $tag->name }}</div>
+                                    @endif
+                                @endforeach
+                            </div>
+
+                            <!-- View Button -->
+                            <div class="flex justify-end">
+                                <a href="/resources/{{ $resource->slug }}" class="hover-effect bg-black text-white text-center py-2 px-8 rounded-lg">
+                                    {{ t("VIEW") }}
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
+
+                </div>
+
+            </div>
+        </div>
+
+    @else
+        <!-- Display message when no search term -->
+        <div class="text-center text-semibold py-20">
+            {{ t("Type a search term or select a research method above to find resources") }}
+        </div>
+
+    @endif
+
+</div>

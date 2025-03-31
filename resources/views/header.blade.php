@@ -1,4 +1,4 @@
-<header class="bg-white shadow-md px-4 sm:px-20" x-data="{ open: false }">
+<header class="bg-white shadow-md py-2 px-4 sm:px-20" x-data="{ open: false }">
     <div class="container mx-auto flex justify-between items-center py-4">
         <!-- Logo -->
         <div class="flex items-center space-x-4">
@@ -9,10 +9,27 @@
 
         <!-- Nav Items -->
         <nav>
-            <ul class="flex space-x-6">
+            <ul class="flex space-x-6 text-lg font-semibold">
+                <li><a href="/home" class="{{ request()->fullUrlIs('home') ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
+                    {{ t("Library Home") }}
+                </a></li>
+                <li><a href="/home#resources" class="{{ request()->is('home#resources') ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
+                    {{ t("Resources") }}
+                </a></li>
+                <li><a href="/home#collections" class="{{ request()->is('home#collections') ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
+                    {{ t("Collections") }}
+                </a></li>
+                <li><a href="/home#browse-all" class="{{ request()->is('home#browse-all') ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
+                    {{ t("Browse all") }}
+                </a></li>
+                <li><a href="/home#theme-pages" class="{{ request()->is('home#theme-pages') ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
+                    {{ t("Theme Pages") }}
+                </a></li>
+                
                 <!-- Language Dropdown -->
-                <li class="relative nav-item dropdown text-gray-800 hover:text-gray-600" x-data="{ open: false }">
-                    <a class="nav-link dropdown-toggle" role="button" aria-expanded="false" x-on:click="open = !open">
+                <li class="relative nav-item dropdown" x-data="{ open: false }">
+                    <a class="nav-link dropdown-toggle px-4 py-2 border-2 border-black text-black rounded-3xl hover:bg-gray-100 cursor-pointer" 
+                        role="button" aria-expanded="false" x-on:click="open = !open">
                         {{ t("Change Language") }}
                     </a>
                     <div class="language-dropdown-menu" x-show="open" x-on:click.outside="open = false" style="display:none">
