@@ -62,7 +62,7 @@ class Resources extends Component
 
                 } else {
                     // No search results, return empty for resources
-                    $this->resources = collect();
+                    $this->resources = new EloquentCollection();
                     $this->totalResources = 0;
                 }
             }

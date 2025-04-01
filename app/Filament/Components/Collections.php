@@ -42,7 +42,7 @@ class Collections extends Component
                     $collectionsQuery->whereIn('id', $collectionIds);
                 } else {
                     // No matching collections found, return empty collections
-                    $this->collections = collect();
+                    $this->collections = new EloquentCollection();
                     $this->totalCollections = 0;
                     return;
                 }
