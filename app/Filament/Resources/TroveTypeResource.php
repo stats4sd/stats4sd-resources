@@ -2,18 +2,21 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\TroveTypeResource\Pages;
-use App\Filament\Resources\TroveTypeResource\RelationManagers;
-use App\Filament\Translatable\Form\TranslatableComboField;
-use Filament\Resources\Concerns\Translatable;
-use App\Models\TroveType;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
+use App\Models\TroveType;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Hidden;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Resources\Concerns\Translatable;
+use App\Filament\Resources\TroveTypeResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Translatable\Form\TranslatableComboField;
+use App\Filament\Resources\TroveTypeResource\RelationManagers;
 
 class TroveTypeResource extends Resource
 {
@@ -38,6 +41,8 @@ class TroveTypeResource extends Resource
                     ->columns(3)
                     ->childField(Forms\Components\TextInput::class)
                     ->required(),
+                Forms\Components\Hidden::make('order')
+                    ->default(fn() => (TroveType::max('order') ?? 0) + 1),
             ])->columns(1);
     }
 
@@ -58,6 +63,8 @@ class TroveTypeResource extends Resource
                 Tables\Actions\EditAction::make()
                     ->modalHeading(''),
             ])
+            ->defaultSort('order')
+            ->reorderable('order')
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

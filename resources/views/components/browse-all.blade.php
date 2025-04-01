@@ -92,17 +92,19 @@
                 @foreach ($this->items as $index => $item)
                     <div class="card relative flex flex-col justify-between bg-white p-6 border border-gray-200 rounded-lg shadow-xl">
 
-                        <!-- Title -->
-                        <h3 class="text-xl font-bold {{ $item['type'] === 'collection' ? 'text-white bg-stats4sd-red p-2 rounded' : 'text-stats4sd-red' }}">
+                        @if ($item['type'] === 'resource' && !empty($item['troveTypes']))
+                            <p class="text-xl uppercase">{{ $item['troveTypes']->sortBy('order')->first()->label ?? '' }}</p>
+                        @endif
+                        <p class="text-xl font-bold {{ $item['type'] === 'collection' ? 'text-white bg-stats4sd-red p-2 rounded' : 'text-stats4sd-red' }}">
                             {!! $item['title'] !!}
-                        </h3>
+                        </p>
 
                         <p class="text-gray-600 pt-8 mb-4 flex-grow">
                             {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($item['description']), ENT_QUOTES, 'UTF-8'), 120, '...') }}
                         </p>
 
                         <!-- Tags (Only for Resources) -->
-                        @if ($item['type'] === 'resource' && isset($item['tags']))
+                        @if ($item['type'] === 'resource' && !empty($item['tags']))
                             <div class="flex flex-wrap mb-4 gap-2 pt-8">
                                 @foreach ($item['tags']->sortBy(fn($tag) => strtolower($tag->name)) as $tag)
                                     <div class="grey-badge">{{ $tag->name }}</div>

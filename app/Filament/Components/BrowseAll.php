@@ -28,7 +28,7 @@ class BrowseAll extends Component
 
     public function fetchInitialData()
     {
-        $this->resources = Trove::where('is_published', 1)->get();
+        $this->resources = Trove::with(['troveTypes', 'themeAndTopicTags'])->where('is_published', 1)->get();
         $this->collections = Collection::where('public', 1)->get();
         $this->mergeItems();
     }
@@ -82,6 +82,8 @@ class BrowseAll extends Component
             'description' => $resource->description,
             'slug' => $resource->slug,
             'type' => 'resource',
+            'troveTypes' => $resource->troveTypes,
+            'tags' => $resource->themeAndTopicTags,
         ]);
 
         $collections = $this->collections->map(fn ($collection) => [
@@ -90,6 +92,8 @@ class BrowseAll extends Component
             'description' => $collection->description,
             'slug' => null, // Collections use ID instead of slug
             'type' => 'collection',
+            'troveTypes' => null,
+            'tags' => null,
         ]);
 
         // Merge and shuffle for a mixed order

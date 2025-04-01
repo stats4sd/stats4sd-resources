@@ -73,7 +73,7 @@
                     @foreach ($this->resources as $index => $resource)
                         <div class="card relative flex flex-col justify-between bg-white p-6 border border-gray-200 rounded-lg shadow-xl">
 
-                            <!-- Type & Title -->
+                            <p class="text-xl uppercase">{{ $resource->troveTypes->sortBy('order')->first()?->label ?? '' }}</p>
                             <p class="text-xl font-bold text-stats4sd-red">{!! $resource['title'] !!}</p>
 
                             <p class="text-gray-600 pt-8 mb-4 flex-grow">
