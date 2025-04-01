@@ -135,10 +135,6 @@ return [
         'key' => env('MEILISEARCH_KEY'),
         'index-settings' => [
              \App\Models\Trove::class => [
-                 'filterableAttributes' => [
-                     'source',
-                     'trove_type',
-                 ],
                  'pagination' => [
                     'maxTotalHits' => 1000,
                 ],
