@@ -7,44 +7,101 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-03-26T17:00:09+00:00\n"
-"PO-Revision-Date: 2025-03-26 18:00+0100\n"
+"POT-Creation-Date: 2025-03-31T12:59:43+00:00\n"
+"PO-Revision-Date: 2025-03-31 14:59+0200\n"
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
-#: resources\views\collection.blade.php:13
+#: resources\views\collection.blade.php:11
 msgid "COLLECTION"
 msgstr ""
 
-#: resources\views\collection.blade.php:16
+#: resources\views\collection.blade.php:14
 msgid "Jump to resources"
 msgstr ""
 
-#: resources\views\collection.blade.php:25
-#: resources\views\trove.blade.php:52
+#: resources\views\collection.blade.php:23
+#: resources\views\trove.blade.php:50
 msgid "Back to all resources"
+msgstr ""
+
+#: resources\views\collection.blade.php:28
+#: resources\views\trove.blade.php:55
+msgid "Description"
 msgstr ""
 
 #: resources\views\collection.blade.php:30
 #: resources\views\trove.blade.php:57
-msgid "Description"
-msgstr ""
-
-#: resources\views\collection.blade.php:32
-#: resources\views\trove.blade.php:59
 msgid "Dated: "
 msgstr ""
 
-#: resources\views\collection.blade.php:41
+#: resources\views\collection.blade.php:39
 msgid "Resources in this collection"
 msgstr ""
 
+#: resources\views\components\browse-all.blade.php:7
+msgid "Search and filter"
+msgstr ""
+
+#: resources\views\components\browse-all.blade.php:37
+#: resources\views\components\collections.blade.php:27
+#: resources\views\components\resources-results.blade.php:38
+#: resources\views\components\resources.blade.php:28
+msgid "Language:"
+msgstr ""
+
+#: resources\views\components\browse-all.blade.php:45
+#: resources\views\components\collections.blade.php:31
+#: resources\views\components\resources-results.blade.php:42
+#: resources\views\components\resources.blade.php:32
+msgid "Spanish"
+msgstr ""
+
+#: resources\views\components\browse-all.blade.php:50
+#: resources\views\components\collections.blade.php:36
+#: resources\views\components\resources-results.blade.php:47
+#: resources\views\components\resources.blade.php:37
+msgid "English"
+msgstr "Anglais"
+
+#: resources\views\components\browse-all.blade.php:55
+#: resources\views\components\collections.blade.php:41
+#: resources\views\components\resources-results.blade.php:52
+#: resources\views\components\resources.blade.php:42
+msgid "French"
+msgstr ""
+
+#: resources\views\components\browse-all.blade.php:65
+msgid "Research method:"
+msgstr ""
+
+#: resources\views\components\browse-all.blade.php:86
+#: resources\views\components\collections.blade.php:48
+#: resources\views\components\resources-results.blade.php:145
+#: resources\views\components\resources-results.blade.php:224
+#: resources\views\components\resources.blade.php:63
+msgid "Showing "
+msgstr ""
+
+#: resources\views\components\browse-all.blade.php:86
+msgid " resources and collections"
+msgstr ""
+
+#: resources\views\components\browse-all.blade.php:90
+#: resources\views\components\collections.blade.php:51
+#: resources\views\components\resources.blade.php:66
+msgid "Clear Filters"
+msgstr ""
+
+#: resources\views\components\browse-all.blade.php:126
 #: resources\views\components\collection-troves.blade.php:29
+#: resources\views\components\collections.blade.php:74
 #: resources\views\components\latest-uploads.blade.php:27
 #: resources\views\components\latest-uploads.blade.php:54
 #: resources\views\components\latest-uploads.blade.php:84
 #: resources\views\components\resources-results.blade.php:190
 #: resources\views\components\resources-results.blade.php:281
+#: resources\views\components\resources.blade.php:101
 #: resources\views\components\trove-collections.blade.php:19
 #: resources\views\components\trove-related-troves.blade.php:29
 msgid "VIEW"
@@ -54,34 +111,58 @@ msgstr ""
 msgid "No resources available for this collection."
 msgstr ""
 
-#: resources\views\components\home.blade.php:11
+#: resources\views\components\collections.blade.php:48
+#: resources\views\components\resources-results.blade.php:145
+msgid " collections"
+msgstr ""
+
+#: resources\views\components\collections.blade.php:89
+msgid "Type a search term above to find collections"
+msgstr ""
+
+#: resources\views\components\home-old.blade.php:11
 msgid "Stats4SD Resources Collection"
 msgstr ""
 
-#: resources\views\components\home.blade.php:16
+#: resources\views\components\home-old.blade.php:16
 msgid "Search the collection"
 msgstr ""
 
-#: resources\views\components\home.blade.php:37
+#: resources\views\components\home-old.blade.php:37
 msgid ""
 "The Stats4SD resources collection is a curated selection of materials that support <b>good practice, research and learning</b> in \n"
 "                            the broad range of topics relevant to our work. Search, or select a library below to get started."
 msgstr ""
 
-#: resources\views\components\home.blade.php:73
+#: resources\views\components\home-old.blade.php:73
+#: resources\views\components\tab-controller.blade.php:33
+#: resources\views\header.blade.php:26
 msgid "Browse all"
 msgstr ""
 
-#: resources\views\components\home.blade.php:74
+#: resources\views\components\home-old.blade.php:74
 msgid "Browse the full collection of resources on a variety of topics."
 msgstr ""
 
-#: resources\views\components\home.blade.php:87
+#: resources\views\components\home-old.blade.php:87
 msgid "Latest Uploads"
+msgstr ""
+
+#: resources\views\components\home.blade.php:11
+msgid "Stats4SD Resources Library"
+msgstr ""
+
+#: resources\views\components\home.blade.php:18
+msgid ""
+"The Stats4SD resources library is a curated selection of materials \n"
+"                            that support <b>good practice, research and learning</b> in the broad range of topics relevant to our \n"
+"                            work. Select a tab below to get started."
 msgstr ""
 
 #: resources\views\components\latest-uploads.blade.php:4
 #: resources\views\components\resources-results.blade.php:207
+#: resources\views\components\tab-controller.blade.php:9
+#: resources\views\header.blade.php:18
 msgid "Resources"
 msgstr ""
 
@@ -92,27 +173,13 @@ msgstr ""
 
 #: resources\views\components\latest-uploads.blade.php:73
 #: resources\views\components\resources-results.blade.php:128
+#: resources\views\components\tab-controller.blade.php:21
+#: resources\views\header.blade.php:22
 msgid "Collections"
 msgstr ""
 
 #: resources\views\components\resources-results.blade.php:6
 msgid "Browse All Resources"
-msgstr ""
-
-#: resources\views\components\resources-results.blade.php:38
-msgid "Language:"
-msgstr ""
-
-#: resources\views\components\resources-results.blade.php:42
-msgid "Spanish"
-msgstr ""
-
-#: resources\views\components\resources-results.blade.php:47
-msgid "English"
-msgstr "Anglais"
-
-#: resources\views\components\resources-results.blade.php:52
-msgid "French"
 msgstr ""
 
 #: resources\views\components\resources-results.blade.php:63
@@ -125,16 +192,7 @@ msgstr ""
 
 #: resources\views\components\resources-results.blade.php:145
 #: resources\views\components\resources-results.blade.php:224
-msgid "Showing "
-msgstr ""
-
-#: resources\views\components\resources-results.blade.php:145
-#: resources\views\components\resources-results.blade.php:224
 msgid " out of "
-msgstr ""
-
-#: resources\views\components\resources-results.blade.php:145
-msgid " collections"
 msgstr ""
 
 #: resources\views\components\resources-results.blade.php:150
@@ -153,11 +211,41 @@ msgid "See "
 msgstr ""
 
 #: resources\views\components\resources-results.blade.php:224
+#: resources\views\components\resources.blade.php:63
 msgid " resources"
+msgstr ""
+
+#: resources\views\components\resources.blade.php:48
+msgid "Filter by research method:"
+msgstr ""
+
+#: resources\views\components\resources.blade.php:116
+msgid "Type a search term or select a research method above to find resources"
 msgstr ""
 
 #: resources\views\components\search-bar.blade.php:4
 msgid "Search here"
+msgstr ""
+
+#: resources\views\components\tab-controller.blade.php:10
+msgid "Guides, tools, videos, papers and other items that we use and recommend to others."
+msgstr ""
+
+#: resources\views\components\tab-controller.blade.php:22
+msgid "A collection is a group of resources compiled together for a specific purpose."
+msgstr ""
+
+#: resources\views\components\tab-controller.blade.php:34
+msgid "Browse the full library of resources."
+msgstr ""
+
+#: resources\views\components\tab-controller.blade.php:45
+#: resources\views\header.blade.php:30
+msgid "Theme Pages"
+msgstr ""
+
+#: resources\views\components\tab-controller.blade.php:46
+msgid "Mini libraries showcasing a specific thematic area."
 msgstr ""
 
 #: resources\views\components\trove-collections.blade.php:27
@@ -168,61 +256,57 @@ msgstr ""
 msgid "No related resources found."
 msgstr ""
 
-#: resources\views\header.blade.php:16
+#: resources\views\header.blade.php:14
+msgid "Library Home"
+msgstr ""
+
+#: resources\views\header.blade.php:38
 msgid "Change Language"
 msgstr "Changer de langue"
 
-#: resources\views\trove.blade.php:15
+#: resources\views\trove.blade.php:13
 msgid "Jump to view/download"
 msgstr ""
 
-#: resources\views\trove.blade.php:34
+#: resources\views\trove.blade.php:32
 msgid "Available Languages:"
 msgstr ""
 
-#: resources\views\trove.blade.php:65
+#: resources\views\trove.blade.php:63
 msgid "Author:"
 msgstr ""
 
-#: resources\views\trove.blade.php:65
+#: resources\views\trove.blade.php:63
 msgid "Authors:"
 msgstr ""
 
-#: resources\views\trove.blade.php:81
+#: resources\views\trove.blade.php:79
 msgid "View/download"
 msgstr ""
 
-#: resources\views\trove.blade.php:97
+#: resources\views\trove.blade.php:95
 msgid "This resource includes a video on our YouTube channel, embedded here."
 msgstr ""
 
-#: resources\views\trove.blade.php:97
+#: resources\views\trove.blade.php:95
 msgid "This resource includes videos on our YouTube channel, embedded here."
 msgstr ""
 
-#: resources\views\trove.blade.php:124
+#: resources\views\trove.blade.php:122
 msgid ""
-"The individual components of the trove are listed below. Click on one to download the file or go to the \r\n"
-"                external url. You can download the full trove below as a .zip file. External urls will be included as\r\n"
+"The individual components of the trove are listed below. Click on one to download the file or go to the \n"
+"                external url. You can download the full trove below as a .zip file. External urls will be included as\n"
 "                .url files. These files act as bookmarks and can be opened with any web browser."
 msgstr ""
 
-#: resources\views\trove.blade.php:151
+#: resources\views\trove.blade.php:149
 msgid "VISIT LINK"
 msgstr ""
 
-#: resources\views\trove.blade.php:178
-msgid "File"
-msgstr "Fichier"
-
-#: resources\views\trove.blade.php:188
-msgid "Download"
-msgstr "Télécharger"
-
-#: resources\views\trove.blade.php:206
+#: resources\views\trove.blade.php:166
 msgid "Collections including this resource"
 msgstr ""
 
-#: resources\views\trove.blade.php:216
+#: resources\views\trove.blade.php:176
 msgid "Related resources"
 msgstr ""

@@ -31,7 +31,7 @@
     @endphp
 
     <div class="container mx-auto p-6">
-        <h3 class="text-lg font-semibold">{{ t("Available Languages:") }}</h3>
+        <p class="text-lg font-semibold">{{ t("Available Languages:") }}</p>
         <div class="flex gap-2 mt-2">
         @foreach($availableLanguages as $language)
             <a href="{{ URL::current() . '?locale=' . $language }}"
@@ -116,42 +116,78 @@
             @endif
         </div>
 
-        <!-- Files and Urls -->
+        <!-- Files and URLs -->
         <p class="text-lg py-8">
             {{ t("The individual components of the trove are listed below. Click on one to download the file or go to the 
                 external url. You can download the full trove below as a .zip file. External urls will be included as
                 .url files. These files act as bookmarks and can be opened with any web browser.") }}
         </p>  
 
-        @php
-            $externalLinks = $resource->getTranslation('external_links', app()->getLocale());
-            if (isset($externalLinks['link_url'])) {
-                $externalLinks = [$externalLinks];
-            }
-        @endphp
+        <div class="space-y-2"> <!-- This ensures equal spacing for both URLs and files -->
+            <!-- URLs -->
+            @php
+                $externalLinks = $resource->getTranslation('external_links', app()->getLocale());
+                if (isset($externalLinks['link_url'])) {
+                    $externalLinks = [$externalLinks];
+                }
+            @endphp
 
-        @if($externalLinks && is_array($externalLinks))
-            @foreach($externalLinks as $link)
-                @if(isset($link['link_url']) && isset($link['link_title']))
-                    <div class="mb-4">
-                        <div class="flex items-center justify-between p-4 border-l-8 border-red-500 shadow-lg bg-white">
+            @if($externalLinks && is_array($externalLinks))
+                @foreach($externalLinks as $link)
+                    @if(isset($link['link_url']) && isset($link['link_title']))
+                        <div class="flex items-center justify-between p-4 border-l-8 border-stats4sd-red shadow-lg bg-white">
                             <div>
                                 <p class="text-xl font-bold">{{ $link['link_title'] }}</p>
                                 <p class="text-lg text-gray-600">{{ $link['link_url'] }}</p>
                             </div>
                             <div>
-                                <a href="{{ $link['link_url'] }}" target="_blank" rel="noopener noreferrer" class="bg-red-500 text-white px-4 py-2 rounded-2xl flex items-center">
-                                    <svg xmlns="https://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 mr-2">
+                                <a href="{{ $link['link_url'] }}" target="_blank" rel="noopener noreferrer" class="bg-stats4sd-red text-white hover-effect px-4 py-2 rounded-2xl flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 mr-2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
                                     </svg>
                                     {{ t("VISIT LINK") }}
                                 </a>
                             </div>
                         </div>
+                    @endif
+                @endforeach
+            @endif
+
+            <!-- Files -->
+            @php
+                $mediaFiles = $resource->getMedia('content_' . app()->getLocale());
+            @endphp
+
+            @if ($mediaFiles->isNotEmpty())
+                @foreach ($mediaFiles as $media)
+                    <div class="flex items-center justify-between p-4 border-l-8 border-stats4sd-red shadow-lg bg-white">
+                        <div>
+                            <p class="text-lg font-bold">{{ $media->file_name }}</p>
+                            <p class="text-gray-600">{{ Number::fileSize($media->size) }}</p>
+                        </div>
+                        <div>
+                            <a href="{{ $media->getUrl() }}" target="_blank" rel="noopener noreferrer"
+                                class="bg-stats4sd-red text-white hover-effect px-4 py-2 rounded-2xl flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 mr-2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m9 12.75 3 3m0 0 3-3m-3 3v-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+                                {{ t("DOWNLOAD") }}
+                            </a>
+                        </div>
                     </div>
-                @endif
-            @endforeach
-        @endif
+                @endforeach
+            @endif
+        </div>
+
+        <!-- DOWNLOAD ALL (ZIP) BUTTON -->
+        <div class="flex justify-end mt-12">
+            <a href="#" class="bg-stats4sd-red text-white hover-effect px-6 py-3 rounded-2xl text-lg font-bold flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 mr-2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m9 12.75 3 3m0 0 3-3m-3 3v-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                {{ t("DOWNLOAD ALL (ZIP)") }}
+            </a>
+        </div>
 
     </div>
 
