@@ -37,4 +37,9 @@ Route::group([
         return view('collection', compact('collection'));
     });
     
+    Route::get('/download-all-zip/{slug}', function ($slug) {
+        $trove = Trove::where('slug', $slug)->firstOrFail();
+        return $trove->downloadAllFilesAsZip();
+    })->name('trove.download.zip');
+
 });

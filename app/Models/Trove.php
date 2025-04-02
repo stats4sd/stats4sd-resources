@@ -2,24 +2,25 @@
 
 namespace App\Models;
 
-use App\Models\Tag;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Tag;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
-use \Oddvalue\LaravelDrafts\Concerns\HasDrafts;
-use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\MediaLibrary\MediaCollections\MediaCollection;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Translatable\HasTranslations;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\Support\MediaStream;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use \Oddvalue\LaravelDrafts\Concerns\HasDrafts;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Spatie\MediaLibrary\MediaCollections\MediaCollection;
+use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
 
 class Trove extends Model implements HasMedia
 {
@@ -236,5 +237,27 @@ class Trove extends Model implements HasMedia
         return $this->tags()->whereHas('tagType', function ($query) {
             $query->whereIn('slug', ['themes', 'topics']);
         });
+    }
+
+    public function downloadAllFilesAsZip()
+    {
+        // Get the current app locale
+        $locale = app()->getLocale();
+
+        // Get the media collection name
+        $collectionName = 'content_' . $locale;
+
+        // Get all media files for this locale
+        $troveFiles = $this->getMedia($collectionName);
+
+        // Check if there are any files
+        if ($troveFiles->isEmpty()) {
+            return redirect()->back()->with('error', __('No downloadable files are available.'));
+        }
+
+        // Return the ZIP of all files
+        $filename = Str::slug($this->title) . "-{$locale}-files.zip";
+
+        return MediaStream::create($filename)->addMedia($troveFiles);
     }
 }
