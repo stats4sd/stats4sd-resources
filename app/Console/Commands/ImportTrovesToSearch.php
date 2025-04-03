@@ -2,13 +2,11 @@
 
 namespace App\Console\Commands;
 
-use Laravel\Scout\Searchable;
+use App\Models\Trove;
 use Illuminate\Console\Command;
 
 class ImportTrovesToSearch extends Command
-{
-    use Searchable;
-    
+{    
     /**
      * The name and signature of the console command.
      *
