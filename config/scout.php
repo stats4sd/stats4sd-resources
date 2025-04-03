@@ -133,13 +133,13 @@ return [
     'meilisearch' => [
         'host' => env('MEILISEARCH_HOST', 'http://localhost:7700'),
         'key' => env('MEILISEARCH_KEY'),
-        // 'index-settings' => [
-        //      \App\Models\Trove::class => [
-        //          'pagination' => [
-        //             'maxTotalHits' => 1000,
-        //         ],
-        //      ],
-        // ],
+        'index-settings' => [
+             \App\Models\Trove::class => [
+                 'pagination' => [
+                    'maxTotalHits' => 1000,
+                ],
+             ],
+        ],
     ],
 
 ];
