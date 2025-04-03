@@ -26,7 +26,9 @@ class ImportTrovesToSearch extends Command
      */
     public function handle()
     {
-        Trove::query()->searchable();
+        // Trove::query()->searchable();
+
+        Trove::where('id', '=', 500)->searchable()
 
         $this->info("Trove search indexes imported!");
     }
