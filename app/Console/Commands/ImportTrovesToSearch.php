@@ -30,6 +30,6 @@ class ImportTrovesToSearch extends Command
 
         Trove::where('id', '=', 500)->searchable()
 
-        $this->info("Trove search indexes imported!");
+        // $this->info("Trove search indexes imported!");
     }
 }
