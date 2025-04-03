@@ -26,9 +26,11 @@ class ImportTrovesToSearch extends Command
      */
     public function handle()
     {
-        // Trove::query()->searchable();
+        $chunkSize = 20; // Adjust based on server limits
 
-        Trove::where('id', '=', 500)->searchable();
+        Trove::query()->chunk($chunkSize, function ($troves) {
+            $troves->each->searchable();
+        });
 
         $this->info("Trove search indexes imported!");
     }
