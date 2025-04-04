@@ -1,8 +1,8 @@
 <div class="flex flex-col md:flex-row justify-center space-y-6 md:space-y-0 md:space-x-8 w-full items-center md:items-stretch px-4 mt-2 md:mt-4 pb-8">
     <!-- Resources tab -->
-    <a href="#resources"
+    <a href="{{ url()->current() }}?activeTab=resources"
         wire:click.prevent="setActiveTab('resources')"
-        onclick="updateUrlHash('resources')"
+        onclick="updateUrl('?activeTab=resources')"
         class="library-card hover-effect flex flex-col items-center 
         {{ $activeTab === 'resources' ? 'bg-black text-white' : 'bg-stats4sd-red' }}">
         <div class="flex-1 text-center">
@@ -12,9 +12,9 @@
     </a>
 
     <!-- Collections tab -->
-    <a href="#collections"
+    <a href="?activeTab=collections"
         wire:click.prevent="setActiveTab('collections')"
-        onclick="updateUrlHash('collections')"
+        onclick="updateUrl('?activeTab=collections')"
         class="library-card hover-effect flex flex-col items-center 
         {{ $activeTab === 'collections' ? 'bg-black text-white' : 'bg-stats4sd-red' }}">
         <div class="flex-1 text-center">
@@ -24,9 +24,9 @@
     </a>
 
     <!-- Browse all tab -->
-    <a href="#browse-all"
+    <a href="?activeTab=browse-all"
         wire:click.prevent="setActiveTab('browse-all')"
-        onclick="updateUrlHash('browse-all')"
+        onclick="updateUrl('?activeTab=browse-all')"
         class="library-card hover-effect flex flex-col items-center 
         {{ $activeTab === 'browse-all' ? 'bg-black text-white' : 'bg-stats4sd-red' }}">
         <div class="flex-1 text-center">
@@ -36,9 +36,9 @@
     </a>
 
     <!-- Theme Pages tab -->
-    <a href="theme-pages"
+    <a href="?activeTab=theme-pages"
         wire:click.prevent="setActiveTab('theme-pages')"
-        onclick="updateUrlHash('theme-pages')"
+        onclick="updateUrl('?activeTab=theme-pages')"
         class="library-card hover-effect flex flex-col items-center 
         {{ $activeTab === 'theme-pages' ? 'bg-black text-white' : 'bg-stats4sd-red' }}">
         <div class="flex-1 text-center">
@@ -49,7 +49,7 @@
 </div>
 
 <script>
-    function updateUrlHash(tab) {
-    window.history.pushState(null, null, '#' + tab);
+    function updateUrl(tab) {
+    window.history.pushState(null, null, tab);
 }
 </script>

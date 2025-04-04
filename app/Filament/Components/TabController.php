@@ -6,6 +6,7 @@ use Livewire\Component;
 
 class TabController extends Component
 {
+    #[Url]
     public $activeTab = null;
 
     public function setActiveTab($tab)
@@ -13,7 +14,12 @@ class TabController extends Component
         $this->activeTab = $tab;
         $this->dispatch('tabChanged', $tab);
     }
-    
+
+    public function mount()
+    {
+        $this->activeTab = request()->query('activeTab') ?? null;
+    }
+
     public function render()
     {
         return view('components.tab-controller');
