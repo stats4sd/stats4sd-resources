@@ -2,7 +2,6 @@
     <!-- Resources tab -->
     <a href="{{ url()->current() }}?activeTab=resources"
         wire:click.prevent="setActiveTab('resources')"
-        onclick="updateUrl('?activeTab=resources')"
         class="library-card hover-effect flex flex-col items-center 
         {{ $activeTab === 'resources' ? 'bg-black text-white' : 'bg-stats4sd-red' }}">
         <div class="flex-1 text-center">
@@ -14,7 +13,6 @@
     <!-- Collections tab -->
     <a href="?activeTab=collections"
         wire:click.prevent="setActiveTab('collections')"
-        onclick="updateUrl('?activeTab=collections')"
         class="library-card hover-effect flex flex-col items-center 
         {{ $activeTab === 'collections' ? 'bg-black text-white' : 'bg-stats4sd-red' }}">
         <div class="flex-1 text-center">
@@ -26,7 +24,6 @@
     <!-- Browse all tab -->
     <a href="?activeTab=browse-all"
         wire:click.prevent="setActiveTab('browse-all')"
-        onclick="updateUrl('?activeTab=browse-all')"
         class="library-card hover-effect flex flex-col items-center 
         {{ $activeTab === 'browse-all' ? 'bg-black text-white' : 'bg-stats4sd-red' }}">
         <div class="flex-1 text-center">
@@ -38,7 +35,6 @@
     <!-- Theme Pages tab -->
     <a href="?activeTab=theme-pages"
         wire:click.prevent="setActiveTab('theme-pages')"
-        onclick="updateUrl('?activeTab=theme-pages')"
         class="library-card hover-effect flex flex-col items-center 
         {{ $activeTab === 'theme-pages' ? 'bg-black text-white' : 'bg-stats4sd-red' }}">
         <div class="flex-1 text-center">
@@ -47,9 +43,3 @@
         </div>
     </a>
 </div>
-
-<script>
-    function updateUrl(tab) {
-    window.history.pushState(null, null, tab);
-}
-</script>

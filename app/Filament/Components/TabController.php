@@ -11,8 +11,8 @@ class TabController extends Component
 
     public function setActiveTab($tab)
     {
-        $this->activeTab = $tab;
-        $this->dispatch('tabChanged', $tab);
+        $this->activeTab = is_string($tab) ? $tab : '';
+        $this->dispatch('tabChanged', $this->activeTab);
     }
 
     public function mount()
