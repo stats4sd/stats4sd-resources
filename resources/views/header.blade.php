@@ -13,22 +13,22 @@
                 <li><a href="/home" class="{{ request()->fullUrlIs('home') ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Library Home") }}
                 </a></li>
-                <li><a href="/home#resources" class="{{ request()->is('home#resources') ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
+                <li><a href="/home?activeTab=resources" class="{{ request()->is('home?activeTab=resources') ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Resources") }}
                 </a></li>
-                <li><a href="/home#collections" class="{{ request()->is('home#collections') ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
+                <li><a href="/home?activeTab=collections" class="{{ request()->is('home?activeTab=collections') ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Collections") }}
                 </a></li>
-                <li><a href="/home#browse-all" class="{{ request()->is('home#browse-all') ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
+                <li><a href="/home?activeTab=browse-all" class="{{ request()->is('home?activeTab=browse-all') ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Browse all") }}
                 </a></li>
-                <li><a href="/home#theme-pages" class="{{ request()->is('home#theme-pages') ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
+                <li><a href="/home?activeTab=theme-pages" class="{{ request()->is('home?activeTab=theme-pages') ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Theme Pages") }}
                 </a></li>
-                
+
                 <!-- Language Dropdown -->
                 <li class="relative nav-item dropdown" x-data="{ open: false }">
-                    <a class="nav-link dropdown-toggle px-4 py-2 border-2 border-black text-black rounded-3xl hover:bg-gray-100 cursor-pointer" 
+                    <a class="nav-link dropdown-toggle px-4 py-2 border-2 border-black text-black rounded-3xl hover:bg-gray-100 cursor-pointer"
                         role="button" aria-expanded="false" x-on:click="open = !open">
                         {{ t("Change Language") }}
                     </a>

@@ -3,7 +3,7 @@
     <a href="#resources"
         wire:click.prevent="setActiveTab('resources')"
         onclick="updateUrlHash('resources')"
-        class="library-card hover-effect flex flex-col items-center 
+        class="library-card hover-effect flex flex-col items-center
         {{ $activeTab === 'resources' ? 'bg-black text-white' : 'bg-stats4sd-red' }}">
         <div class="flex-1 text-center">
             <h2 class="text-bold text-lg md:text-xl mb-4 md:mb-6">{{ t("Resources") }}</h2>
@@ -14,8 +14,7 @@
     <!-- Collections tab -->
     <a href="#collections"
         wire:click.prevent="setActiveTab('collections')"
-        onclick="updateUrlHash('collections')"
-        class="library-card hover-effect flex flex-col items-center 
+        class="library-card hover-effect flex flex-col items-center
         {{ $activeTab === 'collections' ? 'bg-black text-white' : 'bg-stats4sd-red' }}">
         <div class="flex-1 text-center">
             <h2 class="text-bold text-lg md:text-xl mb-4 md:mb-6">{{ t("Collections") }}</h2>
@@ -26,8 +25,7 @@
     <!-- Browse all tab -->
     <a href="#browse-all"
         wire:click.prevent="setActiveTab('browse-all')"
-        onclick="updateUrlHash('browse-all')"
-        class="library-card hover-effect flex flex-col items-center 
+        class="library-card hover-effect flex flex-col items-center
         {{ $activeTab === 'browse-all' ? 'bg-black text-white' : 'bg-stats4sd-red' }}">
         <div class="flex-1 text-center">
             <h2 class="text-bold text-lg md:text-xl mb-4 md:mb-6">{{ t("Browse all") }}</h2>
@@ -38,8 +36,7 @@
     <!-- Theme Pages tab -->
     <a href="theme-pages"
         wire:click.prevent="setActiveTab('theme-pages')"
-        onclick="updateUrlHash('theme-pages')"
-        class="library-card hover-effect flex flex-col items-center 
+        class="library-card hover-effect flex flex-col items-center
         {{ $activeTab === 'theme-pages' ? 'bg-black text-white' : 'bg-stats4sd-red' }}">
         <div class="flex-1 text-center">
             <h2 class="text-bold text-lg md:text-xl mb-4 md:mb-6">{{ t("Theme Pages") }}</h2>
@@ -47,9 +44,3 @@
         </div>
     </a>
 </div>
-
-<script>
-    function updateUrlHash(tab) {
-    window.history.pushState(null, null, '#' + tab);
-}
-</script>
