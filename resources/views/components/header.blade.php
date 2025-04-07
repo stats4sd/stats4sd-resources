@@ -6,27 +6,25 @@
             </a>
         </div>
 
-        @dump('header: ' . $activeTab);
-
         <nav>
             <ul class="flex space-x-6 text-lg font-semibold">
                 <li><a href="/home"
-                    class="{{ !$activeTab ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
+                    class="{{ request()->is('home') && !$activeTab ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Library Home") }}
                 </a></li>
-                <li><a href="?activeTab=resources"
+                <li><a href="/home?activeTab=resources"
                     class="{{ $activeTab === 'resources' ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Resources") }}
                 </a></li>
-                <li><a href="?activeTab=collections"
+                <li><a href="/home?activeTab=collections"
                     class="{{ $activeTab === 'collections' ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Collections") }}
                 </a></li>
-                <li><a href="?activeTab=browse-all"
+                <li><a href="/home?activeTab=browse-all"
                     class="{{ $activeTab === 'browse-all' ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Browse all") }}
                 </a></li>
-                <li><a href="?activeTab=theme-pages"
+                <li><a href="/home?activeTab=theme-pages"
                     class="{{ $activeTab === 'theme-pages' ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Theme Pages") }}
                 </a></li>
