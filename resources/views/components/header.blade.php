@@ -6,35 +6,33 @@
             </a>
         </div>
 
+        @dump('header: ' . $activeTab);
+
         <nav>
             <ul class="flex space-x-6 text-lg font-semibold">
-                <li><a href="/home" 
+                <li><a href="/home"
                     class="{{ !$activeTab ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Library Home") }}
                 </a></li>
                 <li><a href="?activeTab=resources"
-                    wire:click.prevent="setActiveTab('resources')"
                     class="{{ $activeTab === 'resources' ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Resources") }}
                 </a></li>
                 <li><a href="?activeTab=collections"
-                    wire:click.prevent="setActiveTab('collections')"
                     class="{{ $activeTab === 'collections' ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Collections") }}
                 </a></li>
                 <li><a href="?activeTab=browse-all"
-                    wire:click.prevent="setActiveTab('browse-all')"
                     class="{{ $activeTab === 'browse-all' ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Browse all") }}
                 </a></li>
                 <li><a href="?activeTab=theme-pages"
-                    wire:click.prevent="setActiveTab('theme-pages')"
                     class="{{ $activeTab === 'theme-pages' ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Theme Pages") }}
                 </a></li>
                  <!-- Language Dropdown -->
                  <li class="relative nav-item dropdown" x-data="{ open: false }">
-                    <a class="nav-link dropdown-toggle px-4 py-2 border-2 border-black text-black rounded-3xl hover:bg-gray-100 cursor-pointer" 
+                    <a class="nav-link dropdown-toggle px-4 py-2 border-2 border-black text-black rounded-3xl hover:bg-gray-100 cursor-pointer"
                         role="button" aria-expanded="false" x-on:click="open = !open">
                         {{ t("Change Language") }}
                     </a>
