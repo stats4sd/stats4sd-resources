@@ -1,55 +1,46 @@
 <div class="flex flex-col md:flex-row justify-center space-y-6 md:space-y-0 md:space-x-8 w-full items-center md:items-stretch px-4 mt-2 md:mt-4 pb-8">
+
     <!-- Resources tab -->
-    <a href="#resources"
+    <button
         wire:click.prevent="setActiveTab('resources')"
-        onclick="updateUrlHash('resources')"
-        class="library-card hover-effect flex flex-col items-center 
+        class="library-card hover-effect flex flex-col items-center
         {{ $activeTab === 'resources' ? 'bg-black text-white' : 'bg-stats4sd-red' }}">
         <div class="flex-1 text-center">
             <h2 class="text-bold text-lg md:text-xl mb-4 md:mb-6">{{ t("Resources") }}</h2>
             <p class="mb-4 md:mb-6 text-white">{{ t("Guides, tools, videos, papers and other items that we use and recommend to others.") }}</p>
         </div>
-    </a>
+    </button>
 
     <!-- Collections tab -->
-    <a href="#collections"
+    <button
         wire:click.prevent="setActiveTab('collections')"
-        onclick="updateUrlHash('collections')"
-        class="library-card hover-effect flex flex-col items-center 
+        class="library-card hover-effect flex flex-col items-center
         {{ $activeTab === 'collections' ? 'bg-black text-white' : 'bg-stats4sd-red' }}">
         <div class="flex-1 text-center">
             <h2 class="text-bold text-lg md:text-xl mb-4 md:mb-6">{{ t("Collections") }}</h2>
             <p class="mb-4 md:mb-6 text-white">{{ t("A collection is a group of resources compiled together for a specific purpose.") }}</p>
         </div>
-    </a>
+    </button>
 
     <!-- Browse all tab -->
-    <a href="#browse-all"
+    <button
         wire:click.prevent="setActiveTab('browse-all')"
-        onclick="updateUrlHash('browse-all')"
-        class="library-card hover-effect flex flex-col items-center 
+        class="library-card hover-effect flex flex-col items-center
         {{ $activeTab === 'browse-all' ? 'bg-black text-white' : 'bg-stats4sd-red' }}">
         <div class="flex-1 text-center">
             <h2 class="text-bold text-lg md:text-xl mb-4 md:mb-6">{{ t("Browse all") }}</h2>
             <p class="mb-4 md:mb-6 text-white">{{ t("Browse the full library of resources.") }}</p>
         </div>
-    </a>
+    </button>
 
     <!-- Theme Pages tab -->
-    <a href="theme-pages"
+    <button
         wire:click.prevent="setActiveTab('theme-pages')"
-        onclick="updateUrlHash('theme-pages')"
-        class="library-card hover-effect flex flex-col items-center 
+        class="library-card hover-effect flex flex-col items-center
         {{ $activeTab === 'theme-pages' ? 'bg-black text-white' : 'bg-stats4sd-red' }}">
         <div class="flex-1 text-center">
             <h2 class="text-bold text-lg md:text-xl mb-4 md:mb-6">{{ t("Theme Pages") }}</h2>
             <p class="mb-4 md:mb-6 text-white">{{ t("Mini libraries showcasing a specific thematic area.") }}</p>
         </div>
-    </a>
+    </button>
 </div>
-
-<script>
-    function updateUrlHash(tab) {
-    window.history.pushState(null, null, '#' + tab);
-}
-</script>
