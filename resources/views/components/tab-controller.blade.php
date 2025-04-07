@@ -1,6 +1,6 @@
 <div class="flex flex-col md:flex-row justify-center space-y-6 md:space-y-0 md:space-x-8 w-full items-center md:items-stretch px-4 mt-2 md:mt-4 pb-8">
     <!-- Resources tab -->
-    <button href="#"
+    <button
         wire:click.prevent="setActiveTab('resources')"
         class="library-card hover-effect flex flex-col items-center
         {{ $activeTab === 'resources' ? 'bg-black text-white' : 'bg-stats4sd-red' }}">
@@ -11,7 +11,7 @@
     </button>
 
     <!-- Collections tab -->
-    <button href="#"
+    <button
         wire:click.prevent="setActiveTab('collections')"
         class="library-card hover-effect flex flex-col items-center
         {{ $activeTab === 'collections' ? 'bg-black text-white' : 'bg-stats4sd-red' }}">
@@ -22,7 +22,7 @@
     </button>
 
     <!-- Browse all tab -->
-    <button href="#"
+    <button
         wire:click.prevent="setActiveTab('browse-all')"
         class="library-card hover-effect flex flex-col items-center
         {{ $activeTab === 'browse-all' ? 'bg-black text-white' : 'bg-stats4sd-red' }}">
@@ -33,7 +33,7 @@
     </button>
 
     <!-- Theme Pages tab -->
-    <button href="#"
+    <button
         wire:click.prevent="setActiveTab('theme-pages')"
         class="library-card hover-effect flex flex-col items-center
         {{ $activeTab === 'theme-pages' ? 'bg-black text-white' : 'bg-stats4sd-red' }}">
