@@ -7,5 +7,7 @@
         <livewire:browse-all/>
     @elseif ($activeTab === 'theme-pages')
         <livewire:theme-pages/>
+    @else
+    <livewire:tab-default/>
     @endif
 </div>

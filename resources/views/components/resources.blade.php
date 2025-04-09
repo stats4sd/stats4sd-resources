@@ -1,7 +1,7 @@
-<div class="pb-4 px-28">
+<div class="pb-4  max-w-screen-xl mx-auto">
 
     <!-- Search bar -->
-    <div class="relative flex items-center">
+    <div class="relative flex items-center ">
 
         <livewire:search-bar
             inputClass="flex-grow py-2 pl-12 pr-4  border-2 border-black rounded-full focus:outline-none transition

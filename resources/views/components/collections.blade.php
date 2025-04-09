@@ -1,4 +1,4 @@
-<div class="pb-4 px-28">
+<div class="pb-4  max-w-screen-xl mx-auto">
 
     <div class="relative flex items-center">
 
