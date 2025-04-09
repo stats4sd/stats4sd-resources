@@ -1,6 +1,10 @@
-<div class="pb-4  max-w-screen-xl mx-auto">
+
+<div class="w-screen -mx-6 " style="background-color:rgba(245, 246, 246, 0.57)">
+<div class="w-screen shadow-xl bg-white pb-12">
+<div class="pb-4  max-w-screen-xl mx-auto ">
 
     <div class="relative flex items-center">
+
 
         <livewire:search-bar
             inputClass="flex-grow py-2 pl-12 pr-4  border-2 border-black rounded-full focus:outline-none transition
@@ -41,7 +45,8 @@
             <label for="french">{{ t("French") }}</label>
         </div>
     </div>
-
+    </div>
+</div>
     @if($query || !empty($selectedLanguages) )
         <!-- Display search results -->
         <div class="pt-8">
