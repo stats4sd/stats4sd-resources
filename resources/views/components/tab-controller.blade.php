@@ -1,4 +1,4 @@
-<div class="flex flex-col md:flex-row justify-center space-y-6 md:space-y-0 md:space-x-8 w-full items-center md:items-stretch px-4 mt-2 md:mt-4 pb-8">
+<div class="flex flex-col md:flex-row justify-center space-y-6 md:space-y-0 md:space-x-4 lg:space-x8 w-full items-center md:items-stretch px-4 -mt-12 sm:-mt-20 pb-8">
 
     <!-- Resources tab -->
     <button

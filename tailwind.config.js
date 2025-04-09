@@ -14,7 +14,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Open Sans', ...defaultTheme.fontFamily.sans],
             },
             colors: {
                 'stats4sd-red': 'var(--stats4sd-red)',
@@ -27,4 +27,6 @@ export default {
         forms,
         typography
     ],
+
+    
 };
