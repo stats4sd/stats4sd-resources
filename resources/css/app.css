@@ -8,7 +8,7 @@
 }
 
 .library-card {
-    @apply text-white p-6 rounded-2xl shadow-lg w-80 flex flex-col relative;
+    @apply text-white py-6 px-8 rounded-2xl shadow-lg w-80 flex flex-col relative;
 }
 
 .hover-effect {
@@ -62,11 +62,14 @@ a {
 }
 
 nav a {
-    color: black !important;
+    color: black ;
+}
+nav a:hover {
+    color: var(--stats4sd-red) ;
 }
 
 .language-dropdown-menu {
-    @apply absolute left-0 mt-2 p-0 rounded-md bg-white shadow-md flex-col text-black w-full z-50;
+    @apply absolute left-0 mt-2 p-0 rounded-lg bg-white shadow-md flex-col text-black w-full z-50;
 }
 
 .dropdown-item {

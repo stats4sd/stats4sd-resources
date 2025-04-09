@@ -15,7 +15,7 @@
                 <!-- Description -->
                 <div class="relative flex items-center  md:pr-16 mb-0 md:mb-2 text-center md:text-left px-4 pt-8 md:pt-10 mb-8 sm:mb-0 sm:w-10/12 sm:mx-auto px-2 sm:px-4 lg:w-full max-w-xs sm:max-w-screen-xl ">
                     <div class="flex-grow ">
-                        <h1 class="text-white mb-2 md:mb-4 md:text-lg">{!! t("The Stats4SD resources library is a curated selection of materials 
+                        <h1 class="text-white mb-2 md:mb-4 md:text-xl">{!! t("The Stats4SD resources library is a curated selection of materials 
                             that support <b>good practice, research and learning</b> in the broad range of topics relevant to our 
                             work. Select a tab below to get started.") !!}
                         </h1>
