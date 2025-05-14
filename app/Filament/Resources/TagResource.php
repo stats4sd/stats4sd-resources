@@ -51,8 +51,9 @@ class TagResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('name->' . app()->getLocale())
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('name')->searchable(),
                 Tables\Columns\TextColumn::make('tagType.label'),
                 Tables\Columns\TextColumn::make('troves_count')
                     ->label('# of troves')
