@@ -1,4 +1,4 @@
-<header class="bg-white shadow-md py-2 px-4 sm:px-20" x-data="{ open: false }">
+<header class="sticky top-0 z-50 bg-white shadow-md py-2 px-4 sm:px-20" x-data="{ open: false }">
     <div class="container mx-auto flex justify-between items-center py-4">
         <!-- Logo -->
         <div class="flex items-center space-x-4">

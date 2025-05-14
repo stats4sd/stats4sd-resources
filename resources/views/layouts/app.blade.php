@@ -5,9 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
         @vite(['resources/css/app.css'])
-        <livewire:header />
     </head>
     <body>
+        <livewire:header />
         @yield('content')
         <button id="scrollToTopButton" class="hidden fixed bottom-5 right-5 w-12 h-12 bg-stats4sd-red text-white rounded-full shadow-lg flex items-center justify-center transition-opacity duration-300 hover:bg-teal">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
