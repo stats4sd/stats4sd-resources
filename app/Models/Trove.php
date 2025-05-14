@@ -260,4 +260,38 @@ class Trove extends Model implements HasMedia
 
         return MediaStream::create($filename)->addMedia($troveFiles);
     }
+
+    public static function findBySlugOrRedirect($troveKey): ?self
+    {
+        // Try slug
+        $trove = self::where('slug', $troveKey)
+            ->where('is_published', 1)
+            ->first();
+        if ($trove) return $trove;
+
+        // Try id
+        if (is_numeric($troveKey)) {
+            $trove = self::where('id', (int) $troveKey)
+                ->where('is_published', 1)
+                ->first();
+            if ($trove) return $trove;
+        }
+
+        // Try previous_slugs (string)
+        $trove = self::whereJsonContains('previous_slugs', (string) $troveKey)
+            ->where('is_published', 1)
+            ->first();
+        if ($trove) return $trove;
+
+        // Try previous_slugs (numeric)
+        if (is_numeric($troveKey)) {
+            $trove = self::whereJsonContains('previous_slugs', (int) $troveKey)
+                ->where('is_published', 1)
+                ->first();
+            if ($trove) return $trove;
+        }
+
+        return null;
+    }
+
 }
