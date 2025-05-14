@@ -375,10 +375,10 @@ class TroveResource extends Resource
                     ->label('Preview on Front-end')
                     ->url(function(Trove $record) {
                         if($record->is_published) {
-                            return config('app.front_end_url') . '/resources/' . $record->slug;
+                            return url('/resources/' . $record->slug);
                         }
 
-                        return config('app.front_end_url') . '/resources/preview/' . $record->slug;}),
+                        return url('/resources/' . $record->slug);}),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([

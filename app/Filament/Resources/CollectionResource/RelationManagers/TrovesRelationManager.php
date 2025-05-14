@@ -65,7 +65,7 @@ class TrovesRelationManager extends RelationManager
             ->actions([
                 Tables\Actions\Action::make('preview_trove')
                     ->label('Preview Trove')
-                    ->url(fn(Trove $record) => config('app.front_end_url') . '/resources/' . $record->slug),
+                    ->url(fn(Trove $record) => url('/resources/' . $record->slug)),
                 Tables\Actions\DetachAction::make()
                     ->label('Remove trove from collection')
                     ->modalHeading('Remove trove from collection')
@@ -77,7 +77,7 @@ class TrovesRelationManager extends RelationManager
                     Tables\Actions\DetachBulkAction::make()->label('Remove troves from collection'),
                 ]),
             ])
-            ->recordUrl(fn(Trove $record) => config('app.front_end_url') . '/resources/' . $record->slug)
+            ->recordUrl(fn(Trove $record) => url('/resources/' . $record->slug))
             ->emptyStateDescription(
                 'Use the "Show All Troves" button above to find troves to add to the collection.'
             );
