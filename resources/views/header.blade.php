@@ -18,25 +18,25 @@
 
         <!-- Nav Items (hidden on small screens) -->
         <nav class="hidden sm:flex">
-            <ul class="flex space-x-6 text-lg font-semibold">
+            <ul class="flex space-x-6 font-semibold">
                 <li><a href="/home"
-                    class="{{ request()->is('home') && !$activeTab ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
+                    class="{{ request()->is('home') ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Library Home") }}
                 </a></li>
-                <li><a href="/home?activeTab=resources"
-                    class="{{ $activeTab === 'resources' ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
+                <li><a href="/resources"
+                    class="{{ request()->is('resources') ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Resources") }}
                 </a></li>
-                <li><a href="/home?activeTab=collections"
-                    class="{{ $activeTab === 'collections' ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
+                <li><a href="/collections"
+                    class="{{ request()->is('collections') ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Collections") }}
                 </a></li>
-                <li><a href="/home?activeTab=browse-all"
-                    class="{{ $activeTab === 'browse-all' ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
+                <li><a href="/browse-all"
+                    class="{{ request()->is('browse-all') ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Browse all") }}
                 </a></li>
-                <li><a href="/home?activeTab=theme-pages"
-                    class="{{ $activeTab === 'theme-pages' ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
+                <li><a href="/theme-pages"
+                    class="{{ request()->is('theme-pages') ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Theme Pages") }}
                 </a></li>
                  <!-- Language Dropdown -->

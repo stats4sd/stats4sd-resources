@@ -1,5 +1,5 @@
 <div class="flex px-8 py-8 gap-8">
-    
+        
     <!-- Sidebar (Search & Filters) -->
     <div class="w-80 bg-gray-100 p-6 rounded-lg shadow-md self-start">
         

@@ -1,3 +1,0 @@
-<div class="pb-4 px-28 text-xl text-center">
-    Theme pages coming soon.....
-</div>
