@@ -2,10 +2,10 @@
 
 use App\Models\Trove;
 use App\Models\Collection;
-use App\Http\Livewire\BrowseAll;
-use App\Http\Livewire\Resources;
-use App\Http\Livewire\ThemePages;
-use App\Http\Livewire\Collections;
+use App\Livewire\BrowseAll;
+use App\Livewire\Resources;
+use App\Livewire\ThemePages;
+use App\Livewire\Collections;
 use Illuminate\Support\Facades\Route;
 
 /*
