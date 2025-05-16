@@ -129,8 +129,7 @@
             <!-- Files and URLs -->
             <p class="text-lg py-8">
                 {{ t("The individual components of the trove are listed below. Click on one to download the file or go to the 
-                    external url. You can download the full trove below as a .zip file. External urls will be included as
-                    .url files. These files act as bookmarks and can be opened with any web browser.") }}
+                    external url. You can download the full trove below as a .zip file.") }}
             </p>  
 
             <div class="space-y-2"> <!-- This ensures equal spacing for both URLs and files -->
