@@ -7,8 +7,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-04-01T13:51:36+00:00\n"
-"PO-Revision-Date: 2025-04-01 15:51+0200\n"
+"POT-Creation-Date: 2025-05-15T20:10:55+00:00\n"
+"PO-Revision-Date: 2025-05-15 22:10+0200\n"
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=n!=1;\n"
 
@@ -39,158 +39,202 @@ msgstr "Fechado: "
 msgid "Resources in this collection"
 msgstr "Recursos de esta colección"
 
-#: resources\views\components\browse-all.blade.php:7
-msgid "Search and filter"
-msgstr "Buscar y filtrar"
-
-#: resources\views\components\browse-all.blade.php:37
-#: resources\views\components\collections.blade.php:27
-#: resources\views\components\resources.blade.php:28
-msgid "Language:"
-msgstr "Idioma:"
-
-#: resources\views\components\browse-all.blade.php:45
-#: resources\views\components\collections.blade.php:31
-#: resources\views\components\resources.blade.php:32
-msgid "Spanish"
-msgstr "Español"
-
-#: resources\views\components\browse-all.blade.php:50
-#: resources\views\components\collections.blade.php:36
-#: resources\views\components\resources.blade.php:37
-msgid "English"
-msgstr "Inglés"
-
-#: resources\views\components\browse-all.blade.php:55
-#: resources\views\components\collections.blade.php:41
-#: resources\views\components\resources.blade.php:42
-msgid "French"
-msgstr "Francés"
-
-#: resources\views\components\browse-all.blade.php:65
-msgid "Research method:"
-msgstr "Método de investigación:"
-
-#: resources\views\components\browse-all.blade.php:86
-#: resources\views\components\collections.blade.php:48
-#: resources\views\components\resources.blade.php:63
-msgid "Showing "
-msgstr "Mostrando "
-
-#: resources\views\components\browse-all.blade.php:86
-msgid " resources and collections"
-msgstr " recursos y colecciones"
-
-#: resources\views\components\browse-all.blade.php:90
-#: resources\views\components\collections.blade.php:51
-#: resources\views\components\resources.blade.php:66
-msgid "Clear Filters"
-msgstr "Limpiar filtros"
-
-#: resources\views\components\browse-all.blade.php:128
-#: resources\views\components\collection-troves.blade.php:29
-#: resources\views\components\collections.blade.php:74
-#: resources\views\components\resources.blade.php:101
-#: resources\views\components\trove-collections.blade.php:18
-#: resources\views\components\trove-related-troves.blade.php:29
-msgid "VIEW"
-msgstr "VER"
-
-#: resources\views\components\collection-troves.blade.php:37
-msgid "No resources available for this collection."
-msgstr "No hay recursos disponibles para esta colección."
-
-#: resources\views\components\collections.blade.php:48
-msgid " collections"
-msgstr " colecciones"
-
-#: resources\views\components\collections.blade.php:89
-msgid "Type a search term above to find collections"
-msgstr "Escriba un término de búsqueda para encontrar colecciones"
-
-#: resources\views\components\home.blade.php:11
-msgid "Stats4SD Resources Library"
-msgstr "Biblioteca de recursos Stats4SD"
-
-#: resources\views\components\home.blade.php:18
-msgid ""
-"The Stats4SD resources library is a curated selection of materials \n"
-"                            that support <b>good practice, research and learning</b> in the broad range of topics relevant to our \n"
-"                            work. Select a tab below to get started."
-msgstr ""
-"La biblioteca de recursos Stats4SD es una selección de materiales \n"
-"                            que apoyan <b>las buenas prácticas, la investigación y el aprendizaje</b> en una amplia gama de temas relacionados con nuestro trabajo \n"
-"                            nuestro trabajo. Seleccione una pestaña para empezar."
-
-#: resources\views\components\resources.blade.php:48
-msgid "Filter by research method:"
-msgstr "Filtrar por método de investigación:"
-
-#: resources\views\components\resources.blade.php:63
-msgid " resources"
-msgstr " recursos"
-
-#: resources\views\components\resources.blade.php:116
-msgid "Type a search term or select a research method above to find resources"
-msgstr "Escriba un término de búsqueda o seleccione un método de investigación para encontrar recursos"
-
-#: resources\views\components\search-bar.blade.php:4
-msgid "Search here"
-msgstr "Buscar aquí"
-
-#: resources\views\components\tab-controller.blade.php:9
-#: resources\views\header.blade.php:18
-msgid "Resources"
-msgstr "Recursos"
-
-#: resources\views\components\tab-controller.blade.php:10
-msgid "Guides, tools, videos, papers and other items that we use and recommend to others."
-msgstr "Guías, herramientas, vídeos, documentos y otros artículos que utilizamos y recomendamos a los demás."
-
-#: resources\views\components\tab-controller.blade.php:21
-#: resources\views\header.blade.php:22
-msgid "Collections"
-msgstr "Colecciones"
-
-#: resources\views\components\tab-controller.blade.php:22
-msgid "A collection is a group of resources compiled together for a specific purpose."
-msgstr "Una colección es un grupo de recursos reunidos con un fin determinado."
-
-#: resources\views\components\tab-controller.blade.php:33
-#: resources\views\header.blade.php:26
-msgid "Browse all"
-msgstr "Ver todos"
-
-#: resources\views\components\tab-controller.blade.php:34
-msgid "Browse the full library of resources."
-msgstr "Ver toda la biblioteca de recursos."
-
-#: resources\views\components\tab-controller.blade.php:45
-#: resources\views\header.blade.php:30
-msgid "Theme Pages"
-msgstr "Páginas temáticas"
-
-#: resources\views\components\tab-controller.blade.php:46
-msgid "Mini libraries showcasing a specific thematic area."
-msgstr "Mini-bibliotecas que muestran un área temática específica."
-
-#: resources\views\components\trove-collections.blade.php:26
-msgid "No collections available for this resource."
-msgstr "No hay colecciones disponibles para este recurso."
-
-#: resources\views\components\trove-related-troves.blade.php:38
-msgid "No related resources found."
-msgstr "No se han encontrado recursos relacionados."
-
-#: resources\views\header.blade.php:14
+#: resources\views\header.blade.php:24
+#: resources\views\header.blade.php:71
 msgid "Library Home"
 msgstr "Biblioteca Inicio"
 
-#: resources\views\header.blade.php:38
+#: resources\views\header.blade.php:29
+#: resources\views\header.blade.php:72
+msgid "Resources"
+msgstr "Recursos"
+
+#: resources\views\header.blade.php:34
+#: resources\views\header.blade.php:73
+msgid "Collections"
+msgstr "Colecciones"
+
+#: resources\views\header.blade.php:39
+msgid "Browse all"
+msgstr "Ver todos"
+
+#: resources\views\header.blade.php:44
+#: resources\views\header.blade.php:75
+msgid "Theme Pages"
+msgstr "Páginas temáticas"
+
+#: resources\views\header.blade.php:51
+#: resources\views\header.blade.php:78
 msgid "Change Language"
 msgstr ""
 "Cambiar el \n"
 "idioma"
+
+#: resources\views\header.blade.php:74
+msgid "Browse All"
+msgstr "Ver todos"
+
+#: resources\views\home.blade.php:11
+#: resources\views\livewire\browse-all.blade.php:11
+#: resources\views\livewire\collections.blade.php:10
+#: resources\views\livewire\resources.blade.php:10
+#: resources\views\theme-pages.blade.php:11
+msgid "Stats4SD Resources Library"
+msgstr "Biblioteca de recursos Stats4SD"
+
+#: resources\views\home.blade.php:17
+msgid ""
+"The Stats4SD resources library is a curated selection of materials \n"
+"                        that support good practice, research and learning in the broad range of topics relevant to our \n"
+"                        work."
+msgstr ""
+"La biblioteca de recursos Stats4SD es una selección de materiales \n"
+"                        que apoyan las buenas prácticas, la investigación y el aprendizaje en una amplia gama de temas relacionados con nuestro trabajo \n"
+"                        nuestro trabajo."
+
+#: resources\views\home.blade.php:22
+msgid "Select a starting point below to begin."
+msgstr "Seleccione un punto de partida para inciar."
+
+#: resources\views\home.blade.php:33
+msgid "Search resources"
+msgstr "Buscar recursos"
+
+#: resources\views\home.blade.php:34
+msgid "Guides, tools, videos, papers and other items that we use and recommend to others."
+msgstr "Guías, herramientas, vídeos, documentos y otros artículos que utilizamos y recomendamos a los demás."
+
+#: resources\views\home.blade.php:39
+msgid "Search collections"
+msgstr "Buscar colecciones"
+
+#: resources\views\home.blade.php:40
+msgid "A collection is a group of resources compiled together for a specific purpose, such as series of guides on a specific topic, or the reading for an online course."
+msgstr "Una colección es un grupo de recursos recopilados con un fin específico, como una serie de guías sobre un tema concreto o las lecturas de un curso en línea."
+
+#: resources\views\home.blade.php:45
+msgid "View All"
+msgstr "Ver todos"
+
+#: resources\views\home.blade.php:46
+msgid "Browse the full library of resources and collections on a variety of topics."
+msgstr "Consulte la biblioteca completa de recursos y colecciones sobre diversos temas."
+
+#: resources\views\home.blade.php:51
+msgid "Theme pages"
+msgstr "Páginas temáticas"
+
+#: resources\views\home.blade.php:52
+msgid "Mini libraries which showcase a specific thematic area, containing a subset of our resources and/or resources provided by partner organisations."
+msgstr "Minibibliotecas que muestran un área temática específica y contienen un subconjunto de nuestros recursos y/o recursos proporcionados por organizaciones asociadas."
+
+#: resources\views\livewire\browse-all.blade.php:17
+msgid "View all"
+msgstr "Ver todos"
+
+#: resources\views\livewire\browse-all.blade.php:31
+#: resources\views\livewire\collections.blade.php:30
+#: resources\views\livewire\resources.blade.php:30
+msgid "Search and filter"
+msgstr "Buscar y filtrar"
+
+#: resources\views\livewire\browse-all.blade.php:61
+#: resources\views\livewire\collections.blade.php:60
+#: resources\views\livewire\resources.blade.php:60
+msgid "Language:"
+msgstr "Idioma:"
+
+#: resources\views\livewire\browse-all.blade.php:69
+#: resources\views\livewire\collections.blade.php:68
+#: resources\views\livewire\resources.blade.php:68
+msgid "Spanish"
+msgstr "Español"
+
+#: resources\views\livewire\browse-all.blade.php:74
+#: resources\views\livewire\collections.blade.php:73
+#: resources\views\livewire\resources.blade.php:73
+msgid "English"
+msgstr "Inglés"
+
+#: resources\views\livewire\browse-all.blade.php:79
+#: resources\views\livewire\collections.blade.php:78
+#: resources\views\livewire\resources.blade.php:78
+msgid "French"
+msgstr "Francés"
+
+#: resources\views\livewire\browse-all.blade.php:89
+#: resources\views\livewire\resources.blade.php:88
+msgid "Research method:"
+msgstr "Método de investigación:"
+
+#: resources\views\livewire\browse-all.blade.php:110
+#: resources\views\livewire\collections.blade.php:89
+#: resources\views\livewire\resources.blade.php:109
+msgid "Showing "
+msgstr "Mostrando "
+
+#: resources\views\livewire\browse-all.blade.php:110
+msgid " resources and collections"
+msgstr " recursos y colecciones"
+
+#: resources\views\livewire\browse-all.blade.php:114
+#: resources\views\livewire\collections.blade.php:93
+#: resources\views\livewire\resources.blade.php:113
+msgid "Clear Filters"
+msgstr "Limpiar filtros"
+
+#: resources\views\livewire\browse-all.blade.php:156
+#: resources\views\livewire\collection-troves.blade.php:31
+#: resources\views\livewire\collections.blade.php:118
+#: resources\views\livewire\resources.blade.php:149
+#: resources\views\livewire\trove-collections.blade.php:20
+#: resources\views\livewire\trove-related-troves.blade.php:31
+msgid "VIEW"
+msgstr "VER"
+
+#: resources\views\livewire\collection-troves.blade.php:39
+msgid "No resources available for this collection."
+msgstr "No hay recursos disponibles para esta colección."
+
+#: resources\views\livewire\collections.blade.php:16
+msgid "Stats4SD collections"
+msgstr "Colecciones de Stats4SD"
+
+#: resources\views\livewire\collections.blade.php:89
+msgid " collections"
+msgstr " colecciones"
+
+#: resources\views\livewire\collections.blade.php:135
+msgid "Use the search bar to find collections"
+msgstr "Utilice la barra de búsqueda para encontrar colecciones"
+
+#: resources\views\livewire\resources.blade.php:16
+msgid "Stats4SD resources"
+msgstr "Recursos de Stats4SD"
+
+#: resources\views\livewire\resources.blade.php:109
+msgid " resources"
+msgstr " recursos"
+
+#: resources\views\livewire\resources.blade.php:165
+msgid "Use the search bar or select from the research methods and topics to find resources"
+msgstr "Utilice la barra de búsqueda o seleccione entre los métodos de investigación y temas para encontrar recursos"
+
+#: resources\views\livewire\search-bar.blade.php:4
+msgid "Search here"
+msgstr "Buscar aquí"
+
+#: resources\views\livewire\trove-collections.blade.php:28
+msgid "No collections available for this resource."
+msgstr "No hay colecciones disponibles para este recurso."
+
+#: resources\views\livewire\trove-related-troves.blade.php:40
+msgid "No related resources found."
+msgstr "No se han encontrado recursos relacionados."
+
+#: resources\views\theme-pages.blade.php:17
+msgid "Stats4SD theme pages"
+msgstr "Páginas temáticas de Stats4SD"
 
 #: resources\views\trove.blade.php:13
 msgid "Jump to view/download"
@@ -220,25 +264,23 @@ msgstr "Este recurso incluye un vídeo en nuestro canal de YouTube, incrustado a
 msgid "This resource includes videos on our YouTube channel, embedded here."
 msgstr "Este recurso incluye vídeos en nuestro canal de YouTube, incrustados aquí."
 
-#: resources\views\trove.blade.php:122
+#: resources\views\trove.blade.php:132
 msgid ""
 "The individual components of the trove are listed below. Click on one to download the file or go to the \n"
-"                external url. You can download the full trove below as a .zip file. External urls will be included as\n"
-"                .url files. These files act as bookmarks and can be opened with any web browser."
+"                    external url. You can download the full trove below as a .zip file."
 msgstr ""
-"A continuación se enumeran los distintos componentes del archivo. Haga clic en uno para descargar el archivo o vaya a la \n"
-"                url externa. Puede descargar el archivo completo en formato .zip. Las urls externas se incluirán como archivos\n"
-"                archivos .url. Estos archivos actúan como marcadores y pueden abrirse con cualquier navegador web."
+"Los componentes individuales del recurso se encuentran enlistados a continuación. Haga clic en uno para descargar el archivo o vaya a la \n"
+"                    uRL externa. Puede descargar el archivo completo en formato .zip."
 
-#: resources\views\trove.blade.php:150
+#: resources\views\trove.blade.php:152
 msgid "VISIT LINK"
 msgstr "VISITAR EL ENLACE"
 
-#: resources\views\trove.blade.php:177
+#: resources\views\trove.blade.php:175
 msgid "DOWNLOAD"
 msgstr "DESCARGAR"
 
-#: resources\views\trove.blade.php:192
+#: resources\views\trove.blade.php:191
 msgid "DOWNLOAD ALL (ZIP)"
 msgstr "DESCARGAR TODO (ZIP)"
 

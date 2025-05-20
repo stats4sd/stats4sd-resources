@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Components;
+namespace App\Livewire;
 
 use App\Models\Tag;
 use App\Models\Trove;
@@ -123,7 +123,7 @@ class BrowseAll extends Component
 
     public function render()
     {
-        return view('components.browse-all', [
+        return view('livewire.browse-all', [
             'researchMethods' => $this->researchMethods,
             'items' => $this->items
         ]);

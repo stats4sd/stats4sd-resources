@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Components;
+namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Collection;
@@ -18,6 +18,6 @@ class CollectionTroves extends Component
 
     public function render()
     {
-        return view('components.collection-troves');
+        return view('livewire.collection-troves');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Components;
+namespace App\Livewire;
 
 use App\Models\Tag;
 use App\Models\Trove;
@@ -95,7 +95,7 @@ class Resources extends Component
 
     public function render()
     {
-        return view('components.resources', [
+        return view('livewire.resources', [
             'researchMethods' => $this->researchMethods
         ]);
     }

@@ -2,6 +2,10 @@
 
 use App\Models\Trove;
 use App\Models\Collection;
+use App\Livewire\BrowseAll;
+use App\Livewire\Resources;
+use App\Livewire\ThemePages;
+use App\Livewire\Collections;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,8 +28,16 @@ Route::group([
     });
 
     Route::get('/home', function () {
-        return view('components.home');
+        return view('home');
     })->name('home');
+
+    Route::get('/resources', Resources::class)->name('resources');
+    Route::get('/collections', Collections::class)->name('collections');
+    Route::get('/browse-all', BrowseAll::class)->name('browse-all');
+
+    Route::get('/theme-pages', function () {
+        return view('theme-pages');
+    })->name('theme-pages');
 
     Route::get('/resources/{troveKey}', function ($troveKey) {
         $resource = Trove::findBySlugOrRedirect($troveKey);

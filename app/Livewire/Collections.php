@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Components;
+namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Collection;
@@ -74,6 +74,6 @@ class Collections extends Component
 
     public function render()
     {
-        return view('components.collections');
+        return view('livewire.collections');
     }
 }
