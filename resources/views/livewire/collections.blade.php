@@ -78,55 +78,56 @@
 
             </div>
 
-        @if($query || !empty($selectedLanguages) )
-            <div class="w-3/4">
-                <div class="pt-2">
-                    {{ t("Showing ") . $totalCollections . t(" collections") }}
-                    @if($query || !empty($selectedLanguages) || !empty($selectedResearchMethods))
-                        <button wire:click="clearFilters" class="text-gray-500 hover:text-gray-700 underline">
-                            {{ t("Clear Filters") }}
-                        </button>
-                    @endif
-                </div>
+            @if($query || !empty($selectedLanguages) )
+                <div class="w-3/4">
+                    <div class="pt-2">
+                        {{ t("Showing ") . $totalCollections . t(" collections") }}
+                        @if($query || !empty($selectedLanguages) || !empty($selectedResearchMethods))
+                            <button wire:click="clearFilters" class="text-gray-500 hover:text-gray-700 underline">
+                                {{ t("Clear Filters") }}
+                            </button>
+                        @endif
+                    </div>
 
-                <!-- Collections Result Cards -->
-                <div id="Collections-content" class="bg-lightgrey py-8 px-16">
-                    <div class="container mx-auto">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            @foreach ($this->collections as $index => $collection)
-                                <div class="card hover-effect relative flex flex-col justify-between p-6 border border-gray-200 rounded-lg shadow-xl">
-                                    
-                                    <a href="/collections/{{ $collection->id }}" class="absolute inset-0 z-0"></a>
-                                    <!-- Title -->
-                                    <p class="text-xl font-bold bg-stats4sd-red text-white">{!! $collection['title'] !!}</p>
+                    <!-- Collections Result Cards -->
+                    <div id="Collections-content" class="bg-lightgrey py-8 px-16">
+                        <div class="container mx-auto">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                @foreach ($this->collections as $index => $collection)
+                                    <div class="card hover-effect relative flex flex-col justify-between p-6 border border-gray-200 rounded-lg shadow-xl">
+                                        
+                                        <a href="/collections/{{ $collection->id }}" class="absolute inset-0 z-0"></a>
+                                        <!-- Title -->
+                                        <p class="text-xl font-bold bg-stats4sd-red text-white">{!! $collection['title'] !!}</p>
 
-                                    <p class="bg-white pt-8 mb-4 flex-grow">
-                                        {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($collection['description']), ENT_QUOTES, 'UTF-8'), 120, '...') }}
-                                    </p>
+                                        <p class="bg-white pt-8 mb-4 flex-grow">
+                                            {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($collection['description']), ENT_QUOTES, 'UTF-8'), 120, '...') }}
+                                        </p>
 
-                                    <!-- View Button -->
-                                    <div class="flex justify-end">
-                                        <button class="hover-effect bg-stats4sd-red text-white text-center py-2 px-8 rounded-lg">
-                                            {{ t("VIEW") }}
-                                        </button>
+                                        <!-- View Button -->
+                                        <div class="flex justify-end">
+                                            <button class="hover-effect bg-stats4sd-red text-white text-center py-2 px-8 rounded-lg">
+                                                {{ t("VIEW") }}
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+
+                            </div>
 
                         </div>
-
                     </div>
+
                 </div>
 
-            </div>
+            @else
+                <!-- Display message when no search term -->
+                <div class="text-center text-semibold py-20 pl-20">
+                    {{ t("Use the search bar to find collections") }}
+                </div>
 
-        @else
-            <!-- Display message when no search term -->
-            <div class="text-center text-semibold py-20 pl-20">
-                {{ t("Use the search bar to find collections") }}
-            </div>
-
-        @endif
+            @endif
         
+        </div>
     </div>
 </div>
