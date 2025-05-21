@@ -6,6 +6,7 @@ use App\Models\Tag;
 use App\Models\Trove;
 use Livewire\Component;
 use App\Models\Collection;
+use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class BrowseAll extends Component
@@ -13,6 +14,7 @@ class BrowseAll extends Component
     public ?string $query = null;
     public EloquentCollection $resources;
     public EloquentCollection $collections;
+    public SupportCollection $items;
     public int $totalResourcesAndCollections = 0;
     public array $selectedLanguages = [];
     public array $selectedResearchMethods = [];
@@ -97,7 +99,7 @@ class BrowseAll extends Component
         ]);
 
         // Merge and shuffle for a mixed order
-        $this->items = $resources->merge($collections)->shuffle();
+        $this->items = collect($resources)->merge($collections)->shuffle();
         $this->totalResourcesAndCollections = $this->items->count();
     }
 
@@ -105,6 +107,7 @@ class BrowseAll extends Component
     {
         $this->reset('query', 'selectedLanguages', 'selectedResearchMethods');
         $this->dispatch('clearSearchInput');
+        $this->search();
     }
 
     public function clearSearch()
