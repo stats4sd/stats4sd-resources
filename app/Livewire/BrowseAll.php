@@ -6,11 +6,14 @@ use App\Models\Tag;
 use App\Models\Trove;
 use Livewire\Component;
 use App\Models\Collection;
+use App\Traits\UsesCustomSearchOptions;
 use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class BrowseAll extends Component
 {
+    use UsesCustomSearchOptions;
+    
     public ?string $query = null;
     public EloquentCollection $resources;
     public EloquentCollection $collections;
@@ -48,7 +51,7 @@ class BrowseAll extends Component
         // Fetch Resources (Trove)
         $resourceQuery = Trove::query()->where('is_published', 1);
         if (!empty($this->query)) {
-            $searchResults = Trove::search($this->query)->get();
+            $searchResults = Trove::search($this->query, $this->getSearchWithOptions())->get();
             $resourceQuery->whereIn('id', $searchResults->pluck('id'));
         }
         if (!empty($this->selectedResearchMethods)) {
@@ -64,7 +67,7 @@ class BrowseAll extends Component
         // Fetch Collections
         $collectionQuery = Collection::where('public', 1);
         if (!empty($this->query)) {
-            $searchResults = Collection::search($this->query)->get();
+            $searchResults = Collection::search($this->query, $this->getSearchWithOptions())->get();
             $collectionQuery->whereIn('id', $searchResults->pluck('id'));
         }
         if (!empty($this->selectedLanguages)) {

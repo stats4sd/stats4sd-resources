@@ -5,10 +5,13 @@ namespace App\Livewire;
 use App\Models\Tag;
 use App\Models\Trove;
 use Livewire\Component;
+use App\Traits\UsesCustomSearchOptions;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class Resources extends Component
 {
+    use UsesCustomSearchOptions;
+    
     public ?string $query = null;
     public EloquentCollection $resources;
     public int $totalResources = 0;
@@ -53,7 +56,7 @@ class Resources extends Component
             // Step 4: Apply search term if there's a query
             // Step 5: Retrieve filtered troves
             if (!empty($this->query)) {
-                $searchResults = Trove::search($this->query)->get();
+                $searchResults = Trove::search($this->query, $this->getSearchWithOptions())->get();
                 if ($searchResults->isNotEmpty()) {
                     $ids = $searchResults->pluck('id');
                     $query->whereIn('id', $ids);
