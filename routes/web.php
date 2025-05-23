@@ -31,13 +31,15 @@ Route::group([
         return view('home');
     })->name('home');
 
-    Route::get('/resources', Resources::class)->name('resources');
-    Route::get('/collections', Collections::class)->name('collections');
-    Route::get('/browse-all', BrowseAll::class)->name('browse-all');
+    Route::get('/resources/preview/{slug}', function ($slug) {
+        
+        if (!auth()->check()) {
+            return;
+        }
 
-    Route::get('/theme-pages', function () {
-        return view('theme-pages');
-    })->name('theme-pages');
+        $resource = Trove::withDrafts()->where('slug', $slug)->firstOrFail();
+        return view('trove', compact('resource'));
+    });
 
     Route::get('/resources/{troveKey}', function ($troveKey) {
         $resource = Trove::findBySlugOrRedirect($troveKey);
@@ -53,6 +55,14 @@ Route::group([
     
         return view('trove', ['resource' => $resource]);
     })->name('resources.show');
+
+    Route::get('/resources', Resources::class)->name('resources');
+    Route::get('/collections', Collections::class)->name('collections');
+    Route::get('/browse-all', BrowseAll::class)->name('browse-all');
+
+    Route::get('/theme-pages', function () {
+        return view('theme-pages');
+    })->name('theme-pages');
 
     Route::get('/collections/{id}', function ($id) {
         $collection = Collection::where('id', $id)->where('public', 1)->firstOrFail();

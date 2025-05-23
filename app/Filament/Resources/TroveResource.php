@@ -372,14 +372,17 @@ class TroveResource extends Resource
             ->filtersLayout(fn() => FiltersLayout::AboveContentCollapsible)
             ->actions([
                 CommentsAction::make(),
-                Tables\Actions\Action::make('preview')
+                Tables\Actions\Action::make('preview_trove')
                     ->label('Preview on Front-end')
-                    ->url(function(Trove $record) {
-                        if($record->is_published) {
-                            return config('app.front_end_url') . '/resources/' . $record->slug;
-                        }
-
-                        return config('app.front_end_url') . '/resources/preview/' . $record->slug;}),
+                    ->icon('heroicon-o-eye')
+                    ->url(function (Trove $record) {
+                        return $record->is_published
+                            ? url('/resources/' . $record->slug)
+                            : url('/resources/preview/' . $record->slug);
+                    })
+                    ->openUrlInNewTab()
+                    ->action(null)
+                    ->link(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([

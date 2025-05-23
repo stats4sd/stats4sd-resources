@@ -100,12 +100,19 @@ class AllTrovesTable extends Component implements HasTable, HasForms
                             ->send();
                         $this->resetTable();
                     }),
-                Action::make('preview_trove')
-                    ->label('Preview Trove')
+                Tables\Actions\Action::make('preview_trove')
+                    ->label('Preview on Front-end')
                     ->icon('heroicon-o-eye')
-                    ->url(fn(Trove $record) => config('app.front_end_url') . '/resources/' . $record->slug),
+                    ->url(function (Trove $record) {
+                        return $record->is_published
+                            ? url('/resources/' . $record->slug)
+                            : url('/resources/preview/' . $record->slug);
+                    })
+                    ->openUrlInNewTab()
+                    ->action(null)
+                    ->link(),
             ])
-            ->recordUrl(fn(Trove $record) => config('app.front_end_url') . '/resources/' . $record->slug)
+            ->recordUrl(fn(Trove $record) => url('/resources/' . $record->slug))
             ->bulkActions([
                 BulkAction::make('attach')
                     ->label('Add Trove(s) to Collection')
