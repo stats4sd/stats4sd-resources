@@ -64,8 +64,16 @@ class TrovesRelationManager extends RelationManager
             ->filtersLayout(fn() => FiltersLayout::AboveContentCollapsible)
             ->actions([
                 Tables\Actions\Action::make('preview_trove')
-                    ->label('Preview Trove')
-                    ->url(fn(Trove $record) => url('/resources/' . $record->slug)),
+                    ->label('Preview on Front-end')
+                    ->icon('heroicon-o-eye')
+                    ->url(function (Trove $record) {
+                        return $record->is_published
+                            ? url('/resources/' . $record->slug)
+                            : url('/resources/preview/' . $record->slug);
+                    })
+                    ->openUrlInNewTab()
+                    ->action(null)
+                    ->link(),
                 Tables\Actions\DetachAction::make()
                     ->label('Remove trove from collection')
                     ->modalHeading('Remove trove from collection')

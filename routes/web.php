@@ -27,6 +27,16 @@ Route::group([
         return view('components.home');
     })->name('home');
 
+    Route::get('/resources/preview/{slug}', function ($slug) {
+        
+        if (!auth()->check()) {
+            return;
+        }
+
+        $resource = Trove::withDrafts()->where('slug', $slug)->firstOrFail();
+        return view('trove', compact('resource'));
+    });
+
     Route::get('/resources/{slug}', function ($slug) {
         $resource = Trove::where('slug', $slug)->where('is_published', 1)->firstOrFail();
         return view('trove', compact('resource'));
