@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Filament\Components;
+namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Collection;
+use App\Traits\UsesCustomSearchOptions;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class Collections extends Component
 {
+    use UsesCustomSearchOptions;
+    
     public ?string $query = null;
     public EloquentCollection $collections;
     public int $totalCollections;
@@ -36,7 +39,7 @@ class Collections extends Component
         
             // Step 2: Apply search term if there's a query
             if (!empty($this->query)) {
-                $collectionResults = Collection::search($this->query)->get();
+                $collectionResults = Collection::search($this->query, $this->getSearchWithOptions())->get();
                 if ($collectionResults->isNotEmpty()) {
                     $collectionIds = $collectionResults->pluck('id');
                     $collectionsQuery->whereIn('id', $collectionIds);
@@ -74,6 +77,6 @@ class Collections extends Component
 
     public function render()
     {
-        return view('components.collections');
+        return view('livewire.collections');
     }
 }

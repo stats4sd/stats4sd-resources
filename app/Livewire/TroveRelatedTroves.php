@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Components;
+namespace App\Livewire;
 
 use App\Models\Trove;
 use Livewire\Component;
@@ -19,6 +19,6 @@ class TroveRelatedTroves extends Component
 
     public function render()
     {
-        return view('components.trove-related-troves');
+        return view('livewire.trove-related-troves');
     }
 }

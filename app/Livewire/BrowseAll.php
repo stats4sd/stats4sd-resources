@@ -1,18 +1,23 @@
 <?php
 
-namespace App\Filament\Components;
+namespace App\Livewire;
 
 use App\Models\Tag;
 use App\Models\Trove;
 use Livewire\Component;
 use App\Models\Collection;
+use App\Traits\UsesCustomSearchOptions;
+use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class BrowseAll extends Component
 {
+    use UsesCustomSearchOptions;
+    
     public ?string $query = null;
     public EloquentCollection $resources;
     public EloquentCollection $collections;
+    public SupportCollection $items;
     public int $totalResourcesAndCollections = 0;
     public array $selectedLanguages = [];
     public array $selectedResearchMethods = [];
@@ -46,7 +51,7 @@ class BrowseAll extends Component
         // Fetch Resources (Trove)
         $resourceQuery = Trove::query()->where('is_published', 1);
         if (!empty($this->query)) {
-            $searchResults = Trove::search($this->query)->get();
+            $searchResults = Trove::search($this->query, $this->getSearchWithOptions())->get();
             $resourceQuery->whereIn('id', $searchResults->pluck('id'));
         }
         if (!empty($this->selectedResearchMethods)) {
@@ -62,7 +67,7 @@ class BrowseAll extends Component
         // Fetch Collections
         $collectionQuery = Collection::where('public', 1);
         if (!empty($this->query)) {
-            $searchResults = Collection::search($this->query)->get();
+            $searchResults = Collection::search($this->query, $this->getSearchWithOptions())->get();
             $collectionQuery->whereIn('id', $searchResults->pluck('id'));
         }
         if (!empty($this->selectedLanguages)) {
@@ -97,7 +102,7 @@ class BrowseAll extends Component
         ]);
 
         // Merge and shuffle for a mixed order
-        $this->items = $resources->merge($collections)->shuffle();
+        $this->items = collect($resources)->merge($collections)->shuffle();
         $this->totalResourcesAndCollections = $this->items->count();
     }
 
@@ -105,6 +110,7 @@ class BrowseAll extends Component
     {
         $this->reset('query', 'selectedLanguages', 'selectedResearchMethods');
         $this->dispatch('clearSearchInput');
+        $this->search();
     }
 
     public function clearSearch()
@@ -123,7 +129,7 @@ class BrowseAll extends Component
 
     public function render()
     {
-        return view('components.browse-all', [
+        return view('livewire.browse-all', [
             'researchMethods' => $this->researchMethods,
             'items' => $this->items
         ]);

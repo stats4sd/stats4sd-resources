@@ -364,6 +364,7 @@ class TroveResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('created_at', 'desc')
             ->searchable()
             ->columns(static::getTableColumns())
             ->filters(static::getTableFilters())

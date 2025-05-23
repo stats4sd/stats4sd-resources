@@ -2,6 +2,10 @@
 
 use App\Models\Trove;
 use App\Models\Collection;
+use App\Livewire\BrowseAll;
+use App\Livewire\Resources;
+use App\Livewire\ThemePages;
+use App\Livewire\Collections;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +28,7 @@ Route::group([
     });
 
     Route::get('/home', function () {
-        return view('components.home');
+        return view('home');
     })->name('home');
 
     Route::get('/resources/preview/{slug}', function ($slug) {
@@ -37,10 +41,28 @@ Route::group([
         return view('trove', compact('resource'));
     });
 
-    Route::get('/resources/{slug}', function ($slug) {
-        $resource = Trove::where('slug', $slug)->where('is_published', 1)->firstOrFail();
-        return view('trove', compact('resource'));
-    });
+    Route::get('/resources/{troveKey}', function ($troveKey) {
+        $resource = Trove::findBySlugOrRedirect($troveKey);
+    
+        if (! $resource) {
+            abort(404);
+        }
+    
+        // If slug doesn't match, redirect to correct slug
+        if ($resource->slug !== $troveKey) {
+            return redirect()->route('resources.show', ['troveKey' => $resource->slug], 301);
+        }
+    
+        return view('trove', ['resource' => $resource]);
+    })->name('resources.show');
+
+    Route::get('/resources', Resources::class)->name('resources');
+    Route::get('/collections', Collections::class)->name('collections');
+    Route::get('/browse-all', BrowseAll::class)->name('browse-all');
+
+    Route::get('/theme-pages', function () {
+        return view('theme-pages');
+    })->name('theme-pages');
 
     Route::get('/collections/{id}', function ($id) {
         $collection = Collection::where('id', $id)->where('public', 1)->firstOrFail();

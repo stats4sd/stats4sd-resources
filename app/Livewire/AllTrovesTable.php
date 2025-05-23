@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Components;
+namespace App\Livewire;
 
 use App\Filament\Resources\CollectionResource;
 use App\Filament\Resources\TroveResource;
@@ -43,7 +43,7 @@ class AllTrovesTable extends Component implements HasTable, HasForms
 
     public function render()
     {
-        return view('components.all-troves-table');
+        return view('livewire.all-troves-table');
     }
 
     /**
