@@ -2,6 +2,16 @@
 
 @section('content')
     <div class="relative">
+
+        <!-- Preview Banner -->
+        @if(!$resource->is_published)
+        <div class="bg-stats4sd-red text-white py-4 px-6 font-semibold flex justify-center space-x-1">
+            <x-heroicon-o-exclamation-circle class="w-6 h-6 text-white"/>
+            <span>
+                {{ t("PREVIEW MODE: This resource has not been published and is only visible to authorised users") }}
+            </span>
+            </div>
+        @endif
         <!-- Image Header -->
         @php
             $cover_photo = $resource->getMedia('cover_photo')->first();
