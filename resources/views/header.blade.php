@@ -40,12 +40,12 @@
                     {{ t("Theme Pages") }}
                 </a></li>
                  <!-- Language Dropdown -->
-                 <li class="relative nav-item dropdown" x-data="{ open: false }">
+                 <li class="relative nav-item dropdown" x-data="{ langOpen: false }">
                     <a class="nav-link dropdown-toggle px-4 py-2 border-2 border-black text-black rounded-3xl hover:bg-gray-100 cursor-pointer"
-                        role="button" aria-expanded="false" x-on:click="open = !open">
+                        role="button" aria-expanded="false" x-on:click="langOpen = !langOpen">
                         {{ t("Change Language") }}
                     </a>
-                    <div class="language-dropdown-menu" x-show="open" x-on:click.outside="open = false" style="display:none">
+                    <div class="language-dropdown-menu" x-show="langOpen" x-on:click.outside="langOpen = false" style="display:none">
                         <a class="dropdown-item" href="{{ URL::current() . '?locale=en' }}">English</a>
                         <a class="dropdown-item" href="{{ URL::current() . '?locale=es' }}">Español</a>
                         <a class="dropdown-item" href="{{ URL::current() . '?locale=fr' }}">Français</a>
@@ -69,11 +69,11 @@
                 <li><a href="/collections" class="text-gray-800 hover:text-gray-600">{{ t("Collections") }}</a></li>
                 <li><a href="/browse-all" class="text-gray-800 hover:text-gray-600">{{ t("Browse All") }}</a></li>
                 <li><a href="/theme-pages" class="text-gray-800 hover:text-gray-600">{{ t("Theme Pages") }}</a></li>
-                <li class="relative nav-item pt-2 text-gray-800" x-data="{ open: false }">
-                    <a class="nav-link" role="button" x-on:click="open = !open">
+                <li class="relative nav-item pt-2 text-gray-800" x-data="{ langOpen: false }">
+                    <a class="nav-link" role="button" x-on:click="langOpen = !langOpen">
                         {{ t("Change Language") }}
                     </a>
-                    <ul class="language-options" x-show="open" x-on:click.outside="open = false" style="display:none">
+                    <ul class="language-options" x-show="langOpen" x-on:click.outside="langOpen = false" style="display:none">
                         <li><a class="pt-2" href="{{ URL::current() . '?locale=en' }}">English</a></li>
                         <li><a class="py-2" href="{{ URL::current() . '?locale=es' }}">Español</a></li>
                         <li><a href="{{ URL::current() . '?locale=fr' }}">Français</a></li>
