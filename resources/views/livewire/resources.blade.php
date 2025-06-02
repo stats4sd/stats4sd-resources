@@ -107,7 +107,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             @foreach ($this->resources as $index => $resource)
                                 <div class="card hover-effect relative flex flex-col justify-between bg-white p-6 border border-gray-200 rounded-lg shadow-xl">
-                                    <a href="/resources/{{ $resource->slug }}" class="absolute inset-0 z-0"></a>
+                                    <a href="/resources/{{ $resource->slug }}" class="absolute inset-0 z-0" target="_blank"></a>
                                     <p class="text-xl uppercase">{{ $resource->troveTypes->sortBy('order')->first()?->label ?? '' }}</p>
                                     <p class="text-xl font-bold text-stats4sd-red">{!! $resource['title'] !!}</p>
 

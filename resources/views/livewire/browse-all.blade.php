@@ -108,7 +108,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         @foreach ($this->items as $index => $item)
                             <div class="card hover-effect relative flex flex-col justify-between bg-white p-6 border border-gray-200 rounded-lg shadow-xl">
-                                <a href="/{{ $item['type'] === 'collection' ? 'collections/'.$item['id'] : 'resources/'.$item['slug'] }}" class="absolute inset-0 z-0"></a>
+                                <a href="/{{ $item['type'] === 'collection' ? 'collections/'.$item['id'] : 'resources/'.$item['slug'] }}" class="absolute inset-0 z-0" target="_blank"></a>
 
                                 @if ($item['type'] === 'resource' && !empty($item['troveTypes']))
                                     <p class="text-xl uppercase">{{ $item['troveTypes']->sortBy('order')->first()->label ?? '' }}</p>
