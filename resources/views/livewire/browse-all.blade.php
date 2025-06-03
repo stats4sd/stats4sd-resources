@@ -57,7 +57,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                         </svg>
                     </div>
-                    <div class="space-y-2 mt-2" x-show="openLanguage" x-collapse>
+                    <div class="space-y-2 mt-2" x-show="openLanguage" x-show>
                         <label class="flex items-center">
                             <input type="checkbox" wire:model="selectedLanguages" value="es" wire:change="search" class="mr-2 accent-stats4sd-red" />
                             {{ t("Spanish") }}
@@ -82,7 +82,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                         </svg>
                     </div>
-                    <div class="flex flex-col space-y-2 mt-2" x-show="openMethods" x-collapse>
+                    <div class="flex flex-col space-y-2 mt-2" x-show="openMethods" x-show>
                         @foreach($this->researchMethods as $researchMethod)
                             <label class="flex items-center rounded cursor-pointer">
                                 <input type="checkbox" wire:model="selectedResearchMethods" value="{{ $researchMethod->id }}" class="mr-2 accent-stats4sd-red" wire:change="search"/>
