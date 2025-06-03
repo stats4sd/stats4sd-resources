@@ -17,6 +17,7 @@ class Resources extends Component
     public int $totalResources = 0;
     public array $selectedLanguages = [];
     public array $selectedResearchMethods = [];
+    public array $selectedTopics = [];
 
     protected $listeners = ['queryUpdated' => 'updateResults'];
 
@@ -27,9 +28,20 @@ class Resources extends Component
 
     public function getResearchMethodsProperty()
     {
+        $locale = app()->getLocale();
+
         return Tag::whereHas('tagType', function ($query) {
-            $query->where('slug', 'themes');
-        })->orderBy('name')->get();
+            $query->where('slug', 'research-methods');
+        })->orderByRaw("LOWER(JSON_UNQUOTE(JSON_EXTRACT(name, '$.\"$locale\"')))")->get();
+    }
+
+    public function getTopicsProperty()
+    {
+        $locale = app()->getLocale();
+
+        return Tag::whereHas('tagType', function ($query) {
+            $query->where('slug', 'topics');
+        })->orderByRaw("LOWER(JSON_UNQUOTE(JSON_EXTRACT(name, '$.\"$locale\"')))")->get();
     }
 
     public function search()
@@ -47,14 +59,23 @@ class Resources extends Component
                 }
             }
         
-            // Step 3: Apply language filters if selected
+            // Step 3: Apply topics filters if selected
+            if (!empty($this->selectedTopics)) {
+                foreach ($this->selectedTopics as $topicId) {
+                    $query->whereHas('tags', function ($q) use ($topicId) {
+                        $q->where('tags.id', $topicId);
+                    });
+                }
+            }
+
+            // Step 4: Apply language filters if selected
             if (!empty($this->selectedLanguages)) {
                 ray('langfilter selected');
                 $query->whereLocales('title', $this->selectedLanguages);
             }
 
-            // Step 4: Apply search term if there's a query
-            // Step 5: Retrieve filtered troves
+            // Step 5: Apply search term if there's a query
+            // Step 6: Retrieve filtered troves
             if (!empty($this->query)) {
                 $searchResults = Trove::search($this->query, $this->getSearchWithOptions())->get();
                 if ($searchResults->isNotEmpty()) {
@@ -85,7 +106,7 @@ class Resources extends Component
     
     public function clearFilters()
     {
-        $this->reset('query', 'selectedLanguages', 'selectedResearchMethods');
+        $this->reset('query', 'selectedLanguages', 'selectedResearchMethods', 'selectedTopics');
         $this->dispatch('clearSearchInput');
     }
 
@@ -99,7 +120,8 @@ class Resources extends Component
     public function render()
     {
         return view('livewire.resources', [
-            'researchMethods' => $this->researchMethods
+            'researchMethods' => $this->researchMethods,
+            'topics' => $this->topics,
         ]);
     }
 }

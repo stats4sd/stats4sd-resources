@@ -21,6 +21,7 @@ class BrowseAll extends Component
     public int $totalResourcesAndCollections = 0;
     public array $selectedLanguages = [];
     public array $selectedResearchMethods = [];
+    public array $selectedTopics = [];
 
     protected $listeners = ['queryUpdated' => 'updateResults'];
 
@@ -57,6 +58,11 @@ class BrowseAll extends Component
         if (!empty($this->selectedResearchMethods)) {
             foreach ($this->selectedResearchMethods as $methodId) {
                 $resourceQuery->whereHas('tags', fn ($q) => $q->where('tags.id', $methodId));
+            }
+        }
+        if (!empty($this->selectedTopics)) {
+            foreach ($this->selectedTopics as $topicId) {
+                $resourceQuery->whereHas('tags', fn ($q) => $q->where('tags.id', $topicId));
             }
         }
         if (!empty($this->selectedLanguages)) {
@@ -108,7 +114,7 @@ class BrowseAll extends Component
 
     public function clearFilters()
     {
-        $this->reset('query', 'selectedLanguages', 'selectedResearchMethods');
+        $this->reset('query', 'selectedLanguages', 'selectedResearchMethods', 'selectedTopics');
         $this->dispatch('clearSearchInput');
         $this->search();
     }
@@ -122,15 +128,27 @@ class BrowseAll extends Component
 
     public function getResearchMethodsProperty()
     {
+        $locale = app()->getLocale();
+
         return Tag::whereHas('tagType', function ($query) {
-            $query->where('slug', 'themes');
-        })->orderBy('name')->get();
+            $query->where('slug', 'research-methods');
+        })->orderByRaw("LOWER(JSON_UNQUOTE(JSON_EXTRACT(name, '$.\"$locale\"')))")->get();
+    }
+
+    public function getTopicsProperty()
+    {
+        $locale = app()->getLocale();
+
+        return Tag::whereHas('tagType', function ($query) {
+            $query->where('slug', 'topics');
+        })->orderByRaw("LOWER(JSON_UNQUOTE(JSON_EXTRACT(name, '$.\"$locale\"')))")->get();
     }
 
     public function render()
     {
         return view('livewire.browse-all', [
             'researchMethods' => $this->researchMethods,
+            'topics' => $this->topics,
             'items' => $this->items
         ]);
     }

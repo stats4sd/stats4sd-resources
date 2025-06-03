@@ -91,6 +91,26 @@
                         @endforeach
                     </div>
                 </div>
+
+                <!-- Topics Filter -->
+                <div class="mb-6" x-data="{ openTopics: true }">
+                    <div class="border-t border-gray-400 my-4"></div>
+                    <div class="flex justify-between items-center cursor-pointer" @click="openTopics = !openTopics">
+                        <label class="text-xl font-bold">{{ t("Topic:") }}</label>
+                        <svg class="w-5 h-5 transition-transform duration-300" :class="openTopics ? 'rotate-90' : 'rotate-0'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </div>
+                    <div class="flex flex-col space-y-2 mt-2" x-show="openTopics" x-show>
+                        @foreach($this->topics as $topic)
+                            <label class="flex items-center rounded cursor-pointer">
+                                <input type="checkbox" wire:model="selectedTopics" value="{{ $topic->id }}" class="mr-2 accent-stats4sd-red" wire:change="search"/>
+                                {{ $topic->name }}
+                            </label>
+                        @endforeach
+                    </div>
+                </div>
+                
             </div>
 
             <!-- Resources and Collections Cards -->
