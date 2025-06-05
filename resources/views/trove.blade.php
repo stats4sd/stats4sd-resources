@@ -58,7 +58,7 @@
 
     <!-- Back Link -->
     <div class="container mx-auto p-6">
-        <a href="{{ url('/home') }}" class="text-gray-500 hover:text-black">&lt; {{ t("Back to all resources") }}</a>
+        <a href="{{ url('/browse-all') }}" class="text-gray-500 hover:text-black">&lt; {{ t("Browse all resources and collections") }}</a>
     </div>
 
     <!-- Description -->

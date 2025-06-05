@@ -7,8 +7,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-05-23T16:37:12+00:00\n"
-"PO-Revision-Date: 2025-05-23 18:37+0200\n"
+"POT-Creation-Date: 2025-06-05T09:48:15+00:00\n"
+"PO-Revision-Date: 2025-06-05 11:48+0200\n"
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
@@ -22,7 +22,7 @@ msgstr ""
 
 #: resources\views\collection.blade.php:23
 #: resources\views\trove.blade.php:61
-msgid "Back to all resources"
+msgid "Browse all resources and collections"
 msgstr ""
 
 #: resources\views\collection.blade.php:28
@@ -40,17 +40,17 @@ msgid "Resources in this collection"
 msgstr ""
 
 #: resources\views\header.blade.php:24
-#: resources\views\header.blade.php:71
+#: resources\views\header.blade.php:73
 msgid "Library Home"
 msgstr ""
 
 #: resources\views\header.blade.php:29
-#: resources\views\header.blade.php:72
+#: resources\views\header.blade.php:74
 msgid "Resources"
 msgstr ""
 
 #: resources\views\header.blade.php:34
-#: resources\views\header.blade.php:73
+#: resources\views\header.blade.php:75
 msgid "Collections"
 msgstr ""
 
@@ -59,21 +59,21 @@ msgid "Browse all"
 msgstr ""
 
 #: resources\views\header.blade.php:44
-#: resources\views\header.blade.php:75
+#: resources\views\header.blade.php:77
 msgid "Theme Pages"
 msgstr ""
 
 #: resources\views\header.blade.php:51
-#: resources\views\header.blade.php:78
+#: resources\views\header.blade.php:80
 msgid "Change Language"
 msgstr "Changer de langue"
 
-#: resources\views\header.blade.php:74
+#: resources\views\header.blade.php:76
 msgid "Browse All"
 msgstr ""
 
 #: resources\views\home.blade.php:11
-#: resources\views\livewire\browse-all.blade.php:11
+#: resources\views\livewire\browse-all.blade.php:10
 #: resources\views\livewire\collections.blade.php:10
 #: resources\views\livewire\resources.blade.php:10
 #: resources\views\theme-pages.blade.php:11
@@ -123,65 +123,70 @@ msgstr ""
 msgid "Mini libraries which showcase a specific thematic area, containing a subset of our resources and/or resources provided by partner organisations."
 msgstr ""
 
-#: resources\views\livewire\browse-all.blade.php:17
+#: resources\views\livewire\browse-all.blade.php:16
 msgid "View all"
 msgstr ""
 
-#: resources\views\livewire\browse-all.blade.php:31
-#: resources\views\livewire\collections.blade.php:30
-#: resources\views\livewire\resources.blade.php:30
+#: resources\views\livewire\browse-all.blade.php:29
+#: resources\views\livewire\collections.blade.php:27
+#: resources\views\livewire\resources.blade.php:27
 msgid "Search and filter"
 msgstr ""
 
-#: resources\views\livewire\browse-all.blade.php:61
-#: resources\views\livewire\collections.blade.php:60
-#: resources\views\livewire\resources.blade.php:60
+#: resources\views\livewire\browse-all.blade.php:57
+#: resources\views\livewire\collections.blade.php:57
+#: resources\views\livewire\resources.blade.php:55
 msgid "Language:"
 msgstr ""
 
-#: resources\views\livewire\browse-all.blade.php:69
-#: resources\views\livewire\collections.blade.php:68
-#: resources\views\livewire\resources.blade.php:68
+#: resources\views\livewire\browse-all.blade.php:65
+#: resources\views\livewire\collections.blade.php:65
+#: resources\views\livewire\resources.blade.php:63
 msgid "Spanish"
-msgstr ""
+msgstr "Espagnol"
 
-#: resources\views\livewire\browse-all.blade.php:74
-#: resources\views\livewire\collections.blade.php:73
-#: resources\views\livewire\resources.blade.php:73
+#: resources\views\livewire\browse-all.blade.php:70
+#: resources\views\livewire\collections.blade.php:70
+#: resources\views\livewire\resources.blade.php:68
 msgid "English"
 msgstr "Anglais"
 
-#: resources\views\livewire\browse-all.blade.php:79
-#: resources\views\livewire\collections.blade.php:78
-#: resources\views\livewire\resources.blade.php:78
+#: resources\views\livewire\browse-all.blade.php:75
+#: resources\views\livewire\collections.blade.php:75
+#: resources\views\livewire\resources.blade.php:73
 msgid "French"
-msgstr ""
+msgstr "Français"
 
-#: resources\views\livewire\browse-all.blade.php:89
-#: resources\views\livewire\resources.blade.php:88
+#: resources\views\livewire\browse-all.blade.php:85
+#: resources\views\livewire\resources.blade.php:83
 msgid "Research method:"
 msgstr ""
 
-#: resources\views\livewire\browse-all.blade.php:110
-#: resources\views\livewire\collections.blade.php:89
-#: resources\views\livewire\resources.blade.php:109
+#: resources\views\livewire\browse-all.blade.php:105
+#: resources\views\livewire\resources.blade.php:103
+msgid "Topic:"
+msgstr ""
+
+#: resources\views\livewire\browse-all.blade.php:126
+#: resources\views\livewire\collections.blade.php:86
+#: resources\views\livewire\resources.blade.php:124
 msgid "Showing "
 msgstr ""
 
-#: resources\views\livewire\browse-all.blade.php:110
+#: resources\views\livewire\browse-all.blade.php:126
 msgid " resources and collections"
 msgstr ""
 
-#: resources\views\livewire\browse-all.blade.php:114
-#: resources\views\livewire\collections.blade.php:93
-#: resources\views\livewire\resources.blade.php:113
+#: resources\views\livewire\browse-all.blade.php:130
+#: resources\views\livewire\collections.blade.php:89
+#: resources\views\livewire\resources.blade.php:127
 msgid "Clear Filters"
 msgstr ""
 
-#: resources\views\livewire\browse-all.blade.php:156
+#: resources\views\livewire\browse-all.blade.php:168
 #: resources\views\livewire\collection-troves.blade.php:31
-#: resources\views\livewire\collections.blade.php:118
-#: resources\views\livewire\resources.blade.php:149
+#: resources\views\livewire\collections.blade.php:111
+#: resources\views\livewire\resources.blade.php:158
 #: resources\views\livewire\trove-collections.blade.php:20
 #: resources\views\livewire\trove-related-troves.blade.php:31
 msgid "VIEW"
@@ -195,11 +200,11 @@ msgstr ""
 msgid "Stats4SD collections"
 msgstr ""
 
-#: resources\views\livewire\collections.blade.php:89
+#: resources\views\livewire\collections.blade.php:86
 msgid " collections"
 msgstr ""
 
-#: resources\views\livewire\collections.blade.php:135
+#: resources\views\livewire\collections.blade.php:122
 msgid "Use the search bar to find collections"
 msgstr ""
 
@@ -207,11 +212,11 @@ msgstr ""
 msgid "Stats4SD resources"
 msgstr ""
 
-#: resources\views\livewire\resources.blade.php:109
+#: resources\views\livewire\resources.blade.php:124
 msgid " resources"
 msgstr ""
 
-#: resources\views\livewire\resources.blade.php:165
+#: resources\views\livewire\resources.blade.php:170
 msgid "Use the search bar or select from the research methods and topics to find resources"
 msgstr ""
 
