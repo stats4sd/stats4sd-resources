@@ -35,10 +35,10 @@
                     class="{{ request()->is('browse-all') ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Browse all") }}
                 </a></li>
-                <li><a href="/theme-pages"
+                <!-- <li><a href="/theme-pages"
                     class="{{ request()->is('theme-pages') ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Theme Pages") }}
-                </a></li>
+                </a></li> -->
                  <!-- Language Dropdown -->
                  <li class="relative nav-item dropdown" x-data="{ langOpen: false }">
                     <a class="nav-link dropdown-toggle px-4 py-2 border-2 border-black text-black rounded-3xl hover:bg-gray-100 cursor-pointer"
@@ -68,7 +68,7 @@
                 <li><a href="/resources" class="text-gray-800 hover:text-gray-600">{{ t("Resources") }}</a></li>
                 <li><a href="/collections" class="text-gray-800 hover:text-gray-600">{{ t("Collections") }}</a></li>
                 <li><a href="/browse-all" class="text-gray-800 hover:text-gray-600">{{ t("Browse All") }}</a></li>
-                <li><a href="/theme-pages" class="text-gray-800 hover:text-gray-600">{{ t("Theme Pages") }}</a></li>
+                <!-- <li><a href="/theme-pages" class="text-gray-800 hover:text-gray-600">{{ t("Theme Pages") }}</a></li> -->
                 <li class="relative nav-item pt-2 text-gray-800" x-data="{ langOpen: false }">
                     <a class="nav-link" role="button" x-on:click="langOpen = !langOpen">
                         {{ t("Change Language") }}

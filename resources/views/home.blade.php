@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <div class="bg-white max-w-6xl mx-auto px-6 py-12 mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="bg-white max-w-6xl mx-auto px-6 py-12 mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 
             @php
                 $cards = [
@@ -45,13 +45,15 @@
                         'desc' => t('Browse the full library of resources and collections on a variety of topics.'),
                         'image' => 'images/browse-all-card.jpg',
                     ],
+                    /*
                     [
                         'url' => '/theme-pages',
                         'title' => t('Theme pages'),
                         'desc' => t('Mini libraries which showcase a specific thematic area, containing a subset of our resources and/or resources provided by partner organisations.'),
                         'image' => 'images/theme-card.jpg',
                     ],
-                ];
+                    */
+                    ];
             @endphp
 
             @foreach ($cards as $card)
