@@ -1,4 +1,4 @@
-<header class="sticky top-0 z-50 bg-white shadow-md py-2 px-4 sm:px-20" x-data="{ open: false }">
+<header class="sticky top-0 z-50 bg-white py-2 px-4 sm:px-20" x-data="{ open: false }">
     <div class="container mx-auto flex justify-between items-center py-4">
         <!-- Logo -->
         <div class="flex items-center space-x-4">
@@ -18,7 +18,7 @@
 
         <!-- Nav Items (hidden on small screens) -->
         <nav class="hidden sm:flex">
-            <ul class="flex space-x-6 font-semibold">
+            <ul class="flex space-x-6 font-semibold uppercase">
                 <li><a href="/home"
                     class="{{ request()->is('home') ? 'border-b-2 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Library Home") }}
@@ -41,7 +41,7 @@
                 </a></li> -->
                  <!-- Language Dropdown -->
                  <li class="relative nav-item dropdown" x-data="{ langOpen: false }">
-                    <a class="nav-link dropdown-toggle px-4 py-2 border-2 border-black text-black rounded-3xl hover:bg-gray-100 cursor-pointer"
+                    <a class="nav-link dropdown-toggle"
                         role="button" aria-expanded="false" x-on:click="langOpen = !langOpen">
                         {{ t("Change Language") }}
                     </a>
