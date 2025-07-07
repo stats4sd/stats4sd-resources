@@ -16,9 +16,7 @@
 
                     <div class="mt-6 text-left pr-2">
                         <p class="mb-4">
-                            {!! t("Welcome to the Stats4SD Resources Library - a carefully selected set of resources 
-                                designed to support good practice in research methods. 
-                                Select a starting point on the right to begin") !!}
+                            {!! t("Welcome to the Stats4SD Resources Library - a carefully selected set of resources designed to support good practice in research methods. Select a starting point on the right to begin") !!}
                         </p>
                     </div>
                 </div>

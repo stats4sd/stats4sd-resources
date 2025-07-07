@@ -7,8 +7,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-06-05T09:48:15+00:00\n"
-"PO-Revision-Date: 2025-06-05 11:48+0200\n"
+"POT-Creation-Date: 2025-07-07T09:34:31+00:00\n"
+"PO-Revision-Date: 2025-07-07 11:34+0200\n"
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=n!=1;\n"
 
@@ -38,6 +38,22 @@ msgstr "Fechado: "
 #: resources\views\collection.blade.php:39
 msgid "Resources in this collection"
 msgstr "Recursos de esta colección"
+
+#: resources\views\footer.blade.php:8
+msgid "Company Registered in England & Wales Number"
+msgstr ""
+
+#: resources\views\footer.blade.php:12
+msgid "Contact"
+msgstr "Contacto:"
+
+#: resources\views\footer.blade.php:13
+msgid "Tel"
+msgstr ""
+
+#: resources\views\footer.blade.php:14
+msgid "Email"
+msgstr "Email:"
 
 #: resources\views\header.blade.php:24
 #: resources\views\header.blade.php:73
@@ -74,58 +90,40 @@ msgstr ""
 msgid "Browse All"
 msgstr "Ver todos"
 
-#: resources\views\home.blade.php:11
+#: resources\views\home.blade.php:18
+msgid "Welcome to the Stats4SD Resources Library - a carefully selected set of resources designed to support good practice in research methods. Select a starting point on the right to begin"
+msgstr ""
+
+#: resources\views\home.blade.php:29
+msgid "Search resources"
+msgstr "Buscar recursos"
+
+#: resources\views\home.blade.php:30
+msgid "Guides, tools, videos, papers and other items that we use and recommend to others."
+msgstr "Guías, herramientas, vídeos, documentos y otros artículos que utilizamos y recomendamos a los demás."
+
+#: resources\views\home.blade.php:35
+msgid "Search collections"
+msgstr "Buscar colecciones"
+
+#: resources\views\home.blade.php:36
+msgid "A collection is a group of resources compiled together for a specific purpose, such as series of guides on a specific topic, or the reading for an online course."
+msgstr "Una colección es un grupo de recursos recopilados con un fin específico, como una serie de guías sobre un tema concreto o las lecturas de un curso en línea."
+
+#: resources\views\home.blade.php:41
+msgid "View All"
+msgstr "Ver todos"
+
+#: resources\views\home.blade.php:42
+msgid "Browse the full library of resources and collections on a variety of topics."
+msgstr "Consulte la biblioteca completa de recursos y colecciones sobre diversos temas."
+
 #: resources\views\livewire\browse-all.blade.php:10
 #: resources\views\livewire\collections.blade.php:10
 #: resources\views\livewire\resources.blade.php:10
 #: resources\views\theme-pages.blade.php:11
 msgid "Stats4SD Resources Library"
 msgstr "Biblioteca de recursos Stats4SD"
-
-#: resources\views\home.blade.php:17
-msgid ""
-"The Stats4SD resources library is a curated selection of materials \n"
-"                        that support good practice, research and learning in the broad range of topics relevant to our \n"
-"                        work."
-msgstr ""
-"La biblioteca de recursos Stats4SD es una selección de materiales \n"
-"                        que apoyan las buenas prácticas, la investigación y el aprendizaje en una amplia gama de temas relacionados con nuestro trabajo."
-
-#: resources\views\home.blade.php:22
-msgid "Select a starting point below to begin."
-msgstr "Seleccione un punto de partida para inciar."
-
-#: resources\views\home.blade.php:33
-msgid "Search resources"
-msgstr "Buscar recursos"
-
-#: resources\views\home.blade.php:34
-msgid "Guides, tools, videos, papers and other items that we use and recommend to others."
-msgstr "Guías, herramientas, vídeos, documentos y otros artículos que utilizamos y recomendamos a los demás."
-
-#: resources\views\home.blade.php:39
-msgid "Search collections"
-msgstr "Buscar colecciones"
-
-#: resources\views\home.blade.php:40
-msgid "A collection is a group of resources compiled together for a specific purpose, such as series of guides on a specific topic, or the reading for an online course."
-msgstr "Una colección es un grupo de recursos recopilados con un fin específico, como una serie de guías sobre un tema concreto o las lecturas de un curso en línea."
-
-#: resources\views\home.blade.php:45
-msgid "View All"
-msgstr "Ver todos"
-
-#: resources\views\home.blade.php:46
-msgid "Browse the full library of resources and collections on a variety of topics."
-msgstr "Consulte la biblioteca completa de recursos y colecciones sobre diversos temas."
-
-#: resources\views\home.blade.php:51
-msgid "Theme pages"
-msgstr "Páginas temáticas"
-
-#: resources\views\home.blade.php:52
-msgid "Mini libraries which showcase a specific thematic area, containing a subset of our resources and/or resources provided by partner organisations."
-msgstr "Minibibliotecas que muestran un área temática específica y contienen un subconjunto de nuestros recursos y/o recursos proporcionados por organizaciones asociadas."
 
 #: resources\views\livewire\browse-all.blade.php:16
 msgid "View all"
