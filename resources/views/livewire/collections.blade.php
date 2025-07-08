@@ -12,7 +12,7 @@
 
             <!-- Description -->
             <div class="mt-6 text-left pl-16 pr-2 mx-auto">
-                <p class="mb-4 text-xl">{!! t("Stats4SD collections") !!}</p>
+                <p class="mb-4 text-xl">{!! t("A collection is a group of resources compiled together for a specific purpose, such as series of guides on a specific topic, or the reading for an online course.") !!}</p>
             </div>
         </div>
     </div>

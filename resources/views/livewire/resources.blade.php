@@ -12,7 +12,7 @@
 
             <!-- Description -->
             <div class="mt-6 text-left pl-16 pr-2 mx-auto">
-                <p class="mb-4 text-xl">{!! t("Stats4SD resources") !!}</p>
+                <p class="mb-4 text-xl">{!! t("Guides, tools, videos, papers and other items that we use and recommend to others.") !!}</p>
             </div>
         </div>
     </div>

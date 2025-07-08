@@ -12,7 +12,7 @@
 
             <!-- Description -->
             <div class="mt-6 text-left pl-16 pr-2 mx-auto">
-                <p class="mb-4 text-xl">{!! t("View all") !!}
+                <p class="mb-4 text-xl">{!! t("Browse the full library of resources and collections on a variety of topics.") !!}
                 </p>
             </div>
         </div>
