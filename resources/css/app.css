@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75..100,300..800;1,75..100,300..800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,7 +8,9 @@
     --stats4sd-red-transparent: rgba(211, 34, 41, 0.7);
     --stats4sd-grey: #4d4d4d;
 }
-
+body {
+    font-family: 'open sans', 'sans serif';
+}    
 .library-card {
     @apply text-white p-6 rounded-lg shadow-lg w-80 flex flex-col relative;
 }
