@@ -10,7 +10,7 @@
                             Stats4SD
                         </div>
                         <div class="text-5xl md:text-6xl font-bold pt-2 whitespace-nowrap">
-                            Resources Library
+                            {!! t("Resources Library") !!}
                         </div>
                     </div>
 
