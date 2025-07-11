@@ -18,25 +18,25 @@
 
         <!-- Nav Items (hidden on small screens) -->
         <nav class="hidden md:flex">
-            <ul class="flex space-x-6 font-medium uppercase">
+            <ul class="flex space-x-6 font-medium uppercase text-base">
                 <li><a href="/home"
-                    class="{{ request()->is('home') ? 'border-b-4 pb-3 border-stats4sd-red pb-1' : '' }}">
+                    class=" hover:text-stats4sd-red {{ request()->is('home') ? 'border-b-[6px] pb-5 border-stats4sd-red pb-1' : '' }} ">
                     {{ t("Library Home") }}
                 </a></li>
                 <li><a href="/resources"
-                    class="{{ request()->is('resources') ? 'border-b-4 pb-3 border-stats4sd-red pb-1' : '' }}">
+                    class=" hover:text-stats4sd-red  {{ request()->is('resources') ? 'border-b-[6px] pb-5 border-stats4sd-red pb-1' : '' }} !hover:text-red">
                     {{ t("Resources") }}
                 </a></li>
                 <li><a href="/collections"
-                    class="{{ request()->is('collections') ? 'border-b-4 pb-3 border-stats4sd-red pb-1' : '' }}">
+                    class=" hover:text-stats4sd-red  {{ request()->is('collections') ? 'border-b-[6px] pb-5 border-stats4sd-red pb-1' : '' }} !hover:text-red">
                     {{ t("Collections") }}
                 </a></li>
                 <li><a href="/browse-all"
-                    class="{{ request()->is('browse-all') ? 'border-b-4 pb-3 border-stats4sd-red pb-1' : '' }}">
+                    class=" hover:text-stats4sd-red  {{ request()->is('browse-all') ? 'border-b-[6px] pb-5 border-stats4sd-red pb-1' : '' }} !hover:text-red">
                     {{ t("Browse all") }}
                 </a></li>
                 <!-- <li><a href="/theme-pages"
-                    class="{{ request()->is('theme-pages') ? 'border-b-4 pb-3 border-stats4sd-red pb-1' : '' }}">
+                    class=" hover:text-stats4sd-red  {{ request()->is('theme-pages') ? 'border-b-[6px] pb-5 border-stats4sd-red pb-1' : '' }}">
                     {{ t("Theme Pages") }}
                 </a></li> -->
                  <!-- Language Dropdown -->

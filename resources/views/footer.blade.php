@@ -12,7 +12,7 @@
                 <p class="font-bold">{{ t("Contact") }}</p>
                 <p>{{ t("Tel") }}: +44 (0)118 959 9949<br>
                     {{ t("Email") }}:
-                    <a href="mailto:hello@stats4sd.org" class="hover:underline">hello@stats4sd.org</a>
+                    <a href="mailto:hello@stats4sd.org" class="hover:underline text-white">hello@stats4sd.org</a>
                 </p>
                 <div class="flex space-x-4 mt-4">
                     <a href="https://www.linkedin.com/company/statistics-for-sustainable-development">

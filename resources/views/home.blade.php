@@ -3,12 +3,12 @@
     <div class="relative">
         <div class="w-full mt-24 mb-12">
 
-            <div class="flex flex-col md:flex-row items-start gap-12 w-full items-start justify-start">
+            <div class="flex flex-col md:flex-row items-start gap-12 w-full items-start justify-start ">
                 <div class="flex flex-col w-full md:w-[45%] ">
                     <div class="flex flex-row h-full md:justify-between">
                         <div class="bg-stats4sd-red h-auto w-6 flex-shrink-0"></div>
 
-                        <div class="pl-12 xl:pl-24 pr-12 h-auto max-w-3xl">
+                        <div class="pl-12 xl:pl-24 pr-12 h-auto ">
                             <div class="text-4xl md:text-5xl font-bold text-stats4sd-red ">
                                 Stats4SD
                             </div>
@@ -19,7 +19,7 @@
                     </div>
                     <div class=" flex flex-row pt-16 w-full md:justify-between">
                         <div class="bg-white h-auto w-6 flex-shrink-0"></div>
-                        <p class="pl-12 xl:pl-24 lg:pr-12 h-auto max-w-2xl mb-4 max-w-3xl">
+                        <p class="pl-12 xl:pl-24 pr-12 h-auto max-w-2xl mb-4 ">
                             {!! t(
                                 'Welcome to the Stats4SD Resources Library - a carefully selected set of resources designed to support good practice in research methods. Select a starting point on the right to begin',
                             ) !!}
@@ -29,7 +29,7 @@
                 </div>
 
 
-            <div class="w-full md:w-[55%]">
+            <div class="w-full md:w-[55%] ">
             <div class="bg-white max-w-2xl flex flex-wrap gap-8 justify-items-start">
                 @php
                     $cards = [
@@ -60,7 +60,7 @@
 
                 @foreach ($cards as $card)
                     <a href="{{ $card['url'] }}"
-                        class="relative group h-96 w-[18rem] overflow-hidden hover-effect rounded-t-3xl rounded-bl-3xl">
+                        class="relative group h-96 w-[18rem] overflow-hidden hover-effect rounded-t-3xl rounded-bl-3xl mx-auto md:mx-0">
 
                         <img src="{{ asset($card['image']) }}" alt="{{ $card['title'] }}"
                             class="absolute inset-0 w-full h-full object-cover z-0">

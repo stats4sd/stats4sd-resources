@@ -35,10 +35,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.5rem;
-    font-size: 0.875rem;
-    background-color: #E5E7EB;
+    padding: 0.1rem 0.5rem;
+    border-radius: 3rem;
+    font-size: 0.75rem;
+    background-color: #d4d4d4;
     color: black;
 }
 
@@ -66,7 +66,7 @@ a {
 }
 
 nav a {
-    color: black !important;
+    color: black ;
 }
 
 .language-dropdown-menu {
