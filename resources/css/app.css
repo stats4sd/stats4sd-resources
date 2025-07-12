@@ -24,10 +24,10 @@ body {
 }
 
 .divider {
-    height: 0.4rem;
-    width: 60px;
+    height: 0.8rem;
+    width: 90px;
     background-color: var(--stats4sd-red);
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.5rem;
     position: relative;
 }
 
