@@ -8,12 +8,12 @@
                     <div class="flex flex-row h-full md:justify-between">
                         <div class="bg-stats4sd-red h-auto w-6 flex-shrink-0"></div>
 
-                        <div class="pl-12 xl:pl-24 pr-12 h-auto ">
+                        <div class="pl-12 xl:pl-24 pr-12 h-auto max-w-2xl">
                             <div class="text-4xl md:text-5xl font-bold text-stats4sd-red ">
                                 Stats4SD
                             </div>
                             <div class="text-5xl md:text-6xl font-bold pt-2 ">
-                                Resources Library
+                                Biblioteca de recurso
                             </div>
                         </div>
                     </div>

@@ -221,7 +221,7 @@
 
 
         <!-- Collections -->
-        <div class="container mx-auto  mb-20">
+        <div class="container mx-auto  my-20">
             <div class="divider"></div>
 
             <h2 class="text-2xl font-bold pb-2">{{ t('Collections including this resource') }}</h2>
