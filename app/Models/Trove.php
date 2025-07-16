@@ -118,6 +118,13 @@ class Trove extends Model implements HasMedia
         }
     }
 
+    protected function coverImage(): Attribute
+    {
+        return new Attribute(
+            get: fn ()  => $this->getMedia("cover_image_" . app()->getLocale())->first()?->getUrl() ?? asset('images/default-cover-photo.jpg')
+        );
+    }
+
 
     public function user(): BelongsTo
     {
@@ -143,7 +150,7 @@ class Trove extends Model implements HasMedia
     {
         return $this->belongsToMany(TroveType::class);
     }
-    
+
     public function collections(): BelongsToMany
     {
         return $this->belongsToMany(Collection::class)
@@ -156,8 +163,8 @@ class Trove extends Model implements HasMedia
         return Trove::whereHas('collections', function ($query) {
             $query->whereIn('collections.id', $this->collections->pluck('id'));
         })
-        ->where('id', '!=', $this->id)  // Exclude itself
-        ->get();
+            ->where('id', '!=', $this->id)  // Exclude itself
+            ->get();
     }
 
     public function tags(): MorphToMany
@@ -271,21 +278,21 @@ class Trove extends Model implements HasMedia
 
         // Try id
         if (is_numeric($troveKey)) {
-            $trove = self::where('id', (int) $troveKey)
+            $trove = self::where('id', (int)$troveKey)
                 ->where('is_published', 1)
                 ->first();
             if ($trove) return $trove;
         }
 
         // Try previous_slugs (string)
-        $trove = self::whereJsonContains('previous_slugs', (string) $troveKey)
+        $trove = self::whereJsonContains('previous_slugs', (string)$troveKey)
             ->where('is_published', 1)
             ->first();
         if ($trove) return $trove;
 
         // Try previous_slugs (numeric)
         if (is_numeric($troveKey)) {
-            $trove = self::whereJsonContains('previous_slugs', (int) $troveKey)
+            $trove = self::whereJsonContains('previous_slugs', (int)$troveKey)
                 ->where('is_published', 1)
                 ->first();
             if ($trove) return $trove;

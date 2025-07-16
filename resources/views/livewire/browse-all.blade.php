@@ -1,7 +1,7 @@
 <div class="relative">
     <!-- Background Image-->
     <img src="images/crops.png" alt="Background Image" class="absolute inset-0 w-full h-[35vh] sm:h-[30vh] object-cover filter brightness-50 z-0">
-    
+
     <!-- Overlay Content -->
     <div class="relative z-10 flex flex-col items-center justify-center h-[35vh] sm:h-[30vh] px-4 text-white">
         <div class="max-w-3xl w-full mx-auto text-center">
@@ -20,7 +20,7 @@
 
     <div class="">
         <div class="flex flex-col lg:flex-row gap-12">
-        
+
             <!-- Sidebar (Search & Filters) -->
             <div class="lg:min-w-[220px] w-2/12 bg-white self-start pl-12 py-8">
                 <div class="pb-4">
@@ -38,7 +38,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                         </svg>
                     </div>
-                    
+
                     <!-- Clear Button -->
                     @if($query)
                         <svg xmlns="http://www.w3.org/2000/svg" wire:click="clearSearch" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="gray" class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 cursor-pointer hover:stroke-gray-700 transition-colors duration-200">
@@ -109,7 +109,7 @@
                         @endforeach
                     </div>
                 </div>
-                
+
             </div>
 
             <!-- Resources and Collections Cards -->
@@ -126,84 +126,11 @@
                 <div id="Items-content" class="py-8 px-2 sm:px-4 rounded-lg">
                     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 max-w-6xl mx-auto">
                         @foreach ($this->items as $index => $item)
-                          <div
-                                    class="card hover-effect relative flex flex-col justify-between {{ $item['type'] === 'collection' ? 'bg-black' : 'bg-[#f2f2f2]' }} overflow-hidden  rounded-t-3xl rounded-bl-3xl ">
-                                    <a href="/{{ $item['type'] === 'collection' ? 'collections/'.$item['id'] : 'resources/'.$item['slug'] }}"  class="absolute inset-0 z-0"
-                                        target="_blank"></a>
-                                            <div class="flex flex-col justify-start">
-                                        <div class="h-52 bg-cover bg-center mb-4"
-                                            style="background-image: url('images/crops.png');">
-                                        </div>
-                                        <div class="absolute top-4 left-4 h-12 w-12  rounded-full text-white text-center py-auto {{ $item['type'] === 'collection' ? 'bg-stats4sd-red ' : 'bg-black' }}">
-                                         @if ($item['type'] === 'resource')
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="white"  class="mx-auto my-3"><path d="M4 22v-20h16v11.543c0 4.107-6 2.457-6 2.457s1.518 6-2.638 6h-7.362zm18-7.614v-14.386h-20v24h10.189c3.163 0 9.811-7.223 9.811-9.614z"/></svg>
-                                        @else
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="white"  class="mx-auto my-3"><path d="M21.698 10.658l2.302 1.342-12.002 7-11.998-7 2.301-1.342 9.697 5.658 9.7-5.658zm-9.7 10.657l-9.697-5.658-2.301 1.343 11.998 7 12.002-7-2.302-1.342-9.7 5.657zm0-19l8.032 4.685-8.032 4.685-8.029-4.685 8.029-4.685zm0-2.315l-11.998 7 11.998 7 12.002-7-12.002-7z"/></svg>
-                                        @endif
-                                        </div>
-                                     @if ($item['type'] === 'resource' && !empty($item['troveTypes']))
-                                    <p class="text-sm text-stats4sd-red uppercase font-semibold mx-6 ">
-                                            {{ $item['troveTypes']->sortBy('order')->first()->label ?? '' }}</p>
-                                        @endif
-
-                                        <p class="text-lg 2xl:text-xl font-bold mx-6 mb-3 xl:min-h-8 {{ $item['type'] === 'collection' ? 'text-white ' : 'text-black' }} "> {!! $item['title'] !!}</p>
-
-                                        <p class=" text-sm 2xl:text-base mb-2  flex-grow mx-6 mb-4 {{ $item['type'] === 'collection' ? 'text-white ' : 'text-gray-600' }}">
-                                            {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($item['description']), ENT_QUOTES, 'UTF-8'), 110, '...') }}
-                                        </p>
-
-                                        <!-- Tags -->
-            
-                                @if ($item['type'] === 'resource' && !empty($item['tags']))
-                                        <div class="flex flex-wrap gap-2 mb-2 mx-6 mb-4">
-                                            @foreach ($item['tags']->sortBy(fn($tag) => strtolower($tag->name)) as $tag)
-                                        
-                                                    <div class="grey-badge ">{{ $tag->name }}</div>
-                                               
-                                            @endforeach
-                                        </div>
-                                         @endif
-                                    </div>
-                                        <!-- View Button -->
-                                        <div class="flex justify-end mb-2 pb-4 px-8 ">
-                                            <button class="{{ $item['type'] === 'collection' ? 'bg-white text-black' : 'bg-stats4sd-red  text-white' }} text-center py-2 px-8 rounded-full">
-                                                {{ t("VIEW") }}
-                                            </button>
-                                        </div>
-                                    
-                                </div>
-
-                            {{-- <div class="card hover-effect relative flex flex-col justify-between bg-white p-6 border border-gray-200 rounded-lg shadow-xl">
-                                <a href="/{{ $item['type'] === 'collection' ? 'collections/'.$item['id'] : 'resources/'.$item['slug'] }}" class="absolute inset-0 z-0" target="_blank"></a>
-
-                                @if ($item['type'] === 'resource' && !empty($item['troveTypes']))
-                                    <p class="text-xl uppercase">{{ $item['troveTypes']->sortBy('order')->first()->label ?? '' }}</p>
-                                @endif
-
-                                <p class="text-xl font-bold {{ $item['type'] === 'collection' ? 'text-white bg-stats4sd-red p-2 rounded' : 'text-stats4sd-red' }}">
-                                    {!! $item['title'] !!}
-                                </p>
-
-                                <p class="text-gray-600 pt-8 mb-4 flex-grow">
-                                    {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($item['description']), ENT_QUOTES, 'UTF-8'), 120, '...') }}
-                                </p>
-
-                                <!-- Tags (Only for Resources) -->
-                                @if ($item['type'] === 'resource' && !empty($item['tags']))
-                                    <div class="flex flex-wrap mb-4 gap-2 pt-8">
-                                        @foreach ($item['tags']->sortBy(fn($tag) => strtolower($tag->name)) as $tag)
-                                            <div class="grey-badge">{{ $tag->name }}</div>
-                                        @endforeach
-                                    </div>
-                                @endif
-
-                                <!-- View Button -->
-                                <div class="flex justify-end">
-                                    <button class="text-white text-center py-2 px-8 rounded-lg {{ $item['type'] === 'collection' ? 'bg-stats4sd-red' : 'bg-black' }}">
-                                        {{ t("VIEW") }}
-                                    </button>
-                                </div>
-                            </div> --}}
+                            @if($item['type'] === 'resource')
+                                <x-resource-result-card :item="$item"/>
+                            @elseif($item['type'] === 'collection')
+                                <x-collection-result-card :item="$item"/>
+                            @endif
                         @endforeach
                     </div>
                 </div>
