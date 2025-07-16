@@ -26,10 +26,8 @@
                             ) !!}
                         </p>
                 
-
                     </div>
                 </div>
-
 
                 <div class="w-full md:w-[55%] ">
                     <div class="bg-white max-w-2xl flex flex-wrap gap-8 justify-items-start">

@@ -7,41 +7,41 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-08T08:39:19+00:00\n"
-"PO-Revision-Date: 2025-07-08 10:39+0200\n"
+"POT-Creation-Date: 2025-07-11T10:03:13+00:00\n"
+"PO-Revision-Date: 2025-07-11 12:03+0200\n"
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
 #: resources\views\collection.blade.php:11
 msgid "COLLECTION"
-msgstr ""
+msgstr "COLLECTION"
 
 #: resources\views\collection.blade.php:14
 msgid "Jump to resources"
-msgstr ""
+msgstr "Accéder aux ressources"
 
 #: resources\views\collection.blade.php:23
 #: resources\views\trove.blade.php:61
 msgid "Browse all resources and collections"
-msgstr ""
+msgstr "Parcourir toutes les ressources et collections"
 
 #: resources\views\collection.blade.php:28
 #: resources\views\trove.blade.php:66
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #: resources\views\collection.blade.php:30
 #: resources\views\trove.blade.php:68
 msgid "Dated: "
-msgstr ""
+msgstr "Daté : "
 
 #: resources\views\collection.blade.php:39
 msgid "Resources in this collection"
-msgstr ""
+msgstr "Ressources dans cette collection"
 
 #: resources\views\footer.blade.php:8
 msgid "Company Registered in England & Wales Number"
-msgstr ""
+msgstr "Numéro de société enregistrée en Angleterre & Pays de Galles"
 
 #: resources\views\footer.blade.php:12
 msgid "Contact"
@@ -49,7 +49,7 @@ msgstr "Contact"
 
 #: resources\views\footer.blade.php:13
 msgid "Tel"
-msgstr ""
+msgstr "Tél"
 
 #: resources\views\footer.blade.php:14
 msgid "Email"
@@ -58,26 +58,26 @@ msgstr "Email:"
 #: resources\views\header.blade.php:24
 #: resources\views\header.blade.php:73
 msgid "Library Home"
-msgstr ""
+msgstr "Accueil de la bibliothèque"
 
 #: resources\views\header.blade.php:29
 #: resources\views\header.blade.php:74
 msgid "Resources"
-msgstr ""
+msgstr "Ressources"
 
 #: resources\views\header.blade.php:34
 #: resources\views\header.blade.php:75
 msgid "Collections"
-msgstr ""
+msgstr "Collections"
 
 #: resources\views\header.blade.php:39
 msgid "Browse all"
-msgstr ""
+msgstr "Tout parcourir"
 
 #: resources\views\header.blade.php:44
 #: resources\views\header.blade.php:77
 msgid "Theme Pages"
-msgstr ""
+msgstr "Pages thématiques"
 
 #: resources\views\header.blade.php:51
 #: resources\views\header.blade.php:80
@@ -86,57 +86,61 @@ msgstr "Changer de langue"
 
 #: resources\views\header.blade.php:76
 msgid "Browse All"
-msgstr ""
+msgstr "Tout parcourir"
 
-#: resources\views\home.blade.php:18
+#: resources\views\home.blade.php:12
+msgid "Resources Library"
+msgstr "Bibliothèque de ressources"
+
+#: resources\views\home.blade.php:19
 msgid "Welcome to the Stats4SD Resources Library - a carefully selected set of resources designed to support good practice in research methods. Select a starting point on the right to begin"
-msgstr ""
-
-#: resources\views\home.blade.php:29
-msgid "Search resources"
-msgstr ""
+msgstr "Bienvenue dans la bibliothèque des ressources de Stats4SD - un ensemble de ressources soigneusement sélectionnées et conçues pour soutenir les bonnes pratiques en matière de méthodes de recherche. Sélectionnez un point de départ à droite pour commencer"
 
 #: resources\views\home.blade.php:30
+msgid "Search resources"
+msgstr "Recherche de ressources"
+
+#: resources\views\home.blade.php:31
 #: resources\views\livewire\resources.blade.php:16
 msgid "Guides, tools, videos, papers and other items that we use and recommend to others."
-msgstr ""
-
-#: resources\views\home.blade.php:35
-msgid "Search collections"
-msgstr ""
+msgstr "Guides, outils, vidéos, documents et autres éléments que nous utilisons et recommandons."
 
 #: resources\views\home.blade.php:36
+msgid "Search collections"
+msgstr "Recherche de collections"
+
+#: resources\views\home.blade.php:37
 #: resources\views\livewire\collections.blade.php:16
 msgid "A collection is a group of resources compiled together for a specific purpose, such as series of guides on a specific topic, or the reading for an online course."
-msgstr ""
-
-#: resources\views\home.blade.php:41
-msgid "View All"
-msgstr ""
+msgstr "Une collection est un groupe de ressources compilées dans un but précis, comme une série de guides sur un sujet spécifique ou le matériel qui compose un cours en ligne."
 
 #: resources\views\home.blade.php:42
+msgid "View All"
+msgstr "Voir tout"
+
+#: resources\views\home.blade.php:43
 #: resources\views\livewire\browse-all.blade.php:16
 msgid "Browse the full library of resources and collections on a variety of topics."
-msgstr ""
+msgstr "Parcourez la bibliothèque complète de ressources et collections sur divers sujets."
 
 #: resources\views\livewire\browse-all.blade.php:10
 #: resources\views\livewire\collections.blade.php:10
 #: resources\views\livewire\resources.blade.php:10
 #: resources\views\theme-pages.blade.php:11
 msgid "Stats4SD Resources Library"
-msgstr ""
+msgstr "Bibliothèque de ressources de Stats4SD"
 
 #: resources\views\livewire\browse-all.blade.php:29
 #: resources\views\livewire\collections.blade.php:27
 #: resources\views\livewire\resources.blade.php:27
 msgid "Search and filter"
-msgstr ""
+msgstr "Chercher et filtrer"
 
 #: resources\views\livewire\browse-all.blade.php:57
 #: resources\views\livewire\collections.blade.php:57
 #: resources\views\livewire\resources.blade.php:55
 msgid "Language:"
-msgstr ""
+msgstr "Langue :"
 
 #: resources\views\livewire\browse-all.blade.php:65
 #: resources\views\livewire\collections.blade.php:65
@@ -159,28 +163,28 @@ msgstr "Français"
 #: resources\views\livewire\browse-all.blade.php:85
 #: resources\views\livewire\resources.blade.php:83
 msgid "Research method:"
-msgstr ""
+msgstr "Méthode de recherche :"
 
 #: resources\views\livewire\browse-all.blade.php:105
 #: resources\views\livewire\resources.blade.php:103
 msgid "Topic:"
-msgstr ""
+msgstr "Sujet :"
 
 #: resources\views\livewire\browse-all.blade.php:126
 #: resources\views\livewire\collections.blade.php:86
 #: resources\views\livewire\resources.blade.php:124
 msgid "Showing "
-msgstr ""
+msgstr "Montrer "
 
 #: resources\views\livewire\browse-all.blade.php:126
 msgid " resources and collections"
-msgstr ""
+msgstr " ressources et collections"
 
 #: resources\views\livewire\browse-all.blade.php:130
 #: resources\views\livewire\collections.blade.php:89
 #: resources\views\livewire\resources.blade.php:127
 msgid "Clear Filters"
-msgstr ""
+msgstr "Effacer les filtres"
 
 #: resources\views\livewire\browse-all.blade.php:168
 #: resources\views\livewire\collection-troves.blade.php:31
@@ -189,98 +193,98 @@ msgstr ""
 #: resources\views\livewire\trove-collections.blade.php:20
 #: resources\views\livewire\trove-related-troves.blade.php:31
 msgid "VIEW"
-msgstr ""
+msgstr "VOIR"
 
 #: resources\views\livewire\collection-troves.blade.php:39
 msgid "No resources available for this collection."
-msgstr ""
+msgstr "Aucune ressource disponible pour cette collection."
 
 #: resources\views\livewire\collections.blade.php:86
 msgid " collections"
-msgstr ""
+msgstr " collections"
 
 #: resources\views\livewire\collections.blade.php:122
 msgid "Use the search bar to find collections"
-msgstr ""
+msgstr "Utilisez la barre de recherche pour trouver des collections"
 
 #: resources\views\livewire\resources.blade.php:124
 msgid " resources"
-msgstr ""
+msgstr " ressources"
 
 #: resources\views\livewire\resources.blade.php:170
 msgid "Use the search bar or select from the research methods and topics to find resources"
-msgstr ""
+msgstr "Utilisez la barre de recherche ou choisissez parmi les méthodes de recherche et les sujets pour trouver des ressources"
 
 #: resources\views\livewire\search-bar.blade.php:4
 msgid "Search here"
-msgstr ""
+msgstr "Rechercher ici"
 
 #: resources\views\livewire\trove-collections.blade.php:28
 msgid "No collections available for this resource."
-msgstr ""
+msgstr "Aucune collection n'est disponible pour cette ressource."
 
 #: resources\views\livewire\trove-related-troves.blade.php:40
 msgid "No related resources found."
-msgstr ""
+msgstr "Aucune ressource connexe n'a été trouvée."
 
 #: resources\views\theme-pages.blade.php:17
 msgid "Stats4SD theme pages"
-msgstr ""
+msgstr "Pages thématiques de Stats4SD"
 
 #: resources\views\trove.blade.php:9
 msgid "PREVIEW MODE: This resource has not been published and is only visible to authorised users"
-msgstr ""
+msgstr "MODE APERÇU : Cette ressource n'a pas été publiée et n'est visible que par les utilisateurs autorisés"
 
 #: resources\views\trove.blade.php:24
 msgid "Jump to view/download"
-msgstr ""
+msgstr "Aller à l'affichage/téléchargement"
 
 #: resources\views\trove.blade.php:43
 msgid "Available Languages:"
-msgstr ""
+msgstr "Langues disponibles :"
 
 #: resources\views\trove.blade.php:74
 msgid "Author:"
-msgstr ""
+msgstr "Auteur :"
 
 #: resources\views\trove.blade.php:74
 msgid "Authors:"
-msgstr ""
+msgstr "Auteurs :"
 
 #: resources\views\trove.blade.php:90
 msgid "View/download"
-msgstr ""
+msgstr "Voir/télécharger"
 
 #: resources\views\trove.blade.php:106
 msgid "This resource includes a video on our YouTube channel, embedded here."
-msgstr ""
+msgstr "Cette ressource comprend une vidéo sur notre chaîne YouTube, intégrée ici."
 
 #: resources\views\trove.blade.php:106
 msgid "This resource includes videos on our YouTube channel, embedded here."
-msgstr ""
+msgstr "Cette ressource comprend des vidéos sur notre chaîne YouTube, intégrées ici."
 
 #: resources\views\trove.blade.php:143
 msgid ""
 "The individual components of the trove are listed below. Click on one to download the file or go to the \n"
 "                    external url. You can download the full trove below as a .zip file."
-msgstr ""
+msgstr "Les différents éléments de la collection sont énumérés ci-dessous. Cliquez sur l'un d'entre eux pour télécharger le fichier ou accéder à l'url externe. Vous pouvez télécharger l'intégralité de la collection sous la forme d'un fichier .zip."
 
 #: resources\views\trove.blade.php:163
 msgid "VISIT LINK"
-msgstr ""
+msgstr "VISITER LE LIEN"
 
 #: resources\views\trove.blade.php:186
 msgid "DOWNLOAD"
-msgstr ""
+msgstr "TÉLÉCHARGER"
 
 #: resources\views\trove.blade.php:202
 msgid "DOWNLOAD ALL (ZIP)"
-msgstr ""
+msgstr "TÉLÉCHARGER TOUT (ZIP)"
 
 #: resources\views\trove.blade.php:215
 msgid "Collections including this resource"
-msgstr ""
+msgstr "Collections comprenant cette ressource"
 
 #: resources\views\trove.blade.php:225
 msgid "Related resources"
-msgstr ""
+msgstr "Ressources connexes"
