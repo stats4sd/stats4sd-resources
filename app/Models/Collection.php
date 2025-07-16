@@ -42,7 +42,14 @@ class Collection extends Model implements HasMedia
     protected function coverImage(): Attribute
     {
         return new Attribute(
-            get: fn ()  => $this->getMedia("cover_image_" . app()->getLocale())->first()?->getUrl() ?? asset('images/default-cover-photo.jpg')
+            get: fn() => $this->getFirstMediaUrl('cover_image_' . app()->getLocale()) ?? asset('images/default-cover-photo.jpg')
+        );
+    }
+
+    protected function coverImageThumb(): Attribute
+    {
+        return new Attribute(
+            get: fn() => $this->getFirstMediaUrl('cover_image_' . app()->getLocale(), 'cover_thumb') ?? asset('images/default-cover-photo.jpg')
         );
     }
 
@@ -67,9 +74,9 @@ class Collection extends Model implements HasMedia
         return Collection::whereHas('troves', function ($query) {
             $query->whereIn('collection_trove.trove_id', $this->troves->pluck('id'));
         })
-        ->where('id', '!=', $this->id) // Exclude itself
-        ->distinct()
-        ->get();
+            ->where('id', '!=', $this->id) // Exclude itself
+            ->distinct()
+            ->get();
     }
 
 

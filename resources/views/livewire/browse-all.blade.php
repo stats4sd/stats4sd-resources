@@ -35,14 +35,14 @@
 
                     <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5 text-gray-600">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
                         </svg>
                     </div>
 
                     <!-- Clear Button -->
                     @if($query)
                         <svg xmlns="http://www.w3.org/2000/svg" wire:click="clearSearch" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="gray" class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 cursor-pointer hover:stroke-gray-700 transition-colors duration-200">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
                         </svg>
                     @endif
                 </div>
@@ -53,20 +53,20 @@
                     <div class="flex justify-between items-center cursor-pointer" @click="openLanguage = !openLanguage">
                         <label class="text-base font-bold">{{ t("Language:") }}</label>
                         <svg class="w-5 h-5 transition-transform duration-300" :class="openLanguage ? 'rotate-90' : 'rotate-0'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
                         </svg>
                     </div>
                     <div class="space-y-2 mt-2 text-sm" x-show="openLanguage" x-show>
                         <label class="flex items-center">
-                            <input type="checkbox" wire:model="selectedLanguages" value="es" wire:change="search" class="mr-2 accent-stats4sd-red" />
+                            <input type="checkbox" wire:model="selectedLanguages" value="es" wire:change="search" class="mr-2 accent-stats4sd-red"/>
                             {{ t("Spanish") }}
                         </label>
                         <label class="flex items-center">
-                            <input type="checkbox" wire:model="selectedLanguages" value="en" wire:change="search" class="mr-2 accent-stats4sd-red" />
+                            <input type="checkbox" wire:model="selectedLanguages" value="en" wire:change="search" class="mr-2 accent-stats4sd-red"/>
                             {{ t("English") }}
                         </label>
                         <label class="flex items-center">
-                            <input type="checkbox" wire:model="selectedLanguages" value="fr" wire:change="search" class="mr-2 accent-stats4sd-red" />
+                            <input type="checkbox" wire:model="selectedLanguages" value="fr" wire:change="search" class="mr-2 accent-stats4sd-red"/>
                             {{ t("French") }}
                         </label>
                     </div>
@@ -78,7 +78,7 @@
                     <div class="flex justify-between items-center cursor-pointer" @click="openMethods = !openMethods">
                         <label class="text-base font-bold">{{ t("Research method:") }}</label>
                         <svg class="w-5 h-5 transition-transform duration-300" :class="openMethods ? 'rotate-90' : 'rotate-0'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
                         </svg>
                     </div>
                     <div class="flex flex-col space-y-2 mt-2 text-sm" x-show="openMethods" x-show>
@@ -97,7 +97,7 @@
                     <div class="flex justify-between items-center cursor-pointer" @click="openTopics = !openTopics">
                         <label class="text-base font-bold">{{ t("Topic:") }}</label>
                         <svg class="w-5 h-5 transition-transform duration-300" :class="openTopics ? 'rotate-90' : 'rotate-0'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
                         </svg>
                     </div>
                     <div class="flex flex-col space-y-2 mt-2 text-sm" x-show="openTopics" x-show>
@@ -115,7 +115,7 @@
             <!-- Resources and Collections Cards -->
             <div class="w-3/4">
                 <div class="p-8">
-                    {{ t("Showing ") . $totalResourcesAndCollections . t(" resources and collections") }}
+                    {{ t("Showing ") . $this->startOfPage . ' - ' . $this->endOfPage . ' out of ' . $totalResourcesAndCollections . t(" resources and collections") }}
                     @if($query || !empty($selectedLanguages) || !empty($selectedResearchMethods))
                         <button wire:click="clearFilters" class="text-gray-500 hover:text-gray-700 underline text-sm">
                             {{ t("Clear Filters") }}
@@ -125,13 +125,47 @@
 
                 <div id="Items-content" class="py-8 px-2 sm:px-4 rounded-lg">
                     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                        @foreach ($this->items as $index => $item)
+                        @foreach ($this->renderedItems as $index => $item)
                             @if($item['type'] === 'resource')
                                 <x-resource-result-card :item="$item"/>
                             @elseif($item['type'] === 'collection')
                                 <x-collection-result-card :item="$item"/>
                             @endif
                         @endforeach
+                    </div>
+                </div>
+
+
+                <div class="max-w-6xl mx-auto my-5">
+                        <nav class="rounded-md shadow-xs flex w-full justify-end" aria-label="Pagination" x-data="{currentPage: $wire.entangle('currentPage')}">
+
+                            <button
+                                :class="currentPage===1 ? bg-gray-50 : 'bg-white hover:text-stats4sd-red'"
+                                class="py-2 px-4 rounded-full"
+                                x-on:click="$wire.loadPage(currentPage-1); window.scrollTo({ top: 0, behavior: 'smooth' });"
+                                {{ $currentPage === 1 ? 'disabled="disabled"' : '' }}
+                            >
+                                Previous
+                            </button>
+
+                            @for($i=1; $i<=$pageCount; $i++)
+                                <button
+                                    :class="currentPage==={{$i}} ? 'text-white bg-stats4sd-red' : 'text-black hover:text-stats4sd-red'"
+                                    class="py-2 px-4 rounded-full"
+
+                                    x-on:click="$wire.loadPage({{$i}}); window.scrollTo({ top: 0, behavior: 'smooth' });"
+                                >{{ $i }}</button>
+                            @endfor
+
+                            <button
+                                :class="currentPage==={{$pageCount}} ? bg-gray-50 : 'bg-white hover:text-stats4sd-red'"
+                                class="py-2 px-4 rounded-full"
+                                x-on:click="$wire.loadPage(currentPage+1); window.scrollTo({ top: 0, behavior: 'smooth' });"
+                                {{ $currentPage === $pageCount ? 'disabled="disabled"' : ''}}
+                            >
+                                Next
+                            </button>
+                        </nav>
                     </div>
                 </div>
             </div>

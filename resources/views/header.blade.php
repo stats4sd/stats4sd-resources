@@ -1,17 +1,18 @@
-<header class="sticky top-0 z-50 bg-white py-2 px-4 sm:px-20" x-data="{ open: false }">
+<header class="sticky top-0 z-50 bg-white  px-4 sm:px-20" x-data="{ open: false }">
     <div class="container mx-auto flex justify-between items-center py-4">
         <!-- Logo -->
         <div class="flex items-center space-x-4">
             {{-- <a href="https://stats4sd.org/">
                 <img src="/images/Stats4SD_logo.png" alt="Stats4SD logo" class="h-4 w-auto">
             </a> --}}
-            <button class="py-2 px-4 bg-stats4sd-red hover:bg-black text-white flex    font-bold rounded-full w-max" href="https://stats4sd.org/">
-            <span class="inline"><svg xmlns="http://www.w3.org/2000/svg" class="mr-2" width="20" height="20" fill="white" viewBox="0 0 20 20"><path d="M0 12l9-8v6h15v4h-15v6z"/></svg></span>            Stats4SD Home</button>
+            <a class="py-2 px-4 bg-stats4sd-red hover:bg-black text-white flex font-bold rounded-full w-max" href="{{ config('app.front_end_url') }}">
+            <span class="inline"><svg xmlns="http://www.w3.org/2000/svg" class="mr-2" width="20" height="20" fill="white" viewBox="0 0 20 20"><path d="M0 12l9-8v6h15v4h-15v6z"/></svg></span>            Stats4SD Home
+            </a>
         </div>
 
         <!-- Hamburger Menu (visible on small screens) -->
-        <button 
-            class="md:hidden text-gray-800 focus:outline-none" 
+        <button
+            class="md:hidden text-gray-800 focus:outline-none"
             x-on:click="open = !open">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
@@ -55,14 +56,14 @@
                 </li>
             </ul>
         </nav>
-        
+
     </div>
 
     <!-- Nav Items (visible on small screens) -->
-    <div 
-        class="sm:hidden" 
+    <div
+        class="sm:hidden"
         x-show="open"
-        x-on:click.outside="open = false" 
+        x-on:click.outside="open = false"
         style="display: none;">
         <nav class="bg-white text-right">
             <ul class="flex flex-col space-y-2 px-6 pb-4">
