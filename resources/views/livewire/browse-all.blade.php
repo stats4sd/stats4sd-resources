@@ -136,12 +136,12 @@
                 </div>
 
 
-                <div class="max-w-6xl mx-auto my-5">
+                <div class="max-w-6xl mx-auto my-5 text-xl">
                         <nav class="rounded-md shadow-xs flex w-full justify-end" aria-label="Pagination" x-data="{currentPage: $wire.entangle('currentPage')}">
 
                             <button
                                 :class="currentPage===1 ? bg-gray-50 : 'bg-white hover:bg-stats4sd-red-70'"
-                                class="py-2 px-4 border"
+                                class="py-2 px-4 rounded-full"
                                 x-on:click="$wire.loadPage(currentPage-1); window.scrollTo({ top: 0, behavior: 'smooth' });"
                                 {{ $currentPage === 1 ? 'disabled="disabled"' : '' }}
                             >
@@ -151,7 +151,7 @@
                             @for($i=1; $i<=$pageCount; $i++)
                                 <button
                                     :class="currentPage==={{$i}} ? 'text-white bg-stats4sd-red' : 'text-black hover:bg-stats4sd-red-70'"
-                                    class="py-2 px-4 border"
+                                    class="py-2 px-4 rounded-full"
 
                                     x-on:click="$wire.loadPage({{$i}}); window.scrollTo({ top: 0, behavior: 'smooth' });"
                                 >{{ $i }}</button>
@@ -159,7 +159,7 @@
 
                             <button
                                 :class="currentPage==={{$pageCount}} ? bg-gray-50 : 'bg-white hover:bg-stats4sd-red-70'"
-                                class="py-2 px-4 border"
+                                class="py-2 px-4 rounded-full"
                                 x-on:click="$wire.loadPage(currentPage+1); window.scrollTo({ top: 0, behavior: 'smooth' });"
                                 {{ $currentPage === $pageCount ? 'disabled="disabled"' : ''}}
                             >
