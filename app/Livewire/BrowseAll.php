@@ -18,7 +18,13 @@ class BrowseAll extends Component
     public EloquentCollection $resources;
     public EloquentCollection $collections;
     public SupportCollection $items;
+
+    public SupportCollection $renderedItems; // subset of items made with custom pagination
+    public int $pagesLoaded = 0;
+
     public int $totalResourcesAndCollections = 0;
+    public int $renderedResourcesAndCollections = 0;
+
     public array $selectedLanguages = [];
     public array $selectedResearchMethods = [];
     public array $selectedTopics = [];
@@ -29,6 +35,9 @@ class BrowseAll extends Component
     {
         $this->locale = session('locale', app()->getLocale());
         app()->setLocale($this->locale);
+
+        $this->renderedItems = collect();
+
         $this->fetchInitialData();
     }
 
@@ -50,19 +59,19 @@ class BrowseAll extends Component
     public function search()
     {
         // Fetch Resources (Trove)
-        $resourceQuery = Trove::query()->where('is_published', 1);
+        $resourceQuery = Trove::query()->where('is_published', 1)->pagin;
         if (!empty($this->query)) {
             $searchResults = Trove::search($this->query, $this->getSearchWithOptions())->get();
             $resourceQuery->whereIn('id', $searchResults->pluck('id'));
         }
         if (!empty($this->selectedResearchMethods)) {
             foreach ($this->selectedResearchMethods as $methodId) {
-                $resourceQuery->whereHas('tags', fn ($q) => $q->where('tags.id', $methodId));
+                $resourceQuery->whereHas('tags', fn($q) => $q->where('tags.id', $methodId));
             }
         }
         if (!empty($this->selectedTopics)) {
             foreach ($this->selectedTopics as $topicId) {
-                $resourceQuery->whereHas('tags', fn ($q) => $q->where('tags.id', $topicId));
+                $resourceQuery->whereHas('tags', fn($q) => $q->where('tags.id', $topicId));
             }
         }
         if (!empty($this->selectedLanguages)) {
@@ -95,10 +104,10 @@ class BrowseAll extends Component
             'type' => 'resource',
             'troveTypes' => $resource->troveTypes,
             'tags' => $resource->themeAndTopicTags,
-            'cover_image' => $resource->cover_image,
-            ]);
+            'cover_image_thumb' => $resource->cover_image_thumb,
+        ]);
 
-        $collections = $this->collections->map(fn ($collection) => [
+        $collections = $this->collections->map(fn($collection) => [
             'id' => $collection->id,
             'title' => $collection->title,
             'description' => $collection->description,
@@ -106,12 +115,17 @@ class BrowseAll extends Component
             'type' => 'collection',
             'troveTypes' => null,
             'tags' => null,
-            'cover_image' => $collection->cover_image,
+            'cover_image_thumb' => $collection->cover_image_thumb,
         ]);
 
         // Merge and shuffle for a mixed order
         $this->items = collect($resources)->merge($collections)->shuffle();
+
         $this->totalResourcesAndCollections = $this->items->count();
+
+        // start by loading first 100
+        $this->loadNextPage();
+
     }
 
     public function clearFilters()
@@ -146,12 +160,20 @@ class BrowseAll extends Component
         })->orderByRaw("LOWER(JSON_UNQUOTE(JSON_EXTRACT(name, '$.\"$locale\"')))")->get();
     }
 
+    public function loadNextPage(): void
+    {
+        $this->renderedItems = $this->renderedItems->merge($this->items->skip($this->pagesLoaded * 100)->take(100));
+        $this->pagesLoaded++;
+
+        $this->renderedResourcesAndCollections = min([$this->pagesLoaded * 100, $this->totalResourcesAndCollections]);
+    }
+
     public function render()
     {
         return view('livewire.browse-all', [
             'researchMethods' => $this->researchMethods,
             'topics' => $this->topics,
-            'items' => $this->items
+            'items' => $this->items,
         ]);
     }
 }

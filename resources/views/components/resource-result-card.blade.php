@@ -8,7 +8,7 @@
        target="_blank"></a>
     <div class="flex flex-col justify-start">
         <div class="h-52 bg-cover bg-center mb-4 overflow-y-hidden">
-            <img src="{{ $item['cover_image'] }}" class="overflow-y-hidden card-img w-full"/>
+            <img src="{{ $item['cover_image_thumb'] }}" class="overflow-y-hidden card-img w-full"/>
         </div>
         <div class="absolute top-4 left-4 h-12 w-12  rounded-full text-white text-center py-auto bg-black">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="white" class="mx-auto my-3">
