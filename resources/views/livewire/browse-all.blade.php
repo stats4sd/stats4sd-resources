@@ -115,7 +115,7 @@
             <!-- Resources and Collections Cards -->
             <div class="w-3/4">
                 <div class="p-8">
-                    {{ t("Showing ") . $renderedResourcesAndCollections . ' out of ' . $totalResourcesAndCollections . t(" resources and collections") }}
+                    {{ t("Showing ") . $this->startOfPage . ' - ' . $this->endOfPage . ' out of ' . $totalResourcesAndCollections . t(" resources and collections") }}
                     @if($query || !empty($selectedLanguages) || !empty($selectedResearchMethods))
                         <button wire:click="clearFilters" class="text-gray-500 hover:text-gray-700 underline text-sm">
                             {{ t("Clear Filters") }}
@@ -132,19 +132,40 @@
                                 <x-collection-result-card :item="$item"/>
                             @endif
                         @endforeach
+                    </div>
+                </div>
 
-                        <div class="flex flex-col justify-end align-middle">
-                            @if($renderedResourcesAndCollections < $totalResourcesAndCollections)
 
-                                <button wire:click="loadNextPage" class="text-white text-center py-2 px-8 rounded-full bg-stats4sd-red my-auto mx-auto h-20">
-                                    {{ t("Load More...") }}
-                                </button>
-                            @else
-                                <button class="text-black text-center py-2 px-8 rounded-full bg-gray-300 my-auto mx-auto h-20" disabled="disabled">
-                                    No more results found
-                                </button>
-                            @endif
-                        </div>
+                <div class="max-w-6xl mx-auto my-5">
+                        <nav class="rounded-md shadow-xs flex w-full justify-end" aria-label="Pagination" x-data="{currentPage: $wire.entangle('currentPage')}">
+
+                            <button
+                                :class="currentPage===1 ? bg-gray-50 : 'bg-white hover:bg-stats4sd-red-70'"
+                                class="py-2 px-4 border"
+                                x-on:click="$wire.loadPage(currentPage-1); window.scrollTo({ top: 0, behavior: 'smooth' });"
+                                {{ $currentPage === 1 ? 'disabled="disabled"' : '' }}
+                            >
+                                Previous
+                            </button>
+
+                            @for($i=1; $i<=$pageCount; $i++)
+                                <button
+                                    :class="currentPage==={{$i}} ? 'text-white bg-stats4sd-red' : 'text-black hover:bg-stats4sd-red-70'"
+                                    class="py-2 px-4 border"
+
+                                    x-on:click="$wire.loadPage({{$i}}); window.scrollTo({ top: 0, behavior: 'smooth' });"
+                                >{{ $i }}</button>
+                            @endfor
+
+                            <button
+                                :class="currentPage==={{$pageCount}} ? bg-gray-50 : 'bg-white hover:bg-stats4sd-red-70'"
+                                class="py-2 px-4 border"
+                                x-on:click="$wire.loadPage(currentPage+1); window.scrollTo({ top: 0, behavior: 'smooth' });"
+                                {{ $currentPage === $pageCount ? 'disabled="disabled"' : ''}}
+                            >
+                                Next
+                            </button>
+                        </nav>
                     </div>
                 </div>
             </div>

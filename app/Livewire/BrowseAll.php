@@ -2,31 +2,43 @@
 
 namespace App\Livewire;
 
+use App\Models\Collection;
 use App\Models\Tag;
 use App\Models\Trove;
-use Livewire\Component;
-use App\Models\Collection;
 use App\Traits\UsesCustomSearchOptions;
-use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Support\Collection as SupportCollection;
+use Livewire\Attributes\Computed;
+use Livewire\Component;
 
 class BrowseAll extends Component
 {
     use UsesCustomSearchOptions;
 
     public ?string $query = null;
+
     public EloquentCollection $resources;
+
     public EloquentCollection $collections;
+
     public SupportCollection $items;
 
     public SupportCollection $renderedItems; // subset of items made with custom pagination
-    public int $pagesLoaded = 0;
+
+    public int $currentPage = 1;
+
+    public int $pageCount = 1;
+
+    public int $perPage = 100;
 
     public int $totalResourcesAndCollections = 0;
+
     public int $renderedResourcesAndCollections = 0;
 
     public array $selectedLanguages = [];
+
     public array $selectedResearchMethods = [];
+
     public array $selectedTopics = [];
 
     protected $listeners = ['queryUpdated' => 'updateResults'];
@@ -60,32 +72,32 @@ class BrowseAll extends Component
     {
         // Fetch Resources (Trove)
         $resourceQuery = Trove::query()->where('is_published', 1)->pagin;
-        if (!empty($this->query)) {
+        if (! empty($this->query)) {
             $searchResults = Trove::search($this->query, $this->getSearchWithOptions())->get();
             $resourceQuery->whereIn('id', $searchResults->pluck('id'));
         }
-        if (!empty($this->selectedResearchMethods)) {
+        if (! empty($this->selectedResearchMethods)) {
             foreach ($this->selectedResearchMethods as $methodId) {
-                $resourceQuery->whereHas('tags', fn($q) => $q->where('tags.id', $methodId));
+                $resourceQuery->whereHas('tags', fn ($q) => $q->where('tags.id', $methodId));
             }
         }
-        if (!empty($this->selectedTopics)) {
+        if (! empty($this->selectedTopics)) {
             foreach ($this->selectedTopics as $topicId) {
-                $resourceQuery->whereHas('tags', fn($q) => $q->where('tags.id', $topicId));
+                $resourceQuery->whereHas('tags', fn ($q) => $q->where('tags.id', $topicId));
             }
         }
-        if (!empty($this->selectedLanguages)) {
+        if (! empty($this->selectedLanguages)) {
             $resourceQuery->whereLocales('title', $this->selectedLanguages);
         }
         $this->resources = $resourceQuery->get();
 
         // Fetch Collections
         $collectionQuery = Collection::where('public', 1);
-        if (!empty($this->query)) {
+        if (! empty($this->query)) {
             $searchResults = Collection::search($this->query, $this->getSearchWithOptions())->get();
             $collectionQuery->whereIn('id', $searchResults->pluck('id'));
         }
-        if (!empty($this->selectedLanguages)) {
+        if (! empty($this->selectedLanguages)) {
             $collectionQuery->whereLocales('title', $this->selectedLanguages);
         }
         $this->collections = $collectionQuery->get();
@@ -96,7 +108,7 @@ class BrowseAll extends Component
 
     public function mergeItems()
     {
-        $resources = $this->resources->map(fn(Trove $resource) => [
+        $resources = $this->resources->map(fn (Trove $resource) => [
             'id' => $resource->id,
             'title' => $resource->title,
             'description' => $resource->description,
@@ -107,7 +119,7 @@ class BrowseAll extends Component
             'cover_image_thumb' => $resource->cover_image_thumb,
         ]);
 
-        $collections = $this->collections->map(fn($collection) => [
+        $collections = $this->collections->map(fn ($collection) => [
             'id' => $collection->id,
             'title' => $collection->title,
             'description' => $collection->description,
@@ -122,9 +134,9 @@ class BrowseAll extends Component
         $this->items = collect($resources)->merge($collections)->shuffle();
 
         $this->totalResourcesAndCollections = $this->items->count();
+        $this->pageCount = ceil($this->totalResourcesAndCollections / $this->perPage);
 
-        // start by loading first 100
-        $this->loadNextPage();
+        $this->loadPage(1);
 
     }
 
@@ -160,12 +172,23 @@ class BrowseAll extends Component
         })->orderByRaw("LOWER(JSON_UNQUOTE(JSON_EXTRACT(name, '$.\"$locale\"')))")->get();
     }
 
-    public function loadNextPage(): void
+    public function loadPage(int $page): void
     {
-        $this->renderedItems = $this->renderedItems->merge($this->items->skip($this->pagesLoaded * 100)->take(100));
-        $this->pagesLoaded++;
+        $this->currentPage = $page;
+        $this->renderedItems = $this->items->skip(($page - 1) * $this->perPage)->take($this->perPage);
+        $this->renderedResourcesAndCollections = $this->renderedItems->count();
+    }
 
-        $this->renderedResourcesAndCollections = min([$this->pagesLoaded * 100, $this->totalResourcesAndCollections]);
+    #[Computed]
+    public function startOfPage(): int
+    {
+        return ($this->currentPage-1) * $this->perPage + 1;
+    }
+
+    #[Computed]
+    public function endOfPage(): int
+    {
+        return min($this->currentPage * $this->perPage, $this->totalResourcesAndCollections);
     }
 
     public function render()
