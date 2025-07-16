@@ -136,7 +136,7 @@
                 </div>
 
 
-                <div class="max-w-6xl mx-auto my-5 text-xl">
+                <div class="max-w-6xl mx-auto my-5">
                         <nav class="rounded-md shadow-xs flex w-full justify-end" aria-label="Pagination" x-data="{currentPage: $wire.entangle('currentPage')}">
 
                             <button
