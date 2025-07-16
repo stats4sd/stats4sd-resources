@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75..100,300..800;1,75..100,300..800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,7 +8,9 @@
     --stats4sd-red-transparent: rgba(211, 34, 41, 0.7);
     --stats4sd-grey: #4d4d4d;
 }
-
+body {
+    font-family: 'open sans', 'sans serif';
+}    
 .library-card {
     @apply text-white p-6 rounded-lg shadow-lg w-80 flex flex-col relative;
 }
@@ -21,10 +24,10 @@
 }
 
 .divider {
-    height: 0.4rem;
-    width: 60px;
+    height: 0.8rem;
+    width: 90px;
     background-color: var(--stats4sd-red);
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.5rem;
     position: relative;
 }
 
@@ -32,10 +35,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.5rem;
-    font-size: 0.875rem;
-    background-color: #E5E7EB;
+    padding: 0.1rem 0.5rem;
+    border-radius: 3rem;
+    font-size: 0.75rem;
+    background-color: #d4d4d4;
     color: black;
 }
 
@@ -63,7 +66,7 @@ a {
 }
 
 nav a {
-    color: black !important;
+    color: black ;
 }
 
 .language-dropdown-menu {
