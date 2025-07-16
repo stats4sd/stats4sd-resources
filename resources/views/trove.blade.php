@@ -14,7 +14,7 @@
         @endif
         <!-- Image Header -->
         @php
-            $cover_photo = $resource->getMedia('cover_photo')->first();
+            $cover_photo = $resource->getMedia('cover_image_'.app()->getLocale())->first();
             $cover_photo_url = $cover_photo ? $cover_photo->getUrl() : asset('images/default-cover-photo.jpg');
         @endphp
         <div class="relative  bg-cover bg-center" style="height: 500px; background-image: url('{{ $cover_photo_url }}');">

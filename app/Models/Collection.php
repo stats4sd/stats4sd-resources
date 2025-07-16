@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Laravel\Scout\Searchable;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
@@ -38,6 +39,13 @@ class Collection extends Model implements HasMedia
 
     }
 
+    protected function coverImage(): Attribute
+    {
+        return new Attribute(
+            get: fn ()  => $this->getMedia("cover_image_" . app()->getLocale())->first()?->getUrl() ?? asset('images/default-cover-photo.jpg')
+        );
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'uploader_id');
@@ -55,7 +63,7 @@ class Collection extends Model implements HasMedia
     }
 
     public function relatedCollections()
-    {    
+    {
         return Collection::whereHas('troves', function ($query) {
             $query->whereIn('collection_trove.trove_id', $this->troves->pluck('id'));
         })

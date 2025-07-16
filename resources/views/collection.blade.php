@@ -4,7 +4,7 @@
     <div class="relative">
         <!-- Image Header -->
         @php
-            $cover_photo = $collection->getMedia('cover_photo')->first();
+            $cover_photo = $collection->getMedia('cover_image_' . app()->getLocale())->first();
             $cover_photo_url = $cover_photo ? $cover_photo->getUrl() : asset('images/default-cover-photo.jpg');
         @endphp
 
@@ -13,13 +13,13 @@
                 <div
                     class="text-left px-8  lg:px-32 mx-auto container flex flex-col gap-8 lg:gap-12   md:flex-row items-center justify-between">
                     <div class="md:w-1/2 lg:w-2/3">
-                    
+
                     <div class="text-lg md:text-2xl text-white">{{ t("COLLECTION") }}</div>
                     <div class="text-3xl lg:text-4xl text-white font-bold ">{{ $collection->title }}</div>
                     </div>
                     <button onclick="scrollToSection('collection-resources')" class="border-2 border-white  px-6 py-2 mt-2 font-semibold uppercase rounded-full text-white hover:bg-white hover:text-stats4sd-red transition">
                     {{ t("Jump to resources") }} </button>
-                    
+
 
 
                 </div>
@@ -77,7 +77,7 @@
     <div id="collection-resources" class="container mx-auto py-6 px-8 lg:px-32">
         <div class="divider"></div>
         <h2 class="text-2xl font-bold pb-2">{{ t("Resources in this collection") }}</h2>
- 
+
         <livewire:collection-troves :collection="$collection"/>
     </div>
 

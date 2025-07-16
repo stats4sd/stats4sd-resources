@@ -19,13 +19,13 @@
                     </div>
                     <div class=" flex flex-row pt-16 h-full md:justify-between">
                         <div class="bg-white h-auto w-6 flex-shrink-0"></div>
-     
+
                         <p class="pl-12 2xl:pl-24 pr-12 h-auto w-max max-w-2xl mb-4 ">
                             {!! t(
                                 'Welcome to the Stats4SD Resources Library - a carefully selected set of resources designed to support good practice in research methods. Select a starting point on the right to begin.',
                             ) !!}
                         </p>
-                
+
                     </div>
                 </div>
 

@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 class BrowseAll extends Component
 {
     use UsesCustomSearchOptions;
-    
+
     public ?string $query = null;
     public EloquentCollection $resources;
     public EloquentCollection $collections;
@@ -87,7 +87,7 @@ class BrowseAll extends Component
 
     public function mergeItems()
     {
-        $resources = $this->resources->map(fn ($resource) => [
+        $resources = $this->resources->map(fn(Trove $resource) => [
             'id' => $resource->id,
             'title' => $resource->title,
             'description' => $resource->description,
@@ -95,7 +95,8 @@ class BrowseAll extends Component
             'type' => 'resource',
             'troveTypes' => $resource->troveTypes,
             'tags' => $resource->themeAndTopicTags,
-        ]);
+            'cover_image' => $resource->cover_image,
+            ]);
 
         $collections = $this->collections->map(fn ($collection) => [
             'id' => $collection->id,
@@ -105,6 +106,7 @@ class BrowseAll extends Component
             'type' => 'collection',
             'troveTypes' => null,
             'tags' => null,
+            'cover_image' => $collection->cover_image,
         ]);
 
         // Merge and shuffle for a mixed order

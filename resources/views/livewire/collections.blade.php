@@ -1,7 +1,7 @@
 <div class="relative">
     <!-- Background Image -->
     <img src="images/crops.png" alt="Background Image"
-        class="absolute inset-0 w-full h-[40vh] sm:h-[40vh] object-cover filter brightness-[65%] z-0">
+         class="absolute inset-0 w-full h-[40vh] sm:h-[40vh] object-cover filter brightness-[65%] z-0">
 
     <!-- Overlay Content -->
     <div class="relative z-10 flex flex-col items-center justify-center h-[45vh] sm:h-[40vh] px-4 text-white">
@@ -19,31 +19,31 @@
         <div class="relative flex items-center mb-6 max-w-3xl w-full mt-16 ">
             <livewire:search-bar
                 inputClass="w-full py-2 pl-12 pr-4 border-none rounded-full focus:outline-none transition
-                        duration-300 focus:bg-gray-100 focus:ring-0 text-gray-700" />
+                        duration-300 focus:bg-gray-100 focus:ring-0 text-gray-700"/>
 
             <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
-                    stroke="currentColor" class="w-5 h-5 text-gray-600">
+                     stroke="currentColor" class="w-5 h-5 text-gray-600">
                     <path stroke-linecap="round" stroke-linejoin="round"
-                        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                          d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
                 </svg>
             </div>
 
             <!-- Clear Button -->
             @if ($query)
                 <svg xmlns="http://www.w3.org/2000/svg" wire:click="clearSearch" fill="none" viewBox="0 0 24 24"
-                    stroke-width="2" stroke="gray"
-                    class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 cursor-pointer hover:stroke-gray-700 transition-colors duration-200">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                     stroke-width="2" stroke="gray"
+                     class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 cursor-pointer hover:stroke-gray-700 transition-colors duration-200">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
                 </svg>
             @endif
         </div>
     </div>
-    
+
 
     <div class="">
         <div class="flex flex-col xl:flex-row gap-12">
-            
+
             <!-- Sidebar (Search & Filters) -->
             <div class="lg:min-w-[220px] w-2/12 bg-white self-start pl-12 py-8">
                 <div class="pb-4">
@@ -63,7 +63,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                         </svg>
                     </div>
-                    
+
                     <!-- Clear Button -->
                     @if($query)
                         <svg xmlns="http://www.w3.org/2000/svg" wire:click="clearSearch" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="gray"
@@ -79,20 +79,20 @@
                     <div class="flex justify-between items-center cursor-pointer" @click="openLanguage = !openLanguage">
                         <label class="text-base font-bold">{{ t("Language:") }}</label>
                         <svg class="w-5 h-5 transition-transform duration-300" :class="openLanguage ? 'rotate-90' : 'rotate-0'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
                         </svg>
                     </div>
                     <div class="space-y-2 mt-2 text-sm" x-show="openLanguage" x-show>
                         <label class="flex items-center">
-                            <input type="checkbox" wire:model="selectedLanguages" value="es" wire:change="search" class="mr-2 accent-stats4sd-red" />
+                            <input type="checkbox" wire:model="selectedLanguages" value="es" wire:change="search" class="mr-2 accent-stats4sd-red"/>
                             {{ t("Spanish") }}
                         </label>
                         <label class="flex items-center">
-                            <input type="checkbox" wire:model="selectedLanguages" value="en" wire:change="search" class="mr-2 accent-stats4sd-red" />
+                            <input type="checkbox" wire:model="selectedLanguages" value="en" wire:change="search" class="mr-2 accent-stats4sd-red"/>
                             {{ t("English") }}
                         </label>
                         <label class="flex items-center">
-                            <input type="checkbox" wire:model="selectedLanguages" value="fr" wire:change="search" class="mr-2 accent-stats4sd-red" />
+                            <input type="checkbox" wire:model="selectedLanguages" value="fr" wire:change="search" class="mr-2 accent-stats4sd-red"/>
                             {{ t("French") }}
                         </label>
                     </div>
@@ -111,63 +111,15 @@
 
                     <!-- Collections Result Cards -->
                     <div id="Collections-content" class="py-8 px-4 sm:px-8">
-                     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                         @foreach ($this->collections as $index => $collection)
-                          <div
-                                    class="card hover-effect relative flex flex-col justify-between bg-black overflow-hidden  rounded-t-3xl rounded-bl-3xl ">
-                                    <a href="/collections/{{ $collection->id }}"  class="absolute inset-0 z-0"
-                                        target="_blank"></a>
-                                            <div class="flex flex-col justify-start">
-                                        <div class="h-52 bg-cover bg-center mb-4"
-                                            style="background-image: url('images/crops.png');">
-                                        </div>
-                                        <div class="absolute top-4 left-4 h-12 w-12  rounded-full text-white text-center py-auto bg-stats4sd-red ">
-                                    
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="white"  class="mx-auto my-3"><path d="M21.698 10.658l2.302 1.342-12.002 7-11.998-7 2.301-1.342 9.697 5.658 9.7-5.658zm-9.7 10.657l-9.697-5.658-2.301 1.343 11.998 7 12.002-7-2.302-1.342-9.7 5.657zm0-19l8.032 4.685-8.032 4.685-8.029-4.685 8.029-4.685zm0-2.315l-11.998 7 11.998 7 12.002-7-12.002-7z"/></svg>
-                                     
-                                        </div>
-                                    
-                                        <p class="text-lg 2xl:text-xl font-bold mx-6 mb-3 xl:min-h-8 text-white "> {!! $collection['title'] !!}</p>
-
-                                        <p class=" text-sm 2xl:text-base mb-2  flex-grow mx-6 mb-4 text-white">
-                                           {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($collection['description']), ENT_QUOTES, 'UTF-8'), 120, '...') }}
-                                        </p>
-
-                                    </div>
-                                        <!-- View Button -->
-                                        <div class="flex justify-end mb-2 pb-4 px-8 ">
-                                            <button class="bg-white text-black text-center py-2 px-8 rounded-full">
-                                                {{ t("VIEW") }}
-                                            </button>
-                                        </div>
-                                    
-                                </div>
-                        @endforeach
-                    </div>
-                        {{-- <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 max-w-6xl mx-auto">
                             @foreach ($this->collections as $index => $collection)
-                                <div class="card hover-effect relative flex flex-col justify-between p-6 border border-gray-200 rounded-lg shadow-xl">
-                                    <a href="/collections/{{ $collection->id }}" class="absolute inset-0 z-0" target="_blank"></a>
-                                    <!-- Title -->
-                                    <p class="text-xl font-bold bg-stats4sd-red text-white">{!! $collection['title'] !!}</p>
-
-                                    <p class="bg-white pt-8 mb-4 flex-grow">
-                                        {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($collection['description']), ENT_QUOTES, 'UTF-8'), 120, '...') }}
-                                    </p>
-
-                                    <!-- View Button -->
-                                    <div class="flex justify-end">
-                                        <button class="hover-effect bg-stats4sd-red text-white text-center py-2 px-8 rounded-lg">
-                                            {{ t("VIEW") }}
-                                        </button>
-                                    </div>
-                                </div>
+                                <x-collection-result-card :item="$collection"/>
                             @endforeach
-                        </div> --}}
+                        </div>
                     </div>
                 @else
-                <!-- Display when no search term -->
-                <div class="text-center text-semibold py-20 px-4 xl:pl-8">
+                    <!-- Display when no search term -->
+                    <div class="text-center text-semibold py-20 px-4 xl:pl-8">
                         {{ t("Use the search bar to find collections") }}
                     </div>
                 @endif
