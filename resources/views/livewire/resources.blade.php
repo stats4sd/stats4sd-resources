@@ -46,7 +46,7 @@
             <!-- Sidebar (Search & Filters) -->
             <div class="lg:min-w-[220px] w-2/12 bg-white self-start pl-12 py-8">
                 <div class="pb-4">
-                    <div class="pb-4 text-xl font-bold">{{ t('Search and filter') }}</div>
+                    <div class="pb-4 text-xl font-bold">{{ t('Filters') }}</div>
                     <div class="divider"></div>
                 </div>
 
