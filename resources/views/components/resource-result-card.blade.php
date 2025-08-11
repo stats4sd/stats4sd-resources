@@ -3,7 +3,7 @@
 ])
 
 <div
-    class="card hover-effect relative flex flex-col justify-between bg-[#f2f2f2] overflow-hidden  rounded-t-3xl rounded-bl-3xl ">
+    class="card hover-effect relative flex shadow-xl flex-col justify-between bg-[#f2f2f2] overflow-hidden  rounded-t-3xl rounded-bl-3xl ">
     <a href="{{ url('resources/'.$item['slug']) }}" class="absolute inset-0 z-0"
        target="_blank"></a>
     <div class="flex flex-col justify-start">
