@@ -1,10 +1,10 @@
 <div class="relative">
     <!-- Background Image -->
     <img src="images/crops.png" alt="Background Image"
-         class="absolute inset-0 w-full h-[40vh] sm:h-[40vh] object-cover filter brightness-[65%] z-0">
+         class="absolute inset-0 w-full h-[500px] sm:h-[40vh] object-cover filter brightness-[65%] z-0">
 
     <!-- Overlay Content -->
-    <div class="relative z-10 flex flex-col items-center justify-center h-[45vh] sm:h-[40vh] px-4 text-white">
+    <div class="relative z-10 flex flex-col items-center justify-center h-[500px] sm:h-[40vh] px-8 sm:px-20 xl:px-4 text-white">
         <div class="max-w-5xl w-full mx-auto text-left">
             <!-- Heading -->
             <div class="font-bold text-4xl sm:text-5xl md:text-5xl">
@@ -13,10 +13,10 @@
 
             <!-- Description -->
             <div class="mt-6 text-left pr-2 mx-auto">
-                <p class="mb-4 text-xl">{!! t("A collection is a group of resources compiled together for a specific purpose, such as series of guides on a specific topic, or the reading for an online course.") !!}</p>
+                <p class="mb-4 text-base lg:text-xl">{!! t("A collection is a group of resources compiled together for a specific purpose, such as series of guides on a specific topic, or the reading for an online course.") !!}</p>
             </div>
         </div>
-        <div class="relative flex items-center mb-6 max-w-3xl w-full mt-16 ">
+        <div class="relative flex items-center mb-6 max-w-3xl w-full mt-6 md:mt-16 ">
             <livewire:search-bar
                 inputClass="w-full py-2 pl-12 pr-4 border-none rounded-full focus:outline-none transition
                         duration-300 focus:bg-gray-100 focus:ring-0 text-gray-700"/>
@@ -42,13 +42,13 @@
 
 
     <div class="">
-        <div class="flex flex-col xl:flex-row gap-12">
+        <div class="flex flex-col lg:flex-row lg:gap-12">
 
             <!-- Sidebar (Search & Filters) -->
-            <div class="lg:min-w-[220px] w-2/12 bg-white self-start pl-12 py-8">
-                <div class="pb-4">
-                    <div class="pb-4 text-xl font-bold">{{ t("Filters") }}</div>
-                    <div class="divider"></div>
+            <div class="lg:min-w-[220px] w-full lg:w-2/12 bg-[#f4f4f4] lg:bg-white self-start pl-6 md:pl-12 py-6 lg:py-8 flex flex-row lg:flex-col">
+                <div class="lg:pb-4">
+                    <div class="lg:pb-4 text-xl font-bold">{{ t("Filters") }}</div>
+                    <div class="divider hidden lg:block"></div>
                 </div>
 
                 <!-- Search bar -->
@@ -74,7 +74,31 @@
                 </div> --}}
 
                 <!-- Language Filter -->
-                <div class="mb-6" x-data="{ openLanguage: true }">
+                <div class=" md:mx-6 px-6 lg:hidden" x-data="{ openLanguage: false }">
+                    {{-- <div class="border-t border-gray-400 my-4"></div> --}}
+                    <div class="flex justify-between items-center cursor-pointer" @click="openLanguage = !openLanguage">
+                        <label class="text-base lg:font-bold">{{ t("Language:") }}</label>
+                        <svg class="w-4 h-4 transition-transform duration-300 ml-2 sm:ml-4 :class="openLanguage ? 'rotate-00' : 'rotate-0'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                    </div>
+                    <div class="space-y-2 mt-4 text-sm" x-show="openLanguage" x-show>
+                        <label class="flex items-center">
+                            <input type="checkbox" wire:model="selectedLanguages" value="es" wire:change="search" class="mr-2 accent-stats4sd-red"/>
+                            {{ t("Spanish") }}
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" wire:model="selectedLanguages" value="en" wire:change="search" class="mr-2 accent-stats4sd-red"/>
+                            {{ t("English") }}
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" wire:model="selectedLanguages" value="fr" wire:change="search" class="mr-2 accent-stats4sd-red"/>
+                            {{ t("French") }}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-6 hidden lg:block" x-data="{ openLanguage: true }">
                     {{-- <div class="border-t border-gray-400 my-4"></div> --}}
                     <div class="flex justify-between items-center cursor-pointer" @click="openLanguage = !openLanguage">
                         <label class="text-base font-bold">{{ t("Language:") }}</label>
@@ -97,10 +121,12 @@
                         </label>
                     </div>
                 </div>
+
+
             </div>
 
             <!-- Main Content -->
-            <div class="flex-1 p-8">
+            <div class="flex-1 p-8 sm:px-12">
                 @if($query || !empty($selectedLanguages))
                     <div class="pt-2">
                         {{ t("Showing ") . $totalCollections . t(" collections") }}
@@ -110,7 +136,7 @@
                     </div>
 
                     <!-- Collections Result Cards -->
-                    <div id="Collections-content" class="py-8 px-4 sm:px-8">
+                    <div id="Collections-content" class="py-8 lg:px-8">
                         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 max-w-6xl mx-auto">
                             @foreach ($this->collections as $index => $collection)
                                 <x-collection-result-card :item="$collection"/>

@@ -1,4 +1,4 @@
-<header class="sticky top-0 z-50 bg-white  px-4 sm:px-20" x-data="{ open: false }">
+<header class="sticky top-0 z-50 bg-white  px-8 sm:px-20" x-data="{ open: false }">
     <div class="container mx-auto flex justify-between items-center py-4">
         <!-- Logo -->
         <div class="flex items-center space-x-4">
@@ -12,7 +12,7 @@
 
         <!-- Hamburger Menu (visible on small screens) -->
         <button
-            class="md:hidden text-gray-800 focus:outline-none"
+            class="lg:hidden text-gray-800 focus:outline-none"
             x-on:click="open = !open">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
@@ -20,7 +20,7 @@
         </button>
 
         <!-- Nav Items (hidden on small screens) -->
-        <nav class="hidden md:flex">
+        <nav class="hidden lg:flex">
             <ul class="flex space-x-6 font-medium uppercase text-base">
                 <li><a href="/home"
                     class=" hover:text-stats4sd-red {{ request()->is('home') ? 'border-b-[6px] pb-5 border-stats4sd-red pb-1' : '' }} ">
@@ -61,7 +61,7 @@
 
     <!-- Nav Items (visible on small screens) -->
     <div
-        class="sm:hidden"
+        class="lg:hidden"
         x-show="open"
         x-on:click.outside="open = false"
         style="display: none;">
