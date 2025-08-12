@@ -6,6 +6,10 @@
         <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
         @vite(['resources/css/app.css'])
 {{--        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>--}}
+
+        @if(config('app.env') != 'local')
+            @include('layouts.analytics')
+        @endif
     </head>
     <body>
         @include('header')
