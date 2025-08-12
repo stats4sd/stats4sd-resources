@@ -18,7 +18,7 @@
                 <img src="{{ $cover_photo_url }}" style="min-height: 500px;  " class="mx-auto object-cover"
                     alt="cover image">
             </div>
-            <div class="absolute bottom-0 w-full py-8 lg:py-12  h-fit bg-stats4sd-red " style="min-height: 25%;">
+            <div class="absolute bottom-0 w-full py-8 lg:py-12  h-fit  " style="min-height: 25%; background-color: #D32229dd">
                 <div
                     class="text-left px-8  lg:px-32 mx-auto container flex flex-col gap-8 lg:gap-12   md:flex-row items-center justify-between">
                     <div class="md:w-1/2 lg:w-2/3">
