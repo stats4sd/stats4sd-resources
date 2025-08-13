@@ -12,7 +12,9 @@
         @endif
     </head>
     <body>
-        @include('header')
+        @if(empty($hideHeader))
+            @include('header')
+        @endif
         @isset($slot)
             {{ $slot }}
         @else

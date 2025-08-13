@@ -65,7 +65,7 @@ Route::group([
     })->name('theme-pages');
 
     Route::get('/collections/{id}', function ($id) {
-        $collection = Collection::where('id', $id)->where('public', 1)->firstOrFail();
+        $collection = Collection::where('id', $id)->firstOrFail();
         return view('collection', compact('collection'));
     });
     
@@ -73,5 +73,9 @@ Route::group([
         $trove = Trove::where('slug', $slug)->firstOrFail();
         return $trove->downloadAllFilesAsZip();
     })->name('trove.download.zip');
+
+    Route::get('/frn', function () {
+        return view('frn');
+    })->name('frn');
 
 });
