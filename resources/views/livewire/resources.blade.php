@@ -78,7 +78,7 @@
                 <div class=" sm:ml-12 lg:ml-0" x-data="window.innerWidth >= 1024 ? { openLanguage: true } : { openLanguage: false }">
                     {{-- <div class="border-t border-gray-400 my-4"></div> --}}
                     <div class="flex justify-between items-center cursor-pointer" @click="openLanguage = !openLanguage">
-                        <label class="text-base  lg:font-bold">{{ t('Language') }}</label>
+                        <label class="text-base  lg:font-bold">{{ t('Language:') }}</label>
                         <svg class="w-5 h-5 transition-transform duration-300 ml-2"
                             :class="openLanguage ? 'rotate-90' : '-rotate-90'" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -108,7 +108,7 @@
                 <div class="  sm:ml-6 lg:ml-0" x-data="window.innerWidth >= 1024 ? { openMethods: true } : { openMethods: false }">
                     <div class="border-t border-gray-400 sm:border-0 lg:border-t my-6 sm:my-0 lg:my-6"></div>
                     <div class="flex justify-between items-center cursor-pointer" @click="openMethods = !openMethods">
-                        <label class="text-base lg:font-bold">{{ t('Research method') }}</label>
+                        <label class="text-base lg:font-bold">{{ t('Research method:') }}</label>
                         <svg class="w-5 h-5 ml-2 transition-transform duration-300"
                             :class="openMethods ? 'rotate-90' : '-rotate-90'" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -131,7 +131,7 @@
                 <div class="  sm:ml-6 lg:ml-0" x-data="window.innerWidth >= 1024 ? { openTopics: true } : { openTopics: false }">
                     <div class="border-t border-gray-400 sm:border-0 lg:border-t my-6 sm:my-0 lg:my-6"></div>
                     <div class="flex justify-between items-center cursor-pointer" @click="openTopics = !openTopics">
-                        <label class="text-base lg:font-bold">{{ t('Topic') }}</label>
+                        <label class="text-base lg:font-bold">{{ t('Topic:') }}</label>
                         <svg class="w-5 h-5 ml-2 transition-transform duration-300"
                             :class="openTopics ? 'rotate-90' : '-rotate-90'" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
