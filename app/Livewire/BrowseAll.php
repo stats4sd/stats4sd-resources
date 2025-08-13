@@ -71,7 +71,7 @@ class BrowseAll extends Component
     public function search()
     {
         // Fetch Resources (Trove)
-        $resourceQuery = Trove::query()->where('is_published', 1)->pagin;
+        $resourceQuery = Trove::query()->where('is_published', 1);
         if (! empty($this->query)) {
             $searchResults = Trove::search($this->query, $this->getSearchWithOptions())->get();
             $resourceQuery->whereIn('id', $searchResults->pluck('id'));
