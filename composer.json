@@ -31,7 +31,8 @@
         "socialiteproviders/microsoft-azure": "^5.2",
         "spatie/laravel-google-cloud-storage": "^2.3",
         "spatie/laravel-ignition": "^2.0",
-        "spatie/laravel-ray": "^1.37"
+        "spatie/laravel-ray": "^1.37",
+        "tio/laravel": "^1.23"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",

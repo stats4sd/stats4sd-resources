@@ -1,0 +1,292 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Stats4SD Resources\n"
+"Report-Msgid-Bugs-To: contact@translation.io\n"
+"Last-Translator: \n"
+"Language-Team: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-07-11T10:03:13+00:00\n"
+"PO-Revision-Date: 2025-07-11 12:03+0200\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=n!=1;\n"
+
+#: resources\views\collection.blade.php:11
+msgid "COLLECTION"
+msgstr "COLECCIÓN"
+
+#: resources\views\collection.blade.php:14
+msgid "Jump to resources"
+msgstr "Saltar a \"recursos\""
+
+#: resources\views\collection.blade.php:23
+#: resources\views\trove.blade.php:61
+msgid "Browse all resources and collections"
+msgstr "Explorar todos los recursos y colecciones"
+
+#: resources\views\collection.blade.php:28
+#: resources\views\trove.blade.php:66
+msgid "Description"
+msgstr "Descripción"
+
+#: resources\views\collection.blade.php:30
+#: resources\views\trove.blade.php:68
+msgid "Dated: "
+msgstr "Fechado: "
+
+#: resources\views\collection.blade.php:39
+msgid "Resources in this collection"
+msgstr "Recursos de esta colección"
+
+#: resources\views\footer.blade.php:8
+msgid "Company Registered in England & Wales Number"
+msgstr "Empresa registrada en Inglaterra y Gales Número"
+
+#: resources\views\footer.blade.php:12
+msgid "Contact"
+msgstr "Contacto:"
+
+#: resources\views\footer.blade.php:13
+msgid "Tel"
+msgstr "Tel"
+
+#: resources\views\footer.blade.php:14
+msgid "Email"
+msgstr "Email:"
+
+#: resources\views\header.blade.php:24
+#: resources\views\header.blade.php:73
+msgid "Library Home"
+msgstr "Biblioteca Inicio"
+
+#: resources\views\header.blade.php:29
+#: resources\views\header.blade.php:74
+msgid "Resources"
+msgstr "Recursos"
+
+#: resources\views\header.blade.php:34
+#: resources\views\header.blade.php:75
+msgid "Collections"
+msgstr "Colecciones"
+
+#: resources\views\header.blade.php:39
+msgid "Browse all"
+msgstr "Explorar todos"
+
+#: resources\views\header.blade.php:44
+#: resources\views\header.blade.php:77
+msgid "Theme Pages"
+msgstr "Páginas temáticas"
+
+#: resources\views\header.blade.php:51
+#: resources\views\header.blade.php:80
+msgid "Change Language"
+msgstr ""
+"Cambiar el \n"
+"idioma"
+
+#: resources\views\header.blade.php:76
+msgid "Browse All"
+msgstr "Explorar todos"
+
+#: resources\views\home.blade.php:12
+msgid "Resources Library"
+msgstr "Biblioteca de recursos"
+
+#: resources\views\home.blade.php:19
+msgid "Welcome to the Stats4SD Resources Library - a carefully selected set of resources designed to support good practice in research methods. Select a starting point on the right to begin"
+msgstr "Bienvenido a la biblioteca de recursos de Stats4SD, una cuidadosa selección de recursos diseñados para apoyar las buenas prácticas en métodos de investigación. Seleccione un punto de partida a la derecha para empezar"
+
+#: resources\views\home.blade.php:30
+msgid "Search resources"
+msgstr "Buscar recursos"
+
+#: resources\views\home.blade.php:31
+#: resources\views\livewire\resources.blade.php:16
+msgid "Guides, tools, videos, papers and other items that we use and recommend to others."
+msgstr "Guías, herramientas, vídeos, documentos y otros artículos que utilizamos y recomendamos."
+
+#: resources\views\home.blade.php:36
+msgid "Search collections"
+msgstr "Buscar colecciones"
+
+#: resources\views\home.blade.php:37
+#: resources\views\livewire\collections.blade.php:16
+msgid "A collection is a group of resources compiled together for a specific purpose, such as series of guides on a specific topic, or the reading for an online course."
+msgstr "Una colección es un grupo de recursos recopilados con un fin específico, como una serie de guías sobre un tema concreto o las lecturas de un curso en línea."
+
+#: resources\views\home.blade.php:42
+msgid "View All"
+msgstr "Ver todos"
+
+#: resources\views\home.blade.php:43
+#: resources\views\livewire\browse-all.blade.php:16
+msgid "Browse the full library of resources and collections on a variety of topics."
+msgstr "Explora la biblioteca completa de recursos y colecciones sobre diversos temas."
+
+#: resources\views\livewire\browse-all.blade.php:10
+#: resources\views\livewire\collections.blade.php:10
+#: resources\views\livewire\resources.blade.php:10
+#: resources\views\theme-pages.blade.php:11
+msgid "Stats4SD Resources Library"
+msgstr "Biblioteca de recursos Stats4SD"
+
+#: resources\views\livewire\browse-all.blade.php:29
+#: resources\views\livewire\collections.blade.php:27
+#: resources\views\livewire\resources.blade.php:27
+msgid "Search and filter"
+msgstr "Buscar y filtrar"
+
+#: resources\views\livewire\browse-all.blade.php:57
+#: resources\views\livewire\collections.blade.php:57
+#: resources\views\livewire\resources.blade.php:55
+msgid "Language:"
+msgstr "Idioma:"
+
+#: resources\views\livewire\browse-all.blade.php:65
+#: resources\views\livewire\collections.blade.php:65
+#: resources\views\livewire\resources.blade.php:63
+msgid "Spanish"
+msgstr "Español"
+
+#: resources\views\livewire\browse-all.blade.php:70
+#: resources\views\livewire\collections.blade.php:70
+#: resources\views\livewire\resources.blade.php:68
+msgid "English"
+msgstr "Inglés"
+
+#: resources\views\livewire\browse-all.blade.php:75
+#: resources\views\livewire\collections.blade.php:75
+#: resources\views\livewire\resources.blade.php:73
+msgid "French"
+msgstr "Francés"
+
+#: resources\views\livewire\browse-all.blade.php:85
+#: resources\views\livewire\resources.blade.php:83
+msgid "Research method:"
+msgstr "Método de investigación:"
+
+#: resources\views\livewire\browse-all.blade.php:105
+#: resources\views\livewire\resources.blade.php:103
+msgid "Topic:"
+msgstr "Tema:"
+
+#: resources\views\livewire\browse-all.blade.php:126
+#: resources\views\livewire\collections.blade.php:86
+#: resources\views\livewire\resources.blade.php:124
+msgid "Showing "
+msgstr "Mostrando "
+
+#: resources\views\livewire\browse-all.blade.php:126
+msgid " resources and collections"
+msgstr " recursos y colecciones"
+
+#: resources\views\livewire\browse-all.blade.php:130
+#: resources\views\livewire\collections.blade.php:89
+#: resources\views\livewire\resources.blade.php:127
+msgid "Clear Filters"
+msgstr "Limpiar filtros"
+
+#: resources\views\livewire\browse-all.blade.php:168
+#: resources\views\livewire\collection-troves.blade.php:31
+#: resources\views\livewire\collections.blade.php:111
+#: resources\views\livewire\resources.blade.php:158
+#: resources\views\livewire\trove-collections.blade.php:20
+#: resources\views\livewire\trove-related-troves.blade.php:31
+msgid "VIEW"
+msgstr "VER"
+
+#: resources\views\livewire\collection-troves.blade.php:39
+msgid "No resources available for this collection."
+msgstr "No hay recursos disponibles para esta colección."
+
+#: resources\views\livewire\collections.blade.php:86
+msgid " collections"
+msgstr " colecciones"
+
+#: resources\views\livewire\collections.blade.php:122
+msgid "Use the search bar to find collections"
+msgstr "Utilice la barra de búsqueda para encontrar colecciones"
+
+#: resources\views\livewire\resources.blade.php:124
+msgid " resources"
+msgstr " recursos"
+
+#: resources\views\livewire\resources.blade.php:170
+msgid "Use the search bar or select from the research methods and topics to find resources"
+msgstr "Utilice la barra de búsqueda o seleccione entre los métodos de investigación y temas para encontrar recursos"
+
+#: resources\views\livewire\search-bar.blade.php:4
+msgid "Search here"
+msgstr "Buscar aquí"
+
+#: resources\views\livewire\trove-collections.blade.php:28
+msgid "No collections available for this resource."
+msgstr "No hay colecciones disponibles para este recurso."
+
+#: resources\views\livewire\trove-related-troves.blade.php:40
+msgid "No related resources found."
+msgstr "No se han encontrado recursos relacionados."
+
+#: resources\views\theme-pages.blade.php:17
+msgid "Stats4SD theme pages"
+msgstr "Páginas temáticas de Stats4SD"
+
+#: resources\views\trove.blade.php:9
+msgid "PREVIEW MODE: This resource has not been published and is only visible to authorised users"
+msgstr "MODO DE VISTA PREVIA: Este recurso no ha sido publicado y sólo es visible para usuarios autorizados"
+
+#: resources\views\trove.blade.php:24
+msgid "Jump to view/download"
+msgstr "Saltar a ver/descargar"
+
+#: resources\views\trove.blade.php:43
+msgid "Available Languages:"
+msgstr "Idiomas disponibles:"
+
+#: resources\views\trove.blade.php:74
+msgid "Author:"
+msgstr "Autor:"
+
+#: resources\views\trove.blade.php:74
+msgid "Authors:"
+msgstr "Autores:"
+
+#: resources\views\trove.blade.php:90
+msgid "View/download"
+msgstr "Ver/descargar"
+
+#: resources\views\trove.blade.php:106
+msgid "This resource includes a video on our YouTube channel, embedded here."
+msgstr "Este recurso incluye un vídeo en nuestro canal de YouTube, incrustado aquí."
+
+#: resources\views\trove.blade.php:106
+msgid "This resource includes videos on our YouTube channel, embedded here."
+msgstr "Este recurso incluye vídeos en nuestro canal de YouTube, incrustados aquí."
+
+#: resources\views\trove.blade.php:143
+msgid ""
+"The individual components of the trove are listed below. Click on one to download the file or go to the \n"
+"                    external url. You can download the full trove below as a .zip file."
+msgstr "Los componentes individuales del recurso se encuentran enlistados a continuación. Haga clic en uno para descargar el archivo o vaya al URL externo. Puede descargar el archivo completo en formato .zip."
+
+#: resources\views\trove.blade.php:163
+msgid "VISIT LINK"
+msgstr "VISITAR EL ENLACE"
+
+#: resources\views\trove.blade.php:186
+msgid "DOWNLOAD"
+msgstr "DESCARGAR"
+
+#: resources\views\trove.blade.php:202
+msgid "DOWNLOAD ALL (ZIP)"
+msgstr "DESCARGAR TODO (ZIP)"
+
+#: resources\views\trove.blade.php:215
+msgid "Collections including this resource"
+msgstr "Colecciones que incluyen este recurso"
+
+#: resources\views\trove.blade.php:225
+msgid "Related resources"
+msgstr "Recursos relacionados"

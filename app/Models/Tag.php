@@ -31,4 +31,9 @@ class Tag extends Model
     {
         return $this->belongsTo(TagType::class, 'type_id');
     }
+
+    public function hubs()
+    {
+        return $this->belongsToMany(Hub::class, 'hub_tag');
+    }
 }

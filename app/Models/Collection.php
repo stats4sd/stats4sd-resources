@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Laravel\Scout\Searchable;
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\Translatable\HasTranslations;
 
 class Collection extends Model implements HasMedia
 {
@@ -17,7 +19,7 @@ class Collection extends Model implements HasMedia
     use InteractsWithMedia;
     use HasTranslations;
     use HasFilamentComments;
-
+    use Searchable;
 
     protected $casts = [
         'public' => 'boolean',
@@ -37,6 +39,20 @@ class Collection extends Model implements HasMedia
 
     }
 
+    protected function coverImage(): Attribute
+    {
+        return new Attribute(
+            get: fn() => $this->getFirstMediaUrl('cover_image_' . app()->getLocale()) ?? asset('images/default-cover-photo.jpg')
+        );
+    }
+
+    protected function coverImageThumb(): Attribute
+    {
+        return new Attribute(
+            get: fn() => $this->getFirstMediaUrl('cover_image_' . app()->getLocale(), 'cover_thumb') ?? asset('images/default-cover-photo.jpg')
+        );
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'uploader_id');
@@ -51,5 +67,24 @@ class Collection extends Model implements HasMedia
     {
         return $this->belongsToMany(Trove::class)
             ->withPivot('id');
+    }
+
+    public function relatedCollections()
+    {
+        return Collection::whereHas('troves', function ($query) {
+            $query->whereIn('collection_trove.trove_id', $this->troves->pluck('id'));
+        })
+            ->where('id', '!=', $this->id) // Exclude itself
+            ->distinct()
+            ->get();
+    }
+
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'title' => $this->title,
+            'description' => $this->description,
+        ];
     }
 }
