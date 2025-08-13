@@ -320,4 +320,28 @@ class Trove extends Model implements HasMedia
 
         return null;
     }
+
+    // get cover image URL
+    public function getCoverImageUrl()
+    {
+        $coverImageUrl = null;
+
+        $coverImage = $this->getMedia('cover_image_' . app()->getLocale());
+
+        // if there is no cover image for the current locale, default to english
+        if($coverImage->isEmpty()) {
+            $coverImage = $this->getMedia('cover_image_en');
+        }
+
+
+        // there is cover image uploaded, construct URL for it
+        if (!$coverImage->isEmpty()) {
+            // we can have one cover image uploaded only
+            foreach ($coverImage as $media) {
+                $coverImageUrl = $media->getFullUrl();
+            }
+        }
+
+        return $coverImageUrl;
+    }
 }
