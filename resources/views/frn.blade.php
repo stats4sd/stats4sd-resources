@@ -51,7 +51,7 @@
     <div class="w-full bg-white py-4">
         <div class="max-w-6xl mx-auto flex justify-center md:justify-end gap-8 px-4">
             <a href="https://stats4sd.org">
-                <img src="{{ asset('images/stats4SD_logo.png') }}" class="w-28" alt="stats4sd">
+                <img src="{{ asset('images/Stats4SD_logo.png') }}" class="w-28" alt="stats4sd">
             </a>
             <a href="https://ccrp.org">
                 <img src="{{ asset('images/CRFSlogo.png') }}" class="w-28" alt="crfs">
