@@ -89,11 +89,19 @@
                     <!-- Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4">
                         <a href="#collections" 
-                        class="px-6 py-3 bg-white text-frn-green border-2 border-frn-green hover:bg-frn-green hover:text-white font-bold rounded-lg text-center transition">
+                            class="px-6 py-3 bg-white text-frn-green border-2 border-frn-green 
+                                    hover:bg-frn-green hover:text-white 
+                                    active:bg-white active:text-frn-green 
+                                    target:bg-white target:text-frn-green
+                                    font-bold rounded-lg text-center transition">
                             {{ t('Explore topics') }}
                         </a>
                         <a href="#browse_all" 
-                        class="px-6 py-3 bg-white text-frn-green border-2 border-frn-green hover:bg-frn-green hover:text-white font-bold rounded-lg text-center transition">
+                            class="px-6 py-3 bg-white text-frn-green border-2 border-frn-green 
+                                    hover:bg-frn-green hover:text-white 
+                                    active:bg-white active:text-frn-green 
+                                    target:bg-white target:text-frn-green
+                                    font-bold rounded-lg text-center transition">
                             {{ t('Browse all resources') }}
                         </a>
                     </div>
