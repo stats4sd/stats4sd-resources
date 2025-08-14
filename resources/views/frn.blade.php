@@ -168,13 +168,12 @@
     </div>
 
     <!-- Browse all -->
-    <div class="max-w-6xl mx-auto px-4 mt-16 mb-16">
+    <div class="max-w-6xl mx-auto px-4 mt-16">
         <h2 id="browse_all" class="text-3xl font-bold">{{ t('Browse all') }}</h2>
         <div class="h-1 w-20 bg-stats4sd-red my-4"></div>
-
-        @livewire('frn-hub-browse-all')
-
     </div>
+
+    @livewire('frn-hub-browse-all')
 
 </div>
 
