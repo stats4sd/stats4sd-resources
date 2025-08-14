@@ -173,7 +173,7 @@
         <div class="h-1 w-20 bg-stats4sd-red my-4"></div>
     </div>
 
-    @livewire('frn-hub-browse-all')
+    @livewire('frn-hub-browse-resources')
 
 </div>
 

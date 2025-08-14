@@ -12,7 +12,7 @@ use App\Traits\UsesCustomSearchOptions;
 use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
-class FrnHubBrowseAll extends Component
+class FrnHubBrowseResources extends Component
 {
     use UsesCustomSearchOptions;
 
@@ -140,7 +140,7 @@ class FrnHubBrowseAll extends Component
 
     public function render()
     {
-        return view('livewire.frn-hub-browse-all', [
+        return view('livewire.frn-hub-browse-resources', [
             'resources' => $this->resources,
             'totalResources' => $this->totalResources,
         ]);
