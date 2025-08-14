@@ -121,7 +121,7 @@
             <div class="flex-1">
                 <div class="p-8">
                     {{ t("Showing ") . $this->startOfPage . ' - ' . $this->endOfPage . ' ' . t("out of") . ' ' . $totalResourcesAndCollections . t(" resources and collections") }}
-                    @if($query || !empty($selectedLanguages) || !empty($selectedResearchMethods))
+                    @if($query || !empty($selectedLanguages) || !empty($selectedResearchMethods || !empty($selectedTopics)))
                         <button wire:click="clearFilters" class="text-gray-500 hover:text-gray-700 underline text-sm">
                             {{ t("Clear Filters") }}
                         </button>
