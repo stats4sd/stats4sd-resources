@@ -74,8 +74,8 @@ Route::group([
         return $trove->downloadAllFilesAsZip();
     })->name('trove.download.zip');
 
-    Route::get('/frn', function () {
+    Route::get('/frn-hub', function () {
         return view('frn');
-    })->name('frn');
+    })->name('frn-hub');
 
 });
