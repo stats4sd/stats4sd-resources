@@ -82,9 +82,31 @@ class Collection extends Model implements HasMedia
 
     public function toSearchableArray(): array
     {
+        $titles = [];
+        $descriptions = [];
+
+        foreach (config('app.locales') as $locale => $label) {
+            $title = $this->getTranslation('title', $locale);
+            $description = $this->getTranslation('description', $locale);
+
+            // Only add unique, non-empty titles/descriptions
+            if ($title && !in_array($title, $titles)) {
+                $titles[] = $title;
+            }
+
+            if ($description) {
+                $description = strip_tags($description);
+                if (!in_array($description, $descriptions)) {
+                    $descriptions[] = $description;
+                }
+            }
+        }
+
         return [
-            'title' => $this->title,
-            'description' => $this->description,
+            'title' => implode(' ', $titles),
+            'description' => implode(' ', $descriptions),
+            'id' => $this->id,
+            'public' => (int) $this->public,
         ];
     }
 }

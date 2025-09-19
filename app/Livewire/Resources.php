@@ -75,15 +75,14 @@ class Resources extends Component
             }
 
             // Step 5: Apply search term if there's a query
-            // Step 6: Retrieve filtered troves
             if (!empty($this->query)) {
                 $searchResults = Trove::search($this->query, $this->getSearchWithOptions())->get();
                 if ($searchResults->isNotEmpty()) {
-                    $ids = $searchResults->pluck('id');
-                    $query->whereIn('id', $ids);
-                    $this->resources = $query->get();
-                    $this->totalResources = $this->resources->count();
+                    // Step 6: Filter the Eloquent query to only include matching IDs
+                    $ids = $searchResults->pluck('id')->toArray();
 
+                    $this->resources = $query->whereIn('id', $ids)->orderByRaw('FIELD(id,' . implode(',', $ids) . ')')->get();
+                    $this->totalResources = $this->resources->count();
                 } else {
                     // No search results, return empty for resources
                     $this->resources = new EloquentCollection();

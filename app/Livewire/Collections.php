@@ -41,8 +41,12 @@ class Collections extends Component
             if (!empty($this->query)) {
                 $collectionResults = Collection::search($this->query, $this->getSearchWithOptions())->get();
                 if ($collectionResults->isNotEmpty()) {
-                    $collectionIds = $collectionResults->pluck('id');
-                    $collectionsQuery->whereIn('id', $collectionIds);
+                    $collectionIds = $collectionResults->pluck('id')->toArray();
+
+                    $this->collections = $collectionsQuery
+                        ->whereIn('id', $collectionIds)
+                        ->orderByRaw('FIELD(id, ' . implode(',', $collectionIds) . ')')
+                        ->get();
                 } else {
                     // No matching collections found, return empty collections
                     $this->collections = new EloquentCollection();

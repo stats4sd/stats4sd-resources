@@ -72,72 +72,102 @@ class BrowseAll extends Component
     {
         // Fetch Resources (Trove)
         $resourceQuery = Trove::query()->where('is_published', 1);
-        if (! empty($this->query)) {
-            $searchResults = Trove::search($this->query, $this->getSearchWithOptions())->get();
-            $resourceQuery->whereIn('id', $searchResults->pluck('id'));
+        $resourceHits = [];
+
+        if (!empty($this->query)) {
+            $resourceHits = Trove::search($this->query, $this->getSearchWithOptions())->raw()['hits'] ?? [];
+            $ids = collect($resourceHits)->pluck('id')->toArray();
+
+            if ($ids) {
+                $resourceQuery->whereIn('id', $ids)
+                    ->orderByRaw('FIELD(id, ' . implode(',', $ids) . ')');
+            }
         }
-        if (! empty($this->selectedResearchMethods)) {
+
+        if (!empty($this->selectedResearchMethods)) {
             foreach ($this->selectedResearchMethods as $methodId) {
-                $resourceQuery->whereHas('tags', fn ($q) => $q->where('tags.id', $methodId));
+                $resourceQuery->whereHas('tags', fn($q) => $q->where('tags.id', $methodId));
             }
         }
-        if (! empty($this->selectedTopics)) {
+
+        if (!empty($this->selectedTopics)) {
             foreach ($this->selectedTopics as $topicId) {
-                $resourceQuery->whereHas('tags', fn ($q) => $q->where('tags.id', $topicId));
+                $resourceQuery->whereHas('tags', fn($q) => $q->where('tags.id', $topicId));
             }
         }
-        if (! empty($this->selectedLanguages)) {
+
+        if (!empty($this->selectedLanguages)) {
             $resourceQuery->whereLocales('title', $this->selectedLanguages);
         }
+
         $this->resources = $resourceQuery->get();
 
         // Fetch Collections
-        $collectionQuery = Collection::where('public', 1);
-        if (! empty($this->query)) {
-            $searchResults = Collection::search($this->query, $this->getSearchWithOptions())->get();
-            $collectionQuery->whereIn('id', $searchResults->pluck('id'));
+        $collectionQuery = Collection::query()->where('public', 1);
+        $collectionHits = [];
+
+        if (!empty($this->query)) {
+            $collectionHits = Collection::search($this->query, $this->getSearchWithOptions())->raw()['hits'] ?? [];
+            $ids = collect($collectionHits)->pluck('id')->toArray();
+
+            if ($ids) {
+                $collectionQuery->whereIn('id', $ids)
+                    ->orderByRaw('FIELD(id, ' . implode(',', $ids) . ')');
+            }
         }
-        if (! empty($this->selectedLanguages)) {
+
+        if (!empty($this->selectedLanguages)) {
             $collectionQuery->whereLocales('title', $this->selectedLanguages);
         }
+
         $this->collections = $collectionQuery->get();
 
-        // Merge both into $items
-        $this->mergeItems();
+        // Merge with ranking preserved
+        $this->mergeItems($resourceHits, $collectionHits);
     }
 
-    public function mergeItems()
+    public function mergeItems(array $resourceHits = [], array $collectionHits = [])
     {
-        $resources = $this->resources->map(fn (Trove $resource) => [
-            'id' => $resource->id,
-            'title' => $resource->title,
-            'description' => $resource->description,
-            'slug' => $resource->slug,
-            'type' => 'resource',
-            'troveTypes' => $resource->troveTypes,
-            'tags' => $resource->themeAndTopicTags,
-            'cover_image_thumb' => $resource->cover_image_thumb,
-        ]);
+        $resources = $this->resources->map(function($r) use ($resourceHits) {
+            $hit = collect($resourceHits)->firstWhere('id', $r->id);
+            return [
+                'type' => 'resource',
+                'id' => $r->id,
+                'slug' => $r->slug,
+                'title' => $r->title,
+                'description' => $r->description,
+                'troveTypes' => $r->troveTypes,
+                'tags' => $r->themeAndTopicTags,
+                'cover_image_thumb' => $r->cover_image_thumb,
+                'score' => $hit['_rankingScore'] ?? 0,
+            ];
+        });
 
-        $collections = $this->collections->map(fn ($collection) => [
-            'id' => $collection->id,
-            'title' => $collection->title,
-            'description' => $collection->description,
-            'slug' => null, // Collections use ID instead of slug
-            'type' => 'collection',
-            'troveTypes' => null,
-            'tags' => null,
-            'cover_image_thumb' => $collection->cover_image_thumb,
-        ]);
+        $collections = $this->collections->map(function($c) use ($collectionHits) {
+            $hit = collect($collectionHits)->firstWhere('id', $c->id);
+            return [
+                'type' => 'collection',
+                'id' => $c->id,
+                'slug' => null, // collections use ID instead of slug
+                'title' => $c->title,
+                'description' => $c->description,
+                'troveTypes' => null,
+                'tags' => null,
+                'cover_image_thumb' => $c->cover_image_thumb,
+                'score' => $hit['_rankingScore'] ?? 0,
+            ];
+        });
 
-        // Merge and shuffle for a mixed order
-        $this->items = collect($resources)->merge($collections)->shuffle();
+        // Merge and sort by score
+        $this->items = collect($resources)
+            ->merge($collections)
+            ->sortByDesc('score')
+            ->values();
 
         $this->totalResourcesAndCollections = $this->items->count();
         $this->pageCount = ceil($this->totalResourcesAndCollections / $this->perPage);
 
         $this->loadPage(1);
-
     }
 
     public function clearFilters()

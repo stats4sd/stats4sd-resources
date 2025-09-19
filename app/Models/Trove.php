@@ -194,61 +194,34 @@ class Trove extends Model implements HasMedia
         );
     }
 
-    // Matching the old Algolia serachable array as much as possible
     public function toSearchableArray(): array
     {
-        // title and description
-        $array = $this->toArray();
-
-        unset($array['media']);
-
-        $languages = [];
+        $titles = [];
+        $descriptions = [];
 
         foreach (config('app.locales') as $locale => $label) {
-            // truncate description
-            if (isset($array['description'][$locale])) {
-                $array['description'][$locale] = Str::of($array['description'][$locale])->limit(100)->stripTags();
+            $title = $this->getTranslation('title', $locale);
+            $description = $this->getTranslation('description', $locale);
+
+            // Only add unique, non-empty titles/descriptions
+            if ($title && !in_array($title, $titles)) {
+                $titles[] = $title;
             }
 
-            // add language if exists
-            if (isset($array['title'][$locale])) {
-                $languages[] = $label;
+            if ($description) {
+                $description = strip_tags($description);
+                if (!in_array($description, $descriptions)) {
+                    $descriptions[] = $description;
+                }
             }
         }
 
-        $array['languages']['name']['en'] = $languages;
-
-        foreach (TagType::all() as $tagType) {
-            $array[strtolower($tagType->label)] = $this->tags->where('type_id', $tagType->id)->map(fn ($tag) => [
-                'name' => [
-                    'en' => $tag->getTranslation('name', 'en'),
-                    'es' => $tag->getTranslation('name', 'es'),
-                    'fr' => $tag->getTranslation('name', 'fr'),
-                ],
-            ])->values()->toArray();
-        }
-
-        $array['resourceTypes'] = $this->troveTypes
-            ->map(fn (TroveType $type) => [
-                'name' => [
-                    'en' => $type->getTranslation('label', 'en'),
-                    'es' => $type->getTranslation('label', 'es'),
-                    'fr' => $type->getTranslation('label', 'fr'),
-                ],
-            ])->values()->toArray();
-
-        $array['collections']['id'] = $this->collections->pluck('id');
-        $array['tags'] = $this->tags->map(fn ($tag) => [
-            'name' => [
-                'en' => $tag->getTranslation('name', 'en'),
-                'es' => $tag->getTranslation('name', 'es'),
-                'fr' => $tag->getTranslation('name', 'fr'),
-            ],
-        ])->values()->toArray();
-
-        $array['cover_image'] = $this->getFirstMediaUrl('cover_image_en');
-
-        return $array;
+        return [
+            'title' => implode(' ', $titles),
+            'description' => implode(' ', $descriptions),
+            'is_published' => (int) $this->is_published,
+            'id' => $this->id,
+        ];
     }
 
     public function themeAndTopicTags(): MorphToMany
