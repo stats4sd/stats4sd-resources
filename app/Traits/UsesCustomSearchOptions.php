@@ -8,6 +8,7 @@ trait UsesCustomSearchOptions
     {
         return function ($meiliSearch, $query, array $options = []) {
             $options['hitsPerPage'] = (int) config('scout.scout_search_limit', 500);
+            $options['showRankingScore'] = true;
             return $meiliSearch->search($query, $options);
         };
     }
