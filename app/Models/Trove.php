@@ -165,6 +165,9 @@ class Trove extends Model implements HasMedia
                     }
                 }
 
+                // 4. Default image
+                return asset('images/default-cover-photo.jpg');
+
             }
         );
     }
@@ -323,26 +326,37 @@ class Trove extends Model implements HasMedia
     }
 
     // get cover image URL
-    public function getCoverImageUrl()
+    public function getCoverImageUrl(): string
     {
-        $coverImageUrl = null;
+        $currentLocale = app()->getLocale();
 
-        $coverImage = $this->getMedia('cover_image_' . app()->getLocale());
-
-        // if there is no cover image for the current locale, default to english
-        if($coverImage->isEmpty()) {
-            $coverImage = $this->getMedia('cover_image_en');
+        // 1. Check current locale
+        $coverImage = $this->getMedia('cover_image_' . $currentLocale)->first();
+        if ($coverImage) {
+            return $coverImage->getFullUrl();
         }
 
-
-        // there is cover image uploaded, construct URL for it
-        if (!$coverImage->isEmpty()) {
-            // we can have one cover image uploaded only
-            foreach ($coverImage as $media) {
-                $coverImageUrl = $media->getFullUrl();
+        // 2. Fallback to English
+        if ($currentLocale !== 'en') {
+            $coverImage = $this->getMedia('cover_image_en')->first();
+            if ($coverImage) {
+                return $coverImage->getFullUrl();
             }
         }
 
-        return $coverImageUrl;
+        // 3. Fallback to other locale
+        $otherLocale = collect(['es', 'fr'])
+            ->first(fn($locale) => $locale !== $currentLocale);
+
+        if ($otherLocale) {
+            $coverImage = $this->getMedia('cover_image_' . $otherLocale)->first();
+            if ($coverImage) {
+                return $coverImage->getFullUrl();
+            }
+        }
+
+        // 4. Default image
+        return asset('images/default-cover-photo.jpg');
     }
+
 }
