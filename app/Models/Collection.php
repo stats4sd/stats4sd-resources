@@ -49,7 +49,35 @@ class Collection extends Model implements HasMedia
     protected function coverImageThumb(): Attribute
     {
         return new Attribute(
-            get: fn() => $this->getFirstMediaUrl('cover_image_' . app()->getLocale(), 'cover_thumb') ?? asset('images/default-cover-photo.jpg')
+            get: function () {
+                $currentLocale = app()->getLocale();
+
+                // 1. Check current locale
+                $url = $this->getFirstMediaUrl('cover_image_'.$currentLocale, 'cover_thumb');
+                if ($url) {
+                    return $url;
+                }
+
+                // 2. Fallback to English
+                if ($currentLocale !== 'en') {
+                    $url = $this->getFirstMediaUrl('cover_image_en', 'cover_thumb');
+                    if ($url) {
+                        return $url;
+                    }
+                }
+
+                // 3. Fallback to the other locale
+                $otherLocale = collect(['es', 'fr'])
+                    ->first(fn($locale) => $locale !== $currentLocale);
+
+                if ($otherLocale) {
+                    $url = $this->getFirstMediaUrl('cover_image_'.$otherLocale, 'cover_thumb');
+                    if ($url) {
+                        return $url;
+                    }
+                }
+
+            }
         );
     }
 
