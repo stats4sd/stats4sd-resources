@@ -3,19 +3,14 @@
 @section('content')
     <div class="relative">
         <!-- Image Header -->
-        @php
-            $cover_photo = $collection->getMedia('cover_image_' . app()->getLocale())->first();
-            $cover_photo_url = $cover_photo ? $cover_photo->getUrl() : asset('images/default-cover-photo.jpg');
-        @endphp
-
-               <div class="overflow-hidden w-100vw ">
+        <div class="overflow-hidden w-100vw ">
             <div class="relative bg-repeat-x bg-center -ml-24 blur-xl  w-[120vw] bg-cover"
-                style="height: 500px; background-image: url('{{ $cover_photo_url }}');">
+                style="height: 500px; background-image: url('{{ $collection->cover_image }}');">
             </div>
         </div>
         <div class="absolute top-0 h-full w-full bg-center bg-no-repeat">
             <div class="w-full flex items-center overflow-hidden" style="height: 500px">
-                <img src="{{ $cover_photo_url }}" style="min-height: 500px;  " class="mx-auto object-cover"
+                <img src="{{ $collection->cover_image }}" style="min-height: 500px;  " class="mx-auto object-cover"
                     alt="cover image">
             </div>
             <div class="absolute bottom-0 w-full py-8 lg:py-12  h-fit  " style="min-height: 25%; background-color: #D32229dd">
