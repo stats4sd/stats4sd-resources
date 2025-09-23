@@ -42,7 +42,37 @@ class Collection extends Model implements HasMedia
     protected function coverImage(): Attribute
     {
         return new Attribute(
-            get: fn() => $this->getFirstMediaUrl('cover_image_' . app()->getLocale()) ?? asset('images/default-cover-photo.jpg')
+            get: function () {
+                $currentLocale = app()->getLocale();
+
+                // 1. Check current locale
+                $media = $this->getMedia('cover_image_'.$currentLocale)->first();
+                if ($media) {
+                    return $media->getFullUrl();
+                }
+
+                // 2. Fallback to English
+                if ($currentLocale !== 'en') {
+                    $media = $this->getMedia('cover_image_en')->first();
+                    if ($media) {
+                        return $media->getFullUrl();
+                    }
+                }
+
+                // 3. Fallback to the other locale
+                $otherLocale = collect(['es', 'fr'])
+                    ->first(fn($locale) => $locale !== $currentLocale);
+
+                if ($otherLocale) {
+                    $media = $this->getMedia('cover_image_'.$otherLocale)->first();
+                    if ($media) {
+                        return $media->getFullUrl();
+                    }
+                }
+
+                // 4. Default image
+                return asset('images/default-cover-photo.jpg');
+            }
         );
     }
 
@@ -76,6 +106,9 @@ class Collection extends Model implements HasMedia
                         return $url;
                     }
                 }
+
+                // 4. Default image
+                return asset('images/default-cover-photo.jpg');
 
             }
         );
