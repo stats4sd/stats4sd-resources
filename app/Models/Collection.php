@@ -44,33 +44,19 @@ class Collection extends Model implements HasMedia
         return new Attribute(
             get: function () {
                 $currentLocale = app()->getLocale();
+                $locales = ['en', 'es', 'fr']; // Ordered fallback
 
-                // 1. Check current locale
-                $media = $this->getMedia('cover_image_'.$currentLocale)->first();
-                if ($media) {
-                    return $media->getFullUrl();
-                }
+                // Make sure current locale is checked first
+                $orderedLocales = array_merge([$currentLocale], array_diff($locales, [$currentLocale]));
 
-                // 2. Fallback to English
-                if ($currentLocale !== 'en') {
-                    $media = $this->getMedia('cover_image_en')->first();
+                foreach ($orderedLocales as $locale) {
+                    $media = $this->getMedia('cover_image_' . $locale)->first();
                     if ($media) {
                         return $media->getFullUrl();
                     }
                 }
 
-                // 3. Fallback to the other locale
-                $otherLocale = collect(['es', 'fr'])
-                    ->first(fn($locale) => $locale !== $currentLocale);
-
-                if ($otherLocale) {
-                    $media = $this->getMedia('cover_image_'.$otherLocale)->first();
-                    if ($media) {
-                        return $media->getFullUrl();
-                    }
-                }
-
-                // 4. Default image
+                // Default image if no media found
                 return asset('images/default-cover-photo.jpg');
             }
         );
@@ -81,35 +67,20 @@ class Collection extends Model implements HasMedia
         return new Attribute(
             get: function () {
                 $currentLocale = app()->getLocale();
+                $locales = ['en', 'es', 'fr']; // fallback priority
 
-                // 1. Check current locale
-                $url = $this->getFirstMediaUrl('cover_image_'.$currentLocale, 'cover_thumb');
-                if ($url) {
-                    return $url;
-                }
+                // Make sure current locale is checked first
+                $orderedLocales = array_merge([$currentLocale], array_diff($locales, [$currentLocale]));
 
-                // 2. Fallback to English
-                if ($currentLocale !== 'en') {
-                    $url = $this->getFirstMediaUrl('cover_image_en', 'cover_thumb');
+                foreach ($orderedLocales as $locale) {
+                    $url = $this->getFirstMediaUrl('cover_image_' . $locale, 'cover_thumb');
                     if ($url) {
                         return $url;
                     }
                 }
 
-                // 3. Fallback to the other locale
-                $otherLocale = collect(['es', 'fr'])
-                    ->first(fn($locale) => $locale !== $currentLocale);
-
-                if ($otherLocale) {
-                    $url = $this->getFirstMediaUrl('cover_image_'.$otherLocale, 'cover_thumb');
-                    if ($url) {
-                        return $url;
-                    }
-                }
-
-                // 4. Default image
+                // Default image if no media found
                 return asset('images/default-cover-photo.jpg');
-
             }
         );
     }

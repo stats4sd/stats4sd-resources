@@ -147,7 +147,7 @@
                 $externalLinks = [$externalLinks];
             }
 
-            $mediaFiles = $resource->getMedia('content_' . app()->getLocale());
+            $mediaFiles = $resource->getContentMedia();
         @endphp
 
         @if ($externalLinks || $mediaFiles->isNotEmpty())
