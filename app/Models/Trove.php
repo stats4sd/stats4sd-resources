@@ -330,4 +330,22 @@ class Trove extends Model implements HasMedia
         return asset('images/default-cover-photo.jpg');
     }
 
+    public function getContentMedia(): \Illuminate\Support\Collection
+    {
+        $currentLocale = app()->getLocale();
+        $locales = ['en', 'es', 'fr']; // fallback priority
+
+        // Ordered fallback: current locale first, then English, then any remaining
+        $orderedLocales = array_merge([$currentLocale], array_diff($locales, [$currentLocale]));
+
+        foreach ($orderedLocales as $locale) {
+            $media = $this->getMedia('content_' . $locale);
+            if ($media->isNotEmpty()) {
+                return $media;
+            }
+        }
+
+        return collect(); // empty collection if no media found
+    }
+
 }
