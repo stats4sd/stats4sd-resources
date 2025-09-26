@@ -13,18 +13,14 @@
             </div>
         @endif
         <!-- Image Header -->
-        @php
-            $cover_photo = $resource->getMedia('cover_image_' . app()->getLocale())->first();
-            $cover_photo_url = $cover_photo ? $cover_photo->getUrl() : asset('/images/default-cover-photo.jpg');
-        @endphp
-        <div class="overflow-hidden w-100vw ">
-            <div class="relative bg-repeat-x bg-center -ml-24 blur-xl  w-[120vw] bg-cover"
-                style="height: 500px; background-image: url('{{ $cover_photo_url }}');">
+        <div class="overflow-hidden w-100vw">
+            <div class="relative bg-repeat-x bg-center -ml-24 blur-xl w-[120vw] bg-cover"
+                style="height: 500px; background-image: url('{{ $resource->getCoverImageUrl() }}');">
             </div>
         </div>
         <div class="absolute top-0 h-full w-full bg-center bg-no-repeat">
             <div class="w-full flex items-center overflow-hidden" style="height: 500px">
-                <img src="{{ $cover_photo_url }}" style="min-height: 500px;  " class="mx-auto object-cover"
+                <img src="{{ $resource->getCoverImageUrl() }}" style="min-height: 500px;  " class="mx-auto object-cover"
                     alt="cover image">
             </div>
             <div class="absolute bottom-0 w-full py-8 lg:py-12  h-fit bg-black bg-opacity-75 " style="min-height: 25%;">
