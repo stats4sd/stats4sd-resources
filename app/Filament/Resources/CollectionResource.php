@@ -2,30 +2,31 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CollectionResource\Pages\ViewCollection;
-use App\Filament\Translatable\Form\TranslatableComboField;
 use Filament\Forms;
-use Filament\Forms\Components\Section;
-use Filament\Infolists\Components\ImageEntry;
-use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
-use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Infolist;
 use Filament\Tables;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
 use App\Models\Trove;
-use Filament\Actions\ViewAction;
-use Filament\Resources\Resource;
+use Filament\Forms\Form;
 use App\Models\Collection;
+use Filament\Tables\Table;
+use Filament\Actions\ViewAction;
+use Filament\Infolists\Infolist;
+use Filament\Resources\Resource;
+use Illuminate\Support\HtmlString;
 use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Wizard;
+use Filament\Forms\Components\Section;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\ImageEntry;
+use Filament\Resources\Concerns\Translatable;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CollectionResource\Pages;
-use App\Filament\Resources\CollectionResource\RelationManagers;
-use Filament\Resources\Concerns\Translatable;
-use Illuminate\Support\HtmlString;
+use App\Filament\Translatable\Form\TranslatableComboField;
 use Parallax\FilamentComments\Tables\Actions\CommentsAction;
+use App\Filament\Resources\CollectionResource\RelationManagers;
+use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
+use App\Filament\Resources\CollectionResource\Pages\ViewCollection;
 
 class CollectionResource extends Resource
 {
@@ -125,6 +126,11 @@ class CollectionResource extends Resource
                     ->counts('troves')
                     ->label('# Troves')
                     ->sortable(),
+                Tables\Columns\IconColumn::make('public')
+                    ->boolean()
+                    ->trueIcon('heroicon-o-check-badge')
+                    ->falseIcon('heroicon-o-x-mark')
+                    ->sortable()
             ])
             ->filters([
                 //
@@ -136,7 +142,7 @@ class CollectionResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    // Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
