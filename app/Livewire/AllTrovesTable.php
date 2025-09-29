@@ -2,31 +2,31 @@
 
 namespace App\Livewire;
 
-use App\Filament\Resources\CollectionResource;
-use App\Filament\Resources\TroveResource;
 use App\Models\Trove;
-use Filament\Actions\Contracts\HasRecord;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Notifications\Notification;
-use Filament\Resources\Concerns\HasActiveLocaleSwitcher;
-use Filament\Resources\Pages\Concerns\InteractsWithRecord;
-use Filament\SpatieLaravelTranslatableContentDriver;
-use Filament\Support\Concerns\EvaluatesClosures;
-use Filament\Support\Contracts\TranslatableContentDriver;
+use Livewire\Component;
+use Filament\Tables\Table;
 use Filament\Tables\Actions\Action;
+use Livewire\Attributes\Reactive;
+use Illuminate\Support\HtmlString;
+use Filament\Forms\Contracts\HasForms;
 use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Notifications\Notification;
 use Filament\Tables\Enums\FiltersLayout;
-use Filament\Tables\Table;
+use App\Filament\Resources\TroveResource;
+use Filament\Actions\Contracts\HasRecord;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\HtmlString;
-use Livewire\Attributes\Reactive;
-use Livewire\Component;
+use App\Filament\Resources\CollectionResource;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Support\Concerns\EvaluatesClosures;
+use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\SpatieLaravelTranslatableContentDriver;
+use Filament\Resources\Concerns\HasActiveLocaleSwitcher;
+use Filament\Support\Contracts\TranslatableContentDriver;
+use Filament\Resources\Pages\Concerns\InteractsWithRecord;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 
 class AllTrovesTable extends Component implements HasTable, HasForms
 {
@@ -100,7 +100,7 @@ class AllTrovesTable extends Component implements HasTable, HasForms
                             ->send();
                         $this->resetTable();
                     }),
-                Tables\Actions\Action::make('preview_trove')
+                Action::make('preview_trove')
                     ->label('Preview on Front-end')
                     ->icon('heroicon-o-eye')
                     ->url(function (Trove $record) {
