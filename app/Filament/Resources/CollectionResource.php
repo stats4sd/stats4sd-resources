@@ -107,6 +107,8 @@ class CollectionResource extends Resource
                     ]),
 
                 Section::make('Publishing')
+                    ->icon('heroicon-o-globe-alt')
+                    ->iconColor('primary')
                     ->extraAttributes(['class' => 'grey-box'])
                     ->schema([
 
