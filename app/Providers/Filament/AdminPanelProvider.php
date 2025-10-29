@@ -73,7 +73,7 @@ class AdminPanelProvider extends PanelProvider
 
                         ...TroveResource::getNavigationItems(),
                         ...CollectionResource::getNavigationItems(),
-                        ...HubResource::getNavigationItems(),
+                        // ...HubResource::getNavigationItems(),
                     ])
                     ->groups([
                         NavigationGroup::make('Details')
