@@ -2,43 +2,44 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Draftable\Forms\Components\Actions\SaveDraftFormAction;
-use App\Filament\Translatable\Form\TranslatableComboField;
 use App\Models\Tag;
-use Awcodes\Shout\Components\Shout;
 use Filament\Forms;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\Section;
-use Filament\Notifications\Notification;
-use Filament\Resources\Pages\CreateRecord;
-use Filament\Resources\Pages\EditRecord;
-use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use App\Models\Trove;
 use App\Models\TagType;
+use Livewire\Component;
 use Filament\Forms\Form;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use App\Models\Organisation;
 use Filament\Resources\Resource;
-use Guava\FilamentDrafts\Admin\Actions\SaveDraftAction;
-use Guava\FilamentDrafts\Admin\Resources\Concerns\Draftable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\HtmlString;
+use Awcodes\Shout\Components\Shout;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Wizard;
+use Filament\Support\Enums\Alignment;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Repeater;
+use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
+use Filament\Resources\Pages\EditRecord;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\Placeholder;
+use Filament\Resources\Pages\CreateRecord;
 use Filament\Resources\Concerns\Translatable;
 use App\Filament\Resources\TroveResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Kainiklas\FilamentScout\Traits\InteractsWithScout;
-use Livewire\Component;
+use Guava\FilamentDrafts\Admin\Actions\SaveDraftAction;
+use App\Filament\Translatable\Form\TranslatableComboField;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Guava\FilamentDrafts\Admin\Resources\Concerns\Draftable;
 use Parallax\FilamentComments\Tables\Actions\CommentsAction;
+use App\Filament\Draftable\Forms\Components\Actions\SaveDraftFormAction;
 
 class TroveResource extends Resource
 {
@@ -58,7 +59,6 @@ class TroveResource extends Resource
 
         return "title";
     }
-
 
     public static function form(Form $form): Form
     {
@@ -129,6 +129,19 @@ class TroveResource extends Resource
                                         ->required()
                                         ->default(now()),
 
+                                    Forms\Components\Select::make('organisation_id')
+                                        ->label('Organisation / Owner')
+                                        ->placeholder('Select the organisation that owns this trove')
+                                        ->helperText('Who is the owner of this trove?')
+                                        ->default(function () {
+                                            $defaultOrg = Organisation::firstWhere('name', 'Stats4SD');
+                                            return $defaultOrg?->id ?? null;
+                                        })
+                                        ->options(function () {
+                                            return \App\Models\Organisation::pluck('name', 'id');
+                                        })
+                                        ->searchable()
+                                        ->required(),
 
                                     Forms\Components\Hidden::make('uploader_id')->default(Auth::user()->id),
                                 ]),
@@ -463,6 +476,11 @@ class TroveResource extends Resource
     public static function getTableColumns(): array
     {
         return [
+            TextColumn::make('organisation.name')
+                ->label('Owner')
+                ->badge()
+                ->sortable()
+                ->searchable(),
             TextColumn::make('title')
                 ->wrap()
                 ->sortable(query: fn(Builder $query, $direction) => $query->orderBy('title->' . app()->currentLocale(), $direction)),
@@ -511,6 +529,8 @@ class TroveResource extends Resource
                 ->getOptionLabelFromRecordUsing(fn($record, $livewire) => $record->getTranslation('label', 'en')),
             SelectFilter::make('uploader')
                 ->relationship('user', 'name'),
+            SelectFilter::make('owner')
+                ->relationship('organisation', 'name'),
             ...$tagFilters,
         ];
     }
