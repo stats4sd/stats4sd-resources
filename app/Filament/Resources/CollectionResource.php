@@ -8,6 +8,7 @@ use App\Models\Trove;
 use Filament\Forms\Form;
 use App\Models\Collection;
 use Filament\Tables\Table;
+use App\Models\Organisation;
 use Filament\Actions\ViewAction;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
@@ -83,6 +84,28 @@ class CollectionResource extends Resource
                 Forms\Components\Hidden::make('uploader_id')
                     ->default(Auth::id()),
 
+                Forms\Components\Section::make('Metadata')
+                    ->icon('heroicon-o-document-chart-bar')
+                    ->iconColor('primary')
+                    ->extraAttributes(['class' => 'grey-box'])
+                    ->schema([
+
+                        Forms\Components\Select::make('organisation_id')
+                            ->label('Who is the owner of this collection?')
+                            ->placeholder('Select the organisation that owns this collection')
+                            ->default(function () {
+                                $defaultOrg = Organisation::firstWhere('name', 'Stats4SD');
+                                return $defaultOrg?->id ?? null;
+                            })
+                            ->options(function () {
+                                return \App\Models\Organisation::pluck('name', 'id');
+                            })
+                            ->searchable()
+                            ->required(),
+
+                        Forms\Components\Hidden::make('uploader_id')->default(Auth::user()->id),
+                    ]),
+
                 Section::make('Publishing')
                     ->extraAttributes(['class' => 'grey-box'])
                     ->schema([
@@ -100,6 +123,10 @@ class CollectionResource extends Resource
         return $table
             ->defaultSort('created_at', 'desc')
             ->columns([
+                Tables\Columns\TextColumn::make('organisation.name')
+                    ->label('Owner')
+                    ->badge()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('title')
                     ->wrap(),
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('cover_image')
@@ -133,7 +160,8 @@ class CollectionResource extends Resource
                     ->sortable()
             ])
             ->filters([
-                //
+                SelectFilter::make('owner')
+                    ->relationship('organisation', 'name')
             ])
             ->actions([
                 CommentsAction::make(),

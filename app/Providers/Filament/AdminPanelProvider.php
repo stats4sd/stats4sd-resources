@@ -20,6 +20,7 @@ use App\Filament\Resources\TroveTypeResource;
 use Filament\SpatieLaravelTranslatablePlugin;
 use App\Filament\Resources\CollectionResource;
 use Illuminate\Session\Middleware\StartSession;
+use App\Filament\Resources\OrganisationResource;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Kainiklas\FilamentScout\FilamentScoutPlugin;
 use Illuminate\Routing\Middleware\SubstituteBindings;
@@ -80,6 +81,10 @@ class AdminPanelProvider extends PanelProvider
                                 ...TroveTypeResource::getNavigationItems(),
                                 ...TagTypeResource::getNavigationItems(),
                                 ...TagResource::getNavigationItems(),
+                            ]),
+                        NavigationGroup::make('Admin')
+                            ->items([
+                                ...OrganisationResource::getNavigationItems(),
                             ]),
                     ]);
             })
