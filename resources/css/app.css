@@ -3,11 +3,15 @@
 @tailwind components;
 @tailwind utilities;
 
+
 :root {
     --stats4sd-red: #D32229;
     --stats4sd-red-transparent: rgba(211, 34, 41, 0.7);
     --stats4sd-grey: #4d4d4d;
     --frn-green: #0F443ACF;
+    --ifa-darkgreen: #234636;
+    --ifa-green: #006b51;
+    --ifa-yellow: #ffd100;
 }
 body {
     font-family: 'open sans', 'sans serif';
@@ -76,4 +80,17 @@ nav a {
 
 .dropdown-item {
     @apply text-black flex items-center w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-0 pl-10 py-2.5 text-sm hover:bg-gray-50 disabled:text-gray-500;
+}
+
+.theme_ifa {
+font-family: "roboto", "open sans", "sans-serif";
+
+}
+
+.theme_ifa h1,.font_lora {
+    font-family: "lora", "serif";
+    }
+
+.font-opensans {
+    font-family: 'open sans', 'sans serif';
 }

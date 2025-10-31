@@ -1,9 +1,10 @@
-<div class="flex flex-col lg:flex-row lg:gap-12">
+<div class="flex flex-col lg:flex-row lg:gap-12 bg-gray-50">
 
     <!-- Sidebar (Search & Filters) -->
-    <div class="lg:min-w-[280px] w-full lg:w-2/12 bg-[#f4f4f4] lg:bg-white self-start lg:pl-12 px-8 py-6 lg:py-8 ">
+    <div class="lg:min-w-[280px] w-full lg:w-2/12 bg-[#f4f4f4] bg-white self-start lg:pl-8 px-8 py-6 lg:py-8 lg:m-6 lg:shadow-xl">
         <div class="pb-4 sm:pb-0 lg:pb-4 sm:hidden lg:block">
-            <div class="pb-4 sm:pb-0 lg:pb-4 text-xl font-bold">{{ t('Search and filter') }}</div>
+            <div class=" text-xl font-bold">{{ t('Search and filter') }}</div>
+            <div class="h-3 w-12 bg-stats4sd-red my-3"></div>
         </div>  
 
         <!-- Search bar -->
