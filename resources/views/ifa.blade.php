@@ -124,16 +124,20 @@
         <div class="relative">
             <!-- Background Image -->
             <img src="images/ifacover.png" alt="Background Image"
-                class="absolute inset-0 w-full h-[20rem] object-cover filter brightness-[65%] z-0">
+                class="absolute inset-0 w-full h-[21rem] object-cover filter brightness-[70%] z-0">
 
             <!-- Overlay Content -->
             <div class="relative z-10 flex flex-col items-start w-full h-[20rem]  text-white">
                 <div class="h-[20rem] pb-16 flex flex-col sm:flex-row items-end w-full 2xl:pr-32">
                     <!-- Heading -->
-                    <h1 class="font-bold text-4xl sm:text-5xl md:text-5xl pt-10 px-8 sm:pl-16  2xl:pl-32 flex-grow">
-                        {{ t('FRN Research Methods Hub') }}
-                    </h1>
-
+                    <div class="pt-10 px-8 sm:pl-16  2xl:pl-32 flex-grow">
+                        <h1 class="font-bold text-4xl sm:text-5xl md:text-5xl ">
+                            {{ t('Let’s EAT | Educate for Agroecological Transformations') }}
+                        </h1>
+                        <h2 class="text-2xl font-normal mt-6">
+                        {{ t('Resource hub for agroecology in higher education') }}
+                        </h2>
+                    </div>
                     <button
                         class="p-12 bg-stats4sd-red sm:rounded-bl-[4rem] font-opensans 2xl:rounded-b-[4rem] flex flex-col items-start justify-left text-left h-full w-full sm:w-2/5 sm:max-w-[24rem]"
                         href="https://stats4sd.org/resources">
@@ -187,15 +191,19 @@
         </div>
 
         <div class="flex flex-row w-full h-full justify-between gap-12 mt-12 ">
-            <div class="bg-stats4sd-red  w-6 flex-shrink-0 h-auto"></div>
+            <div class="bg-ifa-green  w-6 flex-shrink-0 h-auto"></div>
             <div class="h-auto w-full max-w-7xl py-3 pl-12">
 
-                <h2 class="text-black text-2xl">
-                    {{ t('Browse by topic') }}
+                <h2 class="text-black text-3xl">
+                    {{ t('Explore collections') }}
                 </h2>
-
             </div>
             <div class="bg-none  w-6 flex-shrink-0 h-auto"></div>
+        </div>
+        <div class="flex justify-center w-full">
+        <p class="max-w-7xl px-12">
+        The collections below have been carefully chosen to highlight specific topics or themes present in the resources within the Let's EAT hub. They may be a useful starting point to get an idea of what this hub contains.
+        </p>
         </div>
 
 {{-- View by topic - collections --}}
@@ -234,17 +242,23 @@
                 @endforeach
             </div>
         </div>
+
 {{-- Search bar --}}
 <div class="flex flex-row w-full h-full justify-between gap-12 mt-32 ">
-            <div class="bg-stats4sd-red  w-6 flex-shrink-0 h-auto"></div>
+            <div class="bg-ifa-green  w-6 flex-shrink-0 h-auto"></div>
             <div class="h-auto w-full max-w-7xl py-3 px-12">
 
-                <h2 class="text-black text-2xl">
-                    {{ t('Search or explore resources') }}
+                <h2 class="text-black  text-3xl">
+                    {{ t('Search or browse resources') }}
                 </h2>
 
             </div>
             <div class="bg-none  w-6 flex-shrink-0 h-auto"></div>
+        </div>
+                <div class="flex justify-center w-full">
+        <p class="max-w-7xl w-full mb-8 px-12">
+        Use the search box to find specific key words, titles or authors. Alternatively, you can browse the filters highlighted below.
+        </p>
         </div>
 <div class="w-full  flex justify-center py-6">
 
@@ -261,9 +275,8 @@
             </div>
     </div>
 
-
     <!-- topics filters -->
-        <div class="flex flex-row w-full h-full justify-between gap-12 mt-12 ">
+        <div class="flex flex-row w-full h-full justify-between gap-12  ">
             <div class="bg-none  w-6 flex-shrink-0 h-auto"></div>
             <div class="h-auto w-full max-w-7xl py-3 px-12">
 
@@ -277,10 +290,10 @@
 
 <div class="w-full  flex justify-center py-6 px-12">
 
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6 justify-left max-w-7xl px-12">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 w-full justify-between max-w-7xl px-12">
                                 @foreach ($topics as $t)
                     <a href="" target="_blank"
-                        class="hover-effect flex justify-between relative bg-ifa-yellow rounded-full  overflow-hidden group sm:max-w-[20rem] min-w-[14rem] text-black text-sm px-6 py-4">
+                        class="hover-effect flex justify-between relative bg-ifa-yellow rounded-full  overflow-hidden group sm:max-w-[19rem] min-w-[13rem] text-black text-sm px-6 py-4">
                         {{ $t }}
                          <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6" stroke-miterlimit="2"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>
                         </a>
@@ -299,33 +312,33 @@
                 <div class="sm:grid sm:grid-cols-2 sm:gap-6  mt-12">
                                         @foreach ($institutions as $i)
                             <button href="" target="_blank"
-                                class="hover-effect relative bg-ifa-green flex flex-col justify-around text-left rounded-t-[1.5rem] rounded-bl-[1.5rem]  overflow-hidden group sm:max-w-[20rem] min-w-[14rem] text-white text-sm px-6 py-4 h-[9rem]">
+                                class="hover-effect relative bg-ifa-green flex flex-col justify-start text-left rounded-t-[1.5rem] rounded-bl-[1.5rem]  overflow-hidden group sm:max-w-[20rem] min-w-[14rem] text-white text-sm px-6 py-4 h-[9rem]">
                                 <div>
                                 <h3> {{ $i['name'] }}</h3>
                                 <p>{{ $i['location'] }}</p>
                                </div>
-                                    <div class="w-full ">
+                                    {{-- <div class="w-full ">
                                     <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6" stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>
-                                </div>                               
+                                </div>                                --}}
                                      </button>
                         @endforeach
                     </div>
             </div>
-            <div class="">
+            <div class="max-w-[20rem]">
                 <h3 class="text-black text-lg uppercase font-medium">
                     {{ t('Browse by programme curricula or course syllabi') }}
                 </h3>
                 <div class="flex flex-col gap-6 mt-8">
                 @foreach ($levels as $l)
                             <button href="" target="_blank"
-                                class="hover-effect relative bg-ifa-green flex flex-col text-left justify-around rounded-t-[1.5rem] rounded-bl-[1.5rem]  overflow-hidden group sm:max-w-[20rem] min-w-[14rem] text-white text-sm px-6 py-4 h-[9rem]">
+                                class="hover-effect relative bg-ifa-green flex flex-col text-left justify-start rounded-t-[1.5rem] rounded-bl-[1.5rem]  overflow-hidden group sm:max-w-[20rem] min-w-[14rem] text-white text-sm px-6 py-4 h-[9rem]">
                            
                                 <h3> {{ $l }}</h3>
                             
                             
-                                    <div class="w-full ">
+                                    {{-- <div class="w-full ">
                                     <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6" stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>
-                                </div>       
+                                </div>        --}}
                                 </button>
                         @endforeach
                 
@@ -370,9 +383,9 @@
     <!-- Browse all -->
 
      
-<div class="w-full  ">
+<div class="w-full  " id="browse_all">
 
-    @livewire('frn-hub-browse-resources')
+    @livewire('ifa-hub-browse-resources')
 </div>
     </div>
 @endsection

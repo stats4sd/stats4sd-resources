@@ -40,9 +40,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.1rem 0.5rem;
+    padding: 0.07rem 0.4rem;
     border-radius: 3rem;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     background-color: #d4d4d4;
     color: black;
 }
@@ -93,4 +93,27 @@ font-family: "roboto", "open sans", "sans-serif";
 
 .font-opensans {
     font-family: 'open sans', 'sans serif';
+}
+.theme_ifa .grey-badge {
+    display: none;
+}
+.theme_ifa .resource-card-button {
+    background-color: var(--ifa-yellow);
+    color: black;
+}
+.theme_ifa .resource-card-icon {
+    background-color: var(--ifa-yellow);
+
+}
+
+.theme_ifa .resource-card-icon svg {
+    fill: black!important;
+}
+
+.theme_ifa .resource-card {
+    background-color: white;
+
+}
+.theme_ifa .resource-card p {
+    margin: 0.1rem 2rem ;
 }
