@@ -1,9 +1,4 @@
 @php
-    $featuredResourceIds = [
-        'en' => [658, 659, 604],
-        'es' => [474, 367, 604],
-        'fr' => [625, 604],
-    ];
 
     $collections = [
         [
@@ -59,13 +54,14 @@
         ],
       
     ];
+
     $levels = [
        'Undergraduate', 'Graduate/Masters', 'Student reading list',
       
     ];
 
     $locale = app()->currentLocale();
-    $featuredResources = \App\Models\Trove::whereIn('id', $featuredResourceIds[$locale])->get();
+    
 @endphp
 
 @extends('layouts.app', ['hideHeader' => true])
