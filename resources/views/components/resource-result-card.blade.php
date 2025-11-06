@@ -1,6 +1,7 @@
 @props([
     'item',
-    'color' => 'stats4sd-red'
+    'color' => 'stats4sd-red',
+    'showTags' => true,
 ])
 
 <div
@@ -38,7 +39,7 @@
         </p>
 
         <!-- Tags -->
-        @if (!empty($item['tags']))
+        @if ($showTags && !empty($item['tags']))
             <div class="flex flex-wrap gap-2 mb-2 mx-6 mb-4">
                 @foreach ($item['tags']->sortBy(fn($tag) => strtolower($tag->name)) as $tag)
                     <div class="grey-badge ">{{ $tag->name }}</div>
