@@ -372,7 +372,7 @@
      
 <div class="w-full  ">
 
-    @livewire('frn-hub-browse-resources')
+    @livewire('ifa-hub-browse-resources')
 </div>
     </div>
 @endsection
