@@ -111,7 +111,7 @@
         <div id="Resources-content" class="p-8 rounded-lg">
             <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 @foreach ($resources as $resource)
-                    <x-resource-result-card :item="$resource" color="ifa-yellow"/>
+                    <x-resource-result-card :item="$resource" color="ifa-yellow" :show-tags="false"/>
                 @endforeach
             </div>
         </div>
