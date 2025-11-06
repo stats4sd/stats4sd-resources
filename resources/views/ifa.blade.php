@@ -2,19 +2,19 @@
 
     $collections = [
         [
-            'url' => '/collections/49',
+            'url' => '/collections/#',
             'img' => '/images/ifa1.png',
             'title' => t('Introductions'),
             'desc' => t(' '),
         ],
         [
-            'url' => '/collections/50',
+            'url' => '/collections/#',
             'img' => '/images/ifa2.png',
             'title' => t('Reading for developers'),
             'desc' => t(' '),
         ],
         [
-            'url' => '/collections/51',
+            'url' => '/collections/#',
             'img' => '/images/ifa3.jpg',
             'title' => t('Participatory action research'),
             'desc' => t(' '),
@@ -61,7 +61,7 @@
     ];
 
     $locale = app()->currentLocale();
-    
+
 @endphp
 
 @extends('layouts.app', ['hideHeader' => true])
