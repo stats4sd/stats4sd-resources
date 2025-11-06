@@ -134,8 +134,8 @@
                         {{ t('FRN Research Methods Hub') }}
                     </h1>
 
-                    <button
-                        class="p-12 bg-stats4sd-red sm:rounded-bl-[4rem] font-opensans 2xl:rounded-b-[4rem] flex flex-col items-start justify-left text-left h-full w-full sm:w-2/5 sm:max-w-[24rem]"
+                    <a
+                        class="p-12 bg-stats4sd-red text-white sm:rounded-bl-[4rem] font-opensans 2xl:rounded-b-[4rem] flex flex-col items-start justify-left text-left h-full w-full sm:w-2/5 sm:max-w-[24rem]"
                         href="https://stats4sd.org/resources">
                         <span class="uppercase text-base font-normal ">Part of the</span>
                         <h2 class="text-3xl font-bold mb-8">Stats4SD Resources Library</h2>
@@ -149,6 +149,7 @@
                             </svg>
                             <span class="uppercase text-base font-normal ml-3 ">Library home</span>
                         </div>
+                    </a>
                 </div>
 
 
