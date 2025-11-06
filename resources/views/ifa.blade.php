@@ -187,7 +187,7 @@
         </div>
 
         <div class="flex flex-row w-full h-full justify-between gap-12 mt-12 ">
-            <div class="bg-stats4sd-red  w-6 flex-shrink-0 h-auto"></div>
+            <div class="bg-ifa-green w-6 flex-shrink-0 h-auto"></div>
             <div class="h-auto w-full max-w-7xl py-3 pl-12">
 
                 <h2 class="text-black text-2xl">
@@ -236,7 +236,7 @@
         </div>
 {{-- Search bar --}}
 <div class="flex flex-row w-full h-full justify-between gap-12 mt-32 ">
-            <div class="bg-stats4sd-red  w-6 flex-shrink-0 h-auto"></div>
+            <div class="bg-ifa-green w-6 flex-shrink-0 h-auto"></div>
             <div class="h-auto w-full max-w-7xl py-3 px-12">
 
                 <h2 class="text-black text-2xl">

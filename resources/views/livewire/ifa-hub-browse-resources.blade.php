@@ -4,7 +4,7 @@
     <div class="lg:min-w-[280px] w-full lg:w-2/12 bg-[#f4f4f4] bg-white self-start lg:pl-8 px-8 py-6 lg:py-8 lg:m-6 lg:shadow-xl">
         <div class="pb-4 sm:pb-0 lg:pb-4 sm:hidden lg:block">
             <div class=" text-xl font-bold">{{ t('Search and filter') }}</div>
-            <div class="h-3 w-12 bg-stats4sd-red my-3"></div>
+            <div class="h-3 w-12 bg-ifa-yellow my-3"></div>
         </div>  
 
         <!-- Search bar -->
@@ -42,15 +42,15 @@
                 </div>
                 <div class="space-y-2 mt-2 text-sm" x-show="openLanguage" x-show>
                     <label class="flex items-center">
-                        <input type="checkbox" wire:model="selectedLanguages" value="es" wire:change="search" class="mr-2 accent-stats4sd-red"/>
+                        <input type="checkbox" wire:model="selectedLanguages" value="es" wire:change="search" class="mr-2 accent-ifa-yellow"/>
                         {{ t("Spanish") }}
                     </label>
                     <label class="flex items-center">
-                        <input type="checkbox" wire:model="selectedLanguages" value="en" wire:change="search" class="mr-2 accent-stats4sd-red"/>
+                        <input type="checkbox" wire:model="selectedLanguages" value="en" wire:change="search" class="mr-2 accent-ifa-yellow"/>
                         {{ t("English") }}
                     </label>
                     <label class="flex items-center">
-                        <input type="checkbox" wire:model="selectedLanguages" value="fr" wire:change="search" class="mr-2 accent-stats4sd-red"/>
+                        <input type="checkbox" wire:model="selectedLanguages" value="fr" wire:change="search" class="mr-2 accent-ifa-yellow"/>
                         {{ t("French") }}
                     </label>
                 </div>
@@ -68,7 +68,7 @@
                 <div class="space-y-2 mt-4 text-sm " x-show="openMethods" x-show>
                     @foreach($this->researchMethods as $researchMethod)
                         <label class="flex items-center rounded cursor-pointer">
-                            <input type="checkbox" wire:model="selectedResearchMethods" value="{{ $researchMethod->id }}" class="mr-2 accent-stats4sd-red" wire:change="search"/>
+                            <input type="checkbox" wire:model="selectedResearchMethods" value="{{ $researchMethod->id }}" class="mr-2 accent-ifa-yellow" wire:change="search"/>
                             {{ $researchMethod->name }}
                         </label>
                     @endforeach
@@ -88,7 +88,7 @@
                     @foreach($this->topics as $topic)
                         <label 
                             class="flex items-center rounded cursor-pointer">
-                            <input type="checkbox" wire:model="selectedTopics" value="{{ $topic->id }}" class="mr-2 accent-stats4sd-red" wire:change="search"/>
+                            <input type="checkbox" wire:model="selectedTopics" value="{{ $topic->id }}" class="mr-2 accent-ifa-yellow" wire:change="search"/>
                             {{ $topic->name }}
                         </label>
                     @endforeach
@@ -111,7 +111,7 @@
         <div id="Resources-content" class="p-8 rounded-lg">
             <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 @foreach ($resources as $resource)
-                    <x-resource-result-card :item="$resource"/>
+                    <x-resource-result-card :item="$resource" color="ifa-yellow"/>
                 @endforeach
             </div>
         </div>
