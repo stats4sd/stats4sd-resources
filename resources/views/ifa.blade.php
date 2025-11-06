@@ -115,11 +115,7 @@
         </div>
     </header>
 
-
-
-
     <div class="relative theme_ifa">
-
 
         <div class="relative">
             <!-- Background Image -->
@@ -151,14 +147,9 @@
                         </div>
                     </a>
                 </div>
-
-
             </div>
 
         </div>
-
-
-
 
         <!-- Top section -->
         <div class="w-full bg-gray-100 flex justify-center py-6">
@@ -173,7 +164,7 @@
                                     hover:bg-black 
                                     font-semibold  text-sm rounded-full uppercase text-center transition">
                       <span> {{ t('Browse by topic') }}</span> 
-<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6" stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>
+                    <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6" stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>
 
                     </a>
                     <a href="#browse_all"
@@ -199,15 +190,13 @@
             <div class="bg-none  w-6 flex-shrink-0 h-auto"></div>
         </div>
 
-{{-- View by topic - collections --}}
-
- <div class="w-full  flex justify-center py-6">
-
+        <!-- View by topic - collections -->
+        <div class="w-full  flex justify-center py-6">
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center max-w-7xl p-12">
                 @foreach ($collections as $c)
                     <a href="{{ url($c['url']) }}" target="_blank"
                         class="hover-effect relative bg-ifa-green rounded-t-[2.5rem] rounded-bl-[2.5rem] overflow-hidden group sm:max-w-[20rem] min-w-[15rem]">
-                         <div class="absolute top-4 left-4 h-12 w-12  rounded-full text-white text-center py-auto bg-ifa-yellow">
+                        <div class="absolute top-4 left-4 h-12 w-12  rounded-full text-white text-center py-auto bg-ifa-yellow">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="white"
                                 class="mx-auto my-3">
                                 <path
@@ -235,145 +224,113 @@
                 @endforeach
             </div>
         </div>
-{{-- Search bar --}}
-<div class="flex flex-row w-full h-full justify-between gap-12 mt-32 ">
-            <div class="bg-ifa-green w-6 flex-shrink-0 h-auto"></div>
-            <div class="h-auto w-full max-w-7xl py-3 px-12">
 
-                <h2 class="text-black text-2xl">
-                    {{ t('Search or explore resources') }}
-                </h2>
+        <!-- Search bar -->
+        <div class="flex flex-row w-full h-full justify-between gap-12 mt-32 ">
+                    <div class="bg-ifa-green w-6 flex-shrink-0 h-auto"></div>
+                    <div class="h-auto w-full max-w-7xl py-3 px-12">
 
-            </div>
-            <div class="bg-none  w-6 flex-shrink-0 h-auto"></div>
-        </div>
-<div class="w-full  flex justify-center py-6">
+                        <h2 class="text-black text-2xl">
+                            {{ t('Search or explore resources') }}
+                        </h2>
 
-        <div class="relative w-full items-center mb-6  max-w-2xl lg:max-w-5xl xl:max-w-7xl px-12 hidden lg:flex">
-            <livewire:search-bar
-                inputClass="w-full py-5 pl-12 pr-4 bg-gray-200 border-none rounded-full focus:outline-none transition
-                duration-300 focus:bg-gray-100 focus:ring-0 text-gray-700 "/>
-
-            <div class="absolute left-16 top-1/2 transform -translate-y-1/2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5 text-gray-600">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
-                </svg>
-            </div>
-            </div>
-    </div>
-
-
-    <!-- topics filters -->
-        <div class="flex flex-row w-full h-full justify-between gap-12 mt-12 ">
-            <div class="bg-none  w-6 flex-shrink-0 h-auto"></div>
-            <div class="h-auto w-full max-w-7xl py-3 px-12">
-
-                <h3 class="text-black text-lg uppercase font-medium">
-                    {{ t('Explore selected topics') }}
-                </h3>
-
-            </div>
-            <div class="bg-none  w-6 flex-shrink-0 h-auto"></div>
-        </div>
-
-<div class="w-full  flex justify-center py-6 px-12">
-
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6 justify-left max-w-7xl px-12">
-                                @foreach ($topics as $t)
-                    <a href="" target="_blank"
-                        class="hover-effect flex justify-between relative bg-ifa-yellow rounded-full  overflow-hidden group sm:max-w-[20rem] min-w-[14rem] text-black text-sm px-6 py-4">
-                        {{ $t }}
-                         <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6" stroke-miterlimit="2"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>
-                        </a>
-                @endforeach
-            </div>
-        </div>
-
-
-    <!-- institutions and syllabi filters 2 cols-->
-    <div class="w-full flex justify-center py-6">
-        <div class="w-full flex flex-row gap-20 justify-between w-screen max-w-7xl p-12 ">
-            <div class="">
-                <h3 class="text-black text-lg uppercase font-medium">
-                    {{ t('Explore Institutions') }}
-                </h3>
-                <div class="sm:grid sm:grid-cols-2 sm:gap-6  mt-12">
-                                        @foreach ($institutions as $i)
-                            <button href="" target="_blank"
-                                class="hover-effect relative bg-ifa-green flex flex-col justify-around text-left rounded-t-[1.5rem] rounded-bl-[1.5rem]  overflow-hidden group sm:max-w-[20rem] min-w-[14rem] text-white text-sm px-6 py-4 h-[9rem]">
-                                <div>
-                                <h3> {{ $i['name'] }}</h3>
-                                <p>{{ $i['location'] }}</p>
-                               </div>
-                                    <div class="w-full ">
-                                    <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6" stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>
-                                </div>                               
-                                     </button>
-                        @endforeach
                     </div>
-            </div>
-            <div class="">
-                <h3 class="text-black text-lg uppercase font-medium">
-                    {{ t('Browse by programme curricula or course syllabi') }}
-                </h3>
-                <div class="flex flex-col gap-6 mt-8">
-                @foreach ($levels as $l)
-                            <button href="" target="_blank"
-                                class="hover-effect relative bg-ifa-green flex flex-col text-left justify-around rounded-t-[1.5rem] rounded-bl-[1.5rem]  overflow-hidden group sm:max-w-[20rem] min-w-[14rem] text-white text-sm px-6 py-4 h-[9rem]">
-                           
-                                <h3> {{ $l }}</h3>
-                            
-                            
-                                    <div class="w-full ">
-                                    <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6" stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>
-                                </div>       
-                                </button>
-                        @endforeach
-                
+                    <div class="bg-none  w-6 flex-shrink-0 h-auto"></div>
                 </div>
+        <div class="w-full  flex justify-center py-6">
+
+                <div class="relative w-full items-center mb-6  max-w-2xl lg:max-w-5xl xl:max-w-7xl px-12 hidden lg:flex">
+                    <livewire:search-bar
+                        inputClass="w-full py-5 pl-12 pr-4 bg-gray-200 border-none rounded-full focus:outline-none transition
+                        duration-300 focus:bg-gray-100 focus:ring-0 text-gray-700 "/>
+
+                    <div class="absolute left-16 top-1/2 transform -translate-y-1/2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5 text-gray-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+                        </svg>
+                    </div>
+                    </div>
             </div>
-        </div>
-               </div>
 
 
+            <!-- topics filters -->
+                <div class="flex flex-row w-full h-full justify-between gap-12 mt-12 ">
+                    <div class="bg-none  w-6 flex-shrink-0 h-auto"></div>
+                    <div class="h-auto w-full max-w-7xl py-3 px-12">
 
-        {{-- <h2 id="frn_all" class="text-3xl font-bold">{{ t('Featured resources') }}</h2>
-        <div class="h-1 w-20 bg-stats4sd-red my-4"></div>
-
-        <div class="grid md:grid-cols-3 gap-6">
-            @foreach ($featuredResources as $resource)
-                <a href="{{ url("resources/{$resource->id}") }}" target="_blank"
-                    class="hover-effect relative bg-gray-100 rounded-lg overflow-hidden group">
-                    <div class="h-48 bg-cover bg-center"
-                        style="background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(0,0,0,0.64)), url('{{ $resource->getCoverImageUrl() }}')">
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg group-hover:text-stats4sd-green">
-                            {{ $resource->getTranslation('title', $locale) ?? $resource->getTranslation('title', 'en') }}
+                        <h3 class="text-black text-lg uppercase font-medium">
+                            {{ t('Explore selected topics') }}
                         </h3>
-                        <p class="text-sm">
-                            {!! $resource->getTranslation('description', $locale)
-                                ? \Illuminate\Support\Str::limit($resource->getTranslation('description', $locale), 200)
-                                : \Illuminate\Support\Str::limit($resource->getTranslation('description', 'en'), 200) !!}
-                        </p>
+
                     </div>
-                </a>
-            @endforeach
+                    <div class="bg-none  w-6 flex-shrink-0 h-auto"></div>
+                </div>
+
+                <div class="w-full  flex justify-center py-6 px-12">
+
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6 justify-left max-w-7xl px-12">
+                                        @foreach ($topics as $t)
+                            <a href="" target="_blank"
+                                class="hover-effect flex justify-between relative bg-ifa-yellow rounded-full  overflow-hidden group sm:max-w-[20rem] min-w-[14rem] text-black text-sm px-6 py-4">
+                                {{ $t }}
+                                <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6" stroke-miterlimit="2"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>
+                                </a>
+                        @endforeach
+                    </div>
+                </div>
+
+
+            <!-- institutions and syllabi filters 2 cols-->
+            <div class="w-full flex justify-center py-6">
+                <div class="w-full flex flex-row gap-20 justify-between w-screen max-w-7xl p-12 ">
+                    <div class="">
+                        <h3 class="text-black text-lg uppercase font-medium">
+                            {{ t('Explore Institutions') }}
+                        </h3>
+                        <div class="sm:grid sm:grid-cols-2 sm:gap-6  mt-12">
+                                                @foreach ($institutions as $i)
+                                    <button href="" target="_blank"
+                                        class="hover-effect relative bg-ifa-green flex flex-col justify-around text-left rounded-t-[1.5rem] rounded-bl-[1.5rem]  overflow-hidden group sm:max-w-[20rem] min-w-[14rem] text-white text-sm px-6 py-4 h-[9rem]">
+                                        <div>
+                                        <h3> {{ $i['name'] }}</h3>
+                                        <p>{{ $i['location'] }}</p>
+                                    </div>
+                                            <div class="w-full ">
+                                            <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6" stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>
+                                        </div>                               
+                                            </button>
+                                @endforeach
+                            </div>
+                    </div>
+                    <div class="">
+                        <h3 class="text-black text-lg uppercase font-medium">
+                            {{ t('Browse by programme curricula or course syllabi') }}
+                        </h3>
+                        <div class="flex flex-col gap-6 mt-8">
+                        @foreach ($levels as $l)
+                                    <button href="" target="_blank"
+                                        class="hover-effect relative bg-ifa-green flex flex-col text-left justify-around rounded-t-[1.5rem] rounded-bl-[1.5rem]  overflow-hidden group sm:max-w-[20rem] min-w-[14rem] text-white text-sm px-6 py-4 h-[9rem]">
+                                
+                                        <h3> {{ $l }}</h3>
+                                    
+                                    
+                                            <div class="w-full ">
+                                            <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6" stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>
+                                        </div>       
+                                        </button>
+                                @endforeach
+                        
+                        </div>
+                    </div>
+                </div>
+                    </div>
+
+            </div>
+
+        <!-- Browse all -->
+        <div class="w-full  ">
+
+            @livewire('ifa-hub-browse-resources')
         </div>
-         --}}
-            
-
-
-
-
-    </div>
-
-    <!-- Browse all -->
-
-     
-<div class="w-full  ">
-
-    @livewire('ifa-hub-browse-resources')
-</div>
     </div>
 @endsection
