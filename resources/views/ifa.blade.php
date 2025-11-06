@@ -131,7 +131,7 @@
                 <div class="h-[20rem] pb-16 flex flex-col sm:flex-row items-end w-full 2xl:pr-32">
                     <!-- Heading -->
                     <h1 class="font-bold text-4xl sm:text-5xl md:text-5xl pt-10 px-8 sm:pl-16  2xl:pl-32 flex-grow">
-                        {{ t('FRN Research Methods Hub') }}
+                        {{ t('Let\'s EAT | Educate for Agroecological Transformations') }}
                     </h1>
 
                     <a
