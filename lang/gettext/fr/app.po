@@ -7,45 +7,62 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-08-13T16:12:45+00:00\n"
-"PO-Revision-Date: 2025-08-13 18:12+0200\n"
+"POT-Creation-Date: 2025-11-06T16:46:04+00:00\n"
+"PO-Revision-Date: 2025-11-06 16:46+0000\n"
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
-#: resources\views\collection.blade.php:24
+#: app\Livewire\IfaHubBrowseResources.php:39
+msgid "USA"
+msgstr ""
+
+#: app\Livewire\IfaHubBrowseResources.php:40
+#: app\Livewire\IfaHubBrowseResources.php:42
+msgid "Mexico"
+msgstr ""
+
+#: app\Livewire\IfaHubBrowseResources.php:41
+msgid "Spain"
+msgstr ""
+
+#: app\Livewire\IfaHubBrowseResources.php:43
+msgid "Norway"
+msgstr ""
+
+#: resources\views\collection.blade.php:19
 msgid "COLLECTION"
 msgstr "COLLECTION"
 
-#: resources\views\collection.blade.php:28
+#: resources\views\collection.blade.php:23
 msgid "Jump to resources"
 msgstr "Accéder aux ressources"
 
-#: resources\views\collection.blade.php:47
-#: resources\views\trove.blade.php:52
+#: resources\views\collection.blade.php:42
+#: resources\views\trove.blade.php:48
 msgid "Available Languages:"
 msgstr "Langues disponibles :"
 
-#: resources\views\collection.blade.php:71
-#: resources\views\trove.blade.php:77
+#: resources\views\collection.blade.php:66
+#: resources\views\trove.blade.php:73
 msgid "Browse all resources and collections"
 msgstr "Parcourir toutes les ressources et collections"
 
-#: resources\views\collection.blade.php:77
-#: resources\views\trove.blade.php:84
+#: resources\views\collection.blade.php:72
+#: resources\views\trove.blade.php:80
 msgid "Description"
 msgstr "Description"
 
-#: resources\views\collection.blade.php:78
-#: resources\views\trove.blade.php:86
+#: resources\views\collection.blade.php:73
+#: resources\views\trove.blade.php:82
 msgid "Dated: "
 msgstr "Daté : "
 
-#: resources\views\collection.blade.php:87
+#: resources\views\collection.blade.php:82
 msgid "Resources in this collection"
 msgstr "Ressources dans cette collection"
 
 #: resources\views\components\collection-result-card.blade.php:50
-#: resources\views\components\resource-result-card.blade.php:75
+#: resources\views\components\resource-result-card.blade.php:88
 msgid "VIEW"
 msgstr "VOIR"
 
@@ -109,46 +126,48 @@ msgstr "Études de cas"
 msgid "Insights into what FRNs have been doing."
 msgstr "Aperçu de ce que font les FRN."
 
-#: resources\views\frn.blade.php:72
+#: resources\views\frn.blade.php:68
+#: resources\views\header.blade.php:52
+#: resources\views\header.blade.php:81
+#: resources\views\ifa.blade.php:56
+msgid "Change Language"
+msgstr "Changer de langue"
+
+#: resources\views\frn.blade.php:105
 msgid "FRN Research Methods Hub"
 msgstr "Centre de méthodes de recherche FRN"
 
-#: resources\views\frn.blade.php:76
+#: resources\views\frn.blade.php:139
 msgid "A library of reference materials, tools, and useful information relevant to farmer research networks. Provided by the"
 msgstr "Une bibliothèque de documents de référence, d'outils et d'informations utiles pertinentes pour les réseaux de recherche agricole. Fournie par le "
 
-#: resources\views\frn.blade.php:78
+#: resources\views\frn.blade.php:141
 msgid "Research Methods Support project"
 msgstr "projet de soutien aux méthodes de recherche"
 
-#: resources\views\frn.blade.php:79
+#: resources\views\frn.blade.php:142
 msgid "of CRFS."
 msgstr "du CRFS."
 
-#: resources\views\frn.blade.php:96
-msgid "Explore topics"
-msgstr "Explorer les sujets"
+#: resources\views\frn.blade.php:151
+#: resources\views\frn.blade.php:170
+#: resources\views\ifa.blade.php:127
+#: resources\views\ifa.blade.php:147
+msgid "Browse by topic"
+msgstr ""
 
-#: resources\views\frn.blade.php:101
-msgid "Browse all resources"
-msgstr "Parcourir toutes les ressources"
+#: resources\views\frn.blade.php:158
+msgid "View all resources"
+msgstr ""
 
-#: resources\views\frn.blade.php:108
-msgid "View this page in"
-msgstr "Voir cette page dans"
-
-#: resources\views\frn.blade.php:137
-msgid "Browse by collection"
-msgstr "Parcourir par collection"
-
-#: resources\views\frn.blade.php:155
+#: resources\views\frn.blade.php:221
 msgid "Featured resources"
 msgstr "Ressources en vedette"
 
-#: resources\views\frn.blade.php:179
-#: resources\views\header.blade.php:40
-msgid "Browse all"
-msgstr "Tout parcourir"
+#: resources\views\frn.blade.php:295
+#: resources\views\ifa.blade.php:197
+msgid "Search or explore resources"
+msgstr ""
 
 #: resources\views\header.blade.php:25
 #: resources\views\header.blade.php:74
@@ -165,15 +184,14 @@ msgstr "Ressources"
 msgid "Collections"
 msgstr "Collections"
 
+#: resources\views\header.blade.php:40
+msgid "Browse all"
+msgstr "Tout parcourir"
+
 #: resources\views\header.blade.php:45
 #: resources\views\header.blade.php:78
 msgid "Theme Pages"
 msgstr "Pages thématiques"
-
-#: resources\views\header.blade.php:52
-#: resources\views\header.blade.php:81
-msgid "Change Language"
-msgstr "Changer de langue"
 
 #: resources\views\header.blade.php:77
 msgid "Browse All"
@@ -215,22 +233,58 @@ msgstr "Voir tout"
 msgid "Browse the full library of resources and collections on a variety of topics."
 msgstr "Parcourez la bibliothèque complète de ressources et collections sur divers sujets."
 
+#: resources\views\ifa.blade.php:7
+msgid "Introductions"
+msgstr ""
+
+#: resources\views\ifa.blade.php:8
+#: resources\views\ifa.blade.php:14
+#: resources\views\ifa.blade.php:20
+msgid " "
+msgstr ""
+
+#: resources\views\ifa.blade.php:13
+msgid "Reading for developers"
+msgstr ""
+
+#: resources\views\ifa.blade.php:19
+msgid "Participatory action research"
+msgstr ""
+
+#: resources\views\ifa.blade.php:89
+msgid "Let's EAT | Educate for Agroecological Transformations"
+msgstr ""
+
+#: resources\views\ifa.blade.php:118
+msgid "Let's Educate for Agroecological Transformations is an international community of practice focusing on transformative learning for agroecology in higher education consisting of people who are either already teaching, or who are building agroecology programmes/courses in HE. Programmes consist of undergraduate, graduate and/or post-graduate courses, and extend to continuing education aimed practitioners and professionals in the field of agroecology. We are committed to co-creating and inspiring transformative agroecological learning that transgresses formal-informal education boundaries to create learning spaces that connect academic knowledge with community and movement building practices across multiple contexts."
+msgstr ""
+
+#: resources\views\ifa.blade.php:135
+msgid "View all syllabi"
+msgstr ""
+
 #: resources\views\livewire\browse-all.blade.php:10
 #: resources\views\theme-pages.blade.php:11
 msgid "Stats4SD Resources Library"
 msgstr "Bibliothèque de ressources de Stats4SD"
 
 #: resources\views\livewire\browse-all.blade.php:29
+#: resources\views\livewire\frn-hub-browse-resources.blade.php:6
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:84
 msgid "Search and filter"
 msgstr "Chercher et filtrer"
 
 #: resources\views\livewire\browse-all.blade.php:54
+#: resources\views\livewire\frn-hub-browse-resources.blade.php:31
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:109
 msgid "Filters:"
 msgstr "Filtres :"
 
 #: resources\views\livewire\browse-all.blade.php:61
 #: resources\views\livewire\collections.blade.php:62
 #: resources\views\livewire\collections.blade.php:89
+#: resources\views\livewire\frn-hub-browse-resources.blade.php:38
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:116
 #: resources\views\livewire\resources.blade.php:66
 msgid "Language:"
 msgstr "Langue :"
@@ -238,6 +292,8 @@ msgstr "Langue :"
 #: resources\views\livewire\browse-all.blade.php:69
 #: resources\views\livewire\collections.blade.php:70
 #: resources\views\livewire\collections.blade.php:97
+#: resources\views\livewire\frn-hub-browse-resources.blade.php:46
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:124
 #: resources\views\livewire\resources.blade.php:77
 msgid "Spanish"
 msgstr "Espagnol"
@@ -245,6 +301,8 @@ msgstr "Espagnol"
 #: resources\views\livewire\browse-all.blade.php:74
 #: resources\views\livewire\collections.blade.php:75
 #: resources\views\livewire\collections.blade.php:102
+#: resources\views\livewire\frn-hub-browse-resources.blade.php:51
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:129
 #: resources\views\livewire\resources.blade.php:83
 msgid "English"
 msgstr "Anglais"
@@ -252,23 +310,29 @@ msgstr "Anglais"
 #: resources\views\livewire\browse-all.blade.php:79
 #: resources\views\livewire\collections.blade.php:80
 #: resources\views\livewire\collections.blade.php:107
+#: resources\views\livewire\frn-hub-browse-resources.blade.php:56
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:134
 #: resources\views\livewire\resources.blade.php:89
 msgid "French"
 msgstr "Français"
 
 #: resources\views\livewire\browse-all.blade.php:89
+#: resources\views\livewire\frn-hub-browse-resources.blade.php:66
 #: resources\views\livewire\resources.blade.php:99
 msgid "Research method:"
 msgstr "Méthode de recherche :"
 
 #: resources\views\livewire\browse-all.blade.php:109
+#: resources\views\livewire\frn-hub-browse-resources.blade.php:86
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:185
 #: resources\views\livewire\resources.blade.php:123
 msgid "Topic:"
 msgstr "Sujet :"
 
 #: resources\views\livewire\browse-all.blade.php:130
 #: resources\views\livewire\collections.blade.php:120
-#: resources\views\livewire\frn-hub-browse-all.blade.php:9
+#: resources\views\livewire\frn-hub-browse-resources.blade.php:108
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:207
 #: resources\views\livewire\resources.blade.php:147
 msgid "Showing "
 msgstr "Montrer "
@@ -283,6 +347,8 @@ msgstr " ressources et collections"
 
 #: resources\views\livewire\browse-all.blade.php:134
 #: resources\views\livewire\collections.blade.php:123
+#: resources\views\livewire\frn-hub-browse-resources.blade.php:112
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:211
 #: resources\views\livewire\resources.blade.php:150
 msgid "Clear Filters"
 msgstr "Effacer les filtres"
@@ -308,10 +374,31 @@ msgstr " collections"
 msgid "Use the search bar to find collections"
 msgstr "Utilisez la barre de recherche pour trouver des collections"
 
-#: resources\views\livewire\frn-hub-browse-all.blade.php:9
+#: resources\views\livewire\frn-hub-browse-resources.blade.php:108
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:207
 #: resources\views\livewire\resources.blade.php:147
 msgid " resources"
 msgstr " ressources"
+
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:9
+msgid "Explore selected topics"
+msgstr ""
+
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:37
+msgid "Explore Institutions"
+msgstr ""
+
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:59
+msgid "Browse by programme curricula or course syllabi"
+msgstr ""
+
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:144
+msgid "Level:"
+msgstr ""
+
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:165
+msgid "Institution:"
+msgstr ""
 
 #: resources\views\livewire\resources.blade.php:167
 msgid "Use the search bar or select from the research methods and topics to find resources"
@@ -337,31 +424,31 @@ msgstr "Pages thématiques de Stats4SD"
 msgid "PREVIEW MODE: This resource has not been published and is only visible to authorised users"
 msgstr "MODE APERÇU : Cette ressource n'a pas été publiée et n'est visible que par les utilisateurs autorisés"
 
-#: resources\views\trove.blade.php:35
+#: resources\views\trove.blade.php:31
 msgid "Jump to view/download"
 msgstr "Aller à l'affichage/téléchargement"
 
-#: resources\views\trove.blade.php:95
+#: resources\views\trove.blade.php:91
 msgid "Author:"
 msgstr "Auteur :"
 
-#: resources\views\trove.blade.php:95
+#: resources\views\trove.blade.php:91
 msgid "Authors:"
 msgstr "Auteurs :"
 
-#: resources\views\trove.blade.php:113
+#: resources\views\trove.blade.php:109
 msgid "View/download"
 msgstr "Voir/télécharger"
 
-#: resources\views\trove.blade.php:129
+#: resources\views\trove.blade.php:125
 msgid "This resource includes a video on our YouTube channel, embedded here."
 msgstr "Cette ressource comprend une vidéo sur notre chaîne YouTube, intégrée ici."
 
-#: resources\views\trove.blade.php:129
+#: resources\views\trove.blade.php:125
 msgid "This resource includes videos on our YouTube channel, embedded here."
 msgstr "Cette ressource comprend des vidéos sur notre chaîne YouTube, intégrées ici."
 
-#: resources\views\trove.blade.php:162
+#: resources\views\trove.blade.php:158
 msgid ""
 "The individual components of the trove are listed below. Click on one to download the file or go to the\n"
 "                                                                                                    external url. You can download the full trove below as a .zip file."
@@ -369,22 +456,22 @@ msgstr ""
 "Les éléments individuels de la collection sont listés ci-dessous. Cliquez sur l’un d’eux pour télécharger le fichier ou accéder à l’URL externe. Vous pouvez télécharger l’ensemble complet ci-dessous sous forme de fichier .zip.\n"
 ""
 
-#: resources\views\trove.blade.php:186
+#: resources\views\trove.blade.php:182
 msgid "VISIT LINK"
 msgstr "VISITER LE LIEN"
 
-#: resources\views\trove.blade.php:212
+#: resources\views\trove.blade.php:208
 msgid "DOWNLOAD"
 msgstr "TÉLÉCHARGER"
 
-#: resources\views\trove.blade.php:231
+#: resources\views\trove.blade.php:227
 msgid "DOWNLOAD ALL (ZIP)"
 msgstr "TÉLÉCHARGER TOUT (ZIP)"
 
-#: resources\views\trove.blade.php:243
+#: resources\views\trove.blade.php:239
 msgid "Collections including this resource"
 msgstr "Collections comprenant cette ressource"
 
-#: resources\views\trove.blade.php:251
+#: resources\views\trove.blade.php:247
 msgid "Related resources"
 msgstr "Ressources connexes"

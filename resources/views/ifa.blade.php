@@ -1,25 +1,20 @@
 @php
-    $featuredResourceIds = [
-        'en' => [658, 659, 604],
-        'es' => [474, 367, 604],
-        'fr' => [625, 604],
-    ];
 
     $collections = [
         [
-            'url' => '/collections/49',
+            'url' => '/collections/#',
             'img' => '/images/ifa1.png',
             'title' => t('Introductions'),
             'desc' => t(' '),
         ],
         [
-            'url' => '/collections/50',
+            'url' => '/collections/#',
             'img' => '/images/ifa2.png',
             'title' => t('Reading for developers'),
             'desc' => t(' '),
         ],
         [
-            'url' => '/collections/51',
+            'url' => '/collections/#',
             'img' => '/images/ifa3.jpg',
             'title' => t('Participatory action research'),
             'desc' => t(' '),
@@ -27,45 +22,8 @@
       
     ];
 
-    $topics = [
-        'Transformative', 'Principles', 'Diets', 'Transitions', 'Pests', 'Participation (PAR)', 'Social movements', 'Knowledge', 'Food sovereignty', 'Policies', 'Diversity', 'Soils', 'Feminism', 'Ecology', 'Evaluations',
-    ];
-
-    $institutions = [
-        [
-            'name' => 'University of Vermont',
-            'location' => 'USA',
-
-        ],
-        [
-            'name' => 'Veracruzana University',
-            'location' => 'Mexico',
-            
-        ],
-        [
-            'name' => 'University of Cordoba',
-            'location' => 'Spain',
-            
-        ],
-                [
-            'name' => 'El Colegio de la Frontera Sur',
-            'location' => 'Mexico',
-            
-        ],
-                [
-            'name' => 'Norwegian University of Life Sciences ',
-            'location' => 'Norway',
-            
-        ],
-      
-    ];
-    $levels = [
-       'Undergraduate', 'Graduate/Masters', 'Student reading list',
-      
-    ];
-
     $locale = app()->currentLocale();
-    $featuredResources = \App\Models\Trove::whereIn('id', $featuredResourceIds[$locale])->get();
+
 @endphp
 
 @extends('layouts.app', ['hideHeader' => true])
@@ -115,11 +73,7 @@
         </div>
     </header>
 
-
-
-
     <div class="relative theme_ifa">
-
 
         <div class="relative">
             <!-- Background Image -->
@@ -127,19 +81,15 @@
                 class="absolute inset-0 w-full h-[21rem] object-cover filter brightness-[70%] z-0">
 
             <!-- Overlay Content -->
-            <div class="relative z-10 flex flex-col items-start w-full h-[20rem]  text-white">
+            <div class="relative z-10 flex flex-col items-start w-full h-[20rem] text-white">
                 <div class="h-[20rem] pb-16 flex flex-col sm:flex-row items-end w-full 2xl:pr-32">
                     <!-- Heading -->
-                    <div class="pt-10 px-8 sm:pl-16  2xl:pl-32 flex-grow">
-                        <h1 class="font-bold text-4xl sm:text-5xl md:text-5xl ">
-                            {{ t('Let’s EAT | Educate for Agroecological Transformations') }}
-                        </h1>
-                        <h2 class="text-2xl font-normal mt-6">
-                        {{ t('Resource hub for agroecology in higher education') }}
-                        </h2>
-                    </div>
-                    <button
-                        class="p-12 bg-stats4sd-red sm:rounded-bl-[4rem] font-opensans 2xl:rounded-b-[4rem] flex flex-col items-start justify-left text-left h-full w-full sm:w-2/5 sm:max-w-[24rem]"
+                    <h1 class="font-bold text-4xl sm:text-5xl md:text-5xl pt-10 px-8 sm:pl-16  2xl:pl-32 flex-grow">
+                        {{ t('Let\'s EAT | Educate for Agroecological Transformations') }}
+                    </h1>
+
+                    <a
+                        class="p-12 bg-stats4sd-red text-white sm:rounded-bl-[4rem] font-opensans 2xl:rounded-b-[4rem] flex flex-col items-start justify-left text-left h-full w-full sm:w-2/5 sm:max-w-[24rem]"
                         href="https://stats4sd.org/resources">
                         <span class="uppercase text-base font-normal ">Part of the</span>
                         <h2 class="text-3xl font-bold mb-8">Stats4SD Resources Library</h2>
@@ -153,15 +103,11 @@
                             </svg>
                             <span class="uppercase text-base font-normal ml-3 ">Library home</span>
                         </div>
+                    </a>
                 </div>
-
-
             </div>
 
         </div>
-
-
-
 
         <!-- Top section -->
         <div class="w-full bg-gray-100 flex justify-center py-6">
@@ -174,15 +120,15 @@
                     <a href="#collections"
                         class="px-6 py-3 text-white bg-ifa-green flex flex-row justify-between
                                     hover:bg-black 
-                                    font-semibold  text-sm rounded-full uppercase text-center transition">
+                                    font-semibold text-sm rounded-full uppercase text-center transition">
                       <span> {{ t('Browse by topic') }}</span> 
-<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6" stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>
+                    <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6" stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>
 
                     </a>
                     <a href="#browse_all"
                         class="px-6 py-3 text-white bg-ifa-green flex flex-row justify-between
                                     hover:bg-black 
-                                    font-semibold  text-sm rounded-full uppercase text-center transition">
+                                    font-semibold text-sm rounded-full uppercase text-center transition">
                         <span>{{ t('View all syllabi') }}</span>
                         <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6" stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>
                     </a>
@@ -191,14 +137,19 @@
         </div>
 
         <div class="flex flex-row w-full h-full justify-between gap-12 mt-12 ">
-            <div class="bg-ifa-green  w-6 flex-shrink-0 h-auto"></div>
+            <div class="bg-ifa-green w-6 flex-shrink-0 h-auto"></div>
             <div class="h-auto w-full max-w-7xl py-3 pl-12">
 
                 <h2 class="text-black text-3xl">
                     {{ t('Explore collections') }}
                 </h2>
             </div>
-            <div class="bg-none  w-6 flex-shrink-0 h-auto"></div>
+            <div class="bg-none w-6 flex-shrink-0 h-auto"></div>
+        </div>
+        <div class="flex justify-center w-full">
+        <p class="max-w-7xl px-12">
+        The collections below have been carefully chosen to highlight specific topics or themes present in the resources within the Let's EAT hub. They may be a useful starting point to get an idea of what this hub contains.
+        </p>
         </div>
         <div class="flex justify-center w-full">
         <p class="max-w-7xl px-12">
@@ -206,15 +157,13 @@
         </p>
         </div>
 
-{{-- View by topic - collections --}}
-
- <div class="w-full  flex justify-center py-6">
-
+        <!-- View by topic - collections -->
+        <div class="w-full flex justify-center py-6">
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center max-w-7xl p-12">
                 @foreach ($collections as $c)
                     <a href="{{ url($c['url']) }}" target="_blank"
                         class="hover-effect relative bg-ifa-green rounded-t-[2.5rem] rounded-bl-[2.5rem] overflow-hidden group sm:max-w-[20rem] min-w-[15rem]">
-                         <div class="absolute top-4 left-4 h-12 w-12  rounded-full text-white text-center py-auto bg-ifa-yellow">
+                        <div class="absolute top-4 left-4 h-12 w-12  rounded-full text-white text-center py-auto bg-ifa-yellow">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="white"
                                 class="mx-auto my-3">
                                 <path
@@ -235,7 +184,7 @@
                                 {{ $c['desc'] }}
                             </p>
                         </div>
-                        <div class="w-full  px-10 pb-5">
+                        <div class="w-full px-10 pb-5">
                             <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6" stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>
                         </div>
                     </a>
@@ -243,35 +192,28 @@
             </div>
         </div>
 
-{{-- Search bar --}}
-<div class="flex flex-row w-full h-full justify-between gap-12 mt-32 ">
-            <div class="bg-ifa-green  w-6 flex-shrink-0 h-auto"></div>
+        <!-- Search bar -->
+        <div class="flex flex-row w-full h-full justify-between gap-12 mt-32 ">
+            <div class="bg-ifa-green w-6 flex-shrink-0 h-auto"></div>
             <div class="h-auto w-full max-w-7xl py-3 px-12">
-
-                <h2 class="text-black  text-3xl">
-                    {{ t('Search or browse resources') }}
+                <h2 class="text-black text-2xl">
+                    {{ t('Search or explore resources') }}
                 </h2>
-
             </div>
-            <div class="bg-none  w-6 flex-shrink-0 h-auto"></div>
+            <div class="bg-none w-6 flex-shrink-0 h-auto"></div>
         </div>
-                <div class="flex justify-center w-full">
-        <p class="max-w-7xl w-full mb-8 px-12">
-        Use the search box to find specific key words, titles or authors. Alternatively, you can browse the filters highlighted below.
-        </p>
-        </div>
-<div class="w-full  flex justify-center py-6">
 
-        <div class="relative w-full items-center mb-6  max-w-2xl lg:max-w-5xl xl:max-w-7xl px-12 hidden lg:flex">
-            <livewire:search-bar
-                inputClass="w-full py-5 pl-12 pr-4 bg-gray-200 border-none rounded-full focus:outline-none transition
-                duration-300 focus:bg-gray-100 focus:ring-0 text-gray-700 "/>
+        <div class="w-full  flex justify-center py-6">
+            <div class="relative w-full items-center mb-6  max-w-2xl lg:max-w-5xl xl:max-w-7xl px-12 hidden lg:flex">
+                <livewire:search-bar
+                    inputClass="w-full py-5 pl-12 pr-4 bg-gray-200 border-none rounded-full focus:outline-none transition
+                    duration-300 focus:bg-gray-100 focus:ring-0 text-gray-700 "/>
 
-            <div class="absolute left-16 top-1/2 transform -translate-y-1/2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5 text-gray-600">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
-                </svg>
-            </div>
+                <div class="absolute left-16 top-1/2 transform -translate-y-1/2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5 text-gray-600">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+                    </svg>
+                </div>
             </div>
     </div>
 
