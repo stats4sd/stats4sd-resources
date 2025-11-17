@@ -2,19 +2,19 @@
 
     $collections = [
         [
-            'url' => '/collections/56',
+            'url' => '/collections/57',
             'img' => '/images/ifa1.png',
             'title' => t('Introductions'),
             'desc' => t(' '),
         ],
         [
-            'url' => '/collections/57',
+            'url' => '/collections/58',
             'img' => '/images/ifa2.png',
             'title' => t('Reading for developers'),
             'desc' => t(' '),
         ],
         [
-            'url' => '/collections/58',
+            'url' => '/collections/59',
             'img' => '/images/ifa3.jpg',
             'title' => t('Participatory action research'),
             'desc' => t(' '),

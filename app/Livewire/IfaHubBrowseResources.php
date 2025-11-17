@@ -36,7 +36,7 @@ class IfaHubBrowseResources extends Component
         $institutions = Tag::whereIn('id', [948, 949, 950, 951, 952])->get();
 
         $locations = [
-            948 => t('USA'),
+            940 => t('USA'),
             949 => t('Mexico'),
             950 => t('Spain'),
             951 => t('Mexico'),
