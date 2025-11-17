@@ -4,7 +4,7 @@
         [
             'url' => '/collections/57',
             'img' => '/images/ifa1.png',
-            'title' => t('Introductions'),
+            'title' => t('Introductory modules'),
             'desc' => t(' '),
         ],
         [
@@ -17,6 +17,12 @@
             'url' => '/collections/59',
             'img' => '/images/ifa3.jpg',
             'title' => t('Participatory action research'),
+            'desc' => t(' '),
+        ],
+                [
+            'url' => '/collections/60',
+            'img' => '/images/ifa1.png',
+            'title' => t('Hear what course leads say'),
             'desc' => t(' '),
         ],
     ];
@@ -204,7 +210,7 @@
 
         <!-- View by topic - collections -->
         <div class="w-full flex justify-center py-6">
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center max-w-7xl p-12">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center max-w-7xl p-12">
                 @foreach ($collections as $c)
                     <a href="{{ url($c['url']) }}" target="_blank"
                         class="hover-effect relative bg-ifa-green rounded-t-[2.5rem] rounded-bl-[2.5rem] overflow-hidden group sm:max-w-[20rem] min-w-[15rem]">
