@@ -2,26 +2,26 @@
 
     $collections = [
         [
-            'url' => '/collections/57',
+            'url' => '/collections/56',
             'img' => '/images/ifa1.png',
             'title' => t('Introductory modules'),
             'desc' => t(' '),
         ],
         [
-            'url' => '/collections/58',
-            'img' => '/images/ifa2.png',
+            'url' => '/collections/57',
+            'img' => '/images/ifa4.jpg',
             'title' => t('Reading for developers'),
             'desc' => t(' '),
         ],
         [
-            'url' => '/collections/59',
+            'url' => '/collections/58',
             'img' => '/images/ifa3.jpg',
             'title' => t('Participatory action research'),
             'desc' => t(' '),
         ],
                 [
-            'url' => '/collections/60',
-            'img' => '/images/ifa1.png',
+            'url' => '/collections/59',
+            'img' => '/images/ifa5.png',
             'title' => t('Hear what course leads say'),
             'desc' => t(' '),
         ],
@@ -261,7 +261,7 @@
             <div class="bg-none w-6 flex-shrink-0 h-auto"></div>
         </div>
 
-        <div class="w-full  flex justify-center py-6">
+        {{-- <div class="w-full  flex justify-center py-6">
             <div class="relative w-full items-center mb-6  max-w-2xl lg:max-w-5xl xl:max-w-7xl px-12 hidden lg:flex">
                 <livewire:search-bar
                     inputClass="w-full py-5 pl-12 pr-4 bg-gray-200 border-none rounded-full focus:outline-none transition
@@ -275,7 +275,7 @@
                     </svg>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         
         </div>
