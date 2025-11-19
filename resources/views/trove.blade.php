@@ -98,7 +98,7 @@
             @endforeach
         </p>
 
-        <p class="mt-6">{!! t($resource->description) !!}</p>
+        <div class="description mt-6">{!! t($resource->description) !!}</div>
 
 
 

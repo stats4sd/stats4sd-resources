@@ -117,3 +117,12 @@ font-family: "roboto", "open sans", "sans-serif";
 .theme_ifa .resource-card p {
     margin: 0.1rem 2rem ;
 }
+
+.description p {
+
+@apply mt-4;
+}
+.description h2,.description h3{
+
+@apply mt-6;
+}
