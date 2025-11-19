@@ -71,8 +71,7 @@ class IfaHubBrowseResources extends Component
     public function search()
     {
         // Step 1: Start with a base query for resources
-        $query = Trove::where('is_published', 1)
-                    ->whereHas('tags');
+        $query = Trove::whereHas('tags');
 
         // // Step 2: Apply levels filters if selected
         if (!empty($this->selectedLevels)) {
