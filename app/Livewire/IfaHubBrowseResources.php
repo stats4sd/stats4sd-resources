@@ -61,8 +61,7 @@ class IfaHubBrowseResources extends Component
 
     public function fetchInitialData()
     {
-        $this->resources = Trove::where('is_published', 1)
-            ->whereHas('tags')
+        $this->resources = Trove::whereHas('tags')
             ->orderBy('created_at', 'desc')
             ->get();
 
