@@ -2,6 +2,7 @@
     'item',
     'color' => 'stats4sd-red',
     'showTags' => true,
+    'textcol' => 'white',
 ])
 
 <div
@@ -50,7 +51,7 @@
 
     <!-- View Button -->
     <div class="flex justify-end mb-2 pb-4 px-8 ">
-        <button class="bg-{{ $color }} text-white text-center py-2 px-8 rounded-full">
+        <button class="bg-{{ $color }} text-{{ $textcol }} text-center py-2 px-8 rounded-full">
             {{ t("VIEW") }}
         </button>
     </div>
