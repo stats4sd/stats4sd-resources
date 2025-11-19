@@ -98,7 +98,7 @@
             @endforeach
         </p>
 
-        <p class="mt-6">{{ strip_tags($resource->description) }}</p>
+        <p class="mt-6">{!! t($resource->description) !!}</p>
 
 
 

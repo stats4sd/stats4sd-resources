@@ -72,7 +72,7 @@
         <div class="divider"></div>
         <h2 class="text-2xl font-bold pb-2">{{ t('Description') }}</h2>
         <p>{{ t("Dated: ") }} {{ \Carbon\Carbon::parse($collection->created_at)->translatedFormat('F Y') }}</p>
-        <p class="mt-4">{{ strip_tags($collection->description) }}</p>
+        <p class="mt-4">{!! t($collection->description) !!}</p>
     </div>
 
 
