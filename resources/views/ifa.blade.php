@@ -135,8 +135,8 @@
 
                     <a class="p-12 bg-stats4sd-red text-white sm:rounded-bl-[4rem] font-opensans 2xl:rounded-b-[4rem] flex flex-col items-start justify-left text-left h-full w-full sm:w-2/5 sm:max-w-[24rem]"
                         href="https://stats4sd.org/resources">
-                        <span class="uppercase text-base font-normal ">Part of the</span>
-                        <h2 class="text-3xl font-bold mb-8">Stats4SD Resources Library</h2>
+                        <span class="uppercase text-base font-normal ">{{ t('Part of the') }}</span>
+                        <h2 class="text-3xl font-bold mb-8">{{ t('Stats4SD Resources Library') }}</h2>
                         <div class="flex">
                             <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" fill="#ffffff"
                                 stroke-miterlimit="2" viewBox="0 0 24 24" height="1.5rem"
@@ -145,7 +145,7 @@
                                     d="m9.474 5.209s-4.501 4.505-6.254 6.259c-.147.146-.22.338-.22.53s.073.384.22.53c1.752 1.754 6.252 6.257 6.252 6.257.145.145.336.217.527.217.191-.001.383-.074.53-.221.293-.293.294-.766.004-1.057l-4.976-4.976h14.692c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-14.692l4.978-4.979c.289-.289.287-.761-.006-1.054-.147-.147-.339-.221-.53-.221-.191-.001-.38.071-.525.215z"
                                     fill-rule="nonzero" />
                             </svg>
-                            <span class="uppercase text-base font-normal ml-3 ">Library home</span>
+                            <span class="uppercase text-base font-normal ml-3 ">{{ t('Library home') }}</span>
                         </div>
                     </a>
                 </div>
@@ -160,7 +160,7 @@
                     {{ t("Let's Educate for Agroecological Transformations is an international community of practice focusing on transformative learning for agroecology in higher education consisting of people who are either already teaching, or who are building agroecology programmes/courses in HE. Programmes consist of undergraduate, graduate and/or post-graduate courses, and extend to continuing education aimed practitioners and professionals in the field of agroecology. We are committed to co-creating and inspiring transformative agroecological learning that transgresses formal-informal education boundaries to create learning spaces that connect academic knowledge with community and movement building practices across multiple contexts.") }}
                 </div>
                 <div class="flex flex-col w-2/6 px-12 gap-y-4">
-                    <h2 class=" text-black text-2xl mb-2">Quick links</h2>
+                    <h2 class=" text-black text-2xl mb-2">{{ t('Quick links') }}</h2>
                     <a href="#collections"
                         class="px-6 py-3 text-white bg-ifa-green flex flex-row justify-between
                                     hover:bg-black 
@@ -200,11 +200,12 @@
             </div>
             <div class="bg-none w-6 flex-shrink-0 h-auto"></div>
         </div>
+
         <div class="flex justify-center w-full">
             <p class="max-w-7xl px-12">
-                The collections below have been carefully chosen to highlight specific topics or themes present in the
-                resources within the Let's EAT hub. They may be a useful starting point to get an idea of what this hub
-                contains.
+                {{ t('The collections below have been carefully chosen to highlight specific topics or themes present in the
+                resources within the Let\'s EAT hub. They may be a useful starting point to get an idea of what this hub
+                contains.') }}
             </p>
         </div>
 
@@ -227,7 +228,7 @@
                         </div>
                         <div class="p-10 text-white h-[10rem]">
                             <p class="text-xs  uppercase font-semibold ">
-                                Collection
+                                {{ t('Collection') }}
                             </p>
                             <h3 class="font-bold text-xl mb-2 ">
                                 {{ $c['title'] }}
@@ -277,15 +278,7 @@
             </div>
         </div> --}}
 
-        
-        </div>
-
-
         <!-- institutions and syllabi filters 2 cols-->
-        
-
-
-
         {{-- <h2 id="frn_all" class="text-3xl font-bold">{{ t('Featured resources') }}</h2>
         <div class="h-1 w-20 bg-stats4sd-red my-4"></div>
 
@@ -311,18 +304,9 @@
         </div>
          --}}
 
-
-
-
-
-    </div>
-
-    <!-- Browse all -->
-
-
-    <div class="w-full  " id="browse_all">
-
-        @livewire('ifa-hub-browse-resources')
-    </div>
+        <!-- Browse all -->
+        <div class="w-full  " id="browse_all">
+            @livewire('ifa-hub-browse-resources')
+        </div>
     </div>
 @endsection

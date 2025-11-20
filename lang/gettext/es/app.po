@@ -7,27 +7,27 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-06T16:46:04+00:00\n"
-"PO-Revision-Date: 2025-11-06 16:46+0000\n"
+"POT-Creation-Date: 2025-11-20T11:04:57+00:00\n"
+"PO-Revision-Date: 2025-11-20 11:04+0000\n"
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=n!=1;\n"
 
 #: app\Livewire\IfaHubBrowseResources.php:39
 msgid "USA"
-msgstr ""
+msgstr "EE.UU"
 
 #: app\Livewire\IfaHubBrowseResources.php:40
 #: app\Livewire\IfaHubBrowseResources.php:42
 msgid "Mexico"
-msgstr ""
+msgstr "México"
 
 #: app\Livewire\IfaHubBrowseResources.php:41
 msgid "Spain"
-msgstr ""
+msgstr "España"
 
 #: app\Livewire\IfaHubBrowseResources.php:43
 msgid "Norway"
-msgstr ""
+msgstr "Noruega"
 
 #: resources\views\collection.blade.php:19
 msgid "COLLECTION"
@@ -62,7 +62,7 @@ msgid "Resources in this collection"
 msgstr "Recursos de esta colección"
 
 #: resources\views\components\collection-result-card.blade.php:50
-#: resources\views\components\resource-result-card.blade.php:88
+#: resources\views\components\resource-result-card.blade.php:90
 msgid "VIEW"
 msgstr "VER"
 
@@ -129,7 +129,7 @@ msgstr "Conocimientos sobre lo que han estado haciendo las FRNs."
 #: resources\views\frn.blade.php:68
 #: resources\views\header.blade.php:52
 #: resources\views\header.blade.php:81
-#: resources\views\ifa.blade.php:56
+#: resources\views\ifa.blade.php:101
 msgid "Change Language"
 msgstr ""
 "Cambiar el \n"
@@ -138,6 +138,23 @@ msgstr ""
 #: resources\views\frn.blade.php:105
 msgid "FRN Research Methods Hub"
 msgstr "Centro de métodos de investigación FRN"
+
+#: resources\views\frn.blade.php:112
+#: resources\views\ifa.blade.php:140
+msgid "Part of the"
+msgstr "Parte de la"
+
+#: resources\views\frn.blade.php:113
+#: resources\views\ifa.blade.php:141
+#: resources\views\livewire\browse-all.blade.php:10
+#: resources\views\theme-pages.blade.php:11
+msgid "Stats4SD Resources Library"
+msgstr "Biblioteca de recursos Stats4SD"
+
+#: resources\views\frn.blade.php:122
+#: resources\views\ifa.blade.php:150
+msgid "Library home"
+msgstr "Biblioteca inicio"
 
 #: resources\views\frn.blade.php:139
 msgid "A library of reference materials, tools, and useful information relevant to farmer research networks. Provided by the"
@@ -151,25 +168,34 @@ msgstr "Proyecto de Apoyo a Métodos de Investigación"
 msgid "of CRFS."
 msgstr "de CRFS."
 
+#: resources\views\frn.blade.php:146
+#: resources\views\ifa.blade.php:166
+msgid "Quick links"
+msgstr "Enlaces rápidos"
+
 #: resources\views\frn.blade.php:151
 #: resources\views\frn.blade.php:170
-#: resources\views\ifa.blade.php:127
-#: resources\views\ifa.blade.php:147
+#: resources\views\ifa.blade.php:171
 msgid "Browse by topic"
-msgstr ""
+msgstr "Explorar por tema"
 
 #: resources\views\frn.blade.php:158
 msgid "View all resources"
-msgstr ""
+msgstr "Ver todos los recursos"
 
-#: resources\views\frn.blade.php:221
+#: resources\views\frn.blade.php:198
+#: resources\views\ifa.blade.php:236
+msgid "Collection"
+msgstr "Colección"
+
+#: resources\views\frn.blade.php:222
 msgid "Featured resources"
 msgstr "Recursos destacados"
 
-#: resources\views\frn.blade.php:295
-#: resources\views\ifa.blade.php:197
+#: resources\views\frn.blade.php:296
+#: resources\views\ifa.blade.php:267
 msgid "Search or explore resources"
-msgstr ""
+msgstr "Buscar o explorar recursos"
 
 #: resources\views\header.blade.php:25
 #: resources\views\header.blade.php:74
@@ -205,7 +231,7 @@ msgstr "Biblioteca de recursos"
 
 #: resources\views\home.blade.php:24
 msgid "Welcome to the Stats4SD Resources Library - a carefully selected set of resources designed to support good practice in research methods. Select a starting point on the right to begin."
-msgstr "Bienvenido a la biblioteca de recursos de Stats4SD, una colecci[on de recursos diseñados para apoyar buenas prácticas en métodos de investigación. Seleccione un punto de partida a la derecha para empezar."
+msgstr "Bienvenido a la biblioteca de recursos de Stats4SD, una colección de recursos diseñados para apoyar buenas prácticas en métodos de investigacin. Seleccione un punto de partida a la derecha para empezar."
 
 #: resources\views\home.blade.php:39
 #: resources\views\livewire\resources.blade.php:11
@@ -236,12 +262,13 @@ msgid "Browse the full library of resources and collections on a variety of topi
 msgstr "Explora la biblioteca completa de recursos y colecciones sobre diversos temas."
 
 #: resources\views\ifa.blade.php:7
-msgid "Introductions"
-msgstr ""
+msgid "Introductory modules"
+msgstr "Módulos introductorios"
 
 #: resources\views\ifa.blade.php:8
 #: resources\views\ifa.blade.php:14
 #: resources\views\ifa.blade.php:20
+#: resources\views\ifa.blade.php:26
 msgid " "
 msgstr ""
 
@@ -251,34 +278,44 @@ msgstr ""
 
 #: resources\views\ifa.blade.php:19
 msgid "Participatory action research"
+msgstr "Investigación-acción participativa"
+
+#: resources\views\ifa.blade.php:25
+msgid "Hear what course leads say"
 msgstr ""
 
-#: resources\views\ifa.blade.php:89
+#: resources\views\ifa.blade.php:134
 msgid "Let's EAT | Educate for Agroecological Transformations"
 msgstr ""
 
-#: resources\views\ifa.blade.php:118
+#: resources\views\ifa.blade.php:162
 msgid "Let's Educate for Agroecological Transformations is an international community of practice focusing on transformative learning for agroecology in higher education consisting of people who are either already teaching, or who are building agroecology programmes/courses in HE. Programmes consist of undergraduate, graduate and/or post-graduate courses, and extend to continuing education aimed practitioners and professionals in the field of agroecology. We are committed to co-creating and inspiring transformative agroecological learning that transgresses formal-informal education boundaries to create learning spaces that connect academic knowledge with community and movement building practices across multiple contexts."
 msgstr ""
 
-#: resources\views\ifa.blade.php:135
+#: resources\views\ifa.blade.php:184
 msgid "View all syllabi"
 msgstr ""
 
-#: resources\views\livewire\browse-all.blade.php:10
-#: resources\views\theme-pages.blade.php:11
-msgid "Stats4SD Resources Library"
-msgstr "Biblioteca de recursos Stats4SD"
+#: resources\views\ifa.blade.php:201
+msgid "Explore collections"
+msgstr "Explorar colecciones"
+
+#: resources\views\ifa.blade.php:210
+msgid ""
+"The collections below have been carefully chosen to highlight specific topics or themes present in the\n"
+"                resources within the Let's EAT hub. They may be a useful starting point to get an idea of what this hub\n"
+"                contains."
+msgstr ""
 
 #: resources\views\livewire\browse-all.blade.php:29
 #: resources\views\livewire\frn-hub-browse-resources.blade.php:6
-#: resources\views\livewire\ifa-hub-browse-resources.blade.php:84
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:89
 msgid "Search and filter"
 msgstr "Buscar y filtrar"
 
 #: resources\views\livewire\browse-all.blade.php:54
 #: resources\views\livewire\frn-hub-browse-resources.blade.php:31
-#: resources\views\livewire\ifa-hub-browse-resources.blade.php:109
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:114
 msgid "Filters:"
 msgstr "Filtros:"
 
@@ -286,7 +323,7 @@ msgstr "Filtros:"
 #: resources\views\livewire\collections.blade.php:62
 #: resources\views\livewire\collections.blade.php:89
 #: resources\views\livewire\frn-hub-browse-resources.blade.php:38
-#: resources\views\livewire\ifa-hub-browse-resources.blade.php:116
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:121
 #: resources\views\livewire\resources.blade.php:66
 msgid "Language:"
 msgstr "Idioma:"
@@ -295,7 +332,7 @@ msgstr "Idioma:"
 #: resources\views\livewire\collections.blade.php:70
 #: resources\views\livewire\collections.blade.php:97
 #: resources\views\livewire\frn-hub-browse-resources.blade.php:46
-#: resources\views\livewire\ifa-hub-browse-resources.blade.php:124
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:129
 #: resources\views\livewire\resources.blade.php:77
 msgid "Spanish"
 msgstr "Español"
@@ -304,7 +341,7 @@ msgstr "Español"
 #: resources\views\livewire\collections.blade.php:75
 #: resources\views\livewire\collections.blade.php:102
 #: resources\views\livewire\frn-hub-browse-resources.blade.php:51
-#: resources\views\livewire\ifa-hub-browse-resources.blade.php:129
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:134
 #: resources\views\livewire\resources.blade.php:83
 msgid "English"
 msgstr "Inglés"
@@ -313,7 +350,7 @@ msgstr "Inglés"
 #: resources\views\livewire\collections.blade.php:80
 #: resources\views\livewire\collections.blade.php:107
 #: resources\views\livewire\frn-hub-browse-resources.blade.php:56
-#: resources\views\livewire\ifa-hub-browse-resources.blade.php:134
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:139
 #: resources\views\livewire\resources.blade.php:89
 msgid "French"
 msgstr "Francés"
@@ -326,7 +363,7 @@ msgstr "Método de investigación:"
 
 #: resources\views\livewire\browse-all.blade.php:109
 #: resources\views\livewire\frn-hub-browse-resources.blade.php:86
-#: resources\views\livewire\ifa-hub-browse-resources.blade.php:185
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:190
 #: resources\views\livewire\resources.blade.php:123
 msgid "Topic:"
 msgstr "Tema:"
@@ -334,7 +371,7 @@ msgstr "Tema:"
 #: resources\views\livewire\browse-all.blade.php:130
 #: resources\views\livewire\collections.blade.php:120
 #: resources\views\livewire\frn-hub-browse-resources.blade.php:108
-#: resources\views\livewire\ifa-hub-browse-resources.blade.php:207
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:212
 #: resources\views\livewire\resources.blade.php:147
 msgid "Showing "
 msgstr "Mostrando "
@@ -350,7 +387,7 @@ msgstr " recursos y colecciones"
 #: resources\views\livewire\browse-all.blade.php:134
 #: resources\views\livewire\collections.blade.php:123
 #: resources\views\livewire\frn-hub-browse-resources.blade.php:112
-#: resources\views\livewire\ifa-hub-browse-resources.blade.php:211
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:216
 #: resources\views\livewire\resources.blade.php:150
 msgid "Clear Filters"
 msgstr "Limpiar filtros"
@@ -377,7 +414,7 @@ msgid "Use the search bar to find collections"
 msgstr "Utilice la barra de búsqueda para encontrar colecciones"
 
 #: resources\views\livewire\frn-hub-browse-resources.blade.php:108
-#: resources\views\livewire\ifa-hub-browse-resources.blade.php:207
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:212
 #: resources\views\livewire\resources.blade.php:147
 msgid " resources"
 msgstr " recursos"
@@ -386,21 +423,21 @@ msgstr " recursos"
 msgid "Explore selected topics"
 msgstr ""
 
-#: resources\views\livewire\ifa-hub-browse-resources.blade.php:37
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:42
 msgid "Explore Institutions"
-msgstr ""
+msgstr "Explorar las instituciones"
 
-#: resources\views\livewire\ifa-hub-browse-resources.blade.php:59
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:64
 msgid "Browse by programme curricula or course syllabi"
 msgstr ""
 
-#: resources\views\livewire\ifa-hub-browse-resources.blade.php:144
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:149
 msgid "Level:"
-msgstr ""
+msgstr "Nivel:"
 
-#: resources\views\livewire\ifa-hub-browse-resources.blade.php:165
+#: resources\views\livewire\ifa-hub-browse-resources.blade.php:170
 msgid "Institution:"
-msgstr ""
+msgstr "Institución:"
 
 #: resources\views\livewire\resources.blade.php:167
 msgid "Use the search bar or select from the research methods and topics to find resources"
