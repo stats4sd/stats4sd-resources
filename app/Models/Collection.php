@@ -11,6 +11,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
 
@@ -37,6 +38,19 @@ class Collection extends Model implements HasMedia
             $this->addMediaCollection("cover_image_{$key}")
                 ->singleFile();
         }
+
+    }
+
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $collections = [];
+        foreach (config('app.locales') as $key => $locale) {
+            $collections[] = "cover_image_{$key}";
+        }
+
+        $this->addMediaConversion('cover_thumb')
+            ->width(450)
+            ->performOnCollections(...$collections);
 
     }
 
