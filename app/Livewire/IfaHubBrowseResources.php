@@ -33,7 +33,7 @@ class IfaHubBrowseResources extends Component
 
     public function getInstitutionsProperty()
     {
-        $institutions = Tag::whereIn('id', [948, 949, 950, 951, 952])->get();
+        $institutions = Tag::whereIn('id', [940, 971, 984, 1008, 1009])->get();
 
         $locations = [
             940 => t('USA'),
