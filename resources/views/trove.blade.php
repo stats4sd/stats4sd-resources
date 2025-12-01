@@ -111,10 +111,11 @@
         <!-- Embedded Youtube Video -->
         <div class="pb-8">
             @if ($resource->youtube_links)
+            
                 @php
+                var_dump ($resource['youtube_id']);
                 $videoCount = 0;
                     $youtubeLinks = $resource->getTranslation('youtube_links', app()->getLocale());
-                    var_dump ($youtubeLinks['youtube_id']);
                     if (isset($youtubeLinks['youtube_id'])) {
                         $youtubeLinks = [$youtubeLinks];
                     
