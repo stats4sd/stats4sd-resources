@@ -53,6 +53,10 @@ class IfaHubBrowseResources extends Component
     {
         return Tag::whereIn('id', [935, 109, 955, 956, 957, 933, 959, 934, 961, 962, 963, 964, 942, 966, 967, 38, 151, 364, 936, 941, 943, 944, 969, 970, 975, 975, 976, 977, 978, 979, 987, 988, 989, 990, 991, 993, 994, 995, 996, 997, 998, 999, 1000, 1003, 1004, 1005, 1006])->get();
     }
+      public function getFeatureTopicsProperty()
+    {
+        return Tag::whereIn('id', [935, 109, 957, 956, 955, 933, 959, 961, 962, 963, 964, 942, 966, 967, 960])->get();
+    }
 
     public function mount()
     {

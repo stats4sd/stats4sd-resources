@@ -174,7 +174,7 @@
                         </svg>
 
                     </a>
-                    <a href="#browse_all"
+                    <a href="#browse_all" 
                         class="px-6 py-3 text-white bg-ifa-green flex flex-row justify-between
                                     hover:bg-black 
                                     font-semibold text-sm rounded-full uppercase text-center transition">
