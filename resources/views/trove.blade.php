@@ -113,7 +113,6 @@
             @if ($resource->youtube_links)
             
                 @php
-                var_dump ($resource['youtube_id']);
                 $videoCount = 0;
                     $youtubeLinks = $resource->getTranslation('youtube_links', app()->getLocale());
                     if (isset($youtubeLinks['youtube_id'])) {
