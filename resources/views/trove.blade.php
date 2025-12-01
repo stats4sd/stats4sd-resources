@@ -114,11 +114,13 @@
                 @php
                 $videoCount = 0;
                     $youtubeLinks = $resource->getTranslation('youtube_links', app()->getLocale());
+                    var_dump ($youtubeLinks['youtube_id']);
                     if (isset($youtubeLinks['youtube_id'])) {
                         $youtubeLinks = [$youtubeLinks];
                     
                     $videoCount = count($youtubeLinks);
                     }
+                    
                 @endphp
 
                 @if ($videoCount > 0)
