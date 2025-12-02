@@ -164,6 +164,10 @@ class IfaHubBrowseResources extends Component
         $this->selectedInstitutions = [];
         $this->selectedLevels = [];
 
+        // Clear the search
+        $this->reset('query');
+        $this->dispatch('clearSearchInput');
+
         // Apply the current selection
         if ($type === 'topic') {
             $this->selectedTopics = [$id];
