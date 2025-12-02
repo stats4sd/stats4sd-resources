@@ -38,7 +38,7 @@ class IfaHubBrowseResources extends Component
         $locations = [
             940 => t('USA'),
             971 => t('Mexico'),
-            984 => t('Spain'),
+            1010 => t('Spain'),
             1008 => t('Mexico'),
             1009 => t('Norway'),
         ];
