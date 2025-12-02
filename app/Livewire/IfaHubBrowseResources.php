@@ -156,6 +156,26 @@ class IfaHubBrowseResources extends Component
         $this->search();
     }
 
+    public function clearAndFilter($type, $id)
+    {
+        // Clear all filters
+        $this->selectedLanguages = [];
+        $this->selectedTopics = [];
+        $this->selectedInstitutions = [];
+        $this->selectedLevels = [];
+
+        // Apply the current selection
+        if ($type === 'topic') {
+            $this->selectedTopics = [$id];
+        } elseif ($type === 'institution') {
+            $this->selectedInstitutions = [$id];
+        } elseif ($type === 'level') {
+            $this->selectedLevels = [$id];
+        }
+
+        $this->search();
+    }
+
     public function render()
     {
         return view('livewire.ifa-hub-browse-resources', [
