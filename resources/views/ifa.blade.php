@@ -26,48 +26,6 @@
             'desc' => t(' '),
         ],
     ];
-    $topics = [
-        'Transformative',
-        'Principles',
-        'Diets',
-        'Transitions',
-        'Pests',
-        'Participation (PAR)',
-        'Social movements',
-        'Knowledge',
-        'Food sovereignty',
-        'Policies',
-        'Diversity',
-        'Soils',
-        'Feminism',
-        'Ecology',
-        'Evaluations',
-    ];
-
-    $institutions = [
-        [
-            'name' => 'University of Vermont',
-            'location' => 'USA',
-        ],
-        [
-            'name' => 'Veracruzana University',
-            'location' => 'Mexico',
-        ],
-        [
-            'name' => 'University of Cordoba',
-            'location' => 'Spain',
-        ],
-        [
-            'name' => 'El Colegio de la Frontera Sur',
-            'location' => 'Mexico',
-        ],
-        [
-            'name' => 'Norwegian University of Life Sciences ',
-            'location' => 'Norway',
-        ],
-    ];
-    $levels = ['Undergraduate', 'Graduate/Masters', 'Student reading list'];
-    $locale = app()->currentLocale();
 
 @endphp
 
@@ -190,7 +148,7 @@
             </div>
         </div>
 
-        <div class="flex flex-row w-full h-full justify-between gap-12 mt-12 ">
+        <div class="flex flex-row w-full h-full justify-between gap-12 mt-12">
             <div class="bg-ifa-green w-6 flex-shrink-0 h-auto"></div>
             <div class="h-auto w-full max-w-7xl py-3 pl-12">
 
@@ -227,10 +185,10 @@
                             style="background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(0,0,0,0.14)), url('{{ $c['img'] }}">
                         </div>
                         <div class="p-10 text-white h-[10rem]">
-                            <p class="text-xs  uppercase font-semibold ">
+                            <p class="text-xs  uppercase font-semibold">
                                 {{ t('Collection') }}
                             </p>
-                            <h3 class="font-bold text-xl mb-2 ">
+                            <h3 class="font-bold text-xl mb-2">
                                 {{ $c['title'] }}
                             </h3>
                             <p class="text-sm">
@@ -252,60 +210,18 @@
         </div>
 
         <!-- Search bar -->
-        <div class="flex flex-row w-full h-full justify-between gap-12 mt-32 ">
+        <div class="flex flex-row w-full h-full justify-between gap-12 mt-32">
             <div class="bg-ifa-green w-6 flex-shrink-0 h-auto"></div>
             <div class="h-auto w-full max-w-7xl py-3 px-12">
                 <h2 class="text-black text-2xl">
-                    {{ t('Search or explore resources') }}
+                    {{ t('Explore resources') }}
                 </h2>
             </div>
             <div class="bg-none w-6 flex-shrink-0 h-auto"></div>
         </div>
 
-        {{-- <div class="w-full  flex justify-center py-6">
-            <div class="relative w-full items-center mb-6  max-w-2xl lg:max-w-5xl xl:max-w-7xl px-12 hidden lg:flex">
-                <livewire:search-bar
-                    inputClass="w-full py-5 pl-12 pr-4 bg-gray-200 border-none rounded-full focus:outline-none transition
-                    duration-300 focus:bg-gray-100 focus:ring-0 text-gray-700 " />
-
-                <div class="absolute left-16 top-1/2 transform -translate-y-1/2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
-                        stroke="currentColor" class="w-5 h-5 text-gray-600">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                    </svg>
-                </div>
-            </div>
-        </div> --}}
-
-        <!-- institutions and syllabi filters 2 cols-->
-        {{-- <h2 id="frn_all" class="text-3xl font-bold">{{ t('Featured resources') }}</h2>
-        <div class="h-1 w-20 bg-stats4sd-red my-4"></div>
-
-        <div class="grid md:grid-cols-3 gap-6">
-            @foreach ($featuredResources as $resource)
-                <a href="{{ url("resources/{$resource->id}") }}" target="_blank"
-                    class="hover-effect relative bg-gray-100 rounded-lg overflow-hidden group">
-                    <div class="h-48 bg-cover bg-center"
-                        style="background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(0,0,0,0.64)), url('{{ $resource->getCoverImageUrl() }}')">
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg group-hover:text-stats4sd-green">
-                            {{ $resource->getTranslation('title', $locale) ?? $resource->getTranslation('title', 'en') }}
-                        </h3>
-                        <p class="text-sm">
-                            {!! $resource->getTranslation('description', $locale)
-                                ? \Illuminate\Support\Str::limit($resource->getTranslation('description', $locale), 200)
-                                : \Illuminate\Support\Str::limit($resource->getTranslation('description', 'en'), 200) !!}
-                        </p>
-                    </div>
-                </a>
-            @endforeach
-        </div>
-         --}}
-
         <!-- Browse all -->
-        <div class="w-full  " id="browse_all">
+        <div class="w-full" id="browse_all">
             @livewire('ifa-hub-browse-resources')
         </div>
     </div>
