@@ -98,14 +98,14 @@
 
             <!-- Overlay Content -->
             <div class="relative z-10 flex flex-col items-start w-full h-[20rem]  text-white">
-                <div class="h-[20rem] pb-16 flex flex-col sm:flex-row items-end w-full 2xl:pr-32">
+                <div class="h-[20rem] pb-16 flex flex-col gap-4 sm:flex-row items-end w-full 2xl:pr-32">
                     <!-- Heading -->
                     <h1 class="font-bold text-4xl sm:text-5xl md:text-5xl pt-10 px-8 sm:pl-16  2xl:pl-32 flex-grow">
                         {{ t('FRN Research Methods Hub') }}
                     </h1>
 
-                      <div class="flex items-start h-full w-full sm:w-1/4 sm:max-w-[20rem]">
-                    <a class="p-8 bg-stats4sd-red text-white sm:rounded-bl-[4rem] font-opensans 2xl:rounded-b-[4rem] flex flex-col items-start justify-left text-left  "
+                      <div class="flex items-start h-full w-full sm:w-[18rem]">
+                    <a class="p-8 bg-stats4sd-red text-white sm:rounded-bl-[3rem] w-full font-opensans 2xl:rounded-b-[3rem] flex flex-col items-start justify-left text-left  "
                         href="https://stats4sd.org/resources">
                         <span class="uppercase text-sm font-normal ">{{ t('Part of the') }}</span>
                         <h2 class="text-xl font-bold mb-8">{{ t('Stats4SD Resources Library') }}</h2>
