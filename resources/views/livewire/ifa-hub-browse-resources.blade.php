@@ -21,9 +21,10 @@
         
                 <label
                     onclick="document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' })"
-                    class="hover-effect cursor-pointer flex justify-between items-center relative bg-ifa-yellow rounded-full  overflow-hidden group sm:max-w-[20rem] min-w-[14rem] text-black text-sm h-16 px-6 py-3">
+                    class="hover-effect cursor-pointer flex justify-between items-center relative bg-ifa-yellow rounded-full  overflow-hidden group sm:max-w-[20rem] min-w-[14rem] text-black text-sm h-16 px-6 py-3"
+                    wire:click="clearAndFilter('topic', {{ $t['id'] }})">
                     {{ $t['name'] }}
-                    <input type="checkbox" class="hidden" wire:model="selectedTopics" value="{{ $t['id'] }}" wire:change="search"/>
+                    <input type="checkbox" class="hidden" value="{{ $t['id'] }}"/>
                     <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6" stroke-miterlimit="2"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>
                 </label>
                 @php $featureCount++ @endphp
@@ -43,15 +44,16 @@
                     @foreach ($this->institutions as $i)
                         <label
                             onclick="document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' })"
-                            class="hover-effect cursor-pointer relative bg-ifa-green flex flex-col justify-around text-left rounded-t-[1.5rem] rounded-bl-[1.5rem] overflow-hidden group sm:max-w-[20rem] min-w-[14rem] text-white text-sm px-6 py-4 h-[9rem]">
-                                <div>
-                                    <h3> {{ $i['name'] }}</h3>
-                                    <p>{{ $i['location'] }}</p>
-                                </div>
-                                <input type="checkbox" class="hidden" wire:model="selectedInstitutions" value="{{ $i['id'] }}" wire:change="search"/>
-                                <div class="w-full ">
-                                    <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6" stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>
-                                </div>                               
+                            class="hover-effect cursor-pointer relative bg-ifa-green flex flex-col justify-around text-left rounded-t-[1.5rem] rounded-bl-[1.5rem] overflow-hidden group sm:max-w-[20rem] min-w-[14rem] text-white text-sm px-6 py-4 h-[9rem]"
+                            wire:click="clearAndFilter('institution', {{ $i['id'] }})">
+                            <div>
+                                <h3> {{ $i['name'] }}</h3>
+                                <p>{{ $i['location'] }}</p>
+                            </div>
+                            <input type="checkbox" class="hidden" value="{{ $i['id'] }}"/>
+                            <div class="w-full ">
+                                <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6" stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>
+                            </div>                               
                         </label>
                     @endforeach
                 </div>
@@ -64,9 +66,10 @@
                     @foreach ($this->levels as $l)
                         <label
                             onclick="document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' })"
-                            class="hover-effect cursor-pointer relative bg-ifa-green flex flex-col text-left justify-around rounded-t-[1.5rem] rounded-bl-[1.5rem] overflow-hidden group sm:max-w-[20rem] min-w-[14rem] text-white text-sm px-6 py-4 h-[9rem]">
+                            class="hover-effect cursor-pointer relative bg-ifa-green flex flex-col text-left justify-around rounded-t-[1.5rem] rounded-bl-[1.5rem] overflow-hidden group sm:max-w-[20rem] min-w-[14rem] text-white text-sm px-6 py-4 h-[9rem]"
+                            wire:click="clearAndFilter('level', {{ $l['id'] }})">
                             <h3> {{ $l['name'] }}</h3>
-                            <input type="checkbox" class="hidden" wire:model="selectedLevels" value="{{ $l['id'] }}" wire:change="search"/>
+                            <input type="checkbox" class="hidden" value="{{ $l['id'] }}"/>
                             <div class="w-full ">
                                 <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6" stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero"/></svg>
                             </div>       
