@@ -104,7 +104,7 @@
                         {{ t('FRN Research Methods Hub') }}
                     </h1>
 
-                      <div class="flex items-start h-full w-full sm:w-[18rem]">
+                    <div class="flex items-start h-full w-full sm:w-[18rem]">
                     <a class="p-8 bg-stats4sd-red text-white sm:rounded-bl-[3rem] w-full font-opensans 2xl:rounded-b-[3rem] flex flex-col items-start justify-left text-left  "
                         href="https://stats4sd.org/resources">
                         <span class="uppercase text-sm font-normal ">{{ t('Part of the') }}</span>
@@ -120,7 +120,7 @@
                             <span class="uppercase text-sm font-normal ml-3 ">{{ t('Library home') }}</span>
                         </div>
                         </a>
-                        </div>
+                    </div>
                 </div>
 
 
@@ -171,26 +171,27 @@
 
 
 
- <div class="w-full  flex justify-center py-6">
+        <div class="w-full  flex justify-center py-6">
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center max-w-7xl p-12">
                 @foreach ($collections as $c)
                     <a href="{{ url($c['url']) }}" target="_blank"
                         class="hover-effect relative bg-frn-green rounded-t-[2.5rem] rounded-bl-[2.5rem] overflow-hidden group sm:max-w-[20rem] min-w-[15rem]">
-                         <div class="absolute top-4 left-4 h-12 w-12  rounded-full text-white text-center py-auto bg-frn-green">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="white"
-            class="mx-auto my-3">
-            <path
-                d="M21.698 10.658l2.302 1.342-12.002 7-11.998-7 2.301-1.342 9.697 5.658 9.7-5.658zm-9.7 10.657l-9.697-5.658-2.301 1.343 11.998 7 12.002-7-2.302-1.342-9.7 5.657zm0-19l8.032 4.685-8.032 4.685-8.029-4.685 8.029-4.685zm0-2.315l-11.998 7 11.998 7 12.002-7-12.002-7z" />
-        </svg>
-    </div>
+                        <div
+                            class="absolute top-4 left-4 h-12 w-12  rounded-full text-white text-center py-auto bg-frn-green">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                                fill="white" class="mx-auto my-3">
+                                <path
+                                    d="M21.698 10.658l2.302 1.342-12.002 7-11.998-7 2.301-1.342 9.697 5.658 9.7-5.658zm-9.7 10.657l-9.697-5.658-2.301 1.343 11.998 7 12.002-7-2.302-1.342-9.7 5.657zm0-19l8.032 4.685-8.032 4.685-8.029-4.685 8.029-4.685zm0-2.315l-11.998 7 11.998 7 12.002-7-12.002-7z" />
+                            </svg>
+                        </div>
                         <div class="h-48 bg-cover bg-center"
                             style="background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(0,0,0,0.14)), url('{{ $c['img'] }}">
                         </div>
                         <div class="p-10 text-white">
-                          <p class="text-xs  uppercase font-semibold ">
-                {{ t('Collection') }}
-            </p>
+                            <p class="text-xs  uppercase font-semibold ">
+                                {{ t('Collection') }}
+                            </p>
                             <h3 class="font-bold text-xl mb-2 ">
                                 {{ $c['title'] }}
                             </h3>
@@ -204,7 +205,7 @@
         </div>
 
 
-    <!-- Featured Resources -->
+        <!-- Featured Resources -->
         <div class="flex flex-row w-full h-full justify-between gap-12 mt-12 ">
             <div class="bg-stats4sd-red  w-6 flex-shrink-0 h-auto"></div>
             <div class="h-auto w-full max-w-7xl py-3">
@@ -218,55 +219,55 @@
         </div>
 
 
-    <div class="max-w-7xl mx-auto px-32 -mt-56">
-    
-        <div class="carousel w-full ">
-        @php $slideCount = 1 @endphp
-        @foreach ($featuredResources as $resource)
-            
-  
-            <div id="slide{{$slideCount}}" class="pt-64 carousel-item relative w-full ">
-                
-                <div class="w-full h-80  h-[25rem] bg-cover bg-center flex flex-col-reverse"
-                style="background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(0,0,0,0.44)), url('{{ $resource->getCoverImageUrl() }}')">  
-                    <div class="py-8 px-24 bg-black bg-opacity-75 text-white">
-                        <h3 class="font-bold text-lg group-hover:text-stats4sd-green mb-2">
-                            {{ $resource->getTranslation('title', $locale) ?? $resource->getTranslation('title', 'en') }}
-                        </h3>
-                        <p class="text-xs">
-                            {!! $resource->getTranslation('description', $locale)
-                                ? \Illuminate\Support\Str::limit($resource->getTranslation('description', $locale), 200)
-                                : \Illuminate\Support\Str::limit($resource->getTranslation('description', 'en'), 200) !!}
-                        </p>
-                    </div>
-                @php
-                if ((count($featuredResources)) == $slideCount) {
-                $nextSlide = 1 ;
-                $prevSlide = ($slideCount - 1) ;
-                }
-                elseif ($slideCount === 1) {
-                $prevSlide = (count($featuredResources)); $nextSlide = ($slideCount + 1) ;
-                }
-                else {
-                $nextSlide = ($slideCount + 1);
-                $prevSlide = ($slideCount - 1) ;
-                }
-                
-                @endphp
-                        
-            <div class="absolute left-5 right-5 top-1/2 pt-64 flex -translate-y-1/2 transform justify-between">
+        <div class="max-w-7xl mx-auto px-32 -mt-56">
 
- 
-                 <a href="#slide{{$prevSlide}}" class="btn btn-circle border-0 border-none bg-white hover:bg-black hover:text-white">❮</a>
-                <a href="#slide{{$nextSlide}}" class="btn btn-circle border-0 border-none bg-white hover:bg-black hover:text-white">❯</a>
+            <div class="carousel w-full ">
+                @php $slideCount = 1 @endphp
+                @foreach ($featuredResources as $resource)
+                    <div id="slide{{ $slideCount }}" class="pt-64 carousel-item relative w-full ">
+
+                        <div class="w-full h-80  h-[25rem] bg-cover bg-center flex flex-col-reverse"
+                            style="background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(0,0,0,0.44)), url('{{ $resource->getCoverImageUrl() }}')">
+                            <div class="py-8 px-24 bg-black bg-opacity-75 text-white">
+                                <h3 class="font-bold text-lg group-hover:text-stats4sd-green mb-2">
+                                    {{ $resource->getTranslation('title', $locale) ?? $resource->getTranslation('title', 'en') }}
+                                </h3>
+                                <p class="text-xs">
+                                    {!! $resource->getTranslation('description', $locale)
+                                        ? \Illuminate\Support\Str::limit($resource->getTranslation('description', $locale), 200)
+                                        : \Illuminate\Support\Str::limit($resource->getTranslation('description', 'en'), 200) !!}
+                                </p>
+                            </div>
+                            @php
+                                if (count($featuredResources) == $slideCount) {
+                                    $nextSlide = 1;
+                                    $prevSlide = $slideCount - 1;
+                                } elseif ($slideCount === 1) {
+                                    $prevSlide = count($featuredResources);
+                                    $nextSlide = $slideCount + 1;
+                                } else {
+                                    $nextSlide = $slideCount + 1;
+                                    $prevSlide = $slideCount - 1;
+                                }
+
+                            @endphp
+
+                            <div
+                                class="absolute left-5 right-5 top-1/2 pt-64 flex -translate-y-1/2 transform justify-between">
+
+
+                                <a href="#slide{{ $prevSlide }}"
+                                    class="btn btn-circle border-0 border-none bg-white hover:bg-black hover:text-white">❮</a>
+                                <a href="#slide{{ $nextSlide }}"
+                                    class="btn btn-circle border-0 border-none bg-white hover:bg-black hover:text-white">❯</a>
+                            </div>
+                        </div>
+                    </div>
+                    @php $slideCount++ @endphp
+                @endforeach
+
             </div>
-            </div>
-            </div>
-        @php $slideCount++ @endphp
-    @endforeach
-  
-</div>
-        {{-- <h2 id="frn_all" class="text-3xl font-bold">{{ t('Featured resources') }}</h2>
+            {{-- <h2 id="frn_all" class="text-3xl font-bold">{{ t('Featured resources') }}</h2>
         <div class="h-1 w-20 bg-stats4sd-red my-4"></div>
 
         <div class="grid md:grid-cols-3 gap-6">
@@ -290,16 +291,16 @@
             @endforeach
         </div>
          --}}
-            
 
 
 
 
-    </div>
 
-    <!-- Browse all -->
+        </div>
 
-     <div class="flex flex-row w-full h-full justify-between gap-12 mt-32 ">
+        <!-- Browse all -->
+
+        <div class="flex flex-row w-full h-full justify-between gap-12 mt-32 ">
             <div class="bg-stats4sd-red  w-6 flex-shrink-0 h-auto"></div>
             <div class="h-auto w-full max-w-7xl py-3">
 
@@ -310,24 +311,26 @@
             </div>
             <div class="bg-none  w-6 flex-shrink-0 h-auto"></div>
         </div>
-<div class="w-full  flex justify-center py-6">
+        <div class="w-full  flex justify-center py-6">
 
-        <div class="relative  items-center mb-6 w-full max-w-7xl p-12 hidden lg:flex">
-            <livewire:search-bar
-                inputClass="w-full py-2 pl-12 pr-4 bg-gray-200 border-none rounded-full focus:outline-none transition
-                duration-300 focus:bg-gray-100 focus:ring-0 text-gray-700"/>
+            <div class="relative  items-center mb-6 w-full max-w-7xl p-12 hidden lg:flex">
+                <livewire:search-bar
+                    inputClass="w-full py-2 pl-12 pr-4 bg-gray-200 border-none rounded-full focus:outline-none transition
+                duration-300 focus:bg-gray-100 focus:ring-0 text-gray-700" />
 
-            <div class="absolute left-16 top-1/2 transform -translate-y-1/2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5 text-gray-600">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
-                </svg>
+                <div class="absolute left-16 top-1/2 transform -translate-y-1/2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
+                        stroke="currentColor" class="w-5 h-5 text-gray-600">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                    </svg>
+                </div>
             </div>
-            </div>
-    </div>
+        </div>
 
-<div class="w-full  ">
+        <div class="w-full  ">
 
-    @livewire('frn-hub-browse-resources')
-</div>
+            @livewire('frn-hub-browse-resources')
+        </div>
     </div>
 @endsection

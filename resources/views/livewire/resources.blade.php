@@ -164,7 +164,7 @@
                     <div id="Resources-content" class=" py-8 px-8">
                         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 max-w-6xl mx-auto">
                             @foreach ($this->resources as $index => $resource)
-                                <x-resource-result-card :item="$resource"/>
+                                <x-resource-result-card :item="$resource" color="stats4sd-red" textcol="white" :show-tags="false"/>
                             @endforeach
                         </div>
                     </div>

@@ -32,8 +32,8 @@
 @extends('layouts.app', ['hideHeader' => true])
 
 @section('content')
-    <header class="sticky top-0 z-50 bg-white  px-8 lg:px-20 theme_ifa" x-data="{ open: false }">
-        <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center min-h-16 py-4">
+    <header class="sticky top-0 z-50 bg-white  pl-8 lg:pl-20 theme_ifa" x-data="{ open: false }">
+        <div class=" w-full flex flex-col sm:flex-row justify-between items-center min-h-16 ">
             <!-- Logos -->
             <div class="flex justify-start w-full xl:w-2/3 items-center space-x-4 lg:space-x-6 mb-8 sm:mb-0">
                 <a href="https://stats4sd.org/">
@@ -53,7 +53,7 @@
                 <ul class="flex space-x-6 font-medium uppercase text-sm">
 
                     <!-- Language Dropdown -->
-                    <li class="relative nav-item dropdown" x-data="{ langOpen: false }">
+                    <li class="relative nav-item dropdown flex " x-data="{ langOpen: false }">
                         <a class="nav-link dropdown-toggle flex items-center" role="button" aria-expanded="false"
                             x-on:click="langOpen = !langOpen">
                             {{ t('Change Language') }}
@@ -70,12 +70,38 @@
                             <a class="dropdown-item" href="{{ URL::current() . '?locale=fr' }}">Français</a>
                         </div>
                     </li>
+                    <li>
+                    
+                     <a class=" py-2 px-8 bg-stats4sd-red text-white  flex flex-col items-start w-full md:w-80  justify-left text-left  "
+                            href="https://stats4sd.org/resources">
+
+
+                            <div class="flex flex-row  gap-2 justify-left ">
+                            <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" fill="#ffffff"
+                                    stroke-miterlimit="2" viewBox="0 0 24 24" height="1.5rem" class="w-min my-auto mr-4 flex-none "
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="m9.474 5.209s-4.501 4.505-6.254 6.259c-.147.146-.22.338-.22.53s.073.384.22.53c1.752 1.754 6.252 6.257 6.252 6.257.145.145.336.217.527.217.191-.001.383-.074.53-.221.293-.293.294-.766.004-1.057l-4.976-4.976h14.692c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-14.692l4.978-4.979c.289-.289.287-.761-.006-1.054-.147-.147-.339-.221-.53-.221-.191-.001-.38.071-.525.215z"
+                                        fill-rule="nonzero" />
+                                </svg>
+                                <div class=" ml-8 md:ml-0">
+                                <span class="uppercase text-xs font-normal ">{{ t('Part of the') }}</span>
+                                <h2 class="text-lg normal-case font-bold ">{{ t('Stats4SD Resources Library') }}</h2>
+                                </div>
+
+                            </div>
+                        </a>
+
+                    </li>
                 </ul>
             </nav>
-
         </div>
+        
     </header>
 
+<div class=" relative md:absolute md:top-0 z-50 w-full  md:items-right">
+
+</div>
     <div class="relative theme_ifa">
 
         <div class="relative">
@@ -90,23 +116,7 @@
                     <h1 class="font-bold text-4xl sm:text-5xl md:text-5xl pt-10 px-8 sm:pl-16  2xl:pl-32 flex-grow">
                         {{ t('Let\'s EAT | Educate for Agroecological Transformations') }}
                     </h1>
-                    <div class="flex items-start h-full w-full sm:w-1/4 sm:max-w-[20rem]">
-                    <a class="p-8 bg-stats4sd-red text-white sm:rounded-bl-[4rem] font-opensans 2xl:rounded-b-[4rem] flex flex-col items-start justify-left text-left  "
-                        href="https://stats4sd.org/resources">
-                        <span class="uppercase text-sm font-normal ">{{ t('Part of the') }}</span>
-                        <h2 class="text-xl font-bold mb-8">{{ t('Stats4SD Resources Library') }}</h2>
-                        <div class="flex">
-                            <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" fill="#ffffff"
-                                stroke-miterlimit="2" viewBox="0 0 24 24" height="1.5rem"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="m9.474 5.209s-4.501 4.505-6.254 6.259c-.147.146-.22.338-.22.53s.073.384.22.53c1.752 1.754 6.252 6.257 6.252 6.257.145.145.336.217.527.217.191-.001.383-.074.53-.221.293-.293.294-.766.004-1.057l-4.976-4.976h14.692c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-14.692l4.978-4.979c.289-.289.287-.761-.006-1.054-.147-.147-.339-.221-.53-.221-.191-.001-.38.071-.525.215z"
-                                    fill-rule="nonzero" />
-                            </svg>
-                            <span class="uppercase text-sm font-normal ml-3 ">{{ t('Library home') }}</span>
-                        </div>
-                    </a>
-                    </div>
+                    
                 </div>
             </div>
 

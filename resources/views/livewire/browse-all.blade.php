@@ -132,7 +132,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 max-w-6xl mx-auto">
                         @foreach ($this->renderedItems as $index => $item)
                             @if($item['type'] === 'resource')
-                                <x-resource-result-card :item="$item"/>
+                                <x-resource-result-card :item="$item" color="stats4sd-red" textcol="white" :show-tags="false"/>
                             @elseif($item['type'] === 'collection')
                                 <x-collection-result-card :item="$item"/>
                             @endif
