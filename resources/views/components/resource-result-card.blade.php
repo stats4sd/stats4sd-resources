@@ -32,10 +32,10 @@
         @endif
 
         <!-- Title -->
-        <p class="text-lg 2xl:text-xl font-bold mx-6 mb-3 xl:min-h-8 text-black"> {!! $item['title'] !!}</p>
+        <p class="text-lg font-bold mx-6 mb-3 xl:min-h-8 text-black"> {!! $item['title'] !!}</p>
 
         <!-- Description -->
-        <p class="text-sm 2xl:text-base mb-2  flex-grow mx-6 mb-4 text-gray-600">
+        <p class="text-sm  mb-2  flex-grow mx-6 mb-4 text-gray-600">
             {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($item['description']), ENT_QUOTES, 'UTF-8'), 110, '...') }}
         </p>
 

@@ -104,11 +104,11 @@
                         {{ t('FRN Research Methods Hub') }}
                     </h1>
 
-                    <a
-                        class="p-12 bg-stats4sd-red text-white font-opensans sm:rounded-bl-[4rem]  2xl:rounded-b-[4rem] flex flex-col items-start justify-left text-left h-full w-full sm:w-2/5 sm:max-w-[24rem]"
+                      <div class="flex items-start h-full w-full sm:w-1/4 sm:max-w-[20rem]">
+                    <a class="p-8 bg-stats4sd-red text-white sm:rounded-bl-[4rem] font-opensans 2xl:rounded-b-[4rem] flex flex-col items-start justify-left text-left  "
                         href="https://stats4sd.org/resources">
-                        <span class="uppercase text-base font-normal ">{{ t('Part of the') }}</span>
-                        <h2 class="text-3xl font-bold mb-8">{{ t('Stats4SD Resources Library') }}</h2>
+                        <span class="uppercase text-sm font-normal ">{{ t('Part of the') }}</span>
+                        <h2 class="text-xl font-bold mb-8">{{ t('Stats4SD Resources Library') }}</h2>
                         <div class="flex">
                             <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" fill="#ffffff"
                                 stroke-miterlimit="2" viewBox="0 0 24 24" height="1.5rem"
@@ -117,9 +117,10 @@
                                     d="m9.474 5.209s-4.501 4.505-6.254 6.259c-.147.146-.22.338-.22.53s.073.384.22.53c1.752 1.754 6.252 6.257 6.252 6.257.145.145.336.217.527.217.191-.001.383-.074.53-.221.293-.293.294-.766.004-1.057l-4.976-4.976h14.692c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-14.692l4.978-4.979c.289-.289.287-.761-.006-1.054-.147-.147-.339-.221-.53-.221-.191-.001-.38.071-.525.215z"
                                     fill-rule="nonzero" />
                             </svg>
-                            <span class="uppercase text-base font-normal ml-3 ">{{ t('Library home') }}</span>
+                            <span class="uppercase text-sm font-normal ml-3 ">{{ t('Library home') }}</span>
                         </div>
-                    </a>
+                        </a>
+                        </div>
                 </div>
 
 
@@ -225,11 +226,9 @@
             
   
             <div id="slide{{$slideCount}}" class="pt-64 carousel-item relative w-full ">
-                {{--  HIDING WHILE USING TEST COVER IMAGE VERSION
-                <div class="w-full h-80 bg-cover bg-center"
-                style="background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(0,0,0,0.14)), url('{{ $resource->getCoverImageUrl() }}')">  --}}
-                <div class="w-full h-[25rem] bg-cover bg-center flex flex-col-reverse"
-                style="background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(0,0,0,0.44)), url('/images/coverimg_test.png"> 
+                
+                <div class="w-full h-80  h-[25rem] bg-cover bg-center flex flex-col-reverse"
+                style="background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(0,0,0,0.44)), url('{{ $resource->getCoverImageUrl() }}')">  
                     <div class="py-8 px-24 bg-black bg-opacity-75 text-white">
                         <h3 class="font-bold text-lg group-hover:text-stats4sd-green mb-2">
                             {{ $resource->getTranslation('title', $locale) ?? $resource->getTranslation('title', 'en') }}
