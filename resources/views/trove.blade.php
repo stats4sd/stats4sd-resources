@@ -98,7 +98,7 @@
             @endforeach
         </p>
 
-        <p class="mt-6">{{ strip_tags($resource->description) }}</p>
+        <div class="description mt-6">{!! t($resource->description) !!}</div>
 
 
 
@@ -111,12 +111,16 @@
         <!-- Embedded Youtube Video -->
         <div class="pb-8">
             @if ($resource->youtube_links)
+            
                 @php
+                $videoCount = 0;
                     $youtubeLinks = $resource->getTranslation('youtube_links', app()->getLocale());
                     if (isset($youtubeLinks['youtube_id'])) {
                         $youtubeLinks = [$youtubeLinks];
-                    }
+                    
                     $videoCount = count($youtubeLinks);
+                    }
+                    
                 @endphp
 
                 @if ($videoCount > 0)

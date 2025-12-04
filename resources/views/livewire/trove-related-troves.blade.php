@@ -2,8 +2,12 @@
     @if ($relatedTroves->isNotEmpty())
         <div class="container mx-auto">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            @php $relatedCount = 0 @endphp
                 @foreach ($relatedTroves as $resource)
+                @if ($relatedCount < 9) 
                     <x-resource-result-card :item="$resource"/>
+                @php $relatedCount ++ @endphp
+                @endif    
                 @endforeach
             </div>
         </div>

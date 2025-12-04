@@ -78,4 +78,8 @@ Route::group([
         return view('frn');
     })->name('frn');
 
+    Route::get('/ifa', function () {
+        return view('ifa');
+    })->name('ifa');
+
 });

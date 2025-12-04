@@ -1,7 +1,7 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
-
+import daisyui from 'daisyui';
 /** @type {import('tailwindcss').Config} */
 export default {
     content: [
@@ -21,12 +21,21 @@ export default {
                 'stats4sd-red-70': 'var(--stats4sd-red-transparent)',
                 'stats4sd-grey': 'var(--stats4sd-grey)',
                 'frn-green': 'var(--frn-green)',
+                'ifa-darkgreen': 'var(--ifa-darkgreen)',
+                'ifa-green': 'var(--ifa-green)',
+                'ifa-yellow': 'var(--ifa-yellow)',
             }
         },
     },
 
     plugins: [
         forms,
-        typography
+        typography,
+        daisyui
     ],
+
+    daisyui: {
+        themes: [],
+
+      },
 };
