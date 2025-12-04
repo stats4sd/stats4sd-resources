@@ -39,7 +39,7 @@
                     </p>
                 </div>
             </a>
-{{-- IFA hub hidden for now
+            {{-- IFA hub hidden for now
             <a href="ifa"
                 class="relative group h-[26rem] w-[23rem] overflow-hidden hover-effect rounded-t-3xl rounded-bl-3xl mx-auto md:mx-0">
 
@@ -52,7 +52,7 @@
                     </p>
                 </div>
             </a>
- --}}
+            --}}
 
         </div>
 
