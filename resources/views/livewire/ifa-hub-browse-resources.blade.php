@@ -90,7 +90,7 @@
             </div>  
 
             <!-- Search bar -->
-            <div class="relative flex items-center mb-6">
+            <div class="relative flex items-center mb-6"  >
                 <livewire:search-bar
                     inputClass="w-full py-2 pl-12 pr-4 bg-gray-200 border-none rounded-full focus:outline-none transition
                     duration-300 focus:bg-gray-100 focus:ring-0 text-gray-700"/>
@@ -200,7 +200,7 @@
         </div>
 
         <!-- Resources Cards -->
-        <div class="flex-1">
+        <div class="flex-1" id="browse_all">
             <div class="p-8">
                 {{ t("Showing ") . $totalResources . t(" resources") }}
                 @if($query || !empty($selectedLanguages) || !empty($selectedLevels) || !empty($selectedInstitutions) || !empty($selectedTopics) )

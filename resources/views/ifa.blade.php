@@ -159,7 +159,7 @@
             </div>
         </div>
 
-        <div class="flex flex-row w-full h-full justify-between gap-12 mt-12">
+        <div class="flex flex-row w-full h-full justify-between gap-12 mt-12" id="collections">
             <div class="bg-ifa-green w-6 flex-shrink-0 h-auto"></div>
             <div class="h-auto w-full max-w-7xl py-3 pl-12">
 
@@ -232,7 +232,7 @@
         </div>
 
         <!-- Browse all -->
-        <div class="w-full" id="browse_all">
+        <div class="w-full">
             @livewire('ifa-hub-browse-resources')
         </div>
     </div>
