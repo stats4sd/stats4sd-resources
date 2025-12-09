@@ -144,7 +144,6 @@
                     <a href="#collections"
                         class="px-6 py-3 text-white bg-frn-green 
                                     hover:bg-black 
-
                                     font-semibold  text-sm rounded-full uppercase text-center transition">
                         {{ t('Browse by topic') }}
                     </a>
@@ -160,9 +159,9 @@
 
         <div class="flex flex-row w-full h-full justify-between gap-12 mt-12 ">
             <div class="bg-stats4sd-red  w-6 flex-shrink-0 h-auto"></div>
-            <div class="h-auto w-full max-w-7xl py-3" >
+            <div class="h-auto w-full max-w-7xl py-3">
 
-                <h2 class="text-black text-2xl"  id="collections">
+                <h2 class="text-black text-2xl">
                     {{ t('Browse by topic') }}
                 </h2>
 
@@ -268,7 +267,30 @@
                 @endforeach
 
             </div>
-        
+            {{-- <h2 id="frn_all" class="text-3xl font-bold">{{ t('Featured resources') }}</h2>
+        <div class="h-1 w-20 bg-stats4sd-red my-4"></div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            @foreach ($featuredResources as $resource)
+                <a href="{{ url("resources/{$resource->id}") }}" target="_blank"
+                    class="hover-effect relative bg-gray-100 rounded-lg overflow-hidden group">
+                    <div class="h-48 bg-cover bg-center"
+                        style="background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(0,0,0,0.64)), url('{{ $resource->getCoverImageUrl() }}')">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg group-hover:text-stats4sd-green">
+                            {{ $resource->getTranslation('title', $locale) ?? $resource->getTranslation('title', 'en') }}
+                        </h3>
+                        <p class="text-sm">
+                            {!! $resource->getTranslation('description', $locale)
+                                ? \Illuminate\Support\Str::limit($resource->getTranslation('description', $locale), 200)
+                                : \Illuminate\Support\Str::limit($resource->getTranslation('description', 'en'), 200) !!}
+                        </p>
+                    </div>
+                </a>
+            @endforeach
+        </div>
+         --}}
 
 
 
@@ -278,11 +300,11 @@
 
         <!-- Browse all -->
 
-        <div class="flex flex-row w-full h-full justify-between gap-12 mt-32" >
+        <div class="flex flex-row w-full h-full justify-between gap-12 mt-32 ">
             <div class="bg-stats4sd-red  w-6 flex-shrink-0 h-auto"></div>
             <div class="h-auto w-full max-w-7xl py-3">
 
-                <h2 class="text-black text-2xl" id="browse_all">
+                <h2 class="text-black text-2xl">
                     {{ t('Search or explore resources') }}
                 </h2>
 
