@@ -111,16 +111,27 @@
         <!-- Embedded Youtube Video -->
         <div class="pb-8">
             @if ($resource->youtube_links)
-            
-                @php
-                $videoCount = 0;
+              @php
+
+
+
                     $youtubeLinks = $resource->getTranslation('youtube_links', app()->getLocale());
+
                     if (isset($youtubeLinks['youtube_id'])) {
+
                         $youtubeLinks = [$youtubeLinks];
-                    
-                    $videoCount = count($youtubeLinks);
+
+
                     }
+
+
                     
+
+                    $videoCount = count($youtubeLinks);
+
+
+                    
+
                 @endphp
 
                 @if ($videoCount > 0)
