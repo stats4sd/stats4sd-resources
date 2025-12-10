@@ -110,17 +110,19 @@
 
         <!-- Embedded Youtube Video -->
         <div class="pb-8">
+
             @if ($resource->youtube_links)
-            
+
                 @php
-                $videoCount = 0;
+
                     $youtubeLinks = $resource->getTranslation('youtube_links', app()->getLocale());
+
                     if (isset($youtubeLinks['youtube_id'])) {
                         $youtubeLinks = [$youtubeLinks];
-                    
-                    $videoCount = count($youtubeLinks);
                     }
-                    
+
+                    $videoCount = count($youtubeLinks);
+
                 @endphp
 
                 @if ($videoCount > 0)
@@ -158,7 +160,7 @@
             <!-- Files and URLs -->
             <p class="text-lg py-8">
                 {{ t("The individual components of the trove are listed below. Click on one to download the file or go to the
-                                                                                                    external url. You can download the full trove below as a .zip file.") }}
+                                                                                                                    external url. You can download the full trove below as a .zip file.") }}
             </p>
 
             <div class="space-y-2"> <!-- This ensures equal spacing for both URLs and files -->

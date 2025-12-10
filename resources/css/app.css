@@ -126,3 +126,24 @@ font-family: "roboto", "open sans", "sans-serif";
 
 @apply mt-6;
 }
+.description ul li {
+
+@apply mt-1 list-disc ml-8 list-outside;
+
+}
+
+.description ol li {
+
+@apply mt-1 ml-8 list-decimal list-outside;
+
+}
+
+.description ol, .description ul {
+
+ 
+
+@apply my-4;
+
+
+
+}
