@@ -111,7 +111,7 @@
         <!-- Embedded Youtube Video -->
         <div class="pb-8">
 
-            @if ($resource->youtube_links)
+            @if ($resource->getTranslation('youtube_links', app()->getLocale())[0]['youtube_id'] ?? null)
 
                 @php
 
