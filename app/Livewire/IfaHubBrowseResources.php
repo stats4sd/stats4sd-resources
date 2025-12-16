@@ -65,7 +65,7 @@ class IfaHubBrowseResources extends Component
 
     public function fetchInitialData()
     {
-         $this->resources = Trove::where('organisation_id', 2)
+         $this->resources = Trove::where('organisation_id', 1)
              ->where('is_current', 1)
             ->orderBy('created_at', 'desc')
             ->get();
@@ -76,7 +76,7 @@ class IfaHubBrowseResources extends Component
     public function search()
     {
         // Step 1: Start with a base query for resources
-        $query = Trove::where('organisation_id', 2)
+        $query = Trove::where('organisation_id', 1)
                     ->where('is_current', 1);
 
         // // Step 2: Apply levels filters if selected
