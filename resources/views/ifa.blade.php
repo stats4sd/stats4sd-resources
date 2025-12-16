@@ -42,9 +42,7 @@
                     <img src="{{ asset('images/ifalogo1.png') }}" class="max-h-16  " alt="crfs">
                 </a>
 
-                <a href="https://stats4sd.org/">
-                    <img src="/images/Stats4SD_logo.png" alt="Stats4SD logo" class="max-h-4 ">
-                </a>
+    
 
 
             </div>
