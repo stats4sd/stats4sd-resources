@@ -4,14 +4,14 @@
     <div class="relative">
 
         <!-- Preview Banner -->
-        {{-- @if (!$resource->is_published) --}}
+        @if (!$resource->is_published)
             <div class="bg-stats4sd-red text-white py-4 px-6 font-semibold flex justify-center space-x-1 z-50 relative">
                 <x-heroicon-o-exclamation-circle class="w-6 h-6 text-white" />
                 <span>
                     {{ t('PREVIEW MODE: This resource has not been published and is only visible to authorised users') }}
                 </span>
             </div>
-        {{-- @endif --}}
+        @endif
         <!-- Image Header -->
         <div class="overflow-hidden w-100vw ">
             <div class="relative bg-repeat-x bg-center -ml-24 blur-xl w-[120vw] bg-cover"
