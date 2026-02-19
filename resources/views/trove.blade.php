@@ -5,7 +5,7 @@
 
         <!-- Preview Banner -->
         @if (!$resource->is_published)
-            <div class="bg-stats4sd-red text-white py-4 px-6 font-semibold flex justify-center space-x-1">
+            <div class="bg-stats4sd-red text-white py-4 px-6 font-semibold flex justify-center space-x-1 z-50 relative">
                 <x-heroicon-o-exclamation-circle class="w-6 h-6 text-white" />
                 <span>
                     {{ t('PREVIEW MODE: This resource has not been published and is only visible to authorised users') }}
@@ -13,12 +13,12 @@
             </div>
         @endif
         <!-- Image Header -->
-        <div class="overflow-hidden w-100vw">
+        <div class="overflow-hidden w-100vw ">
             <div class="relative bg-repeat-x bg-center -ml-24 blur-xl w-[120vw] bg-cover"
                 style="height: 500px; background-image: url('{{ $resource->getCoverImageUrl() }}');">
             </div>
         </div>
-        <div class="absolute top-0 h-full w-full bg-center bg-no-repeat">
+        <div class="absolute top-0 h-full w-full bg-center bg-no-repeat ">
             <div class="w-full flex items-center overflow-hidden" style="height: 500px">
                 <img src="{{ $resource->getCoverImageUrl() }}" style="min-height: 500px;  " class="mx-auto object-cover"
                     alt="cover image">
