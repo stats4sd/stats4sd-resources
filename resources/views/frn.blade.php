@@ -105,20 +105,20 @@
                     </h1>
 
                     <div class="flex items-start h-full w-full sm:w-[18rem]">
-                    <a class="p-8 bg-stats4sd-red text-white sm:rounded-bl-[3rem] w-full font-opensans 2xl:rounded-b-[3rem] flex flex-col items-start justify-left text-left  "
-                        href="https://stats4sd.org/resources">
-                        <span class="uppercase text-sm font-normal ">{{ t('Part of the') }}</span>
-                        <h2 class="text-xl font-bold mb-8">{{ t('Stats4SD Resources Library') }}</h2>
-                        <div class="flex">
-                            <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" fill="#ffffff"
-                                stroke-miterlimit="2" viewBox="0 0 24 24" height="1.5rem"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="m9.474 5.209s-4.501 4.505-6.254 6.259c-.147.146-.22.338-.22.53s.073.384.22.53c1.752 1.754 6.252 6.257 6.252 6.257.145.145.336.217.527.217.191-.001.383-.074.53-.221.293-.293.294-.766.004-1.057l-4.976-4.976h14.692c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-14.692l4.978-4.979c.289-.289.287-.761-.006-1.054-.147-.147-.339-.221-.53-.221-.191-.001-.38.071-.525.215z"
-                                    fill-rule="nonzero" />
-                            </svg>
-                            <span class="uppercase text-sm font-normal ml-3 ">{{ t('Library home') }}</span>
-                        </div>
+                        <a class="p-8 bg-stats4sd-red text-white sm:rounded-bl-[3rem] w-full font-opensans 2xl:rounded-b-[3rem] flex flex-col items-start justify-left text-left  "
+                            href="https://stats4sd.org/resources">
+                            <span class="uppercase text-sm font-normal ">{{ t('Part of the') }}</span>
+                            <h2 class="text-xl font-bold mb-8">{{ t('Stats4SD Resources Library') }}</h2>
+                            <div class="flex">
+                                <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" fill="#ffffff"
+                                    stroke-miterlimit="2" viewBox="0 0 24 24" height="1.5rem"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="m9.474 5.209s-4.501 4.505-6.254 6.259c-.147.146-.22.338-.22.53s.073.384.22.53c1.752 1.754 6.252 6.257 6.252 6.257.145.145.336.217.527.217.191-.001.383-.074.53-.221.293-.293.294-.766.004-1.057l-4.976-4.976h14.692c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-14.692l4.978-4.979c.289-.289.287-.761-.006-1.054-.147-.147-.339-.221-.53-.221-.191-.001-.38.071-.525.215z"
+                                        fill-rule="nonzero" />
+                                </svg>
+                                <span class="uppercase text-sm font-normal ml-3 ">{{ t('Library home') }}</span>
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -161,9 +161,15 @@
             <div class="bg-stats4sd-red  w-6 flex-shrink-0 h-auto"></div>
             <div class="h-auto w-full max-w-7xl py-3">
 
-                <h2 class="text-black text-2xl">
+
+
+                <h2 class="text-black text-2xl" id="collections">
+
                     {{ t('Browse by topic') }}
+
                 </h2>
+
+
 
             </div>
             <div class="bg-none  w-6 flex-shrink-0 h-auto"></div>
@@ -267,46 +273,26 @@
                 @endforeach
 
             </div>
-            {{-- <h2 id="frn_all" class="text-3xl font-bold">{{ t('Featured resources') }}</h2>
-        <div class="h-1 w-20 bg-stats4sd-red my-4"></div>
-
-        <div class="grid md:grid-cols-3 gap-6">
-            @foreach ($featuredResources as $resource)
-                <a href="{{ url("resources/{$resource->id}") }}" target="_blank"
-                    class="hover-effect relative bg-gray-100 rounded-lg overflow-hidden group">
-                    <div class="h-48 bg-cover bg-center"
-                        style="background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(0,0,0,0.64)), url('{{ $resource->getCoverImageUrl() }}')">
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg group-hover:text-stats4sd-green">
-                            {{ $resource->getTranslation('title', $locale) ?? $resource->getTranslation('title', 'en') }}
-                        </h3>
-                        <p class="text-sm">
-                            {!! $resource->getTranslation('description', $locale)
-                                ? \Illuminate\Support\Str::limit($resource->getTranslation('description', $locale), 200)
-                                : \Illuminate\Support\Str::limit($resource->getTranslation('description', 'en'), 200) !!}
-                        </p>
-                    </div>
-                </a>
-            @endforeach
-        </div>
-         --}}
-
-
-
 
 
         </div>
 
         <!-- Browse all -->
 
-        <div class="flex flex-row w-full h-full justify-between gap-12 mt-32 ">
-            <div class="bg-stats4sd-red  w-6 flex-shrink-0 h-auto"></div>
+        <div class="flex flex-row w-full h-full justify-between gap-12 mt-32">
+
+            <div class="bg-stats4sd-red w-6 flex-shrink-0 h-auto"></div>
+
             <div class="h-auto w-full max-w-7xl py-3">
 
-                <h2 class="text-black text-2xl">
+
+
+                <h2 class="text-black text-2xl" id="browse_all">
+
                     {{ t('Search or explore resources') }}
+
                 </h2>
+
 
             </div>
             <div class="bg-none  w-6 flex-shrink-0 h-auto"></div>

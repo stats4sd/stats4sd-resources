@@ -51,7 +51,7 @@
                                 ],
                                 [
                                     'url' => '/browse-all',
-                                    'title' => t('View All'),
+                                    'title' => t('Browse All'),
                                     'desc' => t(
                                         'Browse the full library of resources and collections on a variety of topics.',
                                     ),

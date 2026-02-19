@@ -5,7 +5,7 @@
             @php $relatedCount = 0 @endphp
                 @foreach ($relatedTroves as $resource)
                 @if ($relatedCount < 9) 
-                    <x-resource-result-card :item="$resource"/>
+                    <x-resource-result-card :item="$resource" :show-tags="false"/>
                 @php $relatedCount ++ @endphp
                 @endif    
                 @endforeach

@@ -35,17 +35,15 @@
     <header class="sticky top-0 z-50 bg-white  pl-8 lg:pl-20 theme_ifa" x-data="{ open: false }">
         <div class=" w-full flex flex-col sm:flex-row justify-between items-center min-h-16 ">
             <!-- Logos -->
-            <div class="flex justify-start w-full xl:w-2/3 items-center space-x-4 lg:space-x-6 mb-8 sm:mb-0">
-                <a href="https://stats4sd.org/">
-                    <img src="/images/Stats4SD_logo.png" alt="Stats4SD logo" class="max-h-6 ">
+            
+            <div class="flex justify-start w-full xl:w-2/3 items-center space-x-4 lg:space-x-8 mb-8 sm:mb-0">
+            
+                <a href="https://www.uvm.edu/instituteforagroecology">
+                    <img src="{{ asset('images/ifalogo1.png') }}" class="max-h-16  " alt="crfs">
                 </a>
-                <a href="https://ccrp.org">
-                    <img src="{{ asset('images/uvmlogo.png') }}" class="max-h-8 px-8 border-r border-[--ifa-green] "
-                        alt="crfs">
-                </a>
-                <a href="https://ccrp.org">
-                    <img src="{{ asset('images/ifalogo.png') }}" class="max-h-32  " alt="crfs">
-                </a>
+
+    
+
 
             </div>
 
@@ -113,9 +111,13 @@
             <div class="relative z-10 flex flex-col items-start w-full h-[20rem] text-white">
                 <div class="h-[20rem] pb-16 flex flex-col sm:flex-row items-end w-full 2xl:pr-32">
                     <!-- Heading -->
-                    <h1 class="font-bold text-4xl sm:text-5xl md:text-5xl pt-10 px-8 sm:pl-16  2xl:pl-32 flex-grow">
-                        {{ t('Let\'s EAT | Educate for Agroecological Transformations') }}
+                    <div class="pt-10 px-8 sm:pl-16  2xl:pl-32 flex-grow" style="text-wrap: balance">
+                    <h1 class="font-bold text-4xl sm:text-5xl md:text-5xl mb-4 md:!leading-[3.5rem]">
+                        {{ t('Resource Library: Education for Agroecological Transformations') }}
                     </h1>
+                    <h2 class="font-normal text-xl">{{ t('Agroecology in higher education') }}</h2>
+                    
+                    </div>
                     
                 </div>
             </div>
@@ -147,7 +149,7 @@
                         class="px-6 py-3 text-white bg-ifa-green flex flex-row justify-between
                                     hover:bg-black 
                                     font-semibold text-sm rounded-full uppercase text-center transition">
-                        <span>{{ t('View all syllabi') }}</span>
+                        <span>{{ t('View all ') }}</span>
                         <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
                             stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -159,7 +161,7 @@
             </div>
         </div>
 
-        <div class="flex flex-row w-full h-full justify-between gap-12 mt-12">
+        <div class="flex flex-row w-full h-full justify-between gap-12 mt-12" id="collections">
             <div class="bg-ifa-green w-6 flex-shrink-0 h-auto"></div>
             <div class="h-auto w-full max-w-7xl py-3 pl-12">
 
@@ -232,7 +234,7 @@
         </div>
 
         <!-- Browse all -->
-        <div class="w-full" id="browse_all">
+        <div class="w-full">
             @livewire('ifa-hub-browse-resources')
         </div>
     </div>
