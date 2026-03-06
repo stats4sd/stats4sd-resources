@@ -61,11 +61,14 @@
 
 
 
-
-    <!-- Back Link -->
-    <div class="container mx-auto p-6">
-        <a href="{{ url('/browse-all') }}" class="text-gray-500 hover:text-black">&lt; {{ t("Browse all resources and collections") }}</a>
-    </div>
+    <!-- IFA Hub Link -->
+    @if ($collection->organisation_id === 2)
+        <div class="container mx-auto py-6 px-8 lg:px-32">
+            <a href="{{ url('/ifa') }}" class="text-gray-500 hover:text-black">&lt;
+                {{ t("This collection is part of the Institute for Agroecology Resource Library") }}
+            </a>
+        </div> 
+    @endif
 
     <!-- Description -->
     <div class="container mx-auto py-6 px-8 lg:px-32 my-12">
