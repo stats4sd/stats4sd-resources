@@ -3,12 +3,13 @@
     'color' => 'stats4sd-red',
     'showTags' => true,
     'textcol' => 'white',
+     'target' => '_blank'
 ])
 
 <div
     class="card hover-effect resource-card relative flex shadow-xl flex-col justify-between bg-[#f2f2f2] overflow-hidden  rounded-t-3xl rounded-bl-3xl ">
     <a href="{{ url('resources/'.$item['slug']) }}" class="absolute inset-0 z-0"
-       target="_blank">
+       target="{{ $target }}">
     </a>
 
     <!-- Content -->
