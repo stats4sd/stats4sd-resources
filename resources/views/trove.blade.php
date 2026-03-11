@@ -1,3 +1,10 @@
+
+    @php
+                                if ($resource->organisation_id === 2) {
+                                    $ifaheader = true;
+                                }
+
+                            @endphp
 @extends('layouts.app')
 
 @section('content')
