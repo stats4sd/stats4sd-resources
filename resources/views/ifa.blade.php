@@ -126,7 +126,7 @@
 
         <!-- Top section -->
         <div class="w-full bg-gray-100 flex justify-center py-6">
-            <div class="flex flex-col md:flex-row items-start justify-between gap-12 w-screen max-w-7xl p-12">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-12 w-screen max-w-7xl px-12 py-6">
                 <div class="text-base w-3/5">
                     {{ t("Let's Educate for Agroecological Transformations is an international community of practice focusing on transformative learning for agroecology in higher education consisting of people who are either already teaching, or who are building agroecology programmes/courses in HE. Programmes consist of undergraduate, graduate and/or post-graduate courses, and extend to continuing education aimed practitioners and professionals in the field of agroecology. We are committed to co-creating and inspiring transformative agroecological learning that transgresses formal-informal education boundaries to create learning spaces that connect academic knowledge with community and movement building practices across multiple contexts.") }}
                 </div>
@@ -167,6 +167,18 @@
                             <path d="M24 21h-24v-18h24v18zm-23-16.477v15.477h22v-15.477l-10.999 10-11.001-10zm21.089-.523h-20.176l10.088 9.171 10.088-9.171z"/>
                         </svg>
 
+                    </a>
+                     <a href="{{ url('/ifastudent') }}" 
+                        class="px-6 pt-3 pb-2 text-white bg-ifa-green flex flex-row justify-between
+                                    hover:bg-black 
+                                    font-semibold text-sm rounded-full uppercase text-center transition">
+                        <span>{{ t('Information for students ') }}</span>
+                        <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
+                            stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z"
+                                fill-rule="nonzero" />
+                        </svg>
                     </a>
                 </div>
             </div>
