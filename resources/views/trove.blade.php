@@ -1,10 +1,4 @@
 
-    @php
-                                if ($resource->organisation_id === 2) {
-                                    $ifaheader = true;
-                                }
-
-                            @endphp
 @extends('layouts.app')
 
 @section('content')
@@ -75,7 +69,7 @@
 
 
     <!-- IFA Hub Link -->
-    @if ($resource->organisation_id === 2)
+    @if(isset($_GET["origin"]) && $_GET["origin"] === "ifa")
         <div class="container mx-auto py-6 px-8 lg:px-32">
         <a href="{{ url('/ifa') }}"
                         class="px-6 py-3 text-white bg-ifa-green flex flex-row justify-between

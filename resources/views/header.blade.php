@@ -1,4 +1,4 @@
-@if ($ifaheader === true)
+@if(isset($_GET["origin"]) && $_GET["origin"] === "ifa")
     <header class="sticky top-0 z-50 bg-white  pl-8 lg:pl-20 theme_ifa" x-data="{ open: false }">
         <div class=" w-full flex flex-col sm:flex-row justify-between items-center min-h-16 ">
             <!-- Logos -->
@@ -65,6 +65,9 @@
     </header>
 
 @else
+@php 
+    $origin = 'default';
+@endphp
     <header class="sticky top-0 z-50 bg-white  px-8 sm:px-20" x-data="{ open: false }">
         <div class="container mx-auto flex justify-between items-center py-4">
             <!-- Logo -->

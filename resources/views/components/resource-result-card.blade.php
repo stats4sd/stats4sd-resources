@@ -3,15 +3,21 @@
     'color' => 'stats4sd-red',
     'showTags' => true,
     'textcol' => 'white',
-     'target' => '_blank'
+     'target' => '_blank',
+     'origin'
 ])
 
 <div
     class="card hover-effect resource-card relative flex shadow-xl flex-col justify-between bg-[#f2f2f2] overflow-hidden  rounded-t-3xl rounded-bl-3xl ">
-    <a href="{{ url('resources/'.$item['slug']) }}" class="absolute inset-0 z-0"
-       target="{{ $target }}">
-    </a>
-
+   @if(isset($origin))
+        <a href="{{ url('resources/'.$item['slug']."?origin=".$origin) }}" class="absolute inset-0 z-0"
+        target="{{ $target }}">
+        </a>
+    @else
+        <a href="{{ url('resources/'.$item['slug']) }}" class="absolute inset-0 z-0"
+            target="{{ $target }}">
+        </a>
+    @endif
     <!-- Content -->
     <div class="flex flex-col justify-start">
 
