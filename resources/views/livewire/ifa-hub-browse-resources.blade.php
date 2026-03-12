@@ -62,7 +62,7 @@
                 <h3 class="text-black text-lg uppercase font-medium">
                     {{ t('Browse by programme curricula or course syllabi') }}
                 </h3>
-                <div class="flex flex-col gap-6 mt-8">
+                <div class="sm:grid sm:grid-cols-2 sm:gap-6  mt-12">
                     @foreach ($this->levels as $l)
                         <label
                             onclick="document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' })"
