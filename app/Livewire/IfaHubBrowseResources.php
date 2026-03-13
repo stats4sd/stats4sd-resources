@@ -28,7 +28,7 @@ class IfaHubBrowseResources extends Component
 
     public function getLevelsProperty()
     {
-        return Tag::whereIn('id', [945, 946, 947, 1052, 1053])->get();
+        return Tag::whereIn('id', [945, 946, 947, 1052, 1053, 1049])->get();
     }
 
     public function getInstitutionsProperty()
