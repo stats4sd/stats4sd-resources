@@ -82,4 +82,8 @@ Route::group([
         return view('ifa');
     })->name('ifa');
 
+    Route::get('/ifastudent', function () {
+        return view('ifastudent');
+    })->name('ifastudent');
+
 });
