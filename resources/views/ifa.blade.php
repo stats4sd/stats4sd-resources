@@ -207,7 +207,7 @@
         <div class="w-full flex justify-center py-6">
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center max-w-7xl p-12">
                 @foreach ($collections as $c)
-                    <a href="{{ url($c['url']) }}" target="_blank"
+                    <a href="{{ url($c['url'].'?origin=ifa') }}"
                         class="hover-effect relative bg-ifa-green rounded-t-[2.5rem] rounded-bl-[2.5rem] overflow-hidden group sm:max-w-[20rem] min-w-[15rem]">
                         <div
                             class="absolute top-4 left-4 h-12 w-12  rounded-full text-white text-center py-auto bg-ifa-yellow">
