@@ -1,27 +1,27 @@
 @extends('layouts.app', ['hideHeader' => true])
 
 @section('content')
-    <header class="sticky top-0 z-50 bg-white  pl-8 lg:pl-20 theme_ifa" x-data="{ open: false }">
-        <div class=" w-full flex flex-col sm:flex-row justify-between items-center min-h-16 ">
+    <header class="sticky top-0 z-50 bg-white  lg:pl-20 theme_ifa" x-data="{ open: false }">
+        <div class=" w-full flex flex-col md:flex-row justify-between items-center min-h-16 ">
             <!-- Logos -->
-
-            <div class="flex justify-start w-full xl:w-2/3 items-center space-x-4 lg:space-x-8 mb-8 sm:mb-0">
-
+            
+            <div class="flex justify-start w-full xl:w-2/3 items-center space-x-4 pl-4 lg:pl-0 lg:space-x-8 mb-4 sm:mb-0">
+            
                 <a href="https://www.uvm.edu/instituteforagroecology">
                     <img src="{{ asset('images/ifalogo1.png') }}" class="max-h-16  " alt="crfs">
                 </a>
 
-
+    
 
 
             </div>
 
-            <nav class="flex w-full justify-end">
-                <ul class="flex space-x-6 font-medium uppercase text-sm">
+            <nav class="flex w-full  justify-end">
+                <ul class="flex justify-between flex-col md:flex-row lg:justify-end md:space-x-6 font-medium uppercase w-full text-xs md:text-sm">
 
                     <!-- Language Dropdown -->
-                    <li class="relative nav-item dropdown flex " x-data="{ langOpen: false }">
-                        <a class="nav-link dropdown-toggle flex items-center" role="button" aria-expanded="false"
+                    <li class="relative nav-item dropdown flex   pl-4 pr-8 md:px-0 md:pl-0 min-w-40" x-data="{ langOpen: false }">
+                        <a class="nav-link dropdown-toggle flex w-full justify-end m items-center py-4" role="button" aria-expanded="false"
                             x-on:click="langOpen = !langOpen">
                             {{ t('Change Language') }}
                             <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-5 w-5 ml-2"
@@ -30,30 +30,30 @@
                                     d="m16.843 10.211c.108-.141.157-.3.157-.456 0-.389-.306-.755-.749-.755h-8.501c-.445 0-.75.367-.75.755 0 .157.05.316.159.457 1.203 1.554 3.252 4.199 4.258 5.498.142.184.36.29.592.29.23 0 .449-.107.591-.291 1.002-1.299 3.044-3.945 4.243-5.498z" />
                             </svg>
                         </a>
-                        <div class="language-dropdown-menu" x-show="langOpen" x-on:click.outside="langOpen = false"
-                            style="display:none">
+                        <div class="language-dropdown-menu min-w-[11rem] top-9 md:top-16" x-show="langOpen" x-on:click.outside="langOpen = false"
+                           style="display:none">
                             <a class="dropdown-item" href="{{ URL::current() . '?locale=en' }}">English</a>
                             <a class="dropdown-item" href="{{ URL::current() . '?locale=es' }}">Español</a>
                             <a class="dropdown-item" href="{{ URL::current() . '?locale=fr' }}">Français</a>
                         </div>
                     </li>
                     <li>
-
-                        <a class=" py-2 px-8 bg-stats4sd-red text-white  flex flex-col items-start w-full md:w-80  justify-left text-left  "
+                    
+                     <a class=" py-2  sm:px-8 bg-stats4sd-red text-white w-full flex flex-col items-center sm:items-start w-full md:w-80  justify-left text-left  "
                             href="https://stats4sd.org/resources">
 
 
                             <div class="flex flex-row  gap-2 justify-left ">
                                 <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" fill="#ffffff"
-                                    stroke-miterlimit="2" viewBox="0 0 24 24" height="1.5rem"
-                                    class="w-min my-auto mr-4 flex-none " xmlns="http://www.w3.org/2000/svg">
+                                    stroke-miterlimit="2" viewBox="0 0 24 24" height="1.5rem" class="w-min my-auto md:mr-4 flex-none "
+                                    xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="m9.474 5.209s-4.501 4.505-6.254 6.259c-.147.146-.22.338-.22.53s.073.384.22.53c1.752 1.754 6.252 6.257 6.252 6.257.145.145.336.217.527.217.191-.001.383-.074.53-.221.293-.293.294-.766.004-1.057l-4.976-4.976h14.692c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-14.692l4.978-4.979c.289-.289.287-.761-.006-1.054-.147-.147-.339-.221-.53-.221-.191-.001-.38.071-.525.215z"
                                         fill-rule="nonzero" />
                                 </svg>
-                                <div class=" ml-8 md:ml-0">
+                                <div class=" ml-2 md:ml-0">
                                     <span class="uppercase text-xs font-normal ">{{ t('Part of the') }}</span>
-                                    <h2 class="text-lg normal-case font-bold ">{{ t('Stats4SD Resources Library') }}</h2>
+                                    <h2 class="text-sm md:text-lg normal-case font-bold ">{{ t('Stats4SD Resources Library') }}</h2>
                                 </div>
 
                             </div>
@@ -63,7 +63,7 @@
                 </ul>
             </nav>
         </div>
-
+        
     </header>
 
     <div class=" relative md:absolute md:top-0 z-50 w-full  md:items-right">
