@@ -105,17 +105,17 @@
         <div class="relative">
             <!-- Background Image -->
             <img src="images/ifacover.png" alt="Background Image"
-                class="absolute inset-0 w-full h-[21rem] object-cover filter brightness-[70%] z-0">
+                class="absolute inset-0 w-full h-[20rem] sm:h-[12rem] md:h-[20rem] object-cover filter brightness-[70%] z-0">
 
             <!-- Overlay Content -->
-            <div class="relative z-10 flex flex-col items-start w-full h-[20rem] text-white">
-                <div class="h-[20rem] pb-16 flex flex-col sm:flex-row items-end w-full 2xl:pr-32">
+            <div class="relative z-10 flex flex-col items-start w-full h-[20rem] sm:h-[12rem] md:h-[20rem] text-white">
+                <div class="h-[18rem] sm:h-[15rem] md:h-[20rem] pb-16 flex flex-col sm:flex-row items-end w-full 2xl:pr-32">
                     <!-- Heading -->
-                    <div class="pt-10 px-8 sm:pl-16  2xl:pl-32 flex-grow" style="text-wrap: balance">
-                    <h1 class="font-bold text-4xl sm:text-5xl md:text-5xl mb-4 md:!leading-[3.5rem]">
+                    <div class="pt-10 px-4 sm:pl-16  2xl:pl-32 flex-grow" style="text-wrap: balance">
+                    <h1 class="font-bold text-2xl sm:text-3xl  md:text-5xl mb-4 md:!leading-[3.5rem]">
                         {{ t('Resource Library: Education for Agroecological Transformations') }}
                     </h1>
-                    <h2 class="font-normal text-xl">{{ t('Agroecology in higher education') }}</h2>
+                    <h2 class="font-normal text-lg sm:text-xl">{{ t('Agroecology in higher education') }}</h2>
                     
                     </div>
                     
@@ -126,16 +126,16 @@
 
         <!-- Top section -->
         <div class="w-full bg-gray-100 flex justify-center py-6">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-12 w-screen max-w-7xl px-12 py-6">
-                <div class="text-base w-3/5">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-12 w-screen max-w-7xl px-8 md:px-12 py-6">
+                <div class="text-sm md:text-base md:w-3/5">
                     {{ t("Let's Educate for Agroecological Transformations is an international community of practice focusing on transformative learning for agroecology in higher education consisting of people who are either already teaching, or who are building agroecology programmes/courses in HE. Programmes consist of undergraduate, graduate and/or post-graduate courses, and extend to continuing education aimed practitioners and professionals in the field of agroecology. We are committed to co-creating and inspiring transformative agroecological learning that transgresses formal-informal education boundaries to create learning spaces that connect academic knowledge with community and movement building practices across multiple contexts.") }}
                 </div>
-                <div class="flex flex-col w-2/6 px-12 gap-y-3">
+                <div class="flex flex-col w-full md:w-2/6 px-4 md:px-12 gap-y-3">
                     <h2 class=" text-black text-2xl mb-2">{{ t('Quick links') }}</h2>
                     <a href="#collections"
                         class="px-6 pt-3 pb-2 text-white bg-ifa-green flex flex-row justify-between
                                     hover:bg-black 
-                                    font-semibold text-sm rounded-full uppercase text-center transition">
+                                    font-semibold text-xs md:text-sm rounded-full uppercase text-center transition">
                         <span> {{ t('Browse by topic') }}</span>
                         <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
                             stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -148,7 +148,7 @@
                     <a href="#browse_all" 
                         class="px-6 pt-3 pb-2 text-white bg-ifa-green flex flex-row justify-between
                                     hover:bg-black 
-                                    font-semibold text-sm rounded-full uppercase text-center transition">
+                                    font-semibold text-xs md:text-sm rounded-full uppercase text-center transition">
                         <span>{{ t('View all ') }}</span>
                         <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
                             stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -160,7 +160,7 @@
                      <a href="mailto:georgemca20@gmail.com"
                         class="px-6 pt-3 pb-2 text-white bg-ifa-green flex flex-row justify-between
                                     hover:bg-black 
-                                    font-semibold text-sm rounded-full uppercase text-center transition">
+                                    font-semibold text-xs md:text-sm rounded-full uppercase text-center transition">
                         <span> {{ t('Contact us') }}</span>
                         <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
                             stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -171,7 +171,7 @@
                      <a href="{{ url('/ifastudent') }}" 
                         class="px-6 pt-3 pb-2 text-white bg-ifa-green flex flex-row justify-between
                                     hover:bg-black 
-                                    font-semibold text-sm rounded-full uppercase text-center transition">
+                                    font-semibold text-xs md:text-sm rounded-full uppercase text-center transition">
                         <span>{{ t('Information for students ') }}</span>
                         <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
                             stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
