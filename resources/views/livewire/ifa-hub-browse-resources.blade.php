@@ -36,7 +36,7 @@
     <!-- Institutions and syllabi filters 2 cols-->
     <div class="w-full flex justify-center py-6">
         <div class="w-full flex flex-col lg:flex-row gap-8 sm:gap-16 justify-between w-screen max-w-7xl p-12 ">
-            <div class="">
+            <div class="lg:w-1/2">
                 <h3 class="text-black text-lg uppercase font-medium">
                     {{ t('Explore Institutions') }}
                 </h3>
@@ -58,7 +58,7 @@
                     @endforeach
                 </div>
             </div>
-            <div class="">
+            <div class="lg:w-1/2">
                 <h3 class="text-black text-lg uppercase font-medium">
                     {{ t('Browse by programme curricula or course syllabi') }}
                 </h3>
