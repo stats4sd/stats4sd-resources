@@ -1,9 +1,9 @@
 <div>
 
     <!-- Topics filters -->
-    <div class="flex flex-row w-full h-full justify-between gap-12 mt-12 ">
+    <div class="flex flex-row w-full h-full justify-between md:gap-12 mt-4 ">
         <div class="bg-none w-6 flex-shrink-0 h-auto"></div>
-        <div class="h-auto w-full max-w-7xl py-3 px-12">
+        <div class="h-auto w-full max-w-7xl py-3 pr-4 pl-10 md:pl-12">
 
             <h3 class="text-black text-lg uppercase font-medium">
                 {{ t('Explore selected topics') }}
@@ -13,7 +13,7 @@
         <div class="bg-none w-6 flex-shrink-0 h-auto"></div>
     </div>
 
-    <div class="w-full flex justify-center py-6 px-6 sm:px-12">
+    <div class="w-full flex justify-center py-6 px-6 md:px-12">
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 justify-left max-w-7xl md:px-12">
              @php $featureCount = 1 @endphp
             @foreach ($this->FeatureTopics as $t)
@@ -21,7 +21,7 @@
         
                 <label
                     onclick="document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' })"
-                    class="hover-effect cursor-pointer flex justify-between items-center relative bg-ifa-yellow rounded-full  overflow-hidden group sm:max-w-[20rem] min-w-[14rem] text-black text-xs md:text-sm md:h-16 px-6 py-3"
+                    class="hover-effect cursor-pointer flex justify-between items-center relative bg-ifa-yellow rounded-full  overflow-hidden group sm:max-w-[20rem] min-w-[80vw] sm:min-w-[13rem] text-black text-xs md:text-sm md:h-16 px-6 py-3"
                     wire:click="clearAndFilter('topic', {{ $t['id'] }})">
                     {{ $t['name'] }}
                     <input type="checkbox" class="hidden" value="{{ $t['id'] }}"/>
