@@ -33,10 +33,10 @@
 
 @section('content')
     <header class="sticky top-0 z-50 bg-white   lg:pl-20 theme_ifa" x-data="{ open: false }">
-        <div class=" w-full flex flex-col md:flex-row justify-between items-center min-h-16 ">
+        <div class=" w-full flex flex-col sm:flex-row justify-between items-center min-h-16 ">
             <!-- Logos -->
             
-            <div class="flex justify-start w-full xl:w-2/3 items-center space-x-4 pl-4 lg:pl-0 lg:space-x-8 mb-4 sm:mb-0">
+            <div class="flex justify-start w-full xl:w-2/3 items-center space-x-4 pl-4 lg:pl-0 lg:space-x-8 mb-4 sm:mb-0 py-1">
             
                 <a href="https://www.uvm.edu/instituteforagroecology">
                     <img src="{{ asset('images/ifalogo1.png') }}" class="max-h-16  " alt="crfs">
@@ -47,12 +47,12 @@
 
             </div>
 
-            <nav class="flex w-full  justify-end">
-                <ul class="flex justify-between flex-col md:flex-row lg:justify-end md:space-x-6 font-medium uppercase w-full text-xs md:text-sm">
+            <nav class="flex w-full  justify-start sm:justify-end pr-6">
+                <ul class="flex justify-between flex-col sm:flex-row sm:justify-end md:space-x-6 font-medium uppercase w-full text-xs md:text-sm">
 
                     <!-- Language Dropdown -->
                     <li class="relative nav-item dropdown flex   pl-4 pr-8 md:px-0 md:pl-0 min-w-40" x-data="{ langOpen: false }">
-                        <a class="nav-link dropdown-toggle flex w-full justify-end m items-center py-4" role="button" aria-expanded="false"
+                        <a class="nav-link dropdown-toggle flex w-full justify-center sm:justify-end items-center py-4" role="button" aria-expanded="false"
                             x-on:click="langOpen = !langOpen">
                             {{ t('Change Language') }}
                             <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-5 w-5 ml-2"
@@ -68,29 +68,7 @@
                             <a class="dropdown-item" href="{{ URL::current() . '?locale=fr' }}">Français</a>
                         </div>
                     </li>
-                    <li>
                     
-                     <a class=" py-2  sm:px-8 bg-stats4sd-red text-white w-full flex flex-col items-center sm:items-start w-full md:w-80  justify-left text-left  "
-                            href="https://stats4sd.org/resources">
-
-
-                            <div class="flex flex-row  gap-2 justify-left ">
-                                <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" fill="#ffffff"
-                                    stroke-miterlimit="2" viewBox="0 0 24 24" height="1.5rem" class="w-min my-auto md:mr-4 flex-none "
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="m9.474 5.209s-4.501 4.505-6.254 6.259c-.147.146-.22.338-.22.53s.073.384.22.53c1.752 1.754 6.252 6.257 6.252 6.257.145.145.336.217.527.217.191-.001.383-.074.53-.221.293-.293.294-.766.004-1.057l-4.976-4.976h14.692c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-14.692l4.978-4.979c.289-.289.287-.761-.006-1.054-.147-.147-.339-.221-.53-.221-.191-.001-.38.071-.525.215z"
-                                        fill-rule="nonzero" />
-                                </svg>
-                                <div class=" ml-2 md:ml-0">
-                                    <span class="uppercase text-xs font-normal ">{{ t('Part of the') }}</span>
-                                    <h2 class="text-sm md:text-lg normal-case font-bold ">{{ t('Stats4SD Resources Library') }}</h2>
-                                </div>
-
-                            </div>
-                        </a>
-
-                    </li>
                 </ul>
             </nav>
         </div>
@@ -126,67 +104,82 @@
 
         <!-- Top section -->
         <div class="w-full bg-gray-100 flex justify-center py-6">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-12 w-screen max-w-7xl px-8 md:px-12 py-6">
-                <div class="text-sm md:text-base md:w-3/5">
+            <div class="flex flex-col lg:flex-row items-top justify-between gap-12 w-screen max-w-7xl px-8 lg:px-12 py-6">
+                <div class="text-sm md:text-base lg:w-3/6 px-4 lg:px-0" >
                     {{ t("Let's Educate for Agroecological Transformations is an international community of practice focusing on transformative learning for agroecology in higher education consisting of people who are either already teaching, or who are building agroecology programmes/courses in HE. Programmes consist of undergraduate, graduate and/or post-graduate courses, and extend to continuing education aimed practitioners and professionals in the field of agroecology. We are committed to co-creating and inspiring transformative agroecological learning that transgresses formal-informal education boundaries to create learning spaces that connect academic knowledge with community and movement building practices across multiple contexts.") }}
                 </div>
-                <div class="flex flex-col w-full md:w-2/6 px-4 md:px-12 gap-y-3">
-                    <h2 class=" text-black text-2xl mb-2">{{ t('Quick links') }}</h2>
-                    <a href="#collections"
-                        class="px-6 pt-3 pb-2 text-white bg-ifa-green flex flex-row justify-between
-                                    hover:bg-black 
-                                    font-semibold text-xs md:text-sm rounded-full uppercase text-center transition">
-                        <span> {{ t('Browse by topic') }}</span>
-                        <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
-                            stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z"
-                                fill-rule="nonzero" />
-                        </svg>
+                
+                <div class="w-full lg:w-3/6 px-4 ">
+                    <h2 class=" text-black text-2xl mb-4">{{ t('Quick links') }}</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <a href="#collections"
+                            class="px-6 pt-3 pb-2 text-white bg-ifa-green flex flex-row justify-between
+                                        hover:bg-black 
+                                        font-semibold text-xs  rounded-full uppercase text-center transition">
+                            <span> {{ t('Browse by topic') }}</span>
+                            <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
+                                stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z"
+                                    fill-rule="nonzero" />
+                            </svg>
 
-                    </a>
-                    <a href="#browse_all" 
-                        class="px-6 pt-3 pb-2 text-white bg-ifa-green flex flex-row justify-between
-                                    hover:bg-black 
-                                    font-semibold text-xs md:text-sm rounded-full uppercase text-center transition">
-                        <span>{{ t('View all ') }}</span>
-                        <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
-                            stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z"
-                                fill-rule="nonzero" />
-                        </svg>
-                    </a>
-                     <a href="mailto:georgemca20@gmail.com"
-                        class="px-6 pt-3 pb-2 text-white bg-ifa-green flex flex-row justify-between
-                                    hover:bg-black 
-                                    font-semibold text-xs md:text-sm rounded-full uppercase text-center transition">
-                        <span> {{ t('Contact us') }}</span>
-                        <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
-                            stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M24 21h-24v-18h24v18zm-23-16.477v15.477h22v-15.477l-10.999 10-11.001-10zm21.089-.523h-20.176l10.088 9.171 10.088-9.171z"/>
-                        </svg>
+                        </a>
+                        <a href="#browse_all" 
+                            class="px-6 pt-3 pb-2 text-white bg-ifa-green flex flex-row justify-between
+                                        hover:bg-black 
+                                        font-semibold text-xs  rounded-full uppercase text-center transition">
+                            <span>{{ t('View all ') }}</span>
+                            <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
+                                stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z"
+                                    fill-rule="nonzero" />
+                            </svg>
+                        </a>
+                        <a href="mailto:georgemca20@gmail.com"
+                            class="px-6 pt-3 pb-2 text-white bg-ifa-green flex flex-row justify-between
+                                        hover:bg-black 
+                                        font-semibold text-xs  rounded-full uppercase text-center transition">
+                            <span> {{ t('Contact us') }}</span>
+                            <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
+                                stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M24 21h-24v-18h24v18zm-23-16.477v15.477h22v-15.477l-10.999 10-11.001-10zm21.089-.523h-20.176l10.088 9.171 10.088-9.171z"/>
+                            </svg>
 
-                    </a>
-                     <a href="{{ url('/ifastudent') }}" 
-                        class="px-6 pt-3 pb-2 text-white bg-ifa-green flex flex-row justify-between
-                                    hover:bg-black 
-                                    font-semibold text-xs md:text-sm rounded-full uppercase text-center transition">
-                        <span>{{ t('Information for students ') }}</span>
-                        <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
-                            stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z"
-                                fill-rule="nonzero" />
-                        </svg>
-                    </a>
+                        </a>
+                        <a href="{{ url('/ifastudent') }}" 
+                            class="px-6 pt-3 pb-2 text-white bg-ifa-green flex flex-row justify-between
+                                        hover:bg-black 
+                                        font-semibold text-xs  rounded-full uppercase text-center transition">
+                            <span>{{ t('Information for students ') }}</span>
+                            <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
+                                stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z"
+                                    fill-rule="nonzero" />
+                            </svg>
+                        </a>
+                        <a href="https://www.uvm.edu/instituteforagroecology/lets-educate-agroecological-transformations" 
+                            class="px-6 pt-3 pb-2 text-white bg-ifa-green flex flex-row justify-between
+                                        hover:bg-black 
+                                        font-semibold text-xs  rounded-full uppercase text-center transition">
+                            <span>{{ t('UVM Let\'s EAT Page') }}</span>
+                            <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
+                                stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z"
+                                    fill-rule="nonzero" />
+                            </svg>
+                        </a>
+                        </div>
                 </div>
             </div>
         </div>
 
         <div class="flex flex-row w-full h-full justify-between gap-12 mt-12" id="collections">
             <div class="bg-ifa-green w-6 flex-shrink-0 h-auto"></div>
-            <div class="h-auto w-full max-w-7xl py-3 pl-12">
+            <div class="h-auto w-full max-w-7xl py-3 px-4 md:pl-12">
 
                 <h2 class="text-black text-3xl">
                     {{ t('Explore collections') }}
@@ -194,14 +187,18 @@
             </div>
             <div class="bg-none w-6 flex-shrink-0 h-auto"></div>
         </div>
-
-        <div class="flex justify-center w-full">
-            <p class="max-w-7xl px-12">
-                {{ t('The collections below have been carefully chosen to highlight specific topics or themes present in the
-                resources within the Let\'s EAT hub. They may be a useful starting point to get an idea of what this hub
-                contains.') }}
-            </p>
+        <div class="flex flex-row w-full h-full justify-between gap-12 " id="collections">
+            <div class="bg-none w-6 flex-shrink-0 h-auto"></div>
+            <div class="h-auto w-full max-w-7xl py-3 px-4 md:pl-12">
+                <p class="max-w-7xl ">
+                    {{ t('The collections below have been carefully chosen to highlight specific topics or themes present in the
+                    resources within the Let\'s EAT hub. They may be a useful starting point to get an idea of what this hub
+                    contains.') }}
+                    </p>
+            </div>
+            <div class="bg-none w-6 flex-shrink-0 h-auto"></div>
         </div>
+        
 
         <!-- View by topic - collections -->
         <div class="w-full flex justify-center py-6">
@@ -246,9 +243,9 @@
         </div>
 
         <!-- Search bar -->
-        <div class="flex flex-row w-full h-full justify-between gap-12 mt-32">
+        <div class="flex flex-row w-full h-full justify-between md:gap-12 mt-32">
             <div class="bg-ifa-green w-6 flex-shrink-0 h-auto"></div>
-            <div class="h-auto w-full max-w-7xl py-3 px-12">
+            <div class="h-auto w-full max-w-7xl py-3 pr-4 pl-10 md:pl-12">
                 <h2 class="text-black text-2xl">
                     {{ t('Explore resources') }}
                 </h2>
