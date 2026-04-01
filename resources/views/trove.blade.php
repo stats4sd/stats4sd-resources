@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -68,11 +69,20 @@
 
 
     <!-- IFA Hub Link -->
-    @if ($resource->organisation_id === 2)
+    @if(isset($_GET["origin"]) && $_GET["origin"] === "ifa")
         <div class="container mx-auto py-6 px-8 lg:px-32">
-            <a href="{{ url('/ifa') }}" class="text-gray-500 hover:text-black">&lt;
-                {{ t('This resource is part of the Institute for Agroecology Resource Library') }}
-            </a>
+        <a href="{{ url('/ifa') }}"
+                        class="px-6 py-3 text-white bg-ifa-green flex flex-row justify-between
+                                    hover:bg-black 
+                                    font-semibold text-sm rounded-full uppercase text-center transition
+                                    w-max">
+                        <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6 mr-6"
+                            stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z"/>
+                        </svg>
+                        <span> {{ t('Institute for Agroecology Resource Library') }}</span>
+                       
+                    </a>
         </div>
     @endif
 
