@@ -16,7 +16,20 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'ANother App'),
+    'name' => env('APP_NAME', 'Resources Site'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Environment
+    |--------------------------------------------------------------------------
+    |
+    | This value determines the "environment" your application is currently
+    | running in. This may determine how you prefer to configure various
+    | services the application utilizes. Set this in your ".env" file.
+    |
+    */
+
+    'env' => env('APP_ENV', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -30,6 +43,7 @@ return [
     */
 
     'debug_init' => (bool) env('APP_DEBUG', null),
+    'debug' => (bool) env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
