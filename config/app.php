@@ -16,20 +16,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Application Environment
-    |--------------------------------------------------------------------------
-    |
-    | This value determines the "environment" your application is currently
-    | running in. This may determine how you prefer to configure various
-    | services the application utilizes. Set this in your ".env" file.
-    |
-    */
-
-    'env' => env('APP_ENV', 'production'),
+    'name' => env('APP_NAME', 'ANother App'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +29,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug_init' => (bool) env('APP_DEBUG', null),
 
     /*
     |--------------------------------------------------------------------------
@@ -60,6 +47,20 @@ return [
     'asset_url' => env('ASSET_URL'),
 
     'front_end_url' => env('FRONT_END_URL', 'https://stats4sd.org'),
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Environment
+    |--------------------------------------------------------------------------
+    |
+    | This value determines the "environment" your application is currently
+    | running in. This may determine how you prefer to configure various
+    | services the application utilizes. Set this in your ".env" file.
+    |
+    */
+
+    'env' => env('APP_ENV', 'production'),
 
     /*
     |--------------------------------------------------------------------------
