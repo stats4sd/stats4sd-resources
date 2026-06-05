@@ -2,34 +2,45 @@
 
     $collections = [
         [
-            'url' => '/collections/56',
-            'img' => '/images/ifa1.png',
-            'title' => t('Introductory modules'),
+            'url'  => '/collections/56',
+            'img'  => '/images/ifa1.png',
+            'icon' => 'images/ifa/teaching_icon.jpg',
+            'title' => t('Introductions to agroecology'),
             'desc' => t(' '),
         ],
         [
-            'url' => '/collections/57',
-            'img' => '/images/ifa4.jpg',
-            'title' => t('Reading for developers'),
+            'url'  => '/collections/57',
+            'img'  => '/images/ifa4.jpg',
+            'icon' => 'images/ifa/reading_icon.jpg',
+            'title' => t('Resources for program leads'),
             'desc' => t(' '),
         ],
         [
-            'url' => '/collections/58',
-            'img' => '/images/ifa3.jpg',
-            'title' => t('Participatory action research'),
+            'url'  => '/collections/58',
+            'img'  => '/images/ifa3.jpg',
+            'icon' => 'images/ifa/teaching_icon.jpg',
+            'title' => t('Course syllabi'),
             'desc' => t(' '),
         ],
-                [
-            'url' => '/collections/59',
-            'img' => '/images/ifa5.png',
-            'title' => t('Hear what course leads say'),
+        [
+            'url'  => '/collections/58',
+            'img'  => '/images/ifa5.png',
+            'icon' => 'images/ifa/teaching_icon.jpg',
+            'title' => t('Teaching approaches and pedagogies'),
+            'desc' => t(' '),
+        ],
+        [
+            'url'  => '/collections/59',
+            'img'  => '/images/ifa5.png',
+            'icon' => 'images/ifa/webinar_icon.png',
+            'title' => t('Case studies of agroecology programs'),
             'desc' => t(' '),
         ],
     ];
 
 @endphp
 
-@extends('layouts.app', ['hideHeader' => true])
+@extends('layouts.app', ['hideHeader' => true, 'scrollButtonColor' => 'bg-ifa-green'])
 
 @section('content')
     <header class="sticky top-0 z-50 bg-white   lg:pl-20 theme_ifa" x-data="{ open: false }">
@@ -61,7 +72,7 @@
                                     d="m16.843 10.211c.108-.141.157-.3.157-.456 0-.389-.306-.755-.749-.755h-8.501c-.445 0-.75.367-.75.755 0 .157.05.316.159.457 1.203 1.554 3.252 4.199 4.258 5.498.142.184.36.29.592.29.23 0 .449-.107.591-.291 1.002-1.299 3.044-3.945 4.243-5.498z" />
                             </svg>
                         </a>
-                        <div class="language-dropdown-menu min-w-[11rem] top-9 md:top-16" x-show="langOpen" x-on:click.outside="langOpen = false"
+                        <div class="language-dropdown-menu min-w-[11rem] top-full" x-show="langOpen" x-on:click.outside="langOpen = false"
                            style="display:none">
                             <a class="dropdown-item" href="{{ URL::current() . '?locale=en' }}">English</a>
                             <a class="dropdown-item" href="{{ URL::current() . '?locale=es' }}">Español</a>
@@ -104,72 +115,73 @@
 
         <!-- Top section -->
         <div class="w-full bg-gray-100 flex justify-center py-6">
-            <div class="flex flex-col lg:flex-row items-top justify-between gap-12 w-screen max-w-7xl px-8 lg:px-12 py-6">
+            <div class="flex flex-col lg:flex-row items-top justify-between gap-12 w-full max-w-7xl px-8 lg:px-12 py-6">
                 <div class="text-sm md:text-base lg:w-3/6 px-4 lg:px-0" >
-                    {{ t("Let's Educate for Agroecological Transformations is an international community of practice focusing on transformative learning for agroecology in higher education consisting of people who are either already teaching, or who are building agroecology programmes/courses in HE. Programmes consist of undergraduate, graduate and/or post-graduate courses, and extend to continuing education aimed practitioners and professionals in the field of agroecology. We are committed to co-creating and inspiring transformative agroecological learning that transgresses formal-informal education boundaries to create learning spaces that connect academic knowledge with community and movement building practices across multiple contexts.") }}
+                    <p class="mb-4">{{ t("Let's Educate for Agroecological Transformations is an international community of practice focusing on transformative learning for agroecology in higher education consisting of people who are either already teaching, or who are building agroecology programmes/courses in HE. Programmes consist of undergraduate, graduate and/or post-graduate courses, and extend to continuing education aimed practitioners and professionals in the field of agroecology. We are committed to co-creating and inspiring transformative agroecological learning that transgresses formal-informal education boundaries to create learning spaces that connect academic knowledge with community and movement building practices across multiple contexts.") }}</p>
+                    <p>{{ t("In this resource library you can find courses, modules and reading to guide and inform theory, methods and hands-on practice-based pedagogies applicable for adaptation across different territories and cultural contexts. These are made freely available by") }} <a href="{{ url('/ifaabout') }}" class="underline font-medium text-ifa-green hover:no-underline">{{ t("Let's EAT community of practice") }}</a>.</p>
                 </div>
                 
                 <div class="w-full lg:w-3/6 px-4 ">
                     <h2 class=" text-black text-2xl mb-4">{{ t('Quick links') }}</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <a href="#collections"
+                        <a href="{{ url('/ifaabout') }}"
                             class="px-6 pt-3 pb-2 text-white bg-ifa-green flex flex-row justify-between
-                                        hover:bg-black 
+                                        hover:bg-black
                                         font-semibold text-xs  rounded-full uppercase text-center transition">
-                            <span> {{ t('Browse by topic') }}</span>
+                            <span>{{ t('About us') }}</span>
                             <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
                                 stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z"
-                                    fill-rule="nonzero" />
-                            </svg>
-
-                        </a>
-                        <a href="#browse_all" 
-                            class="px-6 pt-3 pb-2 text-white bg-ifa-green flex flex-row justify-between
-                                        hover:bg-black 
-                                        font-semibold text-xs  rounded-full uppercase text-center transition">
-                            <span>{{ t('View all ') }}</span>
-                            <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
-                                stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z"
-                                    fill-rule="nonzero" />
+                                <path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero" />
                             </svg>
                         </a>
-                        <a href="mailto:georgemca20@gmail.com"
+                        <a href="https://www.uvm.edu/instituteforagroecology/lets-educate-agroecological-transformations" target="_blank" rel="noopener noreferrer"
                             class="px-6 pt-3 pb-2 text-white bg-ifa-green flex flex-row justify-between
-                                        hover:bg-black 
-                                        font-semibold text-xs  rounded-full uppercase text-center transition">
-                            <span> {{ t('Contact us') }}</span>
-                            <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
-                                stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M24 21h-24v-18h24v18zm-23-16.477v15.477h22v-15.477l-10.999 10-11.001-10zm21.089-.523h-20.176l10.088 9.171 10.088-9.171z"/>
-                            </svg>
-
-                        </a>
-                        <a href="{{ url('/ifastudent') }}" 
-                            class="px-6 pt-3 pb-2 text-white bg-ifa-green flex flex-row justify-between
-                                        hover:bg-black 
-                                        font-semibold text-xs  rounded-full uppercase text-center transition">
-                            <span>{{ t('Information for students ') }}</span>
-                            <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
-                                stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z"
-                                    fill-rule="nonzero" />
-                            </svg>
-                        </a>
-                        <a href="https://www.uvm.edu/instituteforagroecology/lets-educate-agroecological-transformations" 
-                            class="px-6 pt-3 pb-2 text-white bg-ifa-green flex flex-row justify-between
-                                        hover:bg-black 
+                                        hover:bg-black
                                         font-semibold text-xs  rounded-full uppercase text-center transition">
                             <span>{{ t('UVM Let\'s EAT Page') }}</span>
                             <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
                                 stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z"
-                                    fill-rule="nonzero" />
+                                <path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero" />
+                            </svg>
+                        </a>
+                        <a href="mailto:georgemca20@gmail.com"
+                            class="px-6 pt-3 pb-2 text-white bg-ifa-green flex flex-row justify-between
+                                        hover:bg-black
+                                        font-semibold text-xs  rounded-full uppercase text-center transition">
+                            <span>{{ t('Contact us') }}</span>
+                            <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
+                                stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M24 21h-24v-18h24v18zm-23-16.477v15.477h22v-15.477l-10.999 10-11.001-10zm21.089-.523h-20.176l10.088 9.171 10.088-9.171z"/>
+                            </svg>
+                        </a>
+                        <a href="{{ url('/ifastudent') }}"
+                            class="px-6 pt-3 pb-2 text-white bg-ifa-green flex flex-row justify-between
+                                        hover:bg-black
+                                        font-semibold text-xs  rounded-full uppercase text-center transition">
+                            <span>{{ t('Information for students') }}</span>
+                            <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
+                                stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero" />
+                            </svg>
+                        </a>
+                        <a href="#collections"
+                            class="px-6 pt-3 pb-2 text-white bg-ifa-green flex flex-row justify-between
+                                        hover:bg-black
+                                        font-semibold text-xs  rounded-full uppercase text-center transition">
+                            <span>{{ t('Browse by topic') }}</span>
+                            <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
+                                stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero" />
+                            </svg>
+                        </a>
+                        <a href="#browse_all"
+                            class="px-6 pt-3 pb-2 text-white bg-ifa-green flex flex-row justify-between
+                                        hover:bg-black
+                                        font-semibold text-xs  rounded-full uppercase text-center transition">
+                            <span>{{ t('View all') }}</span>
+                            <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" class="h-6 w-6"
+                                stroke-miterlimit="2" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="m14.523 18.787s4.501-4.505 6.255-6.26c.146-.146.219-.338.219-.53s-.073-.383-.219-.53c-1.753-1.754-6.255-6.258-6.255-6.258-.144-.145-.334-.217-.524-.217-.193 0-.385.074-.532.221-.293.292-.295.766-.004 1.056l4.978 4.978h-14.692c-.414 0-.75.336-.75.75s.336.75.75.75h14.692l-4.979 4.979c-.289.289-.286.762.006 1.054.148.148.341.222.533.222.19 0 .378-.072.522-.215z" fill-rule="nonzero" />
                             </svg>
                         </a>
                         </div>
@@ -202,26 +214,19 @@
 
         <!-- View by topic - collections -->
         <div class="w-full flex justify-center py-6">
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center max-w-7xl p-12">
+            <div class="flex flex-wrap justify-center gap-6 w-full max-w-5xl p-12">
                 @foreach ($collections as $c)
                     <a href="{{ url($c['url'].'?origin=ifa') }}"
-                        class="hover-effect relative bg-ifa-green rounded-t-[2.5rem] rounded-bl-[2.5rem] overflow-hidden group sm:max-w-[20rem] min-w-[15rem]">
-                        <div
-                            class="absolute top-4 left-4 h-12 w-12  rounded-full text-white text-center py-auto bg-ifa-yellow">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
-                                fill="white" class="mx-auto my-3">
-                                <path
-                                    d="M21.698 10.658l2.302 1.342-12.002 7-11.998-7 2.301-1.342 9.697 5.658 9.7-5.658zm-9.7 10.657l-9.697-5.658-2.301 1.343 11.998 7 12.002-7-2.302-1.342-9.7 5.657zm0-19l8.032 4.685-8.032 4.685-8.029-4.685 8.029-4.685zm0-2.315l-11.998 7 11.998 7 12.002-7-12.002-7z" />
-                            </svg>
-                        </div>
+                        class="hover-effect relative bg-ifa-green rounded-t-[2.5rem] rounded-bl-[2.5rem] overflow-hidden group w-full sm:w-64">
                         <div class="h-48 bg-cover bg-center"
-                            style="background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(0,0,0,0.14)), url('{{ $c['img'] }}">
+                            style="background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(0,0,0,0.14)), url('{{ $c['img'] }}');">
                         </div>
-                        <div class="p-10 text-white h-[10rem]">
-                            <p class="text-xs  uppercase font-semibold">
-                                {{ t('Collection') }}
-                            </p>
-                            <h3 class="font-bold text-xl mb-2">
+                        <div class="p-8 text-white min-h-[10rem] relative">
+                            <div class="absolute top-3 right-3 h-10 w-10 rounded-full overflow-hidden bg-ifa-yellow">
+                                <img src="{{ asset($c['icon']) }}" alt="" class="w-full h-full object-cover">
+                            </div>
+                            <p class="text-xs uppercase font-semibold mb-2">{{ t('Collection') }}</p>
+                            <h3 class="font-bold text-lg mb-2">
                                 {{ $c['title'] }}
                             </h3>
                             <p class="text-sm">
@@ -243,10 +248,10 @@
         </div>
 
         <!-- Search bar -->
-        <div class="flex flex-row w-full h-full justify-between md:gap-12 mt-32">
+        <div class="flex flex-row w-full h-full justify-between md:gap-12 mt-12">
             <div class="bg-ifa-green w-6 flex-shrink-0 h-auto"></div>
             <div class="h-auto w-full max-w-7xl py-3 pr-4 pl-10 md:pl-12">
-                <h2 class="text-black text-2xl">
+                <h2 class="text-black text-3xl">
                     {{ t('Explore resources') }}
                 </h2>
             </div>
@@ -257,5 +262,6 @@
         <div class="w-full">
             @livewire('ifa-hub-browse-resources')
         </div>
+
     </div>
 @endsection
