@@ -4,7 +4,6 @@ use App\Models\Trove;
 use App\Models\Collection;
 use App\Livewire\BrowseAll;
 use App\Livewire\Resources;
-use App\Livewire\ThemePages;
 use App\Livewire\Collections;
 use Illuminate\Support\Facades\Route;
 
@@ -85,5 +84,10 @@ Route::group([
     Route::get('/ifastudent', function () {
         return view('ifastudent');
     })->name('ifastudent');
+
+    Route::get('/ifaabout', function () {
+        return view('ifaabout');
+    })->name('ifaabout');
+
 
 });

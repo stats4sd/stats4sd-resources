@@ -28,19 +28,23 @@ class IfaHubBrowseResources extends Component
 
     public function getLevelsProperty()
     {
-        return Tag::whereIn('id', [945, 946, 947, 1052, 1053, 1049])->get();
+        $order = [1053, 945, 946, 1052];
+        return Tag::whereIn('id', $order)->get()->sortBy(fn($tag) => array_search($tag->id, $order))->values();
     }
 
     public function getInstitutionsProperty()
     {
-        $institutions = Tag::whereIn('id', [940, 971, 1010, 1008, 1009])->get();
+        $order = [940, 971, 1010, 1008, 1009, 1058, 1057];
+        $institutions = Tag::whereIn('id', $order)->get()->sortBy(fn($inst) => array_search($inst->id, $order))->values();
 
         $locations = [
-            940 => t('USA'),
-            971 => t('Mexico'),
+            940  => t('USA'),
+            971  => t('Mexico'),
             1010 => t('Spain'),
             1008 => t('Mexico'),
             1009 => t('Norway'),
+            1058 => t('Palestine'),
+            1057 => t('UK'),
         ];
 
         return $institutions->map(function ($inst) use ($locations) {
